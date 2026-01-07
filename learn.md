@@ -1,7 +1,7 @@
 # macOS Complete Cheat Sheet
 ### From Beginner to Expert | M1/M2/M3/M4/M5 Compatible
 
-![macOS Logo](https://upload.wikimedia.org/wikipedia/commons/thumb/2/21/MacOS_wordmark_%282017%29.svg/320px-MacOS_wordmark_%282017%29.svg.png)
+![macOS Logo](https://www.apple.com/ac/structured-data/images/knowledge_graph_logo.png)
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![Maintenance](https://img.shields.io/badge/Maintained%3F-yes-green.svg)](https://github.com/kamalsoft/macOS-cheat-sheet/graphs/commit-activity)
