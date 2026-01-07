@@ -1,3 +1,9 @@
+---
+layout: default
+title: macOS Cheat Sheet
+---
+
+
 # macOS Complete Cheat Sheet
 ### From Beginner to Expert | M1/M2/M3/M4/M5 Compatible
 
