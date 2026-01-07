@@ -1,7 +1,4 @@
----
-layout: default
-title: macOS Cheat Sheet
----
+
 
 
 # macOS Complete Cheat Sheet
@@ -33,7 +30,7 @@ title: macOS Cheat Sheet
 * [Best Resources by Level](#best-resources-by-level)
 
 ---
-
+ 
 ## How to Use This Guide
 
 This cheat sheet is organized by skill level. Find your level and start there:
