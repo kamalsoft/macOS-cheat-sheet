@@ -132,6 +132,7 @@
       <div class="controls-container">
         <div class="search-wrapper">
           <input type="text" id="search-input" placeholder="🔍 Search cheat sheet..." autocomplete="off">
+          <button id="clear-search-btn" title="Clear Search">✕</button>
           <button id="voice-search-btn" title="Search with Voice">🎤</button>
           <div id="search-history-dropdown"></div>
         </div>
@@ -250,49 +251,142 @@
       const searchInput = document.getElementById('search-input');
       const mainContent = document.querySelector('.page-content');
       const historyDropdown = document.getElementById('search-history-dropdown');
-      let searchHistory = JSON.parse(localStorage.getItem('search_history')) || [];
+      let searchHistory = [];
+      try {
+        searchHistory = JSON.parse(localStorage.getItem('search_history')) || [];
+      } catch (e) {
+        searchHistory = [];
+      }
       
       // Wrap content in sections for filtering
       // We assume sections start with H2
-      const children = Array.from(mainContent.children);
-      let currentWrapper = null;
+      if (mainContent) {
+        const children = Array.from(mainContent.children);
+        let currentWrapper = null;
 
-      children.forEach(child => {
-        if (child.tagName === 'H2') {
-          currentWrapper = document.createElement('div');
-          currentWrapper.className = 'searchable-section';
-          mainContent.insertBefore(currentWrapper, child);
-          currentWrapper.appendChild(child);
-        } else if (currentWrapper && child.tagName !== 'FOOTER') {
-          currentWrapper.appendChild(child);
-        }
-      });
-
-      searchInput.addEventListener('input', (e) => {
-        const term = e.target.value.toLowerCase();
-        document.querySelectorAll('.searchable-section').forEach(section => {
-          const text = section.innerText.toLowerCase();
-          section.style.display = text.includes(term) ? '' : 'none';
+        children.forEach(child => {
+          if (child.tagName === 'H2') {
+            currentWrapper = document.createElement('div');
+            currentWrapper.className = 'searchable-section';
+            mainContent.insertBefore(currentWrapper, child);
+            currentWrapper.appendChild(child);
+          } else if (currentWrapper && child.tagName !== 'FOOTER' && child.tagName !== 'SCRIPT') {
+            currentWrapper.appendChild(child);
+          }
         });
-      });
+      }
+
+      const clearSearchBtn = document.getElementById('clear-search-btn');
+
+      function removeHighlights() {
+        const marks = document.querySelectorAll('mark.search-highlight');
+        marks.forEach(mark => {
+          const parent = mark.parentNode;
+          parent.replaceChild(document.createTextNode(mark.textContent), mark);
+          parent.normalize();
+        });
+      }
+
+      function highlightMatches(term) {
+        removeHighlights();
+        if (!term) return;
+
+        const walker = document.createTreeWalker(document.querySelector('.page-content'), NodeFilter.SHOW_TEXT, null, false);
+        const nodes = [];
+        while(walker.nextNode()) nodes.push(walker.currentNode);
+
+        nodes.forEach(node => {
+          if (node.parentNode.tagName === 'SCRIPT' || node.parentNode.tagName === 'STYLE' || node.parentNode.tagName === 'MARK') return;
+          
+          const text = node.textContent;
+          if (text.toLowerCase().includes(term)) {
+             const fragment = document.createDocumentFragment();
+             let lastIdx = 0;
+             const lowerText = text.toLowerCase();
+             let idx = lowerText.indexOf(term);
+             
+             while (idx !== -1) {
+               fragment.appendChild(document.createTextNode(text.substring(lastIdx, idx)));
+               const mark = document.createElement('mark');
+               mark.className = 'search-highlight';
+               mark.textContent = text.substring(idx, idx + term.length);
+               fragment.appendChild(mark);
+               lastIdx = idx + term.length;
+               idx = lowerText.indexOf(term, lastIdx);
+             }
+             fragment.appendChild(document.createTextNode(text.substring(lastIdx)));
+             node.parentNode.replaceChild(fragment, node);
+          }
+        });
+      }
+
+      if (searchInput) {
+        searchInput.addEventListener('input', (e) => {
+          const term = e.target.value.toLowerCase();
+          
+          if (clearSearchBtn) {
+            clearSearchBtn.classList.toggle('visible', term.length > 0);
+          }
+
+          document.querySelectorAll('.searchable-section').forEach(section => {
+            const text = section.innerText.toLowerCase();
+            section.style.display = text.includes(term) ? '' : 'none';
+          });
+
+          if (term.length > 1) {
+            highlightMatches(term);
+          } else {
+            removeHighlights();
+          }
+        });
+      }
 
       // Search History Logic
+      const popularTerms = ["screenshot", "terminal", "reset", "wifi", "force quit", "hidden files"];
+
       function renderSearchHistory() {
+        if (!historyDropdown) return;
         historyDropdown.innerHTML = '';
-        if (searchHistory.length === 0) return;
         
-        searchHistory.forEach(term => {
+        // History
+        if (searchHistory.length > 0) {
+            const header = document.createElement('div');
+            header.textContent = 'Recent';
+            header.style.cssText = 'padding: 8px 12px; font-size: 0.75rem; color: var(--text-color); opacity: 0.5; font-weight: bold; text-transform: uppercase;';
+            historyDropdown.appendChild(header);
+            
+            searchHistory.forEach(term => {
+                addDropdownItem('🕒 ' + term, term);
+            });
+        }
+
+        // Suggestions
+        const suggestions = popularTerms.filter(term => !searchHistory.includes(term));
+        if (suggestions.length > 0) {
+            const header = document.createElement('div');
+            header.textContent = 'Popular';
+            header.style.cssText = 'padding: 8px 12px; font-size: 0.75rem; color: var(--text-color); opacity: 0.5; font-weight: bold; text-transform: uppercase; border-top: 1px solid var(--glass-border); margin-top: 4px;';
+            if (searchHistory.length === 0) header.style.borderTop = 'none';
+            historyDropdown.appendChild(header);
+
+            suggestions.forEach(term => {
+                addDropdownItem('🔥 ' + term, term);
+            });
+        }
+      }
+
+      function addDropdownItem(text, value) {
           const div = document.createElement('div');
           div.className = 'history-item';
-          div.textContent = '🕒 ' + term;
+          div.textContent = text;
           div.addEventListener('mousedown', (e) => { // mousedown fires before blur
             e.preventDefault();
             searchInput.value = term;
             searchInput.dispatchEvent(new Event('input'));
             historyDropdown.classList.remove('visible');
+            saveSearchTerm(value);
           });
           historyDropdown.appendChild(div);
-        });
       }
 
       function saveSearchTerm(term) {
@@ -303,23 +397,33 @@
         localStorage.setItem('search_history', JSON.stringify(searchHistory));
       }
 
-      searchInput.addEventListener('focus', () => {
-        renderSearchHistory();
-        if (searchHistory.length > 0) historyDropdown.classList.add('visible');
-      });
+      if (searchInput) {
+        searchInput.addEventListener('focus', () => {
+          renderSearchHistory();
+          if (historyDropdown.children.length > 0 && historyDropdown) historyDropdown.classList.add('visible');
+        });
 
-      searchInput.addEventListener('blur', () => {
-        historyDropdown.classList.remove('visible');
-        saveSearchTerm(searchInput.value);
-      });
-
-      searchInput.addEventListener('keydown', (e) => {
-        if (e.key === 'Enter') {
+        searchInput.addEventListener('blur', () => {
+          if (historyDropdown) historyDropdown.classList.remove('visible');
           saveSearchTerm(searchInput.value);
-          historyDropdown.classList.remove('visible');
-          searchInput.blur();
+        });
+
+        if (clearSearchBtn) {
+          clearSearchBtn.addEventListener('click', () => {
+            searchInput.value = '';
+            searchInput.dispatchEvent(new Event('input'));
+            searchInput.focus();
+          });
         }
-      });
+
+        searchInput.addEventListener('keydown', (e) => {
+          if (e.key === 'Enter') {
+            saveSearchTerm(searchInput.value);
+            if (historyDropdown) historyDropdown.classList.remove('visible');
+            searchInput.blur();
+          }
+        });
+      }
 
       // Voice Search Logic
       const voiceSearchBtn = document.getElementById('voice-search-btn');
@@ -332,36 +436,40 @@
         recognition.lang = 'en-US';
         recognition.interimResults = false;
 
-        voiceSearchBtn.addEventListener('click', () => {
-          if (voiceSearchBtn.classList.contains('listening')) {
-            recognition.stop();
-          } else {
-            recognition.start();
-          }
-        });
+        if (voiceSearchBtn) {
+          voiceSearchBtn.addEventListener('click', () => {
+            if (voiceSearchBtn.classList.contains('listening')) {
+              recognition.stop();
+            } else {
+              recognition.start();
+            }
+          });
+        }
 
         recognition.onstart = () => {
-          voiceSearchBtn.classList.add('listening');
+          if (voiceSearchBtn) voiceSearchBtn.classList.add('listening');
         };
 
         recognition.onend = () => {
-          voiceSearchBtn.classList.remove('listening');
+          if (voiceSearchBtn) voiceSearchBtn.classList.remove('listening');
         };
 
         recognition.onresult = (event) => {
           const transcript = event.results[0][0].transcript;
-          searchInput.value = transcript;
-          searchInput.dispatchEvent(new Event('input'));
-          searchInput.focus();
-          saveSearchTerm(transcript);
+          if (searchInput) {
+            searchInput.value = transcript;
+            searchInput.dispatchEvent(new Event('input'));
+            searchInput.focus();
+            saveSearchTerm(transcript);
+          }
         };
       } else {
-        voiceSearchBtn.style.display = 'none';
+        if (voiceSearchBtn) voiceSearchBtn.style.display = 'none';
       }
 
       // Keyboard Shortcut to Focus Search
       document.addEventListener('keydown', (e) => {
-        if (e.key === '/' && document.activeElement !== searchInput) {
+        if (e.key === '/' && searchInput && document.activeElement !== searchInput) {
           e.preventDefault();
           searchInput.focus();
         }

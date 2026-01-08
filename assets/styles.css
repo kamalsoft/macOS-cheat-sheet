@@ -190,7 +190,7 @@ blockquote {
 }
 
 #search-input {
-  padding: 0.6rem 2.5rem 0.6rem 1.2rem;
+  padding: 0.6rem 4.5rem 0.6rem 1.2rem;
   border-radius: 20px;
   border: 1px solid var(--glass-border);
   background: var(--glass-bg);
@@ -241,6 +241,44 @@ blockquote {
   0% { transform: translateY(-50%) scale(1); box-shadow: 0 0 0 0 rgba(225, 29, 72, 0.4); }
   70% { transform: translateY(-50%) scale(1); box-shadow: 0 0 0 10px rgba(225, 29, 72, 0); }
   100% { transform: translateY(-50%) scale(1); box-shadow: 0 0 0 0 rgba(225, 29, 72, 0); }
+}
+
+#clear-search-btn {
+  position: absolute;
+  right: 40px;
+  top: 50%;
+  transform: translateY(-50%);
+  background: transparent;
+  border: none;
+  font-size: 1rem;
+  cursor: pointer;
+  opacity: 0.5;
+  transition: all 0.2s;
+  color: var(--text-color);
+  z-index: 10;
+  padding: 4px;
+  border-radius: 50%;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+}
+
+#clear-search-btn:hover {
+  opacity: 1;
+  background: rgba(0,0,0,0.1);
+}
+
+#clear-search-btn.visible {
+  display: flex;
+}
+
+mark.search-highlight {
+  background-color: rgba(255, 215, 0, 0.6);
+  color: inherit;
+  border-radius: 2px;
+  padding: 0 2px;
 }
 
 #search-history-dropdown {
