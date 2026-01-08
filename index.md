@@ -55,6 +55,7 @@ theme: jekyll-theme-cayman
 * [Calendar & Task Apps](#calendar--task-apps)
 * [Finance & Budgeting](#finance--budgeting)
 * [Database Tools](#database-tools)
+* [Local Development](#local-development)
 * [Markdown Editors](#markdown-editors)
 * [Writing Tools](#writing-tools)
 * [Education & Research](#education--research)
@@ -1056,6 +1057,27 @@ A modern, native, and friendly GUI tool for relational databases.
 The easiest way to get started with a local database server.
 - **Use:** Spin up a local PostgreSQL, MySQL, or Redis server in one click.
 - **Integration:** Works perfectly with TablePlus.
+
+↑ Back to Top
+
+---
+
+## Local Development
+
+Spin up local servers for web development.
+
+### 1. Laravel Herd (Free / Pro) 🟢
+The fastest way to get started with PHP and Laravel development on macOS.
+- **Features:** Zero dependencies (no Homebrew/Docker required), incredibly fast, native macOS app.
+- **Includes:** Nginx, DNSMasq, PHP, Node.js.
+
+### 2. MAMP (Free / Pro) 🟡
+The classic Mac, Apache, MySQL, PHP stack.
+- **Use:** Good for legacy projects or if you need a GUI for managing Apache/MySQL.
+
+### 3. XAMPP (Free) 🟡
+Open source cross-platform web server solution.
+- **Use:** Widely used, but can be heavier than Herd.
 
 ↑ Back to Top
 

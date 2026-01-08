@@ -1,2 +1,10 @@
-theme: jekyll-theme-cayman
 title: macOS Cheat Sheet
+description: The ultimate guide to macOS for developers and power users. From beginner settings to expert terminal commands.
+theme: jekyll-theme-cayman
+lang: en-US
+
+show_downloads: false
+google_analytics:
+
+plugins:
+  - jekyll-seo-tag
