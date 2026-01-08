@@ -35,6 +35,44 @@ def minify_html(content):
             
     return ''.join(minified_parts)
 
+def get_slug(title):
+    # Clean title: remove markdown links and special chars to match likely ID
+    clean_title = re.sub(r'\[([^\]]+)\]\([^\)]+\)', r'\1', title)
+    clean_title = re.sub(r'[^\w\s-]', '', clean_title)
+    slug = clean_title.lower().strip().replace(' ', '-')
+    slug = re.sub(r'-+', '-', slug)
+    return slug
+
+def validate_internal_links(md_content):
+    print("Validating internal links...")
+    # Strip front matter
+    content = re.sub(r'^---[\s\S]*?---\n', '', md_content)
+    
+    # 1. Collect valid IDs from headers
+    headers = re.findall(r'^(#{2,3})\s+(.+)$', content, re.MULTILINE)
+    valid_ids = set()
+    valid_ids.add('top') # Common manual anchor
+    valid_ids.add('table-of-contents') # Common manual anchor
+    
+    for _, title in headers:
+        slug = get_slug(title)
+        if slug:
+            valid_ids.add(slug)
+            
+    # 2. Find and check links
+    links = re.findall(r'\[([^\]]+)\]\(#([^\)]+)\)', content)
+    broken_count = 0
+    
+    for text, link in links:
+        if link not in valid_ids:
+            print(f"⚠️  Broken link detected: [{text}](#{link}) - Target header not found.")
+            broken_count += 1
+            
+    if broken_count > 0:
+        print(f"❌ Found {broken_count} broken internal links.")
+        return False
+    return True
+
 def generate_sitemap(md_content):
     print("Generating sitemap.xml...")
     base_url = "https://kamalsoft.github.io/macOS-cheat-sheet/"
@@ -53,11 +91,7 @@ def generate_sitemap(md_content):
     headers = re.findall(r'^(#{2,3})\s+(.+)$', content, re.MULTILINE)
     
     for _, title in headers:
-        # Clean title: remove markdown links and special chars to match likely ID
-        clean_title = re.sub(r'\[([^\]]+)\]\([^\)]+\)', r'\1', title)
-        clean_title = re.sub(r'[^\w\s-]', '', clean_title)
-        slug = clean_title.lower().strip().replace(' ', '-')
-        slug = re.sub(r'-+', '-', slug)
+        slug = get_slug(title)
         
         if slug:
             sitemap.append(f'  <url>\n    <loc>{base_url}#{slug}</loc>\n    <changefreq>weekly</changefreq>\n    <priority>0.5</priority>\n  </url>')
@@ -76,6 +110,11 @@ def update_html():
         with open(HTML_FILE, 'r', encoding='utf-8') as f:
             html_content = f.read()
             
+        # Validate Links before proceeding
+        if not validate_internal_links(md_content):
+            print("Aborting update due to broken links.")
+            return
+
         # Markers to identify the injection point
         start_marker = '<script type="text/template" id="markdown-source">'
         end_marker = '</script>'

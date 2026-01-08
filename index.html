@@ -55,6 +55,7 @@
         }
         .hero-title { font-size: 3rem; font-weight: 800; margin-bottom: 1rem; line-height: 1.2; }
         .hero-desc { font-size: 1.25rem; opacity: 0.95; max-width: 600px; margin: 0 auto 2rem; }
+        .hero-meta { font-size: 0.9rem; opacity: 0.9; margin-bottom: 2rem; font-weight: 500; }
         .hero-buttons { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; }
         .hero-btn {
             background: rgba(255,255,255,0.2);
@@ -168,6 +169,7 @@ theme: jekyll-theme-cayman
 <div class="hero-section">
   <div class="hero-title">macOS Mastered.</div>
   <div class="hero-desc">The ultimate guide for developers, power users, and switchers. Shortcuts, terminal commands, and hidden settings in one place.</div>
+  <div id="reading-time" class="hero-meta"></div>
   <div class="hero-buttons">
     <a href="#beginner-essentials" class="hero-btn">🚀 Beginner</a>
     <a href="#intermediate-productivity" class="hero-btn">⚡ Power User</a>
@@ -1445,6 +1447,13 @@ pstree
             
             const contentArea = document.getElementById('content-area');
             contentArea.innerHTML = marked.parse(markdown);
+
+            // 2.5 Calculate Reading Time
+            const text = contentArea.innerText;
+            const wpm = 200;
+            const words = text.trim().split(/\s+/).length;
+            const time = Math.ceil(words / wpm);
+            document.getElementById('reading-time').textContent = `⏱️ ${time} min read`;
 
             // 3. Highlight Code
             hljs.highlightAll();
