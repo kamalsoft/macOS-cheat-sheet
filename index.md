@@ -11,6 +11,16 @@
 
 - --
 
+<div class="quick-nav-sidebar">
+  <a href="#top-30-essential-settings" class="quick-nav-item" title="Settings">⚙️</a>
+  <a href="#opening-terminal-step-by-step" class="quick-nav-item" title="Terminal">💻</a>
+  <a href="#keyboard-shortcuts-comprehensive" class="quick-nav-item" title="Shortcuts">⌨️</a>
+  <a href="#troubleshooting-guide" class="quick-nav-item" title="Troubleshooting">🚑</a>
+  <a href="#developer-tools-mid-level" class="quick-nav-item" title="Developer">🛠️</a>
+  <a href="#2-homebrew-the-missing-package-manager" class="quick-nav-item" title="Homebrew">🍺</a>
+</div>
+
+
 ## 📋 Table of Contents
 
   * [From Beginner to Expert | M1/M2/M3/M4/M5 Compatible](#from-beginner-to-expert-m1m2m3m4m5-compatible)
@@ -180,11 +190,11 @@
 
 ## 🆕 New & Updated
 
+- **2026-01-08**: Add Contributors section and Last Updated badge to documentation; update sitemap and fix broken link handling
 - **2026-01-08**: Add Last Updated badge and Contributors section to documentation
 - **2026-01-08**: Update documentation
 - **2026-01-08**: Update documentation
 - **2026-01-08**: Update documentation
-- **2026-01-07**: Update title and descriptions for consistency; add SEO metadata and sitemap
 
 ## How to Use This Guide
 

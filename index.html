@@ -72,33 +72,71 @@
         }
         .hero-btn:hover { background: rgba(255,255,255,0.35); transform: translateY(-2px); }
 
-        .quick-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-            gap: 1rem;
-            margin-bottom: 3rem;
-        }
-        .quick-tile {
-            display: flex;
+        /* Quick Nav Sidebar (Modern) */
+        .quick-nav-sidebar {
+            position: fixed;
+            right: 2rem;
+            top: 50%;
+            transform: translateY(-50%);
+            z-index: 40;
+            display: none;
             flex-direction: column;
+            gap: 0.75rem;
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(12px);
+            padding: 1rem 0.5rem;
+            border-radius: 9999px;
+            border: 1px solid rgba(0,0,0,0.05);
+            box-shadow: 0 10px 15px -3px rgba(0,0,0,0.1);
+        }
+        .dark .quick-nav-sidebar {
+            background: rgba(24, 24, 27, 0.8);
+            border-color: rgba(255,255,255,0.05);
+        }
+        @media (min-width: 1280px) { .quick-nav-sidebar { display: flex; } }
+        
+        .quick-nav-item {
+            display: flex;
             align-items: center;
             justify-content: center;
-            padding: 1.5rem;
-            background: white;
-            border: 1px solid #e2e8f0;
-            border-radius: 0.75rem;
-            text-decoration: none !important;
+            width: 3rem;
+            height: 3rem;
+            border-radius: 9999px;
+            font-size: 1.5rem;
+            color: #52525b;
+            transition: all 0.2s;
+            position: relative;
+        }
+        .dark .quick-nav-item { color: #a1a1aa; }
+        .quick-nav-item:hover {
+            background: #f4f4f5;
+            color: #8b5cf6;
+            transform: scale(1.1);
+        }
+        .dark .quick-nav-item:hover {
+            background: #27272a;
+            color: #a78bfa;
+        }
+        /* Tooltip for sidebar */
+        .quick-nav-item::after {
+            content: attr(title);
+            position: absolute;
+            right: 120%;
+            top: 50%;
+            transform: translateY(-50%) translateX(10px);
+            background: #18181b;
+            color: white;
+            padding: 0.25rem 0.75rem;
+            border-radius: 0.5rem;
+            font-size: 0.75rem;
+            font-weight: 600;
+            white-space: nowrap;
+            opacity: 0;
+            pointer-events: none;
             transition: all 0.2s;
         }
-        .dark .quick-tile { background: #1e293b; border-color: #334155; }
-        .quick-tile:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
-            border-color: #3b82f6;
-        }
-        .tile-icon { font-size: 2rem; margin-bottom: 0.5rem; }
-        .tile-label { font-weight: 600; color: #1e293b; }
-        .dark .tile-label { color: #f8fafc; }
+        .dark .quick-nav-item::after { background: white; color: black; }
+        .quick-nav-item:hover::after { opacity: 1; transform: translateY(-50%) translateX(0); }
 
         /* Shortcuts Table Styling */
         .shortcuts-table { width: 100%; border-collapse: collapse; margin: 1rem 0; font-size: 0.95rem; }
@@ -173,6 +211,16 @@
 [![Last Updated](https://img.shields.io/badge/Last%20Updated-2026--01--08-blue.svg)](https://github.com/kamalsoft/macOS-cheat-sheet/commits/main)
 
 - --
+
+<div class="quick-nav-sidebar">
+  <a href="#top-30-essential-settings" class="quick-nav-item" title="Settings">⚙️</a>
+  <a href="#opening-terminal-step-by-step" class="quick-nav-item" title="Terminal">💻</a>
+  <a href="#keyboard-shortcuts-comprehensive" class="quick-nav-item" title="Shortcuts">⌨️</a>
+  <a href="#troubleshooting-guide" class="quick-nav-item" title="Troubleshooting">🚑</a>
+  <a href="#developer-tools-mid-level" class="quick-nav-item" title="Developer">🛠️</a>
+  <a href="#2-homebrew-the-missing-package-manager" class="quick-nav-item" title="Homebrew">🍺</a>
+</div>
+
 
 ## 📋 Table of Contents
 
@@ -343,11 +391,11 @@
 
 ## 🆕 New & Updated
 
+- **2026-01-08**: Add Contributors section and Last Updated badge to documentation; update sitemap and fix broken link handling
 - **2026-01-08**: Add Last Updated badge and Contributors section to documentation
 - **2026-01-08**: Update documentation
 - **2026-01-08**: Update documentation
 - **2026-01-08**: Update documentation
-- **2026-01-07**: Update title and descriptions for consistency; add SEO metadata and sitemap
 
 ## How to Use This Guide
 
@@ -1895,8 +1943,9 @@ Thanks to these wonderful people: **kamalsoft**.
             // 2.1 Inject Filter UI
             const filterContainer = document.createElement('div');
             filterContainer.className = 'px-4 pb-2 mb-2 border-b border-slate-100 dark:border-slate-800';
-            filterContainer.innerHTML = `<h3 class="text-xs font-bold text-slate-400 uppercase tracking-wider mb-2">View</h3><div class="flex gap-2 mb-4"><button onclick="toggleView('list')" id="btn-list" class="flex-1 py-1.5 text-xs font-medium rounded-lg border border-violet-500 bg-violet-50 text-violet-600 dark:bg-violet-900/30 dark:text-violet-400 transition-all">List View</button><button onclick="toggleView('grid')" id="btn-grid" class="flex-1 py-1.5 text-xs font-medium rounded-lg border border-zinc-200 dark:border-zinc-700 text-zinc-600 dark:text-zinc-400 hover:bg-zinc-50 dark:hover:bg-zinc-800 transition-all">Grid View</button></div><h3 class="text-xs font-bold text-slate-400 uppercase tracking-wider mb-2">Skill Level</h3><div class="flex gap-1"><button onclick="setSkillLevel('beginner')" class="skill-btn flex-1 px-2 py-1 text-xs rounded-md border border-zinc-200 dark:border-zinc-700 hover:bg-zinc-100 dark:hover:bg-zinc-800 transition-colors" title="Beginner">🟢</button><button onclick="setSkillLevel('mid')" class="skill-btn flex-1 px-2 py-1 text-xs rounded-md border border-zinc-200 dark:border-zinc-700 hover:bg-zinc-100 dark:hover:bg-zinc-800 transition-colors" title="Mid-Level">🟡</button><button onclick="setSkillLevel('pro')" class="skill-btn flex-1 px-2 py-1 text-xs rounded-md border border-zinc-200 dark:border-zinc-700 hover:bg-zinc-100 dark:hover:bg-zinc-800 transition-colors" title="Pro">🟠</button><button onclick="setSkillLevel('expert')" class="skill-btn flex-1 px-2 py-1 text-xs rounded-md border border-zinc-200 dark:border-zinc-700 hover:bg-zinc-100 dark:hover:bg-zinc-800 transition-colors" title="Expert">🔴</button><button onclick="setSkillLevel('all')" class="skill-btn flex-1 px-2 py-1 text-xs rounded-md border border-zinc-200 dark:border-zinc-700 hover:bg-zinc-100 dark:hover:bg-zinc-800 transition-colors font-bold" title="Show All">ALL</button></div>`;
-            const tocContainer = document.getElementById('toc-container');
+            filterContainer.innerHTML = `
+                <h3 class="text-xs font-bold text-slate-400 uppercase tracking-wider mb-2">View</h3><div class="flex gap-2 mb-4"><button onclick="toggleView('list')" id="btn-list" class="flex-1 py-1.5 text-xs font-medium rounded-lg border border-blue-500 bg-blue-50 text-blue-600 dark:bg-blue-900/30 dark:text-blue-400 transition-all">List View</button><button onclick="toggleView('grid')" id="btn-grid" class="flex-1 py-1.5 text-xs font-medium rounded-lg border border-slate-200 dark:border-slate-700 text-slate-600 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-800 transition-all">Grid View</button></div><h3 class="text-xs font-bold text-slate-400 uppercase tracking-wider mb-2">Skill Level</h3><div class="flex gap-1"><button onclick="setSkillLevel('beginner')" class="skill-btn flex-1 px-2 py-1 text-xs rounded-md border border-slate-200 dark:border-slate-700 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors" title="Beginner">🟢</button><button onclick="setSkillLevel('mid')" class="skill-btn flex-1 px-2 py-1 text-xs rounded-md border border-slate-200 dark:border-slate-700 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors" title="Mid-Level">🟡</button><button onclick="setSkillLevel('pro')" class="skill-btn flex-1 px-2 py-1 text-xs rounded-md border border-slate-200 dark:border-slate-700 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors" title="Pro">🟠</button><button onclick="setSkillLevel('expert')" class="skill-btn flex-1 px-2 py-1 text-xs rounded-md border border-slate-200 dark:border-slate-700 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors" title="Expert">🔴</button><button onclick="setSkillLevel('all')" class="skill-btn flex-1 px-2 py-1 text-xs rounded-md border border-slate-200 dark:border-slate-700 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors font-bold" title="Show All">ALL</button></div>`;
+             tocContainer = document.getElementById('toc-container');
             tocContainer.parentNode.insertBefore(filterContainer, tocContainer);
 
             // 2.2 Bookmarks Logic
@@ -1952,12 +2001,12 @@ Thanks to these wonderful people: **kamalsoft**.
                 
                 if (view === 'grid') {
                     content.classList.add('grid-view');
-                    btnGrid.className = 'flex-1 py-1.5 text-xs font-medium rounded-lg border border-violet-500 bg-violet-50 text-violet-600 dark:bg-violet-900/30 dark:text-violet-400 transition-all';
-                    btnList.className = 'flex-1 py-1.5 text-xs font-medium rounded-lg border border-zinc-200 dark:border-zinc-700 text-zinc-600 dark:text-zinc-400 hover:bg-zinc-50 dark:hover:bg-zinc-800 transition-all';
+                    btnGrid.className = 'flex-1 py-1.5 text-xs font-medium rounded-lg border border-blue-500 bg-blue-50 text-blue-600 dark:bg-blue-900/30 dark:text-blue-400 transition-all';
+                    btnList.className = 'flex-1 py-1.5 text-xs font-medium rounded-lg border border-slate-200 dark:border-slate-700 text-slate-600 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-800 transition-all';
                 } else {
                     content.classList.remove('grid-view');
-                    btnList.className = 'flex-1 py-1.5 text-xs font-medium rounded-lg border border-violet-500 bg-violet-50 text-violet-600 dark:bg-violet-900/30 dark:text-violet-400 transition-all';
-                    btnGrid.className = 'flex-1 py-1.5 text-xs font-medium rounded-lg border border-zinc-200 dark:border-zinc-700 text-zinc-600 dark:text-zinc-400 hover:bg-zinc-50 dark:hover:bg-zinc-800 transition-all';
+                    btnList.className = 'flex-1 py-1.5 text-xs font-medium rounded-lg border border-blue-500 bg-blue-50 text-blue-600 dark:bg-blue-900/30 dark:text-blue-400 transition-all';
+                    btnGrid.className = 'flex-1 py-1.5 text-xs font-medium rounded-lg border border-slate-200 dark:border-slate-700 text-slate-600 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-800 transition-all';
                 }
             };
 
@@ -2010,25 +2059,11 @@ Thanks to these wonderful people: **kamalsoft**.
                 // Update skill buttons UI
                 document.querySelectorAll('.skill-btn').forEach(btn => {
                     if (btn.getAttribute('onclick').includes(`'${skillLevel}'`)) {
-                        btn.classList.add('bg-violet-50', 'dark:bg-violet-900/30', 'border-violet-200', 'dark:border-violet-800', 'text-violet-600', 'dark:text-violet-400');
+                        btn.classList.add('bg-blue-50', 'dark:bg-blue-900/30', 'border-blue-200', 'dark:border-blue-800', 'text-blue-600', 'dark:text-blue-400');
                     } else {
-                        btn.classList.remove('bg-violet-50', 'dark:bg-violet-900/30', 'border-violet-200', 'dark:border-violet-800', 'text-violet-600', 'dark:text-violet-400');
+                        btn.classList.remove('bg-blue-50', 'dark:bg-blue-900/30', 'border-blue-200', 'dark:border-blue-800', 'text-blue-600', 'dark:text-blue-400');
                     }
                 });
-            };
-
-            // 2.26 Download Markdown Logic
-            window.downloadMarkdown = function() {
-                const rawMarkdown = document.getElementById('markdown-source').textContent;
-                const blob = new Blob([rawMarkdown], { type: 'text/markdown' });
-                const url = URL.createObjectURL(blob);
-                const a = document.createElement('a');
-                a.href = url;
-                a.download = 'macOS-cheat-sheet.md';
-                document.body.appendChild(a);
-                a.click();
-                document.body.removeChild(a);
-                URL.revokeObjectURL(url);
             };
 
             // 2.3 Skill Level Filter Logic
@@ -2130,7 +2165,7 @@ Thanks to these wonderful people: **kamalsoft**.
 
             // 4. Generate Sidebar TOC
             const headers = contentArea.querySelectorAll('h2, h3');
-             tocContainer = document.getElementById('toc-container');
+            const tocContainer = document.getElementById('toc-container');
             const mobileTocContainer = document.getElementById('mobile-toc-container');
 
             headers.forEach((header, index) => {
@@ -2166,9 +2201,9 @@ Thanks to these wonderful people: **kamalsoft**.
                 // Styling based on level
                 const baseClasses = "block py-1.5 px-3 rounded-lg text-sm transition-all duration-200 hover:bg-slate-100 dark:hover:bg-slate-800 truncate";
                 if (header.tagName === 'H2') {
-                    link.className = `${baseClasses} font-semibold text-zinc-700 dark:text-zinc-200`;
+                    link.className = `${baseClasses} font-semibold text-slate-700 dark:text-slate-200`;
                 } else {
-                    link.className = `${baseClasses} ml-4 text-zinc-500 dark:text-zinc-400 border-l border-zinc-200 dark:border-zinc-700 pl-4`;
+                    link.className = `${baseClasses} ml-4 text-slate-500 dark:text-slate-400 border-l border-slate-200 dark:border-slate-700 pl-4`;
                 }
 
                 tocContainer.appendChild(link);
