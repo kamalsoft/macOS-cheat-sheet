@@ -99,60 +99,60 @@ If you just got a new Mac or did a fresh install, go through this checklist to o
 ### 🖱️ Trackpad & Mouse
 | Setting | Path | Action |
 | :--- | :--- | :--- |
-| **Tap to Click** | `Trackpad` → `Point & Click` | Turn on **Tap to click** |
-| **Tracking Speed** | `Trackpad` | Increase to **Fast** |
+| **Tap to Click** | `Trackpad` → `Point & Click` | Turn on Tap to click |
+| **Tracking Speed** | `Trackpad` | Increase to Fast |
 | **Natural Scrolling** | `Trackpad` → `Scroll & Zoom` | Toggle based on preference |
-| **Three-Finger Drag** | `Accessibility` → `Pointer Control` | Enable **Trackpad Options** → **Three Finger Drag** |
-| **Right Click** | `Trackpad` → `Point & Click` | Secondary click → **Click with Two Fingers** |
+| **Three-Finger Drag** | `Accessibility` → `Pointer Control` | Enable Trackpad Options → Three Finger Drag |
+| **Right Click** | `Trackpad` → `Point & Click` | Secondary click → Click with Two Fingers |
 
 ### 🖥️ Finder & Desktop
 | Setting | Path | Action |
 | :--- | :--- | :--- |
-| **Show Extensions** | `Finder Settings` → `Advanced` | Check **Show all filename extensions** |
-| **Show Path Bar** | `Finder View Menu` | Click **Show Path Bar** |
-| **Show Status Bar** | `Finder View Menu` | Click **Show Status Bar** |
-| **New Window Loc** | `Finder Settings` → `General` | Set to **Home Directory** |
-| **Search Scope** | `Finder Settings` → `Advanced` | Set to **Search the Current Folder** |
-| **Clean Up** | Right-click Desktop | Click **Use Stacks** |
+| **Show Extensions** | `Finder Settings` → `Advanced` | Check Show all filename extensions |
+| **Show Path Bar** | `Finder View Menu` | Click Show Path Bar |
+| **Show Status Bar** | `Finder View Menu` | Click Show Status Bar |
+| **New Window Loc** | `Finder Settings` → `General` | Set to Home Directory |
+| **Search Scope** | `Finder Settings` → `Advanced` | Set to Search the Current Folder |
+| **Clean Up** | Right-click Desktop | Click Use Stacks |
 | **Sidebar** | `Finder Settings` → `Sidebar` | Check Movies, Music, Pictures, Home |
 
 ### ⚓ Dock & Menu Bar
 | Setting | Path | Action |
 | :--- | :--- | :--- |
-| **Auto-Hide Dock** | `Desktop & Dock` | Turn on **Automatically hide/show Dock** |
+| **Auto-Hide Dock** | `Desktop & Dock` | Turn on Automatically hide/show Dock |
 | **Dock Size** | `Desktop & Dock` | Adjust Size slider (Smaller) |
-| **Magnification** | `Desktop & Dock` | Turn on **Magnification** |
-| **Battery %** | `Control Center` → `Battery` | Turn on **Show Percentage** |
-| **Sound Icon** | `Control Center` → `Sound` | **Always Show in Menu Bar** |
-| **Bluetooth Icon** | `Control Center` → `Bluetooth` | **Always Show in Menu Bar** |
+| **Magnification** | `Desktop & Dock` | Turn on Magnification |
+| **Battery %** | `Control Center` → `Battery` | Turn on Show Percentage |
+| **Sound Icon** | `Control Center` → `Sound` | Always Show in Menu Bar |
+| **Bluetooth Icon** | `Control Center` → `Bluetooth` | Always Show in Menu Bar |
 
 ### 🛡️ Security & Privacy
 | Setting | Path | Action |
 | :--- | :--- | :--- |
 | **FileVault** | `Privacy & Security` | Turn On (Disk Encryption) ⚠️ |
 | **Firewall** | `Network` → `Firewall` | Turn On |
-| **Hot Corners** | `Desktop & Dock` | Set corner to **Lock Screen** |
-| **Lock Screen** | `Lock Screen Settings` | Require password **Immediately** |
+| **Hot Corners** | `Desktop & Dock` | Set corner to Lock Screen |
+| **Lock Screen** | `Lock Screen Settings` | Require password Immediately |
 
 ### ⚡ Performance & Power
 | Setting | Path | Action |
 | :--- | :--- | :--- |
-| **Optimized Charge** | `Battery` → `Battery Health` | Turn on **Optimized Charging** |
+| **Optimized Charge** | `Battery` → `Battery Health` | Turn on Optimized Charging |
 | **Night Shift** | `Displays` | Schedule: Sunset to Sunrise |
-| **Key Repeat** | `Keyboard` | Rate: **Fast**, Delay: **Short** |
+| **Key Repeat** | `Keyboard` | Rate: Fast, Delay: Short |
 
 ### 🌐 Safari & Internet
 | Setting | Path | Action |
 | :--- | :--- | :--- |
-| **Show Full URL** | `Safari Settings` → `Advanced` | Check **Show full website address** |
-| **Develop Menu** | `Safari Settings` → `Advanced` | Check **Show Develop menu** |
+| **Show Full URL** | `Safari Settings` → `Advanced` | Check Show full website address |
+| **Develop Menu** | `Safari Settings` → `Advanced` | Check Show Develop menu |
 | **Default Browser** | `Desktop & Dock` | Select preference |
 
 ### 🛠️ Miscellaneous
 | Setting | Path | Action |
 | :--- | :--- | :--- |
 | **Siri** | `Siri & Spotlight` | Disable if unused |
-| **Updates** | `General` → `Software Update` | Enable **Security Responses** |
+| **Updates** | `General` → `Software Update` | Enable Security Responses |
 
 [↑ Back to Top](#table-of-contents)
 

@@ -10,6 +10,12 @@
   </head>
   <body>
     <div id="sidebar-overlay"></div>
+    <div id="command-palette-overlay">
+      <div id="command-palette">
+        <input type="text" id="command-input" placeholder="Type a command or search sections...">
+        <ul id="command-list"></ul>
+      </div>
+    </div>
     <div id="progress-container">
       <div id="progress-bar"></div>
     </div>
@@ -42,7 +48,10 @@
       <div class="page-layout">
         <aside id="toc-sidebar" class="toc-sidebar">
           <div class="favorites-section">
-            <h3>⭐ Favorites</h3>
+            <div style="display: flex; justify-content: space-between; align-items: center;">
+              <h3>⭐ Favorites</h3>
+              <button id="export-favorites-btn" title="Export Favorites to JSON" style="background:none; border:none; cursor:pointer; font-size:1.2rem;">📥</button>
+            </div>
             <ul id="favorites-list"><li class="favorites-placeholder">Click stars to bookmark sections</li></ul>
           </div>
           <ul id="toc-list"></ul>
@@ -256,6 +265,109 @@
         localStorage.setItem('favorites', JSON.stringify(favorites));
         updateFavoritesUI();
       }
+
+      // Export Favorites Logic
+      document.getElementById('export-favorites-btn').addEventListener('click', () => {
+        if (favorites.length === 0) {
+          alert('No favorites to export!');
+          return;
+        }
+        
+        const exportData = favorites.map(id => {
+          const header = document.getElementById(id);
+          return {
+            id: id,
+            title: header ? header.textContent.replace('⭐', '').replace('☆', '').trim() : id,
+            url: window.location.href.split('#')[0] + '#' + id
+          };
+        });
+
+        const dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(exportData, null, 2));
+        const downloadAnchorNode = document.createElement('a');
+        downloadAnchorNode.setAttribute("href", dataStr);
+        downloadAnchorNode.setAttribute("download", "macos_cheatsheet_favorites.json");
+        document.body.appendChild(downloadAnchorNode);
+        downloadAnchorNode.click();
+        downloadAnchorNode.remove();
+      });
+
+      // Command Palette Logic (Cmd+K)
+      const cmdPaletteOverlay = document.getElementById('command-palette-overlay');
+      const cmdInput = document.getElementById('command-input');
+      const cmdList = document.getElementById('command-list');
+      let cmdItems = [];
+
+      function openCommandPalette() {
+        cmdPaletteOverlay.style.display = 'flex';
+        cmdInput.value = '';
+        cmdInput.focus();
+        populateCommandList();
+      }
+
+      function closeCommandPalette() {
+        cmdPaletteOverlay.style.display = 'none';
+      }
+
+      function populateCommandList() {
+        cmdList.innerHTML = '';
+        cmdItems = [];
+
+        // Add Actions
+        const actions = [
+          { title: 'Toggle Dark Mode', action: () => toggleBtn.click(), shortcut: 'Theme' },
+          { title: 'Toggle Zen Mode', action: () => toggleZenMode(), shortcut: 'Zen' },
+          { title: 'Print to PDF', action: () => window.print(), shortcut: 'Print' },
+          { title: 'Export Favorites', action: () => document.getElementById('export-favorites-btn').click(), shortcut: 'Export' }
+        ];
+
+        actions.forEach(item => {
+          createCmdItem(item.title, item.action, item.shortcut);
+        });
+
+        // Add Sections
+        document.querySelectorAll('.page-content h2').forEach(header => {
+          if (header.id) {
+            createCmdItem('Go to: ' + header.textContent.replace('⭐', '').replace('☆', '').trim(), () => {
+              window.location.hash = header.id;
+            }, 'Section');
+          }
+        });
+      }
+
+      function createCmdItem(text, action, shortcut) {
+        const li = document.createElement('li');
+        li.innerHTML = `<span>${text}</span>${shortcut ? `<span class="cmd-shortcut">${shortcut}</span>` : ''}`;
+        li.addEventListener('click', () => {
+          action();
+          closeCommandPalette();
+        });
+        cmdList.appendChild(li);
+        cmdItems.push({ element: li, text: text.toLowerCase() });
+      }
+
+      // Filter List
+      cmdInput.addEventListener('input', (e) => {
+        const term = e.target.value.toLowerCase();
+        cmdItems.forEach(item => {
+          item.element.style.display = item.text.includes(term) ? 'flex' : 'none';
+        });
+      });
+
+      // Keyboard Shortcuts
+      document.addEventListener('keydown', (e) => {
+        if ((e.metaKey || e.ctrlKey) && e.key === 'k') {
+          e.preventDefault();
+          cmdPaletteOverlay.style.display === 'flex' ? closeCommandPalette() : openCommandPalette();
+        }
+        if (e.key === 'Escape' && cmdPaletteOverlay.style.display === 'flex') {
+          closeCommandPalette();
+        }
+      });
+      
+      // Close on click outside
+      cmdPaletteOverlay.addEventListener('click', (e) => {
+        if (e.target === cmdPaletteOverlay) closeCommandPalette();
+      });
     </script>
 
     <!-- TOC & Copy Button Script -->
