@@ -7,6 +7,7 @@
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![Maintenance](https://img.shields.io/badge/Maintained%3F-yes-green.svg)](https://github.com/kamalsoft/macOS-cheat-sheet/graphs/commit-activity)
 [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](http://makeapullrequest.com)
+[![Last Updated](https://img.shields.io/badge/Last%20Updated-2026--01--08-blue.svg)](https://github.com/kamalsoft/macOS-cheat-sheet/commits/main)
 
 - --
 
@@ -180,9 +181,9 @@
 
 - **2026-01-08**: Update documentation
 - **2026-01-08**: Update documentation
+- **2026-01-08**: Update documentation
 - **2026-01-07**: Update title and descriptions for consistency; add SEO metadata and sitemap
 - **2026-01-07**: Add hero section and quick access grid to the index for improved navigation and user engagement
-- **2026-01-07**: Add speed test widget and disk space analyzer instructions to the index
 
 ## How to Use This Guide
 
@@ -650,7 +651,7 @@ The veteran productivity app.
 
 - File Management
 - Remote Access
-- Clipboard Managers
+- Menu Bar Apps
 
 ## Terminal Themes
 
@@ -1546,8 +1547,8 @@ Hold the `⌘ Command` key to see a list of all active shortcuts for the current
 
 ### 🔗 Related Topics
 
-- Privacy & Security Deep Dive
 - Menu Bar Apps
+- Privacy & Security Deep Dive
 - Remote Access
 
 ## Clipboard Managers
@@ -1568,7 +1569,7 @@ Visual clipboard history for Mac, iPhone, and iPad.
 
 - File Management
 - Productivity Apps
-- Menu Bar Apps
+- Automation
 
 ## Automation
 
@@ -1587,9 +1588,9 @@ Legacy tool, great for file system operations.
 
 ### 🔗 Related Topics
 
-- Remote Access
 - Clipboard Managers
 - Productivity Apps
+- File Management
 
 ## Expert-Level Techniques
 

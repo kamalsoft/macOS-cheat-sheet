@@ -231,6 +231,66 @@ def update_changelog(content):
         print(f"Warning: Could not update changelog (git error?): {e}")
         return content, False
 
+def update_last_updated_badge(content):
+    print("Updating Last Updated badge...")
+    today = datetime.datetime.now().strftime("%Y--%m--%d")
+    badge_url = f"https://img.shields.io/badge/Last%20Updated-{today}-blue.svg"
+    badge_md = f"[![Last Updated]({badge_url})](https://github.com/kamalsoft/macOS-cheat-sheet/commits/main)"
+    
+    # Check if badge exists
+    pattern = r'\[!\[Last Updated\]\(.*?\)\].*?\)'
+    
+    if re.search(pattern, content):
+        new_content = re.sub(pattern, badge_md, content)
+        if new_content != content:
+            return new_content, True
+    else:
+        # Insert after PRs Welcome badge
+        pr_pattern = r'(\[!\[PRs Welcome\].*?\)\].*?\))'
+        match = re.search(pr_pattern, content)
+        if match:
+            new_content = content[:match.end()] + '\n' + badge_md + content[match.end():]
+            return new_content, True
+            
+    return content, False
+
+def update_contributors(content):
+    print("Updating Contributors...")
+    try:
+        # Get contributors from git
+        cmd = ['git', 'log', '--format=%aN']
+        output = subprocess.check_output(cmd, stderr=subprocess.STDOUT).decode('utf-8').strip()
+        
+        if not output:
+            return content, False
+            
+        authors = sorted(list(set(output.split('\n'))))
+        
+        if not authors:
+            return content, False
+            
+        contrib_md = "## 👥 Contributors\n\nThanks to these wonderful people: " + ", ".join([f"**{a}**" for a in authors]) + ".\n"
+        
+        pattern = r'(## 👥 Contributors)([\s\S]*?)(?=\n---|(?:\n#{2,3} )|$)'
+        if re.search(pattern, content):
+            new_content = re.sub(pattern, contrib_md, content, count=1)
+            if new_content != content:
+                return new_content, True
+        else:
+             # Insert before "Best Resources by Level"
+            target = "## Best Resources by Level"
+            if target in content:
+                new_content = content.replace(target, contrib_md + "\n" + target)
+                return new_content, True
+            else:
+                new_content = content + "\n\n" + contrib_md
+                return new_content, True
+
+        return content, False
+    except Exception as e:
+        print(f"Warning: Could not update contributors: {e}")
+        return content, False
+
 def generate_related_topics(md_content):
     print("Generating Related Topics...")
     
@@ -427,6 +487,12 @@ def update_html():
         # Update Changelog
         md_content, log_updated = update_changelog(md_content)
         
+        # Update Last Updated Badge
+        md_content, badge_updated = update_last_updated_badge(md_content)
+        
+        # Update Contributors
+        md_content, contrib_updated = update_contributors(md_content)
+        
         # Generate Related Topics
         new_md_content = generate_related_topics(md_content)
         related_updated = new_md_content != md_content
@@ -441,7 +507,7 @@ def update_html():
         # Fix broken links
         md_content, fixed = fix_broken_links(md_content)
         
-        if updated or fixed or log_updated or related_updated:
+        if updated or fixed or log_updated or related_updated or badge_updated or contrib_updated:
             with open(MD_FILE, 'w', encoding='utf-8') as f:
                 f.write(md_content)
             
