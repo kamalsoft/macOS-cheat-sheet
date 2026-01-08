@@ -120,9 +120,10 @@ def fix_broken_links(content):
         
         matches = difflib.get_close_matches(slug, valid_slugs.keys(), n=1, cutoff=0.6)
         if matches:
+            best_match = matches[0]
             print(f"🔧 Fixed HTML link: href=\"#{slug}\" -> href=\"#{best_match}\"")
             changes_made = True
-            return f'href="#{matches[0]}"'
+            return f'href="#{best_match}"'
         return match.group(0)
 
     new_content = re.sub(r'href="#([^"]+)"', replace_html_link, new_content)
