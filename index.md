@@ -899,6 +899,19 @@ The most beautiful way to visualize what's taking up space.
 ### 3. AppCleaner (Free) 🟢
 Uninstall apps completely by finding all associated files (plists, caches) scattered across the system.
 
+### 4. Disk Space Analyzer (Terminal) 🟠
+Find what's eating your storage without installing GUI apps.
+
+```bash
+# List sizes of folders in current directory (Human readable)
+du -sh * | sort -hr
+
+# Find files larger than 500MB
+find . -type f -size +500M
+
+# Visual Analyzer (NCurses Disk Usage) - Highly Recommended!
+brew install ncdu && ncdu
+```
 
 ## Networking Tools
 
@@ -914,6 +927,14 @@ The ultimate network monitor and application firewall.
 - **Features:** Real-time traffic map, per-app connection alerts, bandwidth usage history.
 - **Why use it:** See exactly where your data is going.
 
+### 3. Network Speed Test
+<div id="speed-test-widget" class="glass-card">
+  <div class="speed-controls">
+    <div id="speed-result">0.00 Mbps</div>
+    <button id="start-speed-test">Start Speed Test</button>
+  </div>
+  <div id="speed-status">Ready to test download speed</div>
+</div>
 
 ## Remote Access
 
