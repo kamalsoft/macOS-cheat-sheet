@@ -98,62 +98,97 @@ This cheat sheet is organized by skill level. Find your level and start there:
 If you just got a new Mac or did a fresh install, go through this checklist to optimize your experience immediately.
 
 ### 🖱️ Trackpad & Mouse
-| Setting | Path | Action |
-| :--- | :--- | :--- |
-| Tap to Click | `Trackpad` → `Point & Click` | Turn on Tap to click |
-| Tracking Speed | `Trackpad` | Increase to Fast |
-| Natural Scrolling | `Trackpad` → `Scroll & Zoom` | Toggle based on preference |
-| Three-Finger Drag | `Accessibility` → `Pointer Control` | Enable Trackpad Options → Three Finger Drag |
-| Right Click | `Trackpad` → `Point & Click` | Secondary click → Click with Two Fingers |
+<table class="shortcuts-table">
+  <thead>
+    <tr><th>Setting</th><th>Path</th><th>Action</th></tr>
+  </thead>
+  <tbody>
+    <tr><td>Tap to Click</td><td><code>Trackpad</code> → <code>Point & Click</code></td><td>Turn on Tap to click</td></tr>
+    <tr><td>Tracking Speed</td><td><code>Trackpad</code></td><td>Increase to Fast</td></tr>
+    <tr><td>Natural Scrolling</td><td><code>Trackpad</code> → <code>Scroll & Zoom</code></td><td>Toggle based on preference</td></tr>
+    <tr><td>Three-Finger Drag</td><td><code>Accessibility</code> → <code>Pointer Control</code></td><td>Enable Trackpad Options → Three Finger Drag</td></tr>
+    <tr><td>Right Click</td><td><code>Trackpad</code> → <code>Point & Click</code></td><td>Secondary click → Click with Two Fingers</td></tr>
+  </tbody>
+</table>
 
 ### 🖥️ Finder & Desktop
-| Setting | Path | Action |
-| :--- | :--- | :--- |
-| Show Extensions | `Finder Settings` → `Advanced` | Check Show all filename extensions |
-| Show Path Bar | `Finder View Menu` | Click Show Path Bar |
-| Show Status Bar | `Finder View Menu` | Click Show Status Bar |
-| New Window Location | `Finder Settings` → `General` | Set to Home Directory |
-| Search Scope | `Finder Settings` → `Advanced` | Set to Search the Current Folder |
-| Clean Up | Right-click Desktop | Click Use Stacks |
-| Sidebar | `Finder Settings` → `Sidebar` | Check Movies, Music, Pictures, Home |
+<table class="shortcuts-table">
+  <thead>
+    <tr><th>Setting</th><th>Path</th><th>Action</th></tr>
+  </thead>
+  <tbody>
+    <tr><td>Show Extensions</td><td><code>Finder Settings</code> → <code>Advanced</code></td><td>Check Show all filename extensions</td></tr>
+    <tr><td>Show Path Bar</td><td><code>Finder View Menu</code></td><td>Click Show Path Bar</td></tr>
+    <tr><td>Show Status Bar</td><td><code>Finder View Menu</code></td><td>Click Show Status Bar</td></tr>
+    <tr><td>New Window Location</td><td><code>Finder Settings</code> → <code>General</code></td><td>Set to Home Directory</td></tr>
+    <tr><td>Search Scope</td><td><code>Finder Settings</code> → <code>Advanced</code></td><td>Set to Search the Current Folder</td></tr>
+    <tr><td>Clean Up</td><td>Right-click Desktop</td><td>Click Use Stacks</td></tr>
+    <tr><td>Sidebar</td><td><code>Finder Settings</code> → <code>Sidebar</code></td><td>Check Movies, Music, Pictures, Home</td></tr>
+  </tbody>
+</table>
 
 ### ⚓ Dock & Menu Bar
-| Setting | Path | Action |
-| :--- | :--- | :--- |
-| Auto-Hide Dock | `Desktop & Dock` | Turn on Automatically hide/show Dock |
-| Dock Size | `Desktop & Dock` | Adjust Size slider (Smaller) |
-| Magnification | `Desktop & Dock` | Turn on Magnification |
-| Battery % | `Control Center` → `Battery` | Turn on Show Percentage |
-| Sound Icon | `Control Center` → `Sound` | Always Show in Menu Bar |
-| Bluetooth Icon | `Control Center` → `Bluetooth` | Always Show in Menu Bar |
+<table class="shortcuts-table">
+  <thead>
+    <tr><th>Setting</th><th>Path</th><th>Action</th></tr>
+  </thead>
+  <tbody>
+    <tr><td>Auto-Hide Dock</td><td><code>Desktop & Dock</code></td><td>Turn on Automatically hide/show Dock</td></tr>
+    <tr><td>Dock Size</td><td><code>Desktop & Dock</code></td><td>Adjust Size slider (Smaller)</td></tr>
+    <tr><td>Magnification</td><td><code>Desktop & Dock</code></td><td>Turn on Magnification</td></tr>
+    <tr><td>Battery %</td><td><code>Control Center</code> → <code>Battery</code></td><td>Turn on Show Percentage</td></tr>
+    <tr><td>Sound Icon</td><td><code>Control Center</code> → <code>Sound</code></td><td>Always Show in Menu Bar</td></tr>
+    <tr><td>Bluetooth Icon</td><td><code>Control Center</code> → <code>Bluetooth</code></td><td>Always Show in Menu Bar</td></tr>
+  </tbody>
+</table>
 
 ### 🛡️ Security & Privacy
-| Setting | Path | Action |
-| :--- | :--- | :--- |
-| FileVault | `Privacy & Security` | Turn On (Disk Encryption) ⚠️ |
-| Firewall | `Network` → `Firewall` | Turn On |
-| Hot Corners | `Desktop & Dock` | Set corner to Lock Screen |
-| Lock Screen | `Lock Screen Settings` | Require password Immediately |
+<table class="shortcuts-table">
+  <thead>
+    <tr><th>Setting</th><th>Path</th><th>Action</th></tr>
+  </thead>
+  <tbody>
+    <tr><td>FileVault</td><td><code>Privacy & Security</code></td><td>Turn On (Disk Encryption) ⚠️</td></tr>
+    <tr><td>Firewall</td><td><code>Network</code> → <code>Firewall</code></td><td>Turn On</td></tr>
+    <tr><td>Hot Corners</td><td><code>Desktop & Dock</code></td><td>Set corner to Lock Screen</td></tr>
+    <tr><td>Lock Screen</td><td><code>Lock Screen Settings</code></td><td>Require password Immediately</td></tr>
+  </tbody>
+</table>
 
 ### ⚡ Performance & Power
-| Setting | Path | Action |
-| :--- | :--- | :--- |
-| Optimized Charge | `Battery` → `Battery Health` | Turn on Optimized Charging |
-| Night Shift | `Displays` | Schedule: Sunset to Sunrise |
-| Key Repeat | `Keyboard` | Rate: Fast, Delay: Short |
+<table class="shortcuts-table">
+  <thead>
+    <tr><th>Setting</th><th>Path</th><th>Action</th></tr>
+  </thead>
+  <tbody>
+    <tr><td>Optimized Charge</td><td><code>Battery</code> → <code>Battery Health</code></td><td>Turn on Optimized Charging</td></tr>
+    <tr><td>Night Shift</td><td><code>Displays</code></td><td>Schedule: Sunset to Sunrise</td></tr>
+    <tr><td>Key Repeat</td><td><code>Keyboard</code></td><td>Rate: Fast, Delay: Short</td></tr>
+  </tbody>
+</table>
 
 ### 🌐 Safari & Internet
-| Setting | Path | Action |
-| :--- | :--- | :--- |
-| Show Full URL | `Safari Settings` → `Advanced` | Check Show full website address |
-| Develop Menu | `Safari Settings` → `Advanced` | Check Show Develop menu |
-| Default Browser | `Desktop & Dock` | Select preference |
+<table class="shortcuts-table">
+  <thead>
+    <tr><th>Setting</th><th>Path</th><th>Action</th></tr>
+  </thead>
+  <tbody>
+    <tr><td>Show Full URL</td><td><code>Safari Settings</code> → <code>Advanced</code></td><td>Check Show full website address</td></tr>
+    <tr><td>Develop Menu</td><td><code>Safari Settings</code> → <code>Advanced</code></td><td>Check Show Develop menu</td></tr>
+    <tr><td>Default Browser</td><td><code>Desktop & Dock</code></td><td>Select preference</td></tr>
+  </tbody>
+</table>
 
 ### 🛠️ Miscellaneous
-| Setting | Path | Action |
-| :--- | :--- | :--- |
-| Siri | `Siri & Spotlight` | Disable if unused |
-| Updates | `General` → `Software Update` | Enable Security Responses |
+<table class="shortcuts-table">
+  <thead>
+    <tr><th>Setting</th><th>Path</th><th>Action</th></tr>
+  </thead>
+  <tbody>
+    <tr><td>Siri</td><td><code>Siri & Spotlight</code></td><td>Disable if unused</td></tr>
+    <tr><td>Updates</td><td><code>General</code> → <code>Software Update</code></td><td>Enable Security Responses</td></tr>
+  </tbody>
+</table>
 
 [↑ Back to Top](#table-of-contents)
 
