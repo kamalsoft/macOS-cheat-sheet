@@ -26,6 +26,7 @@ theme: jekyll-theme-cayman
 * [Apple Silicon Chip Comparison](#apple-silicon-chip-comparison)
 * [Terminal Command Reference](#terminal-command-reference)
 * [System Configuration](#system-configuration)
+* [Modern macOS Features](#modern-macos-features)
 * [Window Management Apps](#window-management-apps)
 * [Menu Bar Apps](#menu-bar-apps)
 * [Productivity Apps](#productivity-apps)
