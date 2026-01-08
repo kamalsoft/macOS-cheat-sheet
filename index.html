@@ -1,0 +1,1576 @@
+<!DOCTYPE html><html lang="en" class="scroll-smooth"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>macOS Mastered | The Ultimate Guide</title><script src="https://cdn.tailwindcss.com?plugins=typography"></script><script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/atom-one-dark.min.css"><script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script><script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#3b82f6',
+                        dark: '#0f172a',
+                        darker: '#020617',
+                        surface: '#1e293b',
+                    },
+                    typography: (theme) => ({
+                        DEFAULT: {
+                            css: {
+                                maxWidth: 'none',
+                                color: '#334155',
+                                a: { color: '#3b82f6', textDecoration: 'none', '&:hover': { textDecoration: 'underline' } },
+                                h1: { color: '#1e293b' },
+                                h2: { color: '#1e293b', borderBottom: '1px solid #e2e8f0', paddingBottom: '0.5rem', marginTop: '3rem' },
+                                code: { color: '#ec4899', backgroundColor: '#f1f5f9', padding: '0.2em 0.4em', borderRadius: '0.25rem', fontWeight: '600' },
+                                'code::before': { content: '""' },
+                                'code::after': { content: '""' },
+                                pre: { backgroundColor: '#1e293b', color: '#e2e8f0' },
+                            },
+                        },
+                        invert: {
+                            css: {
+                                color: '#cbd5e1',
+                                h1: { color: '#f8fafc' },
+                                h2: { color: '#f8fafc', borderColor: '#334155' },
+                                code: { color: '#f472b6', backgroundColor: '#334155' },
+                                strong: { color: '#f8fafc' },
+                            }
+                        }
+                    }),
+                }
+            }
+        }
+    </script><style>
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar { width: 8px; height: 8px; }
+        ::-webkit-scrollbar-track { background: transparent; }
+        ::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 4px; }
+        .dark ::-webkit-scrollbar-thumb { background: #475569; }
+
+        /* Custom Components from Markdown */
+        .hero-section {
+            background: linear-gradient(135deg, #3b82f6 0%, #8b5cf6 100%);
+            color: white;
+            padding: 4rem 2rem;
+            border-radius: 1rem;
+            text-align: center;
+            margin-bottom: 3rem;
+            box-shadow: 0 10px 25px -5px rgba(59, 130, 246, 0.5);
+        }
+        .hero-title { font-size: 3rem; font-weight: 800; margin-bottom: 1rem; line-height: 1.2; }
+        .hero-desc { font-size: 1.25rem; opacity: 0.95; max-width: 600px; margin: 0 auto 2rem; }
+        .hero-buttons { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; }
+        .hero-btn {
+            background: rgba(255,255,255,0.2);
+            backdrop-filter: blur(10px);
+            padding: 0.75rem 1.5rem;
+            border-radius: 9999px;
+            color: white !important;
+            font-weight: 600;
+            transition: all 0.2s;
+            text-decoration: none !important;
+            border: 1px solid rgba(255,255,255,0.3);
+        }
+        .hero-btn:hover { background: rgba(255,255,255,0.35); transform: translateY(-2px); }
+
+        .quick-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 1rem;
+            margin-bottom: 3rem;
+        }
+        .quick-tile {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 1.5rem;
+            background: white;
+            border: 1px solid #e2e8f0;
+            border-radius: 0.75rem;
+            text-decoration: none !important;
+            transition: all 0.2s;
+        }
+        .dark .quick-tile { background: #1e293b; border-color: #334155; }
+        .quick-tile:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+            border-color: #3b82f6;
+        }
+        .tile-icon { font-size: 2rem; margin-bottom: 0.5rem; }
+        .tile-label { font-weight: 600; color: #1e293b; }
+        .dark .tile-label { color: #f8fafc; }
+
+        /* Shortcuts Table Styling */
+        .shortcuts-table { width: 100%; border-collapse: collapse; margin: 1rem 0; font-size: 0.95rem; }
+        .shortcuts-table th { text-align: left; padding: 0.75rem; background: #f1f5f9; border-bottom: 2px solid #e2e8f0; }
+        .dark .shortcuts-table th { background: #334155; border-color: #475569; color: white; }
+        .shortcuts-table td { padding: 0.75rem; border-bottom: 1px solid #e2e8f0; }
+        .dark .shortcuts-table td { border-color: #334155; }
+        .shortcuts-table tr:hover td { background-color: #f8fafc; }
+        .dark .shortcuts-table tr:hover td { background-color: #1e293b; }
+
+        /* Utility */
+        .glass-card {
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 1rem;
+            padding: 1.5rem;
+        }
+        .dark .glass-card {
+            background: rgba(30, 41, 59, 0.7);
+            border-color: rgba(255, 255, 255, 0.1);
+        }
+
+        /* Print Styles */
+        @media print {
+            aside, #mobile-menu-btn, #back-to-top, .hero-buttons, .shortcuts-controls, #theme-toggle { display: none !important; }
+            #main-scroll { overflow: visible !important; height: auto !important; }
+            body { overflow: visible !important; height: auto !important; }
+            .hero-section { box-shadow: none; color: black !important; background: none !important; padding: 2rem 0; text-align: left; border-bottom: 1px solid #eee; margin-bottom: 2rem; }
+            .hero-title { color: black !important; font-size: 2.5rem; }
+            .hero-desc { color: black !important; }
+            .hero-btn { display: none; }
+            a { text-decoration: none !important; color: black !important; }
+            .prose { max-width: 100% !important; }
+            table, tr, td, th, tbody, thead, tfoot { page-break-inside: avoid !important; }
+            ::-webkit-scrollbar { display: none; }
+        }
+    </style></head><body class="bg-slate-50 dark:bg-darker text-slate-800 dark:text-slate-200 h-screen flex overflow-hidden selection:bg-blue-500 selection:text-white"><aside class="w-72 bg-white dark:bg-dark border-r border-slate-200 dark:border-slate-800 flex-col hidden md:flex z-20 shadow-xl"><div class="p-6 border-b border-slate-200 dark:border-slate-800"><h1 class="text-2xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-blue-600 to-violet-600">macOS Mastered</h1><p class="text-xs text-slate-500 mt-1 font-medium tracking-wide uppercase">Interactive Guide</p></div><div class="p-4 space-y-3"><div class="relative group"><input type="text" id="search-input" placeholder="Filter topics..." 
+                    class="w-full bg-slate-100 dark:bg-slate-800 text-slate-800 dark:text-slate-200 px-4 py-2.5 pl-10 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all"><svg class="w-4 h-4 absolute left-3 top-3 text-slate-400 group-focus-within:text-blue-500 transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg></div><button onclick="window.print()" class="w-full flex items-center justify-center gap-2 bg-white dark:bg-surface border border-slate-200 dark:border-slate-700 text-slate-600 dark:text-slate-300 px-4 py-2 rounded-xl text-sm font-medium hover:bg-slate-50 dark:hover:bg-slate-700 transition-all group"><svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 17h2a2 2 0 002-2v-4a2 2 0 00-2-2H5a2 2 0 00-2 2v4a2 2 0 002 2h2m2 4h6a2 2 0 002-2v-4a2 2 0 00-2-2H9a2 2 0 00-2 2v4a2 2 0 002 2zm8-12V5a2 2 0 00-2-2H9a2 2 0 00-2 2v4h10z"></path></svg><span>Export PDF</span></button></div><nav class="flex-1 overflow-y-auto p-3 space-y-0.5" id="toc-container"></nav><div class="p-4 border-t border-slate-200 dark:border-slate-800 flex items-center justify-between bg-slate-50 dark:bg-dark"><div class="flex items-center gap-2 text-sm font-medium text-slate-600 dark:text-slate-400"><svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"></path></svg><span>Theme</span></div><button id="theme-toggle" class="relative inline-flex h-6 w-11 items-center rounded-full bg-slate-200 dark:bg-slate-700 transition-colors focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 dark:focus:ring-offset-slate-900"><span class="sr-only">Toggle theme</span><span id="theme-knob" class="inline-block h-4 w-4 transform rounded-full bg-white shadow transition-transform translate-x-1 dark:translate-x-6"></span></button></div></aside><main class="flex-1 overflow-y-auto relative scroll-smooth" id="main-scroll"><div class="md:hidden sticky top-0 z-30 bg-white/80 dark:bg-dark/80 backdrop-blur-md border-b border-slate-200 dark:border-slate-800 p-4 flex items-center justify-between"><span class="font-bold text-lg bg-clip-text text-transparent bg-gradient-to-r from-blue-600 to-violet-600">macOS Mastered</span><button id="mobile-menu-btn" class="p-2 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800"><svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path></svg></button></div><div class="max-w-5xl mx-auto px-6 py-12"><div id="content-area" class="prose prose-slate dark:prose-invert prose-lg max-w-none prose-headings:scroll-mt-24 prose-a:no-underline hover:prose-a:underline prose-img:rounded-xl prose-img:shadow-lg"></div></div><button id="back-to-top" class="fixed bottom-8 right-8 bg-blue-600 text-white p-3 rounded-full shadow-lg shadow-blue-600/30 opacity-0 invisible transition-all duration-300 hover:bg-blue-700 hover:-translate-y-1 z-50"><svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 10l7-7m0 0l7 7m-7-7v18"></path></svg></button></main><div id="mobile-menu" class="fixed inset-0 z-50 hidden"><div class="absolute inset-0 bg-black/60 backdrop-blur-sm" id="mobile-menu-backdrop"></div><div class="absolute right-0 top-0 bottom-0 w-3/4 max-w-xs bg-white dark:bg-surface shadow-2xl transform transition-transform translate-x-full" id="mobile-menu-panel"><div class="p-4 flex justify-between items-center border-b border-slate-200 dark:border-slate-700"><h2 class="font-bold text-lg">Navigation</h2><button id="close-mobile-menu" class="p-2 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-700"><svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg></button></div><nav id="mobile-toc-container" class="p-4 space-y-2 overflow-y-auto h-full pb-20"></nav></div></div><script type="text/template" id="markdown-source">
+---
+layout: default
+title: macOS Mastered
+theme: jekyll-theme-cayman
+---
+
+
+# macOS Mastered
+### From Beginner to Expert | M1/M2/M3/M4/M5 Compatible
+
+![macOS Logo](https://www.apple.com/ac/structured-data/images/knowledge_graph_logo.png)
+
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+[![Maintenance](https://img.shields.io/badge/Maintained%3F-yes-green.svg)](https://github.com/kamalsoft/macOS-cheat-sheet/graphs/commit-activity)
+[![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](http://makeapullrequest.com)
+
+---
+
+## 📋 Table of Contents
+
+* [Beginner: Essentials](#beginner-essentials)
+* [Intermediate: Productivity](#intermediate-productivity)
+* [Power User: Workflows](#power-user-workflows)
+* [Developer: Ecosystem](#developer-ecosystem)
+* [Expert: Internals](#expert-internals)
+* [Troubleshooting & Maintenance](#troubleshooting--maintenance)
+* [Reference Cards](#reference-cards)
+
+---
+
+<div class="hero-section">
+  <div class="hero-title">macOS Mastered.</div>
+  <div class="hero-desc">The ultimate guide for developers, power users, and switchers. Shortcuts, terminal commands, and hidden settings in one place.</div>
+  <div class="hero-buttons">
+    <a href="#beginner-essentials" class="hero-btn">🚀 Beginner</a>
+    <a href="#intermediate-productivity" class="hero-btn">⚡ Power User</a>
+    <a href="#developer-ecosystem" class="hero-btn">🛠️ Developer</a>
+    <a href="#expert-internals" class="hero-btn">🧠 Expert</a>
+  </div>
+</div>
+
+<div class="quick-grid">
+  <a href="#keyboard-shortcuts-comprehensive" class="quick-tile"><span class="tile-icon">⌨️</span><span class="tile-label">Shortcuts</span></a>
+  <a href="#terminal-command-reference" class="quick-tile"><span class="tile-icon">💻</span><span class="tile-label">Terminal</span></a>
+  <a href="#top-30-essential-settings" class="quick-tile"><span class="tile-icon">⚙️</span><span class="tile-label">Settings</span></a>
+  <a href="#homebrew-essentials" class="quick-tile"><span class="tile-icon">🍺</span><span class="tile-label">Homebrew</span></a>
+  <a href="#troubleshooting-guide" class="quick-tile"><span class="tile-icon">🚑</span><span class="tile-label">Fixes</span></a>
+  <a href="#developer-tools-mid-level" class="quick-tile"><span class="tile-icon">🛠️</span><span class="tile-label">Dev Tools</span></a>
+</div>
+ 
+## How to Use This Guide
+
+This guide is organized by skill level. Find your level and start there:
+
+| Level | Description | Start Here |
+|-------|-------------|-----------|
+| 🟢 **Beginner** | New to Mac, learning basics | [Top 30 Settings](#top-30-essential-settings-for-new-mac-users) |
+| 🟡 **Mid-Level** | Comfortable with Mac, want to do more | [Developer Tools](#developer-tools-mid-level) |
+| 🟠 **Pro** | Advanced user, customization & automation | [Advanced Configuration](#advanced-configuration-pro) |
+| 🔴 **Expert** | System administration, scripting, optimization | [Expert Techniques](#expert-level-techniques) |
+
+**Symbols Used:**
+- 🟢 = Beginner friendly
+- 🟡 = Mid-level recommended
+- 🟠 = Pro users
+- 🔴 = Expert only
+- ⚠️ = Caution required
+- 💡 = Pro tip
+- 🍎 = Apple Silicon (M1/M2/M3/M4/M5) specific
+
+[↑ Back to Top](#table-of-contents)
+
+---
+
+## Beginner: Essentials
+
+### 🚀 Top 30 Essential Settings
+
+Optimize your experience immediately after a fresh install.
+
+#### 🖱️ Trackpad & Mouse
+<table class="shortcuts-table">
+  <thead>
+    <tr><th>Setting</th><th>Path</th><th>Action</th></tr>
+  </thead>
+  <tbody>
+    <tr><td>Tap to Click</td><td><code>Trackpad</code> → <code>Point & Click</code></td><td>Turn on Tap to click</td></tr>
+    <tr><td>Tracking Speed</td><td><code>Trackpad</code></td><td>Increase to Fast</td></tr>
+    <tr><td>Natural Scrolling</td><td><code>Trackpad</code> → <code>Scroll & Zoom</code></td><td>Toggle based on preference</td></tr>
+    <tr><td>Three-Finger Drag</td><td><code>Accessibility</code> → <code>Pointer Control</code></td><td>Enable Trackpad Options → Three Finger Drag</td></tr>
+    <tr><td>Right Click</td><td><code>Trackpad</code> → <code>Point & Click</code></td><td>Secondary click → Click with Two Fingers</td></tr>
+  </tbody>
+</table>
+
+#### 🖥️ Finder & Desktop
+<table class="shortcuts-table">
+  <thead>
+    <tr><th>Setting</th><th>Path</th><th>Action</th></tr>
+  </thead>
+  <tbody>
+    <tr><td>Show Extensions</td><td><code>Finder Settings</code> → <code>Advanced</code></td><td>Check Show all filename extensions</td></tr>
+    <tr><td>Show Path Bar</td><td><code>Finder View Menu</code></td><td>Click Show Path Bar</td></tr>
+    <tr><td>Show Status Bar</td><td><code>Finder View Menu</code></td><td>Click Show Status Bar</td></tr>
+    <tr><td>New Window Location</td><td><code>Finder Settings</code> → <code>General</code></td><td>Set to Home Directory</td></tr>
+    <tr><td>Search Scope</td><td><code>Finder Settings</code> → <code>Advanced</code></td><td>Set to Search the Current Folder</td></tr>
+    <tr><td>Clean Up</td><td>Right-click Desktop</td><td>Click Use Stacks</td></tr>
+    <tr><td>Sidebar</td><td><code>Finder Settings</code> → <code>Sidebar</code></td><td>Check Movies, Music, Pictures, Home</td></tr>
+  </tbody>
+</table>
+
+#### ⚓ Dock & Menu Bar
+<table class="shortcuts-table">
+  <thead>
+    <tr><th>Setting</th><th>Path</th><th>Action</th></tr>
+  </thead>
+  <tbody>
+    <tr><td>Auto-Hide Dock</td><td><code>Desktop & Dock</code></td><td>Turn on Automatically hide/show Dock</td></tr>
+    <tr><td>Dock Size</td><td><code>Desktop & Dock</code></td><td>Adjust Size slider (Smaller)</td></tr>
+    <tr><td>Magnification</td><td><code>Desktop & Dock</code></td><td>Turn on Magnification</td></tr>
+    <tr><td>Battery %</td><td><code>Control Center</code> → <code>Battery</code></td><td>Turn on Show Percentage</td></tr>
+    <tr><td>Sound Icon</td><td><code>Control Center</code> → <code>Sound</code></td><td>Always Show in Menu Bar</td></tr>
+    <tr><td>Bluetooth Icon</td><td><code>Control Center</code> → <code>Bluetooth</code></td><td>Always Show in Menu Bar</td></tr>
+  </tbody>
+</table>
+
+#### 🛡️ Security & Privacy
+<table class="shortcuts-table">
+  <thead>
+    <tr><th>Setting</th><th>Path</th><th>Action</th></tr>
+  </thead>
+  <tbody>
+    <tr><td>FileVault</td><td><code>Privacy & Security</code></td><td>Turn On (Disk Encryption) ⚠️</td></tr>
+    <tr><td>Firewall</td><td><code>Network</code> → <code>Firewall</code></td><td>Turn On</td></tr>
+    <tr><td>Hot Corners</td><td><code>Desktop & Dock</code></td><td>Set corner to Lock Screen</td></tr>
+    <tr><td>Lock Screen</td><td><code>Lock Screen Settings</code></td><td>Require password Immediately</td></tr>
+  </tbody>
+</table>
+
+#### ⚡ Performance & Power
+<table class="shortcuts-table">
+  <thead>
+    <tr><th>Setting</th><th>Path</th><th>Action</th></tr>
+  </thead>
+  <tbody>
+    <tr><td>Optimized Charge</td><td><code>Battery</code> → <code>Battery Health</code></td><td>Turn on Optimized Charging</td></tr>
+    <tr><td>Night Shift</td><td><code>Displays</code></td><td>Schedule: Sunset to Sunrise</td></tr>
+    <tr><td>Key Repeat</td><td><code>Keyboard</code></td><td>Rate: Fast, Delay: Short</td></tr>
+  </tbody>
+</table>
+
+#### 🌐 Safari & Internet
+<table class="shortcuts-table">
+  <thead>
+    <tr><th>Setting</th><th>Path</th><th>Action</th></tr>
+  </thead>
+  <tbody>
+    <tr><td>Show Full URL</td><td><code>Safari Settings</code> → <code>Advanced</code></td><td>Check Show full website address</td></tr>
+    <tr><td>Develop Menu</td><td><code>Safari Settings</code> → <code>Advanced</code></td><td>Check Show Develop menu</td></tr>
+    <tr><td>Default Browser</td><td><code>Desktop & Dock</code></td><td>Select preference</td></tr>
+  </tbody>
+</table>
+
+#### 🛠️ Miscellaneous
+<table class="shortcuts-table">
+  <thead>
+    <tr><th>Setting</th><th>Path</th><th>Action</th></tr>
+  </thead>
+  <tbody>
+    <tr><td>Siri</td><td><code>Siri & Spotlight</code></td><td>Disable if unused</td></tr>
+    <tr><td>Updates</td><td><code>General</code> → <code>Software Update</code></td><td>Enable Security Responses</td></tr>
+  </tbody>
+</table>
+
+[↑ Back to Top](#table-of-contents)
+
+---
+
+## Opening Terminal - Step by Step
+
+### Method 1: Using Spotlight Search (Easiest) 🟢
+
+1. **Press** `Command (⌘) + Space` on your keyboard
+2. **Type** `terminal`
+3. **Press** `Return (Enter)`
+
+### Method 2: Using Finder 🟢
+
+1. **Click** Finder (Smiling Face)
+2. **Go** to Applications → Utilities
+3. **Double-click** Terminal
+
+[↑ Back to Top](#table-of-contents)
+
+---
+
+## Getting Started (Beginners)
+
+### Apple Silicon (M-Series) Compatibility 🍎
+
+**M1/M2/M3/M4/M5 Macs Are Special!**
+
+Your Mac has a special type of processor (chip) called "Apple Silicon".
+
+| Feature | Intel Macs | Apple Silicon (M1-M5) |
+|---------|------------|----------------------|
+| **Architecture** | x86_64 | arm64 |
+| **Apps** | All native | Native + Rosetta 2 |
+| **Performance** | Standard | High Efficiency & Speed ⚡ |
+
+**Which Mac do you have?** 🟢
+1. Click  (Apple menu) → "About This Mac"
+2. Look at "Chip" or "Processor".
+
+[↑ Back to Top](#table-of-contents)
+
+---
+
+## System Information & Hardware
+
+### Check Your Mac Specifications 🟢
+
+**Terminal Method:** 🟡
+
+```bash
+# Basic system information
+sw_vers
+
+# Detailed system info
+system_profiler SPSoftwareDataType SPHardwareDataType
+
+# Check if Apple Silicon or Intel
+uname -m
+# arm64 = Apple Silicon (M1-M5) | x86_64 = Intel
+```
+
+**Installing Rosetta 2 (for Intel apps):** 🍎
+
+```bash
+# Install Rosetta 2 (one time only)
+softwareupdate --install-rosetta
+```
+
+[↑ Back to Top](#table-of-contents)
+
+---
+
+## Apple Silicon Chip Comparison
+
+Understanding the differences between the M-Series chips will help you understand your Mac's capabilities.
+
+### 📊 Chip Tiers Explained
+
+| Tier | Best For... | Ideal User |
+| :--- | :--- | :--- |
+| **Base** (M1/M2/M3/M4/M5) | Everyday tasks, office work, light editing, browsing. | Students, Writers, Office Workers |
+| **Pro** (M1/M2/M3/M4/M5 Pro) | Heavy multitasking, coding, photo editing, light video. | Developers, Photographers, Creators |
+| **Max** (M1/M2/M3/M4/M5 Max) | 3D rendering, 4K/8K video editing, complex compiling. | Video Editors, 3D Artists, Engineers |
+| **Ultra** (M1/M2/M3 Ultra) | Extreme workstation tasks, scientific compute. | Studios, Data Scientists |
+
+### 🚀 Generation Comparison
+
+| Generation | Key Features | Performance Leap |
+| :--- | :--- | :--- |
+| **M1 (2020)** | The Revolution. First SoC for Mac. Incredible battery life. | 3.5x faster CPU than Intel. |
+| **M2 (2022)** | Refined architecture. Better GPU, Media Engine added to base. | ~18% faster CPU, 35% faster GPU than M1. |
+| **M3 (2023)** | 3nm Process. Hardware Ray Tracing. Dynamic Caching. | ~15-20% faster than M2. Massive GPU leap. |
+| **M4 (2024)** | AI Focused. Enhanced Neural Engine. Efficiency boost. | Significant AI/ML performance gains. |
+| **M5 (2025/26)** | Next-Gen Architecture. Extreme efficiency & raw power. | The pinnacle of desktop silicon. |
+
+[↑ Back to Top](#table-of-contents)
+
+---
+
+## Terminal Command Reference
+
+### Beginner Terminal Commands 🟢
+
+**Navigation:**
+
+```bash
+pwd                 # Print Working Directory (Where am I?)
+ls                  # List files
+ls -la              # List all files (including hidden)
+cd Documents        # Change Directory to Documents
+cd ..               # Go back one folder
+cd ~                # Go to Home folder
+```
+
+**File Operations:**
+
+```bash
+touch file.txt      # Create empty file
+mkdir NewFolder     # Create new folder
+cp file.txt copy.txt # Copy file
+mv file.txt NewLoc/ # Move file
+rm file.txt         # Delete file (Careful!)
+open .              # Open current folder in Finder
+```
+
+### Mid-Level Terminal Commands 🟡
+
+**System Management:**
+
+```bash
+top                 # Real-time process viewer
+killall Safari      # Force close an app
+uptime              # How long has Mac been on?
+history             # Show command history
+```
+
+**Network:**
+
+```bash
+ifconfig            # Network interfaces
+ping google.com     # Check internet connection
+curl ifconfig.me    # Get public IP
+```
+
+### Pro Terminal Commands 🟠
+
+**Advanced Operations:**
+
+```bash
+# Find files larger than 100MB
+find ~ -size +100M
+
+# Watch file changes
+tail -f /var/log/system.log
+
+# Disk usage sorted by size
+du -sh * | sort -hr
+
+# Symbolic links
+ln -s /original/path /link/path
+```
+
+[↑ Back to Top](#table-of-contents)
+
+---
+
+## System Configuration
+
+### Finder Configuration 🟢
+
+**Show Hidden Files:** `Cmd + Shift + .`
+
+**Terminal Method:** 🟡
+```bash
+# Show hidden files
+defaults write com.apple.finder AppleShowAllFiles -bool true
+killall Finder
+
+# Show path bar
+defaults write com.apple.finder ShowPathbar -bool true
+```
+
+### Screenshot Configuration 🟡
+
+**Terminal Tweaks:**
+```bash
+# Change location to Desktop/Screenshots
+mkdir ~/Desktop/Screenshots
+defaults write com.apple.screencapture location ~/Desktop/Screenshots
+killall SystemUIServer
+
+# Remove shadow from screenshots
+defaults write com.apple.screencapture disable-shadow -bool true
+```
+
+### Dock Configuration 🟡
+
+```bash
+# Auto-hide Dock
+defaults write com.apple.dock autohide -bool true
+
+# Speed up Dock animation
+defaults write com.apple.dock autohide-time-modifier -float 0.5
+killall Dock
+```
+
+[↑ Back to Top](#table-of-contents)
+
+---
+
+## Window Management Apps
+
+Even with recent macOS updates adding window tiling, dedicated apps provide faster, keyboard-centric control (similar to Windows snapping).
+
+### 1. Rectangle (Free & Open Source) 🟢
+The most popular free option.
+- **Website:** [rectangleapp.com](https://rectangleapp.com/)
+- **Install via Homebrew:** `brew install --cask rectangle`
+- **Key Shortcuts:**
+  - `Ctrl + Opt + Left/Right`: Snap to halves
+  - `Ctrl + Opt + Enter`: Maximize
+  - `Ctrl + Opt + U/I/J/K`: Snap to corners
+
+### 2. Magnet (Paid) 🟢
+Excellent alternative if you prefer the App Store.
+- **Availability:** Mac App Store
+- **Features:** Drag-to-snap, clean menu bar interface, reliable performance.
+
+↑ Back to Top
+
+---
+
+## Menu Bar Apps
+
+Keep your menu bar organized and clean.
+
+### 1. Hidden Bar (Free) 🟢
+A lightweight utility to hide menu bar icons.
+- **Install:** `brew install --cask hiddenbar`
+
+### 2. Ice (Free) 🟢
+A modern, open-source alternative to Bartender.
+- **Install:** `brew install --cask jordanbaird-ice`
+
+### 3. Bartender (Paid) 🟢
+The most powerful option for total control over menu bar items.
+
+---
+
+## Productivity Apps
+
+Boost your workflow with these powerful launchers and tools.
+
+### 1. Raycast (Free for Personal Use) 🟢
+The modern, extendable launcher that's taking over the Mac world.
+- **Install:** `brew install --cask raycast`
+- **Features:** Clipboard history, window management, extensions store, quick scripts.
+- **Pro Tip:** Replace Spotlight (⌘ + Space) with Raycast in its settings.
+
+### 2. Alfred (Freemium) 🟡
+The veteran productivity app.
+- **Install:** `brew install --cask alfred`
+- **Features:** Incredibly fast file search, custom workflows (Powerpack required), clipboard history.
+
+↑ Back to Top
+
+---
+
+## Terminal Themes
+
+Make your terminal look amazing and helpful with status indicators.
+
+### 1. Oh My Zsh 🟡
+A framework for managing your Zsh configuration.
+- **Install:**
+  ```bash
+  sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+  ```
+
+### 2. Powerlevel10k Theme 🟠
+The fastest and most customizable theme for Zsh.
+1. **Install Font:** Download and install a Nerd Font (e.g., MesloLGS NF) for icons to work.
+2. **Install Theme:**
+   ```bash
+   git clone --depth=1 https://github.com/romkatv/powerlevel10k.git ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/themes/powerlevel10k
+   ```
+3. **Activate:** Set `ZSH_THEME="powerlevel10k/powerlevel10k"` in your `~/.zshrc` file.
+4. **Configure:** Restart terminal and type `p10k configure`.
+
+↑ Back to Top
+
+---
+
+## Backup Strategies
+
+Don't lose your data. Implement the "3-2-1" rule: 3 copies, 2 media types, 1 off-site.
+
+### 1. Time Machine (Local) 🟢
+Apple's built-in "set it and forget it" solution.
+- **Setup:** `System Settings` → `General` → `Time Machine`.
+- **Requirement:** External Hard Drive or NAS.
+- **Tip:** Check "Encrypt Backup" to secure your data if the drive is stolen.
+
+### 2. Cloud Backup (Off-site) 🟡
+Protect against fire, theft, or hardware failure.
+- **iCloud Drive:** Syncs Desktop & Documents (Good for access, not a full history backup).
+- **Backblaze / Arq:** Dedicated backup services that run in the background and upload everything.
+
+↑ Back to Top
+
+---
+
+## Keyboard Shortcuts (Comprehensive)
+
+<div class="shortcuts-controls">
+  <select id="shortcuts-filter">
+    <option value="all">Show All Categories</option>
+    <option value="basics">The "Must Know" Basics</option>
+    <option value="text">Text Editing & Document Control</option>
+    <option value="finder">Finder & File Management</option>
+    <option value="screenshots">Screenshots & Recording</option>
+    <option value="web">Web Browsing</option>
+    <option value="system">System & Window Management</option>
+  </select>
+  <button id="print-shortcuts-btn">🖨️ Print Shortcuts</button>
+</div>
+
+### 🔑 The "Must Know" Basics
+<table class="shortcuts-table">
+  <thead>
+    <tr><th>Shortcut</th><th>Action</th></tr>
+  </thead>
+  <tbody>
+    <tr><td><code>⌘</code> + <code>Space</code></td><td>Spotlight Search (Launch apps, find files, do math)</td></tr>
+    <tr><td><code>⌘</code> + <code>Q</code></td><td>Quit application (Completely closes it)</td></tr>
+    <tr><td><code>⌘</code> + <code>W</code></td><td>Close current window/tab</td></tr>
+    <tr><td><code>⌘</code> + <code>Tab</code></td><td>Switch between open apps</td></tr>
+    <tr><td><code>⌘</code> + <code>`</code></td><td>Switch between windows of the same app</td></tr>
+    <tr><td><code>⌘</code> + <code>Opt</code> + <code>Esc</code></td><td>Force Quit menu (Use when app freezes)</td></tr>
+    <tr><td><code>⌘</code> + <code>,</code></td><td>Open Settings/Preferences for current app</td></tr>
+    <tr><td><code>⌘</code> + <code>H</code></td><td>Hide current app</td></tr>
+    <tr><td><code>⌘</code> + <code>M</code></td><td>Minimize window to Dock</td></tr>
+  </tbody>
+</table>
+
+### 📝 Text Editing & Document Control
+<table class="shortcuts-table">
+  <thead>
+    <tr><th>Shortcut</th><th>Action</th></tr>
+  </thead>
+  <tbody>
+    <tr><td><code>⌘</code> + <code>C</code></td><td>Copy</td></tr>
+    <tr><td><code>⌘</code> + <code>V</code></td><td>Paste</td></tr>
+    <tr><td><code>⌘</code> + <code>X</code></td><td>Cut</td></tr>
+    <tr><td><code>⌘</code> + <code>Z</code></td><td>Undo</td></tr>
+    <tr><td><code>⌘</code> + <code>Shift</code> + <code>Z</code></td><td>Redo</td></tr>
+    <tr><td><code>⌘</code> + <code>A</code></td><td>Select All</td></tr>
+    <tr><td><code>⌘</code> + <code>F</code></td><td>Find / Search in document</td></tr>
+    <tr><td><code>Opt</code> + <code>←</code> / <code>→</code></td><td>Move cursor by word</td></tr>
+    <tr><td><code>⌘</code> + <code>←</code> / <code>→</code></td><td>Move cursor to start/end of line</td></tr>
+    <tr><td><code>⌘</code> + <code>↑</code> / <code>↓</code></td><td>Move cursor to top/bottom of document</td></tr>
+    <tr><td><code>Shift</code> + <code>Arrows</code></td><td>Highlight/Select text</td></tr>
+    <tr><td><code>Opt</code> + <code>Delete</code></td><td>Delete previous word</td></tr>
+    <tr><td><code>⌘</code> + <code>Delete</code></td><td>Delete entire line (to left of cursor)</td></tr>
+  </tbody>
+</table>
+
+### 📂 Finder & File Management
+<table class="shortcuts-table">
+  <thead>
+    <tr><th>Shortcut</th><th>Action</th></tr>
+  </thead>
+  <tbody>
+    <tr><td><code>⌘</code> + <code>N</code></td><td>New Finder Window</td></tr>
+    <tr><td><code>⌘</code> + <code>Shift</code> + <code>N</code></td><td>Create New Folder</td></tr>
+    <tr><td><code>Return</code></td><td>Rename selected file</td></tr>
+    <tr><td><code>Spacebar</code></td><td>Quick Look (Preview file without opening)</td></tr>
+    <tr><td><code>⌘</code> + <code>Delete</code></td><td>Move to Trash</td></tr>
+    <tr><td><code>⌘</code> + <code>Shift</code> + <code>Delete</code></td><td>Empty Trash</td></tr>
+    <tr><td><code>⌘</code> + <code>D</code></td><td>Duplicate file</td></tr>
+    <tr><td><code>⌘</code> + <code>I</code></td><td>Get Info (Size, type, permissions)</td></tr>
+    <tr><td><code>⌘</code> + <code>Shift</code> + <code>.</code></td><td>Toggle Hidden Files</td></tr>
+    <tr><td><code>⌘</code> + <code>Opt</code> + <code>C</code></td><td>Copy File Path</td></tr>
+    <tr><td><code>⌘</code> + <code>1</code>/<code>2</code>/<code>3</code>/<code>4</code></td><td>View as Icon / List / Column / Gallery</td></tr>
+  </tbody>
+</table>
+
+### 📸 Screenshots & Recording
+<table class="shortcuts-table">
+  <thead>
+    <tr><th>Shortcut</th><th>Action</th></tr>
+  </thead>
+  <tbody>
+    <tr><td><code>⌘</code> + <code>Shift</code> + <code>3</code></td><td>Capture Entire Screen</td></tr>
+    <tr><td><code>⌘</code> + <code>Shift</code> + <code>4</code></td><td>Capture Selected Area (Drag crosshair)</td></tr>
+    <tr><td><code>⌘</code> + <code>Shift</code> + <code>4</code> + <code>Space</code></td><td>Capture Specific Window (Camera icon appears)</td></tr>
+    <tr><td><code>⌘</code> + <code>Shift</code> + <code>5</code></td><td>Open Screenshot/Recording Utility (Options menu)</td></tr>
+    <tr><td><code>Ctrl</code> + (Any above)</td><td>Copy screenshot to Clipboard instead of saving to file</td></tr>
+  </tbody>
+</table>
+
+### 🌐 Web Browsing (Safari/Chrome)
+<table class="shortcuts-table">
+  <thead>
+    <tr><th>Shortcut</th><th>Action</th></tr>
+  </thead>
+  <tbody>
+    <tr><td><code>⌘</code> + <code>T</code></td><td>New Tab</td></tr>
+    <tr><td><code>⌘</code> + <code>Shift</code> + <code>T</code></td><td>Reopen Last Closed Tab (Lifesaver!)</td></tr>
+    <tr><td><code>⌘</code> + <code>L</code></td><td>Highlight URL/Address Bar</td></tr>
+    <tr><td><code>⌘</code> + <code>R</code></td><td>Refresh Page</td></tr>
+    <tr><td><code>⌘</code> + <code>+</code> / <code>-</code></td><td>Zoom In / Out</td></tr>
+    <tr><td><code>⌘</code> + <code>0</code></td><td>Reset Zoom</td></tr>
+    <tr><td><code>Ctrl</code> + <code>Tab</code></td><td>Next Tab</td></tr>
+    <tr><td><code>Ctrl</code> + <code>Shift</code> + <code>Tab</code></td><td>Previous Tab</td></tr>
+  </tbody>
+</table>
+
+### 🖥️ System & Window Management
+<table class="shortcuts-table">
+  <thead>
+    <tr><th>Shortcut</th><th>Action</th></tr>
+  </thead>
+  <tbody>
+    <tr><td><code>Ctrl</code> + <code>⌘</code> + <code>F</code></td><td>Toggle Full Screen</td></tr>
+    <tr><td><code>Ctrl</code> + <code>↑</code></td><td>Mission Control (See all open windows)</td></tr>
+    <tr><td><code>Ctrl</code> + <code>↓</code></td><td>App Expose (See windows of current app)</td></tr>
+    <tr><td><code>Ctrl</code> + <code>←</code> / <code>→</code></td><td>Switch between Desktops/Spaces</td></tr>
+    <tr><td><code>Fn</code> + <code>Delete</code></td><td>Forward Delete (Delete character to right)</td></tr>
+    <tr><td><code>Ctrl</code> + <code>⌘</code> + <code>Q</code></td><td>Lock Screen immediately</td></tr>
+    <tr><td><code>⌘</code> + <code>Shift</code> + <code>?</code></td><td>Open Help Menu (Search for menu items!)</td></tr>
+  </tbody>
+</table>
+
+[↑ Back to Top](#table-of-contents)
+
+---
+
+## Troubleshooting Guide
+
+### Common Issues & Fixes 🟢
+
+**1. App is Frozen**
+- Press `Cmd + Option + Esc` to open Force Quit menu.
+- Select the app and click "Force Quit".
+- *Terminal way:* `killall AppName`
+
+**2. Mac is Slow**
+- Open **Activity Monitor** (Cmd + Space, type "Activity Monitor").
+- Check "CPU" and "Memory" tabs to see what's using resources.
+- Restart your Mac (clears RAM and caches).
+
+**3. WiFi Issues**
+- Toggle WiFi off and on.
+- *Terminal reset:* `sudo killall -HUP mDNSResponder` (Flushes DNS).
+
+**4. Disk Full?**
+- Check storage:  → System Settings → General → Storage.
+- Use `du -sh *` in Terminal to find large folders.
+
+### Safe Mode 🟡
+- **Apple Silicon:** Shut down. Press and hold Power button until "Loading startup options" appears. Select disk, hold Shift, click "Continue in Safe Mode".
+- **Intel:** Restart and immediately hold Shift.
+
+[↑ Back to Top](#table-of-contents)
+
+---
+
+## Developer Tools (Mid-Level)
+
+### 1. Xcode Command Line Tools 🟡
+Essential for development on macOS.
+```bash
+xcode-select --install
+```
+
+### 2. Homebrew (The Missing Package Manager) 🟡
+Install software easily from terminal.
+
+**Install Homebrew:**
+```bash
+/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+```
+
+**Common Commands:**
+```bash
+brew install node           # Install Node.js
+brew install git            # Install Git
+brew install --cask google-chrome  # Install Chrome app
+brew update && brew upgrade # Update everything
+brew cleanup                # Remove old versions
+```
+
+### 3. Git Configuration 🟡
+```bash
+git config --global user.name "Your Name"
+git config --global user.email "you@example.com"
+git config --global core.editor "nano" # or code, vim
+```
+
+### 4. VS Code Setup 🟡
+- Install via Brew: `brew install --cask visual-studio-code`
+- Enable `code` command: Open VS Code → Cmd+Shift+P → Type "Shell Command: Install 'code' command in PATH".
+
+### 5. Containerization (Docker / OrbStack) 🟡
+Run containers and Linux machines on your Mac.
+
+- **OrbStack:** Fast, light, and native. The modern choice for Apple Silicon.
+  - `brew install --cask orbstack`
+- **Docker Desktop:** The industry standard.
+  - `brew install --cask docker`
+
+[↑ Back to Top](#table-of-contents)
+
+---
+
+## Homebrew Essentials
+
+Must-have CLI tools to supercharge your terminal.
+
+### 1. tldr (Too Long; Didn't Read) 🟢
+Simplified man pages.
+- **Install:** `brew install tldr`
+- **Usage:** `tldr tar` (Shows practical examples instead of a wall of text).
+
+### 2. htop / btop 🟡
+Interactive process viewer. Better than `top`.
+- **Install:** `brew install htop` or `brew install btop`
+
+### 3. ffmpeg 🔴
+The swiss-army knife of video/audio conversion.
+- **Install:** `brew install ffmpeg`
+- **Usage:** `ffmpeg -i input.mp4 output.mp3`
+
+### 4. bat 🟢
+A `cat` clone with syntax highlighting.
+- **Install:** `brew install bat`
+
+↑ Back to Top
+
+---
+
+## Virtualization
+
+Run Windows or Linux on your Mac.
+
+### 1. UTM (Free / Open Source) 🟢
+Best for running generic Linux distros or emulating older architectures (x86 on Apple Silicon).
+- **Install:** `brew install --cask utm`
+- **Pros:** Free, native Apple Virtualization Framework support.
+
+### 2. VMware Fusion Pro (Free for Personal Use) 🟡
+Industry standard virtualization, now free for personal use (Broadcom).
+- **Pros:** Robust networking, good 3D acceleration, reliable.
+
+### 3. Parallels Desktop (Paid) 🟢
+The most polished experience for running Windows on Mac.
+- **Pros:** Easiest setup, "Coherence" mode (run Windows apps like Mac apps), best gaming performance.
+
+↑ Back to Top
+
+---
+
+## Gaming on Mac
+
+Gaming on Apple Silicon has improved significantly with translation layers.
+
+### 1. Whisky (Free / Open Source) 🟢
+A user-friendly graphical wrapper for Wine and Apple's Game Porting Toolkit.
+- **Best for:** Running Windows games without a full Windows VM.
+- **Install:** `brew install --cask whisky`
+- **Features:** Easy setup, manages "bottles" (containers) for games.
+
+### 2. Game Porting Toolkit (GPTK) 🔴
+Apple's translation layer allowing DirectX 12 games to run on macOS.
+- **Usage:** Usually accessed via Whisky or CrossOver, but can be used via Terminal for advanced users.
+- **Performance:** Surprisingly good for many AAA titles.
+
+↑ Back to Top
+
+---
+
+## Creative Tools
+
+Professional grade creative software that runs natively on Apple Silicon.
+
+### 1. DaVinci Resolve (Free / Paid) 🟠
+Hollywood-grade video editing and color correction.
+- **Install:** `brew install --cask davinci-resolve` (or via App Store)
+- **Performance:** Highly optimized for M-Series chips.
+
+### 2. Blender (Free & Open Source) 🟠
+3D creation suite (Modeling, Rigging, Animation, Rendering).
+- **Install:** `brew install --cask blender`
+
+### 3. OBS Studio (Free & Open Source) 🟡
+Live streaming and screen recording.
+- **Install:** `brew install --cask obs`
+
+↑ Back to Top
+
+---
+
+## Design Tools
+
+Create stunning user interfaces and graphics.
+
+### 1. Figma (Free / Paid) 🟢
+The industry standard for interface design and prototyping.
+- **Platform:** Web-based but has a solid macOS app.
+- **Best for:** UI/UX design, collaboration.
+
+### 2. Sketch (Paid) 🟠
+The original Mac-native design tool.
+- **Best for:** Designers who prefer a strictly native Mac app experience.
+
+### 3. Affinity Designer (Paid) 🟢
+A powerful, one-time purchase alternative to Adobe Illustrator.
+- **Best for:** Vector graphics, illustrations, icons.
+- **Performance:** Incredible speed on Apple Silicon.
+
+↑ Back to Top
+
+---
+
+## Audio Tools
+
+Route and record audio between applications.
+
+### 1. Loopback (Paid) 🟠
+Cable-free audio routing. Combine audio from multiple sources (e.g., Mic + Music) into one virtual input.
+- **Use Case:** Podcasting, streaming, screen recording with system audio.
+
+### 2. Audio Hijack (Paid) 🟠
+Record any audio on your Mac.
+- **Features:** Record individual apps (Zoom, Safari) separate from system audio. Apply effects in real-time.
+
+↑ Back to Top
+
+---
+
+## Music Production
+
+Create music with industry-standard tools.
+
+### 1. Logic Pro (Paid) 🟠
+Apple's professional Digital Audio Workstation (DAW).
+- **Features:** Massive sound library, spatial audio tools, professional mixing plugins.
+- **Performance:** Optimized perfectly for Apple Silicon.
+
+### 2. GarageBand (Free) 🟢
+The best entry-level music creation tool.
+- **Included:** Comes pre-installed on your Mac.
+- **Path:** Great starting point before upgrading to Logic Pro.
+
+↑ Back to Top
+
+---
+
+## Quick Look Plugins
+
+Enhance macOS Quick Look (Spacebar preview) to support more file types.
+
+### 1. Syntax Highlight (Free) 🟢
+Adds syntax highlighting to code files (.js, .py, .json, etc.) in Quick Look.
+- **Install:** `brew install --cask syntax-highlight`
+
+### 2. QLVideo (Free) 🟢
+Generates thumbnails and previews for video formats macOS doesn't natively support (mkv, flv, etc.).
+- **Install:** `brew install --cask qlvideo`
+
+### 3. QLMarkdown (Free) 🟢
+Preview Markdown files rendered as HTML.
+- **Install:** `brew install --cask qlmarkdown`
+
+↑ Back to Top
+
+---
+
+## Advanced Configuration (Pro)
+
+### Shell Customization (Zsh) 🟠
+Your configuration file is at `~/.zshrc`.
+
+**Useful Aliases:**
+Add these to your `.zshrc` file:
+```bash
+# Edit zshrc easily
+alias zshconfig="nano ~/.zshrc"
+alias reload="source ~/.zshrc"
+
+# Easier navigation
+alias ..="cd .."
+alias ...="cd ../.."
+alias dl="cd ~/Downloads"
+alias dt="cd ~/Desktop"
+
+# Better list
+alias ll="ls -la"
+
+# Show hidden files in Finder
+alias showfiles="defaults write com.apple.finder AppleShowAllFiles -bool true && killall Finder"
+alias hidefiles="defaults write com.apple.finder AppleShowAllFiles -bool false && killall Finder"
+```
+
+### SSH Key Generation 🟠
+For GitHub/GitLab authentication:
+```bash
+ssh-keygen -t ed25519 -C "your_email@example.com"
+# Follow prompts. Public key will be in ~/.ssh/id_ed25519.pub
+pbcopy < ~/.ssh/id_ed25519.pub # Copies key to clipboard
+```
+
+
+## Privacy & Security Deep Dive
+
+Take control of your data and network connections.
+
+### 1. Outbound Firewalls 🟠
+macOS has an inbound firewall, but these tools stop apps from "phoning home".
+
+- **LuLu (Free & Open Source):** Lightweight firewall by Objective-See. Blocks unknown outgoing connections.
+  - **Install:** `brew install --cask lulu`
+- **Little Snitch (Paid):** The power-user standard. Visualizes traffic map, granular rules, and bandwidth monitoring.
+
+### 2. Malware Monitoring 🟠
+Tools to detect persistence (malware that starts when your Mac starts).
+
+- **KnockKnock (Free):** Scans for persistently installed software.
+
+
+## Maintenance & Cleaning
+
+Keep your Mac running smooth and recover disk space.
+
+### 1. OnyX (Free) 🟠
+The swiss-army knife of macOS maintenance.
+- **Use for:** Rebuilding databases, cleaning deep system caches, verifying file structure.
+- **Warning:** Read instructions carefully before running tasks.
+
+### 2. DaisyDisk (Paid) 🟢
+The most beautiful way to visualize what's taking up space.
+- **Alternative (Free):** `GrandPerspective` or `OmniDiskSweeper`.
+
+### 3. AppCleaner (Free) 🟢
+Uninstall apps completely by finding all associated files (plists, caches) scattered across the system.
+
+### 4. Disk Space Analyzer (Terminal) 🟠
+Find what's eating your storage without installing GUI apps.
+
+```bash
+# List sizes of folders in current directory (Human readable)
+du -sh * | sort -hr
+
+# Find files larger than 500MB
+find . -type f -size +500M
+
+# Visual Analyzer (NCurses Disk Usage) - Highly Recommended!
+brew install ncdu && ncdu
+```
+
+## Networking Tools
+
+Analyze traffic and monitor connections.
+
+### 1. Wireshark (Free / Open Source) 🔴
+The world's most widely-used network protocol analyzer.
+- **Install:** `brew install --cask wireshark`
+- **Use Case:** Deep packet inspection, troubleshooting network issues, development.
+
+### 2. Little Snitch (Paid) 🟠
+The ultimate network monitor and application firewall.
+- **Features:** Real-time traffic map, per-app connection alerts, bandwidth usage history.
+- **Why use it:** See exactly where your data is going.
+
+### 3. Network Speed Test
+<div id="speed-test-widget" class="glass-card">
+  <div class="speed-controls">
+    <div id="speed-result">0.00 Mbps</div>
+    <button id="start-speed-test">Start Speed Test</button>
+  </div>
+  <div id="speed-status">Ready to test download speed</div>
+</div>
+
+## Remote Access
+
+Control your Mac remotely or access other machines.
+
+### 1. SSH (Secure Shell) 🟠
+Access your Mac's terminal from another device.
+- **Enable:** `System Settings` → `General` → `Sharing` → Turn on **Remote Login**.
+- **Connect:** `ssh username@ip-address`
+
+### 2. Screen Sharing (VNC) 🟢
+View and control your Mac's screen from another Apple device.
+- **Enable:** `System Settings` → `General` → `Sharing` → Turn on **Screen Sharing**.
+- **Connect:** Finder → Go → Connect to Server → `vnc://ip-address`
+
+### 3. Microsoft Remote Desktop (Free) 🟡
+The best way to access a Windows PC from your Mac.
+- **Install:** Mac App Store or `brew install --cask microsoft-remote-desktop`
+
+
+## File Management
+
+Go beyond Finder with dual-pane file managers for power users.
+
+### 1. Commander One (Freemium) 🟡
+Classic dual-pane file manager inspired by Norton Commander.
+- **Install:** `brew install --cask commander-one`
+- **Features:** Built-in terminal, root access, archive support.
+
+### 2. ForkLift (Paid) 🟠
+A robust dual-pane file manager and file transfer client.
+- **Install:** `brew install --cask forklift`
+- **Best for:** Connecting to remote servers (SFTP, S3) and local file management.
+
+
+## System Monitoring
+
+Keep an eye on your CPU, GPU, RAM, and sensors.
+
+### 1. Stats (Free & Open Source) 🟢
+The best free menu bar monitor for macOS.
+- **Install:** `brew install --cask stats`
+- **Features:** Clean, customizable graphs for every system metric.
+
+### 2. iStat Menus (Paid) 🟢
+The gold standard for system monitoring with beautiful weather and calendar integration.
+
+### 3. Activity Monitor (Built-in) 🟢
+- **Tip:** View → Dock Icon → Show CPU Usage (Turn your dock icon into a live graph).
+- **Tip:** Check "Memory Pressure" (Green is good, Yellow/Red means you need more RAM).
+
+
+## Browser Extensions
+
+Essential tools for privacy and security.
+
+### 1. uBlock Origin (Free / Open Source) 🟢
+The most efficient content blocker.
+- **Best for:** Chrome, Firefox, Brave.
+- **Note:** For Safari, consider **AdGuard** or **Wipr** due to extension limitations.
+
+### 2. 1Password (Paid) 🟢
+Securely manage passwords and passkeys.
+- **Integration:** Unlocks with Touch ID on your Mac.
+- **Alternative (Free):** Bitwarden.
+
+
+## Communication Apps
+
+Stay connected with teams and communities.
+
+### 1. Slack (Freemium) 🟢
+- **Tip:** `Cmd + K` (Quick Switcher) to jump to any channel or DM instantly.
+- **Tip:** `Cmd + Shift + Enter` to create a new snippet.
+
+### 2. Discord (Free) 🟢
+- **Tip:** `Cmd + K` also works here for quick navigation!
+- **Tip:** Adjust "Noise Suppression" (Krisp) in Voice settings for crystal clear audio.
+
+### 3. Zoom (Free / Paid) 🟢
+- **Mute Toggle:** `Cmd + Shift + A` (Audio).
+- **Video Toggle:** `Cmd + Shift + V` (Video).
+
+
+## Email Clients
+
+Manage your inbox efficiently.
+
+### 1. Spark (Freemium) 🟢
+Smart email client with intelligent sorting.
+- **Features:** Smart Inbox, "Gatekeeper" (block unwanted senders), team collaboration.
+
+### 2. Mimestream (Paid) 🟢
+A native macOS client for Gmail.
+- **Best for:** Gmail users who want a fast, native app instead of a web wrapper.
+- **Performance:** Incredible speed and system integration.
+
+### 3. Apple Mail (Built-in) 🟢
+Reliable, secure, and integrated.
+- **Pros:** Privacy protection, Hide My Email integration, extensions support.
+
+
+## Calendar & Task Apps
+
+Master your schedule and to-do list.
+
+### 1. Fantastical (Freemium) 🟢
+The best calendar app for macOS, period.
+- **Features:** Natural language parsing (e.g., type "Lunch with John tomorrow at 1pm"), beautiful widgets, weather integration.
+
+### 2. Things 3 (Paid) 🟢
+The most polished and "Apple-like" task manager.
+- **Design:** Award-winning minimalist interface.
+- **Philosophy:** Based on GTD (Getting Things Done).
+- **Alternative (Free):** Apple Reminders (which has gotten very good recently).
+
+
+## Finance & Budgeting
+
+Take control of your personal finances.
+
+### 1. YNAB (You Need A Budget) (Paid) 🟢
+The gold standard for zero-based budgeting.
+- **Philosophy:** Give every dollar a job.
+- **Features:** Bank syncing, goal tracking, detailed reports.
+
+### 2. Banktivity (Paid) 🟠
+A comprehensive personal finance manager for macOS.
+- **Best for:** Tracking investments, real estate, and multi-currency support.
+- **Privacy:** Local-first data storage options.
+
+
+## Database Tools
+
+Manage your local and remote databases with ease.
+
+### 1. TablePlus (Freemium) 🟡
+A modern, native, and friendly GUI tool for relational databases.
+- **Supports:** PostgreSQL, MySQL, SQLite, Redis, and more.
+- **Features:** Multiple tabs, code review, safe mode.
+
+### 2. DBngin (Free) 🟢
+The easiest way to get started with a local database server.
+- **Use:** Spin up a local PostgreSQL, MySQL, or Redis server in one click.
+- **Integration:** Works perfectly with TablePlus.
+
+
+## Local Development
+
+Spin up local servers for web development.
+
+### 1. Laravel Herd (Free / Pro) 🟢
+The fastest way to get started with PHP and Laravel development on macOS.
+- **Features:** Zero dependencies (no Homebrew/Docker required), incredibly fast, native macOS app.
+- **Includes:** Nginx, DNSMasq, PHP, Node.js.
+
+### 2. MAMP (Free / Pro) 🟡
+The classic Mac, Apache, MySQL, PHP stack.
+- **Use:** Good for legacy projects or if you need a GUI for managing Apache/MySQL.
+
+### 3. XAMPP (Free) 🟡
+Open source cross-platform web server solution.
+- **Use:** Widely used, but can be heavier than Herd.
+
+
+## Markdown Editors
+
+Write notes, documentation, and blogs in style.
+
+### 1. Obsidian (Free) 🟢
+A powerful knowledge base that works on top of a local folder of plain text Markdown files.
+- **Best for:** Personal Knowledge Management (PKM), linking notes, graph view.
+- **Extensibility:** Massive community plugin ecosystem.
+
+### 2. Bear (Freemium) 🟢
+Beautiful, native Apple ecosystem note-taking app.
+- **Best for:** Quick notes, aesthetics, Apple device sync (iCloud).
+- **Design:** Minimalist and polished.
+
+### 3. Typora (Paid) 🟢
+A seamless "what you see is what you get" (WYSIWYG) markdown editor.
+- **Best for:** Distraction-free writing where the markdown syntax hides as you type.
+
+
+## Writing Tools
+
+Distraction-free environments for long-form writing.
+
+### 1. Scrivener (Paid) 🟠
+The ultimate tool for novelists, researchers, and scriptwriters.
+- **Features:** Corkboard view, outliner, compile to ebook/PDF.
+- **Best for:** Organizing massive writing projects.
+
+### 2. Ulysses (Paid) 🟢
+A polished, distraction-free writing app for the Apple ecosystem.
+- **Features:** Markdown-based, seamless iCloud sync, direct publishing to WordPress/Medium.
+
+
+## Education & Research
+
+Tools for students, researchers, and lifelong learners.
+
+### 1. Zotero (Free & Open Source) 🟢
+The best tool to collect, organize, cite, and share research.
+- **Features:** Browser extension saves citations instantly, integrates with Word/Google Docs.
+
+### 2. Anki (Free & Open Source) 🟢
+Powerful, intelligent flashcards.
+- **Method:** Uses Spaced Repetition to help you remember things forever.
+- **Best for:** Language learning, medical school, memorizing shortcuts.
+
+
+## Mind Mapping
+
+Visualize your ideas and brainstorm effectively.
+
+### 1. MindNode (Freemium) 🟢
+The most beautiful and native mind mapping experience on Mac.
+- **Best for:** Brainstorming, outlining, and visual organization.
+- **Sync:** Seamless iCloud sync with iPhone/iPad.
+
+### 2. XMind (Freemium) 🟡
+A professional, cross-platform mind mapping tool.
+- **Features:** Pitch mode, various chart structures (fishbone, matrix), and extensive export options.
+
+
+## Utilities
+
+Small but mighty tools that solve specific problems.
+
+### 1. Amphetamine (Free) 🟢
+Keep your Mac awake with powerful triggers.
+- **Use:** Prevent sleep when a specific app is running or when connected to a specific WiFi.
+- **Install:** Mac App Store.
+
+### 2. The Unarchiver (Free) 🟢
+Open any archive format (RAR, 7z, Tar, etc.) that macOS doesn't support natively.
+- **Install:** `brew install --cask the-unarchiver`
+
+### 3. CheatSheet (Free) 🟢
+Hold the `⌘ Command` key to see a list of all active shortcuts for the current app.
+- **Install:** `brew install --cask cheatsheet`
+
+
+## Clipboard Managers
+
+Never lose a copied item again.
+
+### 1. Maccy (Free / Open Source) 🟢
+Lightweight, keyboard-centric clipboard manager.
+- **Install:** `brew install --cask maccy`
+- **Usage:** `Cmd + Shift + C` (default) to open history. Search and paste instantly.
+
+### 2. Paste (Paid) 🟢
+Visual clipboard history for Mac, iPhone, and iPad.
+- **Features:** Sync across devices, pin items, visual preview of links/images.
+
+
+## Automation
+
+Streamline repetitive tasks.
+
+### 1. Shortcuts (Built-in) 🟢
+Apple's modern automation tool.
+- **Use:** Create cross-device workflows (Mac, iPhone, iPad).
+- **Example:** "Split Screen" shortcut or "Batch Resize Images".
+
+### 2. Automator (Built-in) 🟡
+Legacy tool, great for file system operations.
+- **Folder Actions:** Automatically process files dropped into a folder.
+- **Quick Actions:** Add custom buttons to the Finder Touch Bar or Right-Click menu.
+
+
+## Expert-Level Techniques
+
+### System Integrity Protection (SIP) 🔴
+Protects system files from modification.
+- **Check status:** `csrutil status`
+- **Disable (Warning!):** Boot into Recovery Mode → Terminal → `csrutil disable`
+- **Enable:** Boot into Recovery Mode → Terminal → `csrutil enable`
+
+### Network Analysis 🔴
+```bash
+# List open network ports
+sudo lsof -i -P | grep LISTEN
+
+# Monitor network traffic
+sudo tcpdump -i en0
+
+# Check DNS propagation
+dig google.com
+```
+
+### Process Management 🔴
+```bash
+# Find process ID (PID) by name
+pgrep -f python
+
+# Kill process by PID
+kill -9 <PID>
+
+# View process hierarchy
+pstree
+```
+
+[↑ Back to Top](#table-of-contents)
+
+---
+
+## Best Resources by Level
+
+| Level | Resource | Description |
+|-------|----------|-------------|
+| 🟢 | [Apple Support](https://support.apple.com/mac) | Official guides |
+| 🟡 | [MacRumors Guides](https://www.macrumors.com/guides/) | News and how-tos |
+| 🟠 | [Homebrew Docs](https://docs.brew.sh/) | Package manager docs |
+| 🔴 | [SS64 macOS Commands](https://ss64.com/osx/) | Complete command reference |
+| 🔴 | [Hacker News](https://news.ycombinator.com/) | Tech news & discussion |
+
+    </script><script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // 1. Initialize Theme
+            const themeToggle = document.getElementById('theme-toggle');
+            const themeKnob = document.getElementById('theme-knob');
+            
+            const isDark = localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches);
+            if (isDark) {
+                document.documentElement.classList.add('dark');
+                themeKnob.classList.add('translate-x-6');
+                themeKnob.classList.remove('translate-x-1');
+            }
+
+            themeToggle.addEventListener('click', () => {
+                document.documentElement.classList.toggle('dark');
+                const isNowDark = document.documentElement.classList.contains('dark');
+                localStorage.theme = isNowDark ? 'dark' : 'light';
+                
+                if (isNowDark) {
+                    themeKnob.classList.add('translate-x-6');
+                    themeKnob.classList.remove('translate-x-1');
+                } else {
+                    themeKnob.classList.remove('translate-x-6');
+                    themeKnob.classList.add('translate-x-1');
+                }
+            });
+
+            // 2. Render Markdown
+            const rawMarkdown = document.getElementById('markdown-source').textContent;
+            // Strip Front Matter
+            const markdown = rawMarkdown.replace(/^---[\s\S]*?---\n/, '');
+            
+            const contentArea = document.getElementById('content-area');
+            contentArea.innerHTML = marked.parse(markdown);
+
+            // 3. Highlight Code
+            hljs.highlightAll();
+
+            // 3.5 Code Copy Feature
+            document.querySelectorAll('pre').forEach(pre => {
+                // Make it clickable
+                pre.classList.add('cursor-pointer', 'relative', 'group');
+                pre.title = 'Click to copy';
+                
+                // Hover hint
+                const hint = document.createElement('div');
+                hint.className = 'absolute top-2 right-2 text-xs text-slate-400 opacity-0 group-hover:opacity-100 transition-opacity select-none';
+                hint.textContent = 'Click to copy';
+                pre.appendChild(hint);
+
+                pre.addEventListener('click', () => {
+                    const code = pre.querySelector('code').innerText;
+                    navigator.clipboard.writeText(code).then(() => {
+                        // Show Copied! tooltip
+                        const tooltip = document.createElement('div');
+                        tooltip.className = 'absolute top-2 right-2 bg-blue-600 text-white text-xs px-2 py-1 rounded shadow-lg transition-opacity duration-300';
+                        tooltip.textContent = 'Copied!';
+                        
+                        hint.style.display = 'none'; // Hide hint
+                        pre.appendChild(tooltip);
+                        
+                        setTimeout(() => {
+                            tooltip.style.opacity = '0';
+                            setTimeout(() => {
+                                tooltip.remove();
+                                hint.style.display = 'block';
+                            }, 300);
+                        }, 1500);
+                    });
+                });
+            });
+
+            // 4. Generate Sidebar TOC
+            const headers = contentArea.querySelectorAll('h2, h3');
+            const tocContainer = document.getElementById('toc-container');
+            const mobileTocContainer = document.getElementById('mobile-toc-container');
+
+            headers.forEach((header, index) => {
+                // Assign ID if missing
+                if (!header.id) {
+                    header.id = `section-${index}`;
+                }
+
+                const link = document.createElement('a');
+                link.href = `#${header.id}`;
+                link.textContent = header.textContent.replace(/^[🟢🟡🟠🔴]\s*/, ''); // Strip status icons for cleaner TOC
+                
+                // Styling based on level
+                const baseClasses = "block py-1.5 px-3 rounded-lg text-sm transition-all duration-200 hover:bg-slate-100 dark:hover:bg-slate-800 truncate";
+                if (header.tagName === 'H2') {
+                    link.className = `${baseClasses} font-semibold text-slate-700 dark:text-slate-200`;
+                } else {
+                    link.className = `${baseClasses} ml-4 text-slate-500 dark:text-slate-400 border-l border-slate-200 dark:border-slate-700 pl-4`;
+                }
+
+                tocContainer.appendChild(link);
+                
+                // Clone for mobile
+                const mobileLink = link.cloneNode(true);
+                mobileLink.addEventListener('click', () => {
+                    document.getElementById('mobile-menu').classList.add('hidden');
+                });
+                mobileTocContainer.appendChild(mobileLink);
+            });
+
+            // 5. Search Functionality
+            const searchInput = document.getElementById('search-input');
+            searchInput.addEventListener('input', (e) => {
+                const term = e.target.value.toLowerCase();
+                const links = tocContainer.querySelectorAll('a');
+                
+                links.forEach(link => {
+                    const text = link.textContent.toLowerCase();
+                    if (text.includes(term)) {
+                        link.style.display = 'block';
+                    } else {
+                        link.style.display = 'none';
+                    }
+                });
+            });
+
+            // 6. Mobile Menu Logic
+            const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+            const mobileMenu = document.getElementById('mobile-menu');
+            const closeMobileMenu = document.getElementById('close-mobile-menu');
+            const mobileMenuPanel = document.getElementById('mobile-menu-panel');
+            const mobileMenuBackdrop = document.getElementById('mobile-menu-backdrop');
+
+            function toggleMenu(show) {
+                if (show) {
+                    mobileMenu.classList.remove('hidden');
+                    setTimeout(() => {
+                        mobileMenuPanel.classList.remove('translate-x-full');
+                    }, 10);
+                } else {
+                    mobileMenuPanel.classList.add('translate-x-full');
+                    setTimeout(() => {
+                        mobileMenu.classList.add('hidden');
+                    }, 300);
+                }
+            }
+
+            mobileMenuBtn.addEventListener('click', () => toggleMenu(true));
+            closeMobileMenu.addEventListener('click', () => toggleMenu(false));
+            mobileMenuBackdrop.addEventListener('click', () => toggleMenu(false));
+
+            // 7. Back to Top
+            const backToTopBtn = document.getElementById('back-to-top');
+            const mainScroll = document.getElementById('main-scroll');
+
+            mainScroll.addEventListener('scroll', () => {
+                if (mainScroll.scrollTop > 300) {
+                    backToTopBtn.classList.remove('opacity-0', 'invisible');
+                } else {
+                    backToTopBtn.classList.add('opacity-0', 'invisible');
+                }
+            });
+
+            backToTopBtn.addEventListener('click', () => {
+                mainScroll.scrollTo({ top: 0, behavior: 'smooth' });
+            });
+        });
+    </script></body></html>

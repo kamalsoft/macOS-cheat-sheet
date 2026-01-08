@@ -1,0 +1,13 @@
+#!/bin/sh
+
+# Run the update script to sync index.html with index.md
+echo "Syncing index.html with index.md..."
+python3 update_site.py once
+
+if [ $? -ne 0 ]; then
+    echo "Error: Failed to update index.html"
+    exit 1
+fi
+
+# Stage the updated index.html so it's included in the commit
+git add index.html
