@@ -45,6 +45,10 @@
         <button id="close-shortcuts-btn" style="width:100%; padding: 10px; background: var(--heading-color); color: white; border: none; border-radius: 8px; cursor: pointer;">Close</button>
       </div>
     </div>
+    <div id="print-shortcuts-modal">
+      <button id="print-shortcuts-close">Close</button>
+      <div id="print-shortcuts-content"></div>
+    </div>
     <div id="progress-container">
       <div id="progress-bar"></div>
     </div>
@@ -57,6 +61,48 @@
       <button id="mobile-fab-main">➕</button>
     </div>
     <button id="exit-zen-btn">Exit Zen Mode</button>
+    
+    <div id="keyboard-visualizer">
+      <div class="kb-row">
+        <div class="kb-key" data-key="`">`</div>
+        <div class="kb-key" data-key="1">1</div>
+        <div class="kb-key" data-key="2">2</div>
+        <div class="kb-key" data-key="3">3</div>
+        <div class="kb-key" data-key="4">4</div>
+        <div class="kb-key" data-key="5">5</div>
+        <div class="kb-key" data-key="6">6</div>
+        <div class="kb-key" data-key="7">7</div>
+        <div class="kb-key" data-key="8">8</div>
+        <div class="kb-key" data-key="9">9</div>
+        <div class="kb-key" data-key="0">0</div>
+        <div class="kb-key" data-key="-">-</div>
+        <div class="kb-key" data-key="=">=</div>
+        <div class="kb-key kb-key-wide" data-key="delete">del</div>
+      </div>
+      <div class="kb-row">
+        <div class="kb-key kb-key-wide" data-key="tab">tab</div>
+        <div class="kb-key" data-key="q">Q</div><div class="kb-key" data-key="w">W</div><div class="kb-key" data-key="e">E</div><div class="kb-key" data-key="r">R</div><div class="kb-key" data-key="t">T</div><div class="kb-key" data-key="y">Y</div><div class="kb-key" data-key="u">U</div><div class="kb-key" data-key="i">I</div><div class="kb-key" data-key="o">O</div><div class="kb-key" data-key="p">P</div><div class="kb-key" data-key="[">[</div><div class="kb-key" data-key="]">]</div><div class="kb-key" data-key="\">|</div>
+      </div>
+      <div class="kb-row">
+        <div class="kb-key kb-key-xwide" data-key="caps">caps</div>
+        <div class="kb-key" data-key="a">A</div><div class="kb-key" data-key="s">S</div><div class="kb-key" data-key="d">D</div><div class="kb-key" data-key="f">F</div><div class="kb-key" data-key="g">G</div><div class="kb-key" data-key="h">H</div><div class="kb-key" data-key="j">J</div><div class="kb-key" data-key="k">K</div><div class="kb-key" data-key="l">L</div><div class="kb-key" data-key=";">;</div><div class="kb-key" data-key="'">'</div><div class="kb-key kb-key-xwide" data-key="return">return</div>
+      </div>
+      <div class="kb-row">
+        <div class="kb-key kb-key-xwide" data-key="shift">shift</div>
+        <div class="kb-key" data-key="z">Z</div><div class="kb-key" data-key="x">X</div><div class="kb-key" data-key="c">C</div><div class="kb-key" data-key="v">V</div><div class="kb-key" data-key="b">B</div><div class="kb-key" data-key="n">N</div><div class="kb-key" data-key="m">M</div><div class="kb-key" data-key=",">,</div><div class="kb-key" data-key=".">.</div><div class="kb-key" data-key="/">/</div><div class="kb-key kb-key-xwide" data-key="shift">shift</div>
+      </div>
+      <div class="kb-row">
+        <div class="kb-key" data-key="fn">fn</div>
+        <div class="kb-key" data-key="ctrl">ctrl</div>
+        <div class="kb-key" data-key="opt">opt</div>
+        <div class="kb-key kb-key-wide" data-key="cmd">cmd</div>
+        <div class="kb-key kb-key-space" data-key="space">space</div>
+        <div class="kb-key kb-key-wide" data-key="cmd">cmd</div>
+        <div class="kb-key" data-key="opt">opt</div>
+        <div class="kb-key" data-key="left">←</div><div class="kb-key" data-key="up">↑</div><div class="kb-key" data-key="down">↓</div><div class="kb-key" data-key="right">→</div>
+      </div>
+    </div>
+
     <a id="skip-to-content" href="#content">Skip to the content.</a>
 
     <header class="page-header" role="banner">
@@ -70,11 +116,16 @@
       {% endif %}
 
       <div class="controls-container">
-        <input type="text" id="search-input" placeholder="🔍 Search cheat sheet...">
+        <div class="search-wrapper">
+          <input type="text" id="search-input" placeholder="🔍 Search cheat sheet..." autocomplete="off">
+          <div id="search-history-dropdown"></div>
+        </div>
         <button id="mobile-menu-btn">☰ Menu</button>
         <button id="print-btn">🖨️ PDF</button>
         <button id="share-btn">🔗 Share</button>
         <button id="settings-btn">⚙️ Settings</button>
+        <button id="quick-ref-btn">🃏 Quick Ref</button>
+        <button id="keyboard-toggle-btn">⌨️ Visualizer</button>
         <button id="zen-mode-toggle">🧘 Zen Mode</button>
         <button id="dark-mode-toggle">🌙 Dark Mode</button>
       </div>
@@ -181,6 +232,8 @@
       // Search Logic
       const searchInput = document.getElementById('search-input');
       const mainContent = document.querySelector('.page-content');
+      const historyDropdown = document.getElementById('search-history-dropdown');
+      let searchHistory = JSON.parse(localStorage.getItem('search_history')) || [];
       
       // Wrap content in sections for filtering
       // We assume sections start with H2
@@ -206,6 +259,51 @@
         });
       });
 
+      // Search History Logic
+      function renderSearchHistory() {
+        historyDropdown.innerHTML = '';
+        if (searchHistory.length === 0) return;
+        
+        searchHistory.forEach(term => {
+          const div = document.createElement('div');
+          div.className = 'history-item';
+          div.textContent = '🕒 ' + term;
+          div.addEventListener('mousedown', (e) => { // mousedown fires before blur
+            e.preventDefault();
+            searchInput.value = term;
+            searchInput.dispatchEvent(new Event('input'));
+            historyDropdown.classList.remove('visible');
+          });
+          historyDropdown.appendChild(div);
+        });
+      }
+
+      function saveSearchTerm(term) {
+        if (!term || term.length < 2) return;
+        searchHistory = searchHistory.filter(t => t !== term);
+        searchHistory.unshift(term);
+        if (searchHistory.length > 5) searchHistory.pop();
+        localStorage.setItem('search_history', JSON.stringify(searchHistory));
+      }
+
+      searchInput.addEventListener('focus', () => {
+        renderSearchHistory();
+        if (searchHistory.length > 0) historyDropdown.classList.add('visible');
+      });
+
+      searchInput.addEventListener('blur', () => {
+        historyDropdown.classList.remove('visible');
+        saveSearchTerm(searchInput.value);
+      });
+
+      searchInput.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter') {
+          saveSearchTerm(searchInput.value);
+          historyDropdown.classList.remove('visible');
+          searchInput.blur();
+        }
+      });
+
       // Keyboard Shortcut to Focus Search
       document.addEventListener('keydown', (e) => {
         if (e.key === '/' && document.activeElement !== searchInput) {
@@ -217,17 +315,35 @@
       // Zen Mode Logic
       const zenToggle = document.getElementById('zen-mode-toggle');
       const exitZenBtn = document.getElementById('exit-zen-btn');
+      const quickRefBtn = document.getElementById('quick-ref-btn');
       
       function toggleZenMode() {
         document.body.classList.toggle('zen-mode');
+        document.body.classList.remove('quick-ref-mode'); // Ensure mutually exclusive
+      }
+
+      function toggleQuickRefMode() {
+        document.body.classList.toggle('quick-ref-mode');
+        document.body.classList.remove('zen-mode'); // Ensure mutually exclusive
+        if (document.body.classList.contains('quick-ref-mode')) {
+          exitZenBtn.textContent = 'Exit Quick Ref';
+        } else {
+          exitZenBtn.textContent = 'Exit Zen Mode';
+        }
       }
 
       zenToggle.addEventListener('click', toggleZenMode);
-      exitZenBtn.addEventListener('click', toggleZenMode);
+      quickRefBtn.addEventListener('click', toggleQuickRefMode);
+      
+      exitZenBtn.addEventListener('click', () => {
+        document.body.classList.remove('zen-mode');
+        document.body.classList.remove('quick-ref-mode');
+      });
       
       document.addEventListener('keydown', (e) => {
-        if (e.key === 'Escape' && document.body.classList.contains('zen-mode')) {
-          toggleZenMode();
+        if (e.key === 'Escape') {
+          if (document.body.classList.contains('zen-mode')) toggleZenMode();
+          if (document.body.classList.contains('quick-ref-mode')) toggleQuickRefMode();
         }
       });
 

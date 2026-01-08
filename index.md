@@ -64,6 +64,7 @@ theme: jekyll-theme-cayman
 * [Clipboard Managers](#clipboard-managers)
 * [Automation](#automation)
 * [Expert-Level Techniques](#expert-level-techniques)
+* [Glossary](#glossary)
 * [Best Resources by Level](#best-resources-by-level)
 
 ---
@@ -99,60 +100,60 @@ If you just got a new Mac or did a fresh install, go through this checklist to o
 ### 🖱️ Trackpad & Mouse
 | Setting | Path | Action |
 | :--- | :--- | :--- |
-| **Tap to Click** | `Trackpad` → `Point & Click` | Turn on Tap to click |
-| **Tracking Speed** | `Trackpad` | Increase to Fast |
-| **Natural Scrolling** | `Trackpad` → `Scroll & Zoom` | Toggle based on preference |
-| **Three-Finger Drag** | `Accessibility` → `Pointer Control` | Enable Trackpad Options → Three Finger Drag |
-| **Right Click** | `Trackpad` → `Point & Click` | Secondary click → Click with Two Fingers |
+| Tap to Click | `Trackpad` → `Point & Click` | Turn on Tap to click |
+| Tracking Speed | `Trackpad` | Increase to Fast |
+| Natural Scrolling | `Trackpad` → `Scroll & Zoom` | Toggle based on preference |
+| Three-Finger Drag | `Accessibility` → `Pointer Control` | Enable Trackpad Options → Three Finger Drag |
+| Right Click | `Trackpad` → `Point & Click` | Secondary click → Click with Two Fingers |
 
 ### 🖥️ Finder & Desktop
 | Setting | Path | Action |
 | :--- | :--- | :--- |
-| **Show Extensions** | `Finder Settings` → `Advanced` | Check Show all filename extensions |
-| **Show Path Bar** | `Finder View Menu` | Click Show Path Bar |
-| **Show Status Bar** | `Finder View Menu` | Click Show Status Bar |
-| **New Window Location** | `Finder Settings` → `General` | Set to Home Directory |
-| **Search Scope** | `Finder Settings` → `Advanced` | Set to Search the Current Folder |
-| **Clean Up** | Right-click Desktop | Click Use Stacks |
-| **Sidebar** | `Finder Settings` → `Sidebar` | Check Movies, Music, Pictures, Home |
+| Show Extensions | `Finder Settings` → `Advanced` | Check Show all filename extensions |
+| Show Path Bar | `Finder View Menu` | Click Show Path Bar |
+| Show Status Bar | `Finder View Menu` | Click Show Status Bar |
+| New Window Location | `Finder Settings` → `General` | Set to Home Directory |
+| Search Scope | `Finder Settings` → `Advanced` | Set to Search the Current Folder |
+| Clean Up | Right-click Desktop | Click Use Stacks |
+| Sidebar | `Finder Settings` → `Sidebar` | Check Movies, Music, Pictures, Home |
 
 ### ⚓ Dock & Menu Bar
 | Setting | Path | Action |
 | :--- | :--- | :--- |
-| **Auto-Hide Dock** | `Desktop & Dock` | Turn on Automatically hide/show Dock |
-| **Dock Size** | `Desktop & Dock` | Adjust Size slider (Smaller) |
-| **Magnification** | `Desktop & Dock` | Turn on Magnification |
-| **Battery %** | `Control Center` → `Battery` | Turn on Show Percentage |
-| **Sound Icon** | `Control Center` → `Sound` | Always Show in Menu Bar |
-| **Bluetooth Icon** | `Control Center` → `Bluetooth` | Always Show in Menu Bar |
+| Auto-Hide Dock | `Desktop & Dock` | Turn on Automatically hide/show Dock |
+| Dock Size | `Desktop & Dock` | Adjust Size slider (Smaller) |
+| Magnification | `Desktop & Dock` | Turn on Magnification |
+| Battery % | `Control Center` → `Battery` | Turn on Show Percentage |
+| Sound Icon | `Control Center` → `Sound` | Always Show in Menu Bar |
+| Bluetooth Icon | `Control Center` → `Bluetooth` | Always Show in Menu Bar |
 
 ### 🛡️ Security & Privacy
 | Setting | Path | Action |
 | :--- | :--- | :--- |
-| **FileVault** | `Privacy & Security` | Turn On (Disk Encryption) ⚠️ |
-| **Firewall** | `Network` → `Firewall` | Turn On |
-| **Hot Corners** | `Desktop & Dock` | Set corner to Lock Screen |
-| **Lock Screen** | `Lock Screen Settings` | Require password Immediately |
+| FileVault | `Privacy & Security` | Turn On (Disk Encryption) ⚠️ |
+| Firewall | `Network` → `Firewall` | Turn On |
+| Hot Corners | `Desktop & Dock` | Set corner to Lock Screen |
+| Lock Screen | `Lock Screen Settings` | Require password Immediately |
 
 ### ⚡ Performance & Power
 | Setting | Path | Action |
 | :--- | :--- | :--- |
-| **Optimized Charge** | `Battery` → `Battery Health` | Turn on Optimized Charging |
-| **Night Shift** | `Displays` | Schedule: Sunset to Sunrise |
-| **Key Repeat** | `Keyboard` | Rate: Fast, Delay: Short |
+| Optimized Charge | `Battery` → `Battery Health` | Turn on Optimized Charging |
+| Night Shift | `Displays` | Schedule: Sunset to Sunrise |
+| Key Repeat | `Keyboard` | Rate: Fast, Delay: Short |
 
 ### 🌐 Safari & Internet
 | Setting | Path | Action |
 | :--- | :--- | :--- |
-| **Show Full URL** | `Safari Settings` → `Advanced` | Check Show full website address |
-| **Develop Menu** | `Safari Settings` → `Advanced` | Check Show Develop menu |
-| **Default Browser** | `Desktop & Dock` | Select preference |
+| Show Full URL | `Safari Settings` → `Advanced` | Check Show full website address |
+| Develop Menu | `Safari Settings` → `Advanced` | Check Show Develop menu |
+| Default Browser | `Desktop & Dock` | Select preference |
 
 ### 🛠️ Miscellaneous
 | Setting | Path | Action |
 | :--- | :--- | :--- |
-| **Siri** | `Siri & Spotlight` | Disable if unused |
-| **Updates** | `General` → `Software Update` | Enable Security Responses |
+| Siri | `Siri & Spotlight` | Disable if unused |
+| Updates | `General` → `Software Update` | Enable Security Responses |
 
 [↑ Back to Top](#table-of-contents)
 
@@ -468,6 +469,19 @@ Protect against fire, theft, or hardware failure.
 ---
 
 ## Keyboard Shortcuts (Comprehensive)
+
+<div class="shortcuts-controls">
+  <select id="shortcuts-filter">
+    <option value="all">Show All Categories</option>
+    <option value="basics">The "Must Know" Basics</option>
+    <option value="text">Text Editing & Document Control</option>
+    <option value="finder">Finder & File Management</option>
+    <option value="screenshots">Screenshots & Recording</option>
+    <option value="web">Web Browsing</option>
+    <option value="system">System & Window Management</option>
+  </select>
+  <button id="print-shortcuts-btn">🖨️ Print Shortcuts</button>
+</div>
 
 ### 🔑 The "Must Know" Basics
 | Shortcut | Action |
