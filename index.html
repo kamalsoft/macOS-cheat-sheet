@@ -38,6 +38,14 @@
                 }
             }
         }
+    </script>
+    <script>
+        // Immediate theme check to prevent flash
+        if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+            document.documentElement.classList.add('dark');
+        } else {
+            document.documentElement.classList.remove('dark');
+        }
     </script><style>
         /* Custom Scrollbar */
         ::-webkit-scrollbar { width: 8px; height: 8px; }
@@ -1864,6 +1872,45 @@ Thanks to these wonderful people: **kamalsoft**.
     </script><script>
         document.addEventListener('DOMContentLoaded', () => {
             // 1. Initialize Theme
+            function updateThemeUI(theme) {
+                const btns = {
+                    light: document.getElementById('theme-light'),
+                    system: document.getElementById('theme-system'),
+                    dark: document.getElementById('theme-dark')
+                };
+                
+                // Reset all
+                Object.values(btns).forEach(btn => {
+                    if(btn) {
+                        btn.classList.remove('bg-white', 'dark:bg-zinc-600', 'text-violet-600', 'dark:text-white', 'shadow-sm');
+                        btn.classList.add('text-zinc-500');
+                    }
+                });
+
+                // Activate current
+                const activeBtn = btns[theme] || btns['system'];
+                if(activeBtn) {
+                    activeBtn.classList.add('bg-white', 'dark:bg-zinc-600', 'text-violet-600', 'dark:text-white', 'shadow-sm');
+                    activeBtn.classList.remove('text-zinc-500');
+                }
+            }
+
+            // Initial UI Update
+            updateThemeUI(localStorage.theme || 'system');
+
+            window.downloadMarkdown = function() {
+                const rawMarkdown = document.getElementById('markdown-source').textContent;
+                const blob = new Blob([rawMarkdown], { type: 'text/markdown' });
+                const url = URL.createObjectURL(blob);
+                const a = document.createElement('a');
+                a.href = url;
+                a.download = 'macOS-cheat-sheet.md';
+                document.body.appendChild(a);
+                a.click();
+                document.body.removeChild(a);
+                URL.revokeObjectURL(url);
+            };
+
             const sidebar = document.querySelector('aside');
             const toggleSidebarBtn = document.getElementById('toggle-sidebar-btn');
             
@@ -1880,25 +1927,6 @@ Thanks to these wonderful people: **kamalsoft**.
                 toggleSidebarBtn.addEventListener('click', toggleSidebar);
             }
 
-            function updateThemeUI(theme) {
-                const btns = {
-                    light: document.getElementById('theme-light'),
-                    system: document.getElementById('theme-system'),
-                    dark: document.getElementById('theme-dark')
-                };
-                
-                // Reset all
-                Object.values(btns).forEach(btn => {
-                    btn.classList.remove('bg-white', 'dark:bg-zinc-600', 'text-violet-600', 'dark:text-white', 'shadow-sm');
-                    btn.classList.add('text-zinc-500');
-                });
-
-                // Activate current
-                const activeBtn = btns[theme] || btns['system'];
-                activeBtn.classList.add('bg-white', 'dark:bg-zinc-600', 'text-violet-600', 'dark:text-white', 'shadow-sm');
-                activeBtn.classList.remove('text-zinc-500');
-            }
-
             window.setTheme = function(theme) {
                 if (theme === 'dark' || (theme === 'system' && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
                     document.documentElement.classList.add('dark');
@@ -1909,9 +1937,12 @@ Thanks to these wonderful people: **kamalsoft**.
                 updateThemeUI(theme);
             };
 
-            // Initial Load
-            const savedTheme = localStorage.theme || 'system';
-            setTheme(savedTheme);
+            // System theme listener
+            window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', e => {
+                if (localStorage.theme === 'system' || !localStorage.theme) {
+                    window.setTheme('system');
+                }
+            });
 
             // 2. Render Markdown
             const contentArea = document.getElementById('content-area');

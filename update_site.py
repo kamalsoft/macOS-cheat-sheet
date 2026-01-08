@@ -243,7 +243,8 @@ def generate_quick_sidebar(content):
         "Settings": "⚙️",
         "Homebrew": "🍺",
         "Troubleshooting": "🚑",
-        "Developer": "🛠️"
+        "Developer": "🛠️",
+        "Virtualization": "🖥️"
     }
     
     headers = re.findall(r'^(#{2,3})\s+(.+)$', content, re.MULTILINE)
@@ -254,7 +255,7 @@ def generate_quick_sidebar(content):
         clean_title = re.sub(r'\s*[🟢🟡🟠🔴]$', '', clean_title)
         
         for key, icon in quick_map.items():
-            if key in clean_title and len(tiles) < 6: # Limit to 6 tiles
+            if key in clean_title and len(tiles) < 8: # Limit to 8 tiles
                 slug = get_slug(title)
                 # Check if we already have this key to avoid duplicates (e.g. multiple Terminal headers)
                 if not any(t['label'] == key for t in tiles):
