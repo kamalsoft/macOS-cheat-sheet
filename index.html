@@ -160,6 +160,7 @@
     </style></head><body class="bg-slate-50 dark:bg-darker text-slate-800 dark:text-slate-200 h-screen flex overflow-hidden selection:bg-blue-500 selection:text-white"><aside class="w-72 bg-white dark:bg-dark border-r border-slate-200 dark:border-slate-800 flex-col hidden md:flex z-20 shadow-xl"><div class="p-6 border-b border-slate-200 dark:border-slate-800"><h1 class="text-2xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-blue-600 to-violet-600">macOS Mastered</h1><p class="text-xs text-slate-500 mt-1 font-medium tracking-wide uppercase">Interactive Guide</p></div><div class="p-4 space-y-3"><div class="relative group"><input type="text" id="search-input" placeholder="Filter topics..." 
                     class="w-full bg-slate-100 dark:bg-slate-800 text-slate-800 dark:text-slate-200 px-4 py-2.5 pl-10 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all"><svg class="w-4 h-4 absolute left-3 top-3 text-slate-400 group-focus-within:text-blue-500 transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg></div><button onclick="window.print()" class="w-full flex items-center justify-center gap-2 bg-white dark:bg-surface border border-slate-200 dark:border-slate-700 text-slate-600 dark:text-slate-300 px-4 py-2 rounded-xl text-sm font-medium hover:bg-slate-50 dark:hover:bg-slate-700 transition-all group"><svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 17h2a2 2 0 002-2v-4a2 2 0 00-2-2H5a2 2 0 00-2 2v4a2 2 0 002 2h2m2 4h6a2 2 0 002-2v-4a2 2 0 00-2-2H9a2 2 0 00-2 2v4a2 2 0 002 2zm8-12V5a2 2 0 00-2-2H9a2 2 0 00-2 2v4h10z"></path></svg><span>Export PDF</span></button></div><nav class="flex-1 overflow-y-auto p-3 space-y-0.5" id="toc-container"></nav><div class="p-4 border-t border-slate-200 dark:border-slate-800 flex items-center justify-between bg-slate-50 dark:bg-dark"><div class="flex items-center gap-2 text-sm font-medium text-slate-600 dark:text-slate-400"><svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"></path></svg><span>Theme</span></div><button id="theme-toggle" class="relative inline-flex h-6 w-11 items-center rounded-full bg-slate-200 dark:bg-slate-700 transition-colors focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 dark:focus:ring-offset-slate-900"><span class="sr-only">Toggle theme</span><span id="theme-knob" class="inline-block h-4 w-4 transform rounded-full bg-white shadow transition-transform translate-x-1 dark:translate-x-6"></span></button></div></aside><main class="flex-1 overflow-y-auto relative scroll-smooth" id="main-scroll"><div class="md:hidden sticky top-0 z-30 bg-white/80 dark:bg-dark/80 backdrop-blur-md border-b border-slate-200 dark:border-slate-800 p-4 flex items-center justify-between"><span class="font-bold text-lg bg-clip-text text-transparent bg-gradient-to-r from-blue-600 to-violet-600">macOS Mastered</span><button id="mobile-menu-btn" class="p-2 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800"><svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path></svg></button></div><div class="max-w-5xl mx-auto px-6 py-12"><div id="content-area" class="prose prose-slate dark:prose-invert prose-lg max-w-none prose-headings:scroll-mt-24 prose-a:no-underline hover:prose-a:underline prose-img:rounded-xl prose-img:shadow-lg"></div></div><button id="back-to-top" class="fixed bottom-8 right-8 bg-blue-600 text-white p-3 rounded-full shadow-lg shadow-blue-600/30 opacity-0 invisible transition-all duration-300 hover:bg-blue-700 hover:-translate-y-1 z-50"><svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 10l7-7m0 0l7 7m-7-7v18"></path></svg></button></main><div id="mobile-menu" class="fixed inset-0 z-50 hidden"><div class="absolute inset-0 bg-black/60 backdrop-blur-sm" id="mobile-menu-backdrop"></div><div class="absolute right-0 top-0 bottom-0 w-3/4 max-w-xs bg-white dark:bg-surface shadow-2xl transform transition-transform translate-x-full" id="mobile-menu-panel"><div class="p-4 flex justify-between items-center border-b border-slate-200 dark:border-slate-700"><h2 class="font-bold text-lg">Navigation</h2><button id="close-mobile-menu" class="p-2 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-700"><svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg></button></div><nav id="mobile-toc-container" class="p-4 space-y-2 overflow-y-auto h-full pb-20"></nav></div></div><script type="text/template" id="markdown-source">
 # macOS Mastered
+
 ### From Beginner to Expert | M1/M2/M3/M4/M5 Compatible
 
 ![macOS Logo](https://www.apple.com/ac/structured-data/images/knowledge_graph_logo.png)
@@ -168,7 +169,7 @@
 [![Maintenance](https://img.shields.io/badge/Maintained%3F-yes-green.svg)](https://github.com/kamalsoft/macOS-cheat-sheet/graphs/commit-activity)
 [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](http://makeapullrequest.com)
 
----
+- --
 
 ## 📋 Table of Contents
 
@@ -336,38 +337,14 @@
   * [Process Management 🔴](#process-management)
 * [Best Resources by Level](#best-resources-by-level)
 
----
-
 ## 🆕 New & Updated
 
+- **2026-01-08**: Update documentation
 - **2026-01-08**: Update documentation
 - **2026-01-07**: Update title and descriptions for consistency; add SEO metadata and sitemap
 - **2026-01-07**: Add hero section and quick access grid to the index for improved navigation and user engagement
 - **2026-01-07**: Add speed test widget and disk space analyzer instructions to the index
-- **2026-01-07**: Enhance styles for dynamic wallpapers and add dock navigation; update index for improved organization and clarity
 
----
-
-<div class="hero-section">
-  <div class="hero-title">macOS Mastered.</div>
-  <div class="hero-desc">The ultimate guide for developers, power users, and switchers. Shortcuts, terminal commands, and hidden settings in one place.</div>
-  <div class="hero-buttons">
-    <a href="#beginner-essentials" class="hero-btn">🚀 Beginner</a>
-    <a href="#intermediate-productivity" class="hero-btn">⚡ Power User</a>
-    <a href="#developer-ecosystem" class="hero-btn">🛠️ Developer</a>
-    <a href="#expert-internals" class="hero-btn">🧠 Expert</a>
-  </div>
-</div>
-
-<div class="quick-grid">
-  <a href="#keyboard-shortcuts-comprehensive" class="quick-tile"><span class="tile-icon">⌨️</span><span class="tile-label">Shortcuts</span></a>
-  <a href="#terminal-command-reference" class="quick-tile"><span class="tile-icon">💻</span><span class="tile-label">Terminal</span></a>
-  <a href="#top-30-essential-settings" class="quick-tile"><span class="tile-icon">⚙️</span><span class="tile-label">Settings</span></a>
-  <a href="#homebrew-essentials" class="quick-tile"><span class="tile-icon">🍺</span><span class="tile-label">Homebrew</span></a>
-  <a href="#troubleshooting-guide" class="quick-tile"><span class="tile-icon">🚑</span><span class="tile-label">Fixes</span></a>
-  <a href="#developer-tools-mid-level" class="quick-tile"><span class="tile-icon">🛠️</span><span class="tile-label">Dev Tools</span></a>
-</div>
- 
 ## How to Use This Guide
 
 This guide is organized by skill level. Find your level and start there:
@@ -379,7 +356,7 @@ This guide is organized by skill level. Find your level and start there:
 | 🟠 **Pro** | Advanced user, customization & automation | [Advanced Configuration](#advanced-configuration-pro) |
 | 🔴 **Expert** | System administration, scripting, optimization | [Expert Techniques](#expert-level-techniques) |
 
-**Symbols Used:**
+* *Symbols Used:**
 - 🟢 = Beginner friendly
 - 🟡 = Mid-level recommended
 - 🟠 = Pro users
@@ -388,9 +365,9 @@ This guide is organized by skill level. Find your level and start there:
 - 💡 = Pro tip
 - 🍎 = Apple Silicon (M1/M2/M3/M4/M5) specific
 
+[↑ Back to Top](#table-of-contents)
 
-
-
+- --
 
 
 ### 🔗 Related Topics
@@ -398,10 +375,6 @@ This guide is organized by skill level. Find your level and start there:
 - Gaming on Mac
 - Virtualization
 - Getting Started (Beginners)
-
-[↑ Back to Top](#table-of-contents)
-
----
 
 ## Beginner: Essentials
 
@@ -502,9 +475,9 @@ Optimize your experience immediately after a fresh install.
   </tbody>
 </table>
 
+[↑ Back to Top](#table-of-contents)
 
-
-
+- --
 
 
 ### 🔗 Related Topics
@@ -512,10 +485,6 @@ Optimize your experience immediately after a fresh install.
 - Keyboard Shortcuts (Comprehensive)
 - Terminal Command Reference
 - System Configuration
-
-[↑ Back to Top](#table-of-contents)
-
----
 
 ## Opening Terminal - Step by Step
 
@@ -531,9 +500,9 @@ Optimize your experience immediately after a fresh install.
 2. **Go** to Applications → Utilities
 3. **Double-click** Terminal
 
+[↑ Back to Top](#table-of-contents)
 
-
-
+- --
 
 
 ### 🔗 Related Topics
@@ -542,15 +511,11 @@ Optimize your experience immediately after a fresh install.
 - Audio Tools
 - Productivity Apps
 
-[↑ Back to Top](#table-of-contents)
-
----
-
 ## Getting Started (Beginners)
 
 ### Apple Silicon (M-Series) Compatibility 🍎
 
-**M1/M2/M3/M4/M5 Macs Are Special!**
+* *M1/M2/M3/M4/M5 Macs Are Special!**
 
 Your Mac has a special type of processor (chip) called "Apple Silicon".
 
@@ -560,13 +525,13 @@ Your Mac has a special type of processor (chip) called "Apple Silicon".
 | **Apps** | All native | Native + Rosetta 2 |
 | **Performance** | Standard | High Efficiency & Speed ⚡ |
 
-**Which Mac do you have?** 🟢
+* *Which Mac do you have?** 🟢
 1. Click  (Apple menu) → "About This Mac"
 2. Look at "Chip" or "Processor".
 
+[↑ Back to Top](#table-of-contents)
 
-
-
+- --
 
 
 ### 🔗 Related Topics
@@ -575,17 +540,14 @@ Your Mac has a special type of processor (chip) called "Apple Silicon".
 - Design Tools
 - Virtualization
 
-[↑ Back to Top](#table-of-contents)
-
----
-
 ## System Information & Hardware
 
 ### Check Your Mac Specifications 🟢
 
-**Terminal Method:** 🟡
+* *Terminal Method:** 🟡
 
 ```bash
+
 # Basic system information
 sw_vers
 
@@ -594,19 +556,21 @@ system_profiler SPSoftwareDataType SPHardwareDataType
 
 # Check if Apple Silicon or Intel
 uname -m
+
 # arm64 = Apple Silicon (M1-M5) | x86_64 = Intel
 ```
 
-**Installing Rosetta 2 (for Intel apps):** 🍎
+* *Installing Rosetta 2 (for Intel apps):** 🍎
 
 ```bash
+
 # Install Rosetta 2 (one time only)
 softwareupdate --install-rosetta
 ```
 
+[↑ Back to Top](#table-of-contents)
 
-
-
+- --
 
 
 ### 🔗 Related Topics
@@ -614,10 +578,6 @@ softwareupdate --install-rosetta
 - Opening Terminal - Step by Step
 - Getting Started (Beginners)
 - Audio Tools
-
-[↑ Back to Top](#table-of-contents)
-
----
 
 ## Apple Silicon Chip Comparison
 
@@ -642,24 +602,20 @@ Understanding the differences between the M-Series chips will help you understan
 | **M4 (2024)** | AI Focused. Enhanced Neural Engine. Efficiency boost. | Significant AI/ML performance gains. |
 | **M5 (2025/26)** | Next-Gen Architecture. Extreme efficiency & raw power. | The pinnacle of desktop silicon. |
 
+[↑ Back to Top](#table-of-contents)
 
-
-
+- --
 
 
 ### 🔗 Related Topics
 
 - Getting Started (Beginners)
 
-[↑ Back to Top](#table-of-contents)
-
----
-
 ## Terminal Command Reference
 
 ### Beginner Terminal Commands 🟢
 
-**Navigation:**
+* *Navigation:**
 
 ```bash
 pwd                 # Print Working Directory (Where am I?)
@@ -670,7 +626,7 @@ cd ..               # Go back one folder
 cd ~                # Go to Home folder
 ```
 
-**File Operations:**
+* *File Operations:**
 
 ```bash
 touch file.txt      # Create empty file
@@ -683,7 +639,7 @@ open .              # Open current folder in Finder
 
 ### Mid-Level Terminal Commands 🟡
 
-**System Management:**
+* *System Management:**
 
 ```bash
 top                 # Real-time process viewer
@@ -692,7 +648,7 @@ uptime              # How long has Mac been on?
 history             # Show command history
 ```
 
-**Network:**
+* *Network:**
 
 ```bash
 ifconfig            # Network interfaces
@@ -702,9 +658,10 @@ curl ifconfig.me    # Get public IP
 
 ### Pro Terminal Commands 🟠
 
-**Advanced Operations:**
+* *Advanced Operations:**
 
 ```bash
+
 # Find files larger than 100MB
 find ~ -size +100M
 
@@ -718,9 +675,9 @@ du -sh * | sort -hr
 ln -s /original/path /link/path
 ```
 
+[↑ Back to Top](#table-of-contents)
 
-
-
+- --
 
 
 ### 🔗 Related Topics
@@ -729,18 +686,15 @@ ln -s /original/path /link/path
 - Keyboard Shortcuts (Comprehensive)
 - Beginner: Essentials
 
-[↑ Back to Top](#table-of-contents)
-
----
-
 ## System Configuration
 
 ### Finder Configuration 🟢
 
-**Show Hidden Files:** `Cmd + Shift + .`
+* *Show Hidden Files:** `Cmd + Shift + .`
 
-**Terminal Method:** 🟡
+* *Terminal Method:** 🟡
 ```bash
+
 # Show hidden files
 defaults write com.apple.finder AppleShowAllFiles -bool true
 killall Finder
@@ -751,8 +705,9 @@ defaults write com.apple.finder ShowPathbar -bool true
 
 ### Screenshot Configuration 🟡
 
-**Terminal Tweaks:**
+* *Terminal Tweaks:**
 ```bash
+
 # Change location to Desktop/Screenshots
 mkdir ~/Desktop/Screenshots
 defaults write com.apple.screencapture location ~/Desktop/Screenshots
@@ -765,6 +720,7 @@ defaults write com.apple.screencapture disable-shadow -bool true
 ### Dock Configuration 🟡
 
 ```bash
+
 # Auto-hide Dock
 defaults write com.apple.dock autohide -bool true
 
@@ -773,9 +729,9 @@ defaults write com.apple.dock autohide-time-modifier -float 0.5
 killall Dock
 ```
 
+[↑ Back to Top](#table-of-contents)
 
-
-
+- --
 
 
 ### 🔗 Related Topics
@@ -783,10 +739,6 @@ killall Dock
 - Advanced Configuration (Pro)
 - Terminal Command Reference
 - Beginner: Essentials
-
-[↑ Back to Top](#table-of-contents)
-
----
 
 ## Window Management Apps
 
@@ -809,17 +761,11 @@ Excellent alternative if you prefer the App Store.
 ↑ Back to Top
 
 
-
-
-
-
 ### 🔗 Related Topics
 
-- Productivity Apps
 - Menu Bar Apps
 - Remote Access
-
----
+- Clipboard Managers
 
 ## Menu Bar Apps
 
@@ -837,17 +783,11 @@ A modern, open-source alternative to Bartender.
 The most powerful option for total control over menu bar items.
 
 
-
-
-
-
 ### 🔗 Related Topics
 
 - Remote Access
-- Productivity Apps
+- Window Management Apps
 - Utilities
-
----
 
 ## Productivity Apps
 
@@ -867,17 +807,11 @@ The veteran productivity app.
 ↑ Back to Top
 
 
-
-
-
-
 ### 🔗 Related Topics
 
+- File Management
 - Remote Access
 - Clipboard Managers
-- File Management
-
----
 
 ## Terminal Themes
 
@@ -903,15 +837,9 @@ The fastest and most customizable theme for Zsh.
 ↑ Back to Top
 
 
-
-
-
-
 ### 🔗 Related Topics
 
 - Developer Tools (Mid-Level)
-
----
 
 ## Backup Strategies
 
@@ -930,7 +858,7 @@ Protect against fire, theft, or hardware failure.
 
 ↑ Back to Top
 
----
+- --
 
 ## Keyboard Shortcuts (Comprehensive)
 
@@ -1054,9 +982,9 @@ Protect against fire, theft, or hardware failure.
   </tbody>
 </table>
 
+[↑ Back to Top](#table-of-contents)
 
-
-
+- --
 
 
 ### 🔗 Related Topics
@@ -1065,29 +993,25 @@ Protect against fire, theft, or hardware failure.
 - Terminal Command Reference
 - Troubleshooting Guide
 
-[↑ Back to Top](#table-of-contents)
-
----
-
 ## Troubleshooting Guide
 
 ### Common Issues & Fixes 🟢
 
-**1. App is Frozen**
+* *1. App is Frozen**
 - Press `Cmd + Option + Esc` to open Force Quit menu.
 - Select the app and click "Force Quit".
 - *Terminal way:* `killall AppName`
 
-**2. Mac is Slow**
+* *2. Mac is Slow**
 - Open **Activity Monitor** (Cmd + Space, type "Activity Monitor").
 - Check "CPU" and "Memory" tabs to see what's using resources.
 - Restart your Mac (clears RAM and caches).
 
-**3. WiFi Issues**
+* *3. WiFi Issues**
 - Toggle WiFi off and on.
 - *Terminal reset:* `sudo killall -HUP mDNSResponder` (Flushes DNS).
 
-**4. Disk Full?**
+* *4. Disk Full?**
 - Check storage:  → System Settings → General → Storage.
 - Use `du -sh *` in Terminal to find large folders.
 
@@ -1095,19 +1019,15 @@ Protect against fire, theft, or hardware failure.
 - **Apple Silicon:** Shut down. Press and hold Power button until "Loading startup options" appears. Select disk, hold Shift, click "Continue in Safe Mode".
 - **Intel:** Restart and immediately hold Shift.
 
+[↑ Back to Top](#table-of-contents)
 
-
-
+- --
 
 
 ### 🔗 Related Topics
 
 - Keyboard Shortcuts (Comprehensive)
 - Beginner: Essentials
-
-[↑ Back to Top](#table-of-contents)
-
----
 
 ## Developer Tools (Mid-Level)
 
@@ -1120,12 +1040,12 @@ xcode-select --install
 ### 2. Homebrew (The Missing Package Manager) 🟡
 Install software easily from terminal.
 
-**Install Homebrew:**
+* *Install Homebrew:**
 ```bash
 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 ```
 
-**Common Commands:**
+* *Common Commands:**
 ```bash
 brew install node           # Install Node.js
 brew install git            # Install Git
@@ -1153,9 +1073,9 @@ Run containers and Linux machines on your Mac.
 - **Docker Desktop:** The industry standard.
   - `brew install --cask docker`
 
+[↑ Back to Top](#table-of-contents)
 
-
-
+- --
 
 
 ### 🔗 Related Topics
@@ -1163,10 +1083,6 @@ Run containers and Linux machines on your Mac.
 - Virtualization
 - Terminal Themes
 - Gaming on Mac
-
-[↑ Back to Top](#table-of-contents)
-
----
 
 ## Homebrew Essentials
 
@@ -1192,7 +1108,7 @@ A `cat` clone with syntax highlighting.
 
 ↑ Back to Top
 
----
+- --
 
 ## Virtualization
 
@@ -1214,17 +1130,11 @@ The most polished experience for running Windows on Mac.
 ↑ Back to Top
 
 
-
-
-
-
 ### 🔗 Related Topics
 
 - Getting Started (Beginners)
 - Gaming on Mac
 - Developer Tools (Mid-Level)
-
----
 
 ## Gaming on Mac
 
@@ -1244,17 +1154,11 @@ Apple's translation layer allowing DirectX 12 games to run on macOS.
 ↑ Back to Top
 
 
-
-
-
-
 ### 🔗 Related Topics
 
 - Virtualization
 - How to Use This Guide
 - Developer Tools (Mid-Level)
-
----
 
 ## Creative Tools
 
@@ -1276,17 +1180,11 @@ Live streaming and screen recording.
 ↑ Back to Top
 
 
-
-
-
-
 ### 🔗 Related Topics
 
 - Music Production
 - Audio Tools
 - Utilities
-
----
 
 ## Design Tools
 
@@ -1309,17 +1207,11 @@ A powerful, one-time purchase alternative to Adobe Illustrator.
 ↑ Back to Top
 
 
-
-
-
-
 ### 🔗 Related Topics
 
 - Getting Started (Beginners)
 - Music Production
 - Virtualization
-
----
 
 ## Audio Tools
 
@@ -1336,17 +1228,11 @@ Record any audio on your Mac.
 ↑ Back to Top
 
 
-
-
-
-
 ### 🔗 Related Topics
 
 - System Information & Hardware
 - Opening Terminal - Step by Step
 - Creative Tools
-
----
 
 ## Music Production
 
@@ -1365,17 +1251,11 @@ The best entry-level music creation tool.
 ↑ Back to Top
 
 
-
-
-
-
 ### 🔗 Related Topics
 
 - Design Tools
 - Creative Tools
 - Getting Started (Beginners)
-
----
 
 ## Quick Look Plugins
 
@@ -1395,16 +1275,17 @@ Preview Markdown files rendered as HTML.
 
 ↑ Back to Top
 
----
+- --
 
 ## Advanced Configuration (Pro)
 
 ### Shell Customization (Zsh) 🟠
 Your configuration file is at `~/.zshrc`.
 
-**Useful Aliases:**
+* *Useful Aliases:**
 Add these to your `.zshrc` file:
 ```bash
+
 # Edit zshrc easily
 alias zshconfig="nano ~/.zshrc"
 alias reload="source ~/.zshrc"
@@ -1427,14 +1308,10 @@ alias hidefiles="defaults write com.apple.finder AppleShowAllFiles -bool false &
 For GitHub/GitLab authentication:
 ```bash
 ssh-keygen -t ed25519 -C "your_email@example.com"
+
 # Follow prompts. Public key will be in ~/.ssh/id_ed25519.pub
 pbcopy < ~/.ssh/id_ed25519.pub # Copies key to clipboard
 ```
-
-
-
-
-
 
 
 ### 🔗 Related Topics
@@ -1457,11 +1334,6 @@ macOS has an inbound firewall, but these tools stop apps from "phoning home".
 Tools to detect persistence (malware that starts when your Mac starts).
 
 - **KnockKnock (Free):** Scans for persistently installed software.
-
-
-
-
-
 
 
 ### 🔗 Related Topics
@@ -1490,6 +1362,7 @@ Uninstall apps completely by finding all associated files (plists, caches) scatt
 Find what's eating your storage without installing GUI apps.
 
 ```bash
+
 # List sizes of folders in current directory (Human readable)
 du -sh * | sort -hr
 
@@ -1499,10 +1372,6 @@ find . -type f -size +500M
 # Visual Analyzer (NCurses Disk Usage) - Highly Recommended!
 brew install ncdu && ncdu
 ```
-
-
-
-
 
 
 ### 🔗 Related Topics
@@ -1533,10 +1402,6 @@ The ultimate network monitor and application firewall.
 </div>
 
 
-
-
-
-
 ### 🔗 Related Topics
 
 - Privacy & Security Deep Dive
@@ -1561,16 +1426,11 @@ The best way to access a Windows PC from your Mac.
 - **Install:** Mac App Store or `brew install --cask microsoft-remote-desktop`
 
 
-
-
-
-
-
 ### 🔗 Related Topics
 
 - Menu Bar Apps
 - Productivity Apps
-- File Management
+- Window Management Apps
 
 ## File Management
 
@@ -1585,11 +1445,6 @@ Classic dual-pane file manager inspired by Norton Commander.
 A robust dual-pane file manager and file transfer client.
 - **Install:** `brew install --cask forklift`
 - **Best for:** Connecting to remote servers (SFTP, S3) and local file management.
-
-
-
-
-
 
 
 ### 🔗 Related Topics
@@ -1615,11 +1470,6 @@ The gold standard for system monitoring with beautiful weather and calendar inte
 - **Tip:** Check "Memory Pressure" (Green is good, Yellow/Red means you need more RAM).
 
 
-
-
-
-
-
 ### 🔗 Related Topics
 
 - Finance & Budgeting
@@ -1639,10 +1489,6 @@ The most efficient content blocker.
 Securely manage passwords and passkeys.
 - **Integration:** Unlocks with Touch ID on your Mac.
 - **Alternative (Free):** Bitwarden.
-
-
-
-
 
 
 ### 🔗 Related Topics
@@ -1666,7 +1512,6 @@ Stay connected with teams and communities.
 - **Mute Toggle:** `Cmd + Shift + A` (Audio).
 - **Video Toggle:** `Cmd + Shift + V` (Video).
 
-
 ## Email Clients
 
 Manage your inbox efficiently.
@@ -1683,11 +1528,6 @@ A native macOS client for Gmail.
 ### 3. Apple Mail (Built-in) 🟢
 Reliable, secure, and integrated.
 - **Pros:** Privacy protection, Hide My Email integration, extensions support.
-
-
-
-
-
 
 
 ### 🔗 Related Topics
@@ -1711,11 +1551,6 @@ The most polished and "Apple-like" task manager.
 - **Alternative (Free):** Apple Reminders (which has gotten very good recently).
 
 
-
-
-
-
-
 ### 🔗 Related Topics
 
 - Getting Started (Beginners)
@@ -1737,11 +1572,6 @@ A comprehensive personal finance manager for macOS.
 - **Privacy:** Local-first data storage options.
 
 
-
-
-
-
-
 ### 🔗 Related Topics
 
 - System Monitoring
@@ -1759,11 +1589,6 @@ A modern, native, and friendly GUI tool for relational databases.
 The easiest way to get started with a local database server.
 - **Use:** Spin up a local PostgreSQL, MySQL, or Redis server in one click.
 - **Integration:** Works perfectly with TablePlus.
-
-
-
-
-
 
 
 ### 🔗 Related Topics
@@ -1790,11 +1615,6 @@ Open source cross-platform web server solution.
 - **Use:** Widely used, but can be heavier than Herd.
 
 
-
-
-
-
-
 ### 🔗 Related Topics
 
 - Database Tools
@@ -1818,11 +1638,6 @@ A seamless "what you see is what you get" (WYSIWYG) markdown editor.
 - **Best for:** Distraction-free writing where the markdown syntax hides as you type.
 
 
-
-
-
-
-
 ### 🔗 Related Topics
 
 - Writing Tools
@@ -1842,11 +1657,6 @@ A polished, distraction-free writing app for the Apple ecosystem.
 - **Features:** Markdown-based, seamless iCloud sync, direct publishing to WordPress/Medium.
 
 
-
-
-
-
-
 ### 🔗 Related Topics
 
 - Markdown Editors
@@ -1864,7 +1674,6 @@ Powerful, intelligent flashcards.
 - **Method:** Uses Spaced Repetition to help you remember things forever.
 - **Best for:** Language learning, medical school, memorizing shortcuts.
 
-
 ## Mind Mapping
 
 Visualize your ideas and brainstorm effectively.
@@ -1877,7 +1686,6 @@ The most beautiful and native mind mapping experience on Mac.
 ### 2. XMind (Freemium) 🟡
 A professional, cross-platform mind mapping tool.
 - **Features:** Pitch mode, various chart structures (fishbone, matrix), and extensive export options.
-
 
 ## Utilities
 
@@ -1897,16 +1705,11 @@ Hold the `⌘ Command` key to see a list of all active shortcuts for the current
 - **Install:** `brew install --cask cheatsheet`
 
 
-
-
-
-
-
 ### 🔗 Related Topics
 
 - Privacy & Security Deep Dive
 - Menu Bar Apps
-- Productivity Apps
+- Remote Access
 
 ## Clipboard Managers
 
@@ -1922,15 +1725,10 @@ Visual clipboard history for Mac, iPhone, and iPad.
 - **Features:** Sync across devices, pin items, visual preview of links/images.
 
 
-
-
-
-
-
 ### 🔗 Related Topics
 
-- Productivity Apps
 - File Management
+- Productivity Apps
 - Menu Bar Apps
 
 ## Automation
@@ -1948,15 +1746,11 @@ Legacy tool, great for file system operations.
 - **Quick Actions:** Add custom buttons to the Finder Touch Bar or Right-Click menu.
 
 
-
-
-
-
 ### 🔗 Related Topics
 
-- Productivity Apps
 - Remote Access
 - Clipboard Managers
+- Productivity Apps
 
 ## Expert-Level Techniques
 
@@ -1968,6 +1762,7 @@ Protects system files from modification.
 
 ### Network Analysis 🔴
 ```bash
+
 # List open network ports
 sudo lsof -i -P | grep LISTEN
 
@@ -1980,6 +1775,7 @@ dig google.com
 
 ### Process Management 🔴
 ```bash
+
 # Find process ID (PID) by name
 pgrep -f python
 
@@ -1990,18 +1786,14 @@ kill -9 <PID>
 pstree
 ```
 
+[↑ Back to Top](#table-of-contents)
 
-
-
+- --
 
 
 ### 🔗 Related Topics
 
 - Terminal Command Reference
-
-[↑ Back to Top](#table-of-contents)
-
----
 
 ## Best Resources by Level
 

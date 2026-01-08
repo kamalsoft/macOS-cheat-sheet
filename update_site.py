@@ -391,6 +391,24 @@ def generate_command_index(md_content):
     with open('commands.json', 'w', encoding='utf-8') as f:
         json.dump(commands, f, indent=2)
 
+def fix_markdown_linting(content):
+    print("Fixing common markdown linting errors...")
+    
+    # 1. Fix trailing whitespace on lines
+    content = re.sub(r'[ \t]+$', '', content, flags=re.MULTILINE)
+    
+    # 2. Fix multiple consecutive blank lines (max 1 blank line = 2 newlines)
+    content = re.sub(r'\n{3,}', '\n\n', content)
+    
+    # 3. Ensure space after list markers (e.g., "-Item" -> "- Item")
+    content = re.sub(r'^(\s*[-*])([^\s])', r'\1 \2', content, flags=re.MULTILINE)
+    
+    # 4. Ensure blank lines before headers (if not already present)
+    # Matches a non-newline char, followed by newline, followed by header
+    content = re.sub(r'([^\n])\n(\#{1,6} )', r'\1\n\n\2', content)
+    
+    return content
+
 def update_html():
     print(f"Change detected. Updating {HTML_FILE} from {MD_FILE}...")
     try:
@@ -400,6 +418,9 @@ def update_html():
         with open(HTML_FILE, 'r', encoding='utf-8') as f:
             html_content = f.read()
             
+        # Fix Linting Errors
+        md_content = fix_markdown_linting(md_content)
+
         # Update TOC in Markdown if needed
         md_content, updated = update_toc(md_content)
         
