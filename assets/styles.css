@@ -1473,3 +1473,9 @@ body.quick-ref-mode #exit-zen-btn {
 .sotd-keys { font-size: 1.2rem; margin-bottom: 0.5rem; color: white; }
 .sotd-keys code { background: rgba(255,255,255,0.2); border-color: rgba(255,255,255,0.4); color: white; }
 .sotd-action { font-size: 1rem; color: rgba(255,255,255,0.9); font-weight: 500; }
+
+/* Ensure content visibility */
+.searchable-section {
+  display: block;
+  width: 100%;
+}

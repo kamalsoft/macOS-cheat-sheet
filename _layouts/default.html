@@ -275,6 +275,11 @@
           }
         });
       }
+      
+      // Ensure content is visible by default
+      document.querySelectorAll('.searchable-section').forEach(section => {
+        section.style.display = '';
+      });
 
       const clearSearchBtn = document.getElementById('clear-search-btn');
 
@@ -339,6 +344,11 @@
             removeHighlights();
           }
         });
+        
+        // Trigger initial search if value exists (e.g. browser restore)
+        if (searchInput.value) {
+          searchInput.dispatchEvent(new Event('input'));
+        }
       }
 
       // Search History Logic
@@ -821,6 +831,9 @@
       
       // Initialize
       showShortcutOfTheDay();
+
+      // Ensure modes are off by default to prevent hidden content
+      document.body.classList.remove('zen-mode', 'quick-ref-mode');
     </script>
 
     <!-- TOC & Copy Button Script -->
@@ -990,6 +1003,11 @@
             }
           });
         });
+        
+        // Trigger initial filter state
+        if (shortcutsFilter.value !== 'all') {
+          shortcutsFilter.dispatchEvent(new Event('change'));
+        }
       }
 
       if (printShortcutsBtn) {
