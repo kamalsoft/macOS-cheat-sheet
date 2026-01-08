@@ -55,7 +55,6 @@ def validate_internal_links(md_content):
     headers = re.findall(r'^(#{2,3})\s+(.+)$', content, re.MULTILINE)
     valid_ids = set()
     valid_ids.add('top') # Common manual anchor
-    valid_ids.add('table-of-contents') # Common manual anchor
     
     for _, title in headers:
         slug = get_slug(title)
@@ -88,7 +87,6 @@ def fix_broken_links(content):
     
     # Add manual anchors
     valid_slugs['top'] = "Top"
-    valid_slugs['table-of-contents'] = "Table of Contents"
     
     changes_made = False
     

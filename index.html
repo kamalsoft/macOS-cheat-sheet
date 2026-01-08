@@ -399,11 +399,11 @@
 
 ## 🆕 New & Updated
 
+- **2026-01-08**: Refactor documentation updates and enhance slug generation for better compatibility
 - **2026-01-08**: Update documentation
 - **2026-01-08**: Update documentation
 - **2026-01-08**: Update documentation
 - **2026-01-08**: Add Contributors section and Last Updated badge to documentation; update sitemap and fix broken link handling
-- **2026-01-08**: Add Last Updated badge and Contributors section to documentation
 
 ## How to Use This Guide
 
@@ -1872,16 +1872,85 @@ Thanks to these wonderful people: **kamalsoft**.
     </script><script>
         document.addEventListener('DOMContentLoaded', () => {
             // 1. Initialize Theme
+            
+            // Developer Logger
+            window.devLogger = {
+                panel: document.getElementById('dev-log-panel'),
+                content: document.getElementById('dev-log-content'),
+                counts: { error: 0, warn: 0 },
+                
+                init() {
+                    const originalConsole = {
+                        log: console.log,
+                        error: console.error,
+                        warn: console.warn,
+                        debug: console.debug,
+                        info: console.info
+                    };
+
+                    ['log', 'error', 'warn', 'debug', 'info'].forEach(method => {
+                        console[method] = (...args) => {
+                            originalConsole[method].apply(console, args);
+                            this.addLog(method, args);
+                        };
+                    });
+                    console.info("DevLogger initialized.");
+                },
+
+                addLog(type, args) {
+                    if (!this.content) return;
+                    const line = document.createElement('div');
+                    let colorClass = 'text-blue-300';
+                    if (type === 'error') colorClass = 'text-red-400';
+                    else if (type === 'warn') colorClass = 'text-yellow-400';
+                    else if (type === 'debug') colorClass = 'text-slate-500';
+                    
+                    line.className = `border-b border-slate-800/50 pb-0.5 mb-0.5 break-all ${colorClass}`;
+                    const timestamp = new Date().toLocaleTimeString();
+                    const message = args.map(arg => {
+                        try {
+                            return typeof arg === 'object' ? JSON.stringify(arg) : String(arg);
+                        } catch (e) {
+                            return String(arg);
+                        }
+                    }).join(' ');
+                    line.innerHTML = `<span class="opacity-50 mr-2">[${timestamp}]</span>${message}`;
+                    this.content.appendChild(line);
+                    this.content.scrollTop = this.content.scrollHeight;
+                    
+                    if (type === 'error' || type === 'warn') {
+                        this.counts[type]++;
+                        document.getElementById(`log-count-${type}`).textContent = `${this.counts[type]} ${type}`;
+                    }
+                },
+
+                toggle() { this.panel.classList.toggle('translate-y-full'); },
+                clear() { 
+                    this.content.innerHTML = ''; 
+                    this.counts = { error: 0, warn: 0 };
+                    document.getElementById('log-count-error').textContent = '0 err';
+                    document.getElementById('log-count-warn').textContent = '0 warn';
+                }
+            };
+            window.devLogger.init();
+
             // Configure Marked to match Python's slug generation
-            const renderer = new marked.Renderer();
-            renderer.heading = function(text, level, raw) {
+            const renderer = {
+              heading(text, level, raw) {
                 // Remove markdown links [text](url) -> text
-                let clean = raw.replace(/\[([^\]]+)\]\([^\)]+\)/g, '$1');
+                let source = raw || text || '';
+                // If raw is missing, text might contain HTML tags, strip them to match Python slug generation
+                if (!raw) {
+                    source = source.toString().replace(/<[^>]*>/g, '');
+                }
+                
+                let clean = source.toString().replace(/\[([^\]]+)\]\([^\)]+\)/g, '$1');
                 // Remove non-word chars (ASCII only to match Python script update)
                 clean = clean.replace(/[^a-zA-Z0-9\s-]/g, '');
                 let slug = clean.toLowerCase().trim().replace(/\s+/g, '-');
                 slug = slug.replace(/-+/g, '-');
                 return `<h${level} id="${slug}">${text}</h${level}>`;
+              }
             };
             marked.use({ renderer: renderer });
 
@@ -1957,6 +2026,23 @@ Thanks to these wonderful people: **kamalsoft**.
                 }
             });
 
+            // Handle anchor links for smooth scrolling in overflow container
+            document.addEventListener('click', (e) => {
+                const link = e.target.closest('a');
+                if (!link) return;
+                
+                const href = link.getAttribute('href');
+                if (href && href.startsWith('#') && href.length > 1) {
+                    e.preventDefault();
+                    const targetId = href.substring(1);
+                    const target = document.getElementById(targetId);
+                    if (target) {
+                        target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                        history.pushState(null, null, href);
+                    }
+                }
+            });
+
             // 2. Render Markdown
             const contentArea = document.getElementById('content-area');
             try {
@@ -2005,7 +2091,7 @@ Thanks to these wonderful people: **kamalsoft**.
             filterContainer.className = 'px-4 pb-2 mb-2 border-b border-slate-100 dark:border-slate-800';
             filterContainer.innerHTML = `
                 <h3 class="text-xs font-bold text-slate-400 uppercase tracking-wider mb-2">View</h3><div class="flex gap-2 mb-4"><button onclick="toggleView('list')" id="btn-list" class="flex-1 py-1.5 text-xs font-medium rounded-lg border border-blue-500 bg-blue-50 text-blue-600 dark:bg-blue-900/30 dark:text-blue-400 transition-all">List View</button><button onclick="toggleView('grid')" id="btn-grid" class="flex-1 py-1.5 text-xs font-medium rounded-lg border border-slate-200 dark:border-slate-700 text-slate-600 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-800 transition-all">Grid View</button></div><h3 class="text-xs font-bold text-slate-400 uppercase tracking-wider mb-2">Skill Level</h3><div class="flex gap-1"><button onclick="setSkillLevel('beginner')" class="skill-btn flex-1 px-2 py-1 text-xs rounded-md border border-slate-200 dark:border-slate-700 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors" title="Beginner">🟢</button><button onclick="setSkillLevel('mid')" class="skill-btn flex-1 px-2 py-1 text-xs rounded-md border border-slate-200 dark:border-slate-700 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors" title="Mid-Level">🟡</button><button onclick="setSkillLevel('pro')" class="skill-btn flex-1 px-2 py-1 text-xs rounded-md border border-slate-200 dark:border-slate-700 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors" title="Pro">🟠</button><button onclick="setSkillLevel('expert')" class="skill-btn flex-1 px-2 py-1 text-xs rounded-md border border-slate-200 dark:border-slate-700 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors" title="Expert">🔴</button><button onclick="setSkillLevel('all')" class="skill-btn flex-1 px-2 py-1 text-xs rounded-md border border-slate-200 dark:border-slate-700 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors font-bold" title="Show All">ALL</button></div>`;
-             tocContainer = document.getElementById('toc-container');
+            const tocContainer = document.getElementById('toc-container');
             tocContainer.parentNode.insertBefore(filterContainer, tocContainer);
 
             // 2.2 Bookmarks Logic
@@ -2225,7 +2311,6 @@ Thanks to these wonderful people: **kamalsoft**.
 
             // 4. Generate Sidebar TOC
             const headers = contentArea.querySelectorAll('h2, h3');
-            const tocContainer = document.getElementById('toc-container');
             const mobileTocContainer = document.getElementById('mobile-toc-container');
 
             headers.forEach((header, index) => {
