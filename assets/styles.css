@@ -1133,3 +1133,57 @@ body.quick-ref-mode #exit-zen-btn {
   opacity: 1;
   background: var(--td-hover);
 }
+
+/* Alternate Table Approach: Card Grid */
+.shortcuts-table {
+  display: block;
+  width: 100%;
+  border: none !important;
+  background: transparent !important;
+  box-shadow: none !important;
+  margin-bottom: 2rem;
+}
+
+.shortcuts-table thead {
+  display: none; /* Hide headers for card view */
+}
+
+.shortcuts-table tbody {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 1rem;
+}
+
+.shortcuts-table tr {
+  display: flex;
+  flex-direction: column;
+  background: var(--glass-bg);
+  border: 1px solid var(--glass-border);
+  border-radius: 12px;
+  padding: 1rem;
+  transition: transform 0.2s, box-shadow 0.2s;
+  backdrop-filter: blur(10px);
+}
+
+.shortcuts-table tr:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+  background: var(--td-hover);
+}
+
+.shortcuts-table td {
+  display: block;
+  border: none !important;
+  padding: 0.25rem 0 !important;
+  background: transparent !important;
+}
+
+.shortcuts-table td:first-child {
+  font-family: "SF Mono", Menlo, monospace;
+  font-weight: bold;
+  color: var(--heading-color);
+  font-size: 1.1em;
+  margin-bottom: 0.5rem;
+  border-bottom: 1px solid var(--glass-border) !important;
+  padding-bottom: 0.5rem !important;
+}

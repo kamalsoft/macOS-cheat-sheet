@@ -484,81 +484,111 @@ Protect against fire, theft, or hardware failure.
 </div>
 
 ### 🔑 The "Must Know" Basics
-| Shortcut | Action |
-|----------|--------|
-| `⌘` + `Space` | Spotlight Search (Launch apps, find files, do math) |
-| `⌘` + `Q` | Quit application (Completely closes it) |
-| `⌘` + `W` | Close current window/tab |
-| `⌘` + `Tab` | Switch between open apps |
-| `⌘` + `` ` `` | Switch between windows of the same app |
-| `⌘` + `Opt` + `Esc` | Force Quit menu (Use when app freezes) |
-| `⌘` + `,` | Open Settings/Preferences for current app |
-| `⌘` + `H` | Hide current app |
-| `⌘` + `M` | Minimize window to Dock |
+<table class="shortcuts-table">
+  <thead>
+    <tr><th>Shortcut</th><th>Action</th></tr>
+  </thead>
+  <tbody>
+    <tr><td><code>⌘</code> + <code>Space</code></td><td>Spotlight Search (Launch apps, find files, do math)</td></tr>
+    <tr><td><code>⌘</code> + <code>Q</code></td><td>Quit application (Completely closes it)</td></tr>
+    <tr><td><code>⌘</code> + <code>W</code></td><td>Close current window/tab</td></tr>
+    <tr><td><code>⌘</code> + <code>Tab</code></td><td>Switch between open apps</td></tr>
+    <tr><td><code>⌘</code> + <code>`</code></td><td>Switch between windows of the same app</td></tr>
+    <tr><td><code>⌘</code> + <code>Opt</code> + <code>Esc</code></td><td>Force Quit menu (Use when app freezes)</td></tr>
+    <tr><td><code>⌘</code> + <code>,</code></td><td>Open Settings/Preferences for current app</td></tr>
+    <tr><td><code>⌘</code> + <code>H</code></td><td>Hide current app</td></tr>
+    <tr><td><code>⌘</code> + <code>M</code></td><td>Minimize window to Dock</td></tr>
+  </tbody>
+</table>
 
 ### 📝 Text Editing & Document Control
-| Shortcut | Action |
-|----------|--------|
-| `⌘` + `C` | Copy |
-| `⌘` + `V` | Paste |
-| `⌘` + `X` | Cut |
-| `⌘` + `Z` | Undo |
-| `⌘` + `Shift` + `Z` | Redo |
-| `⌘` + `A` | Select All |
-| `⌘` + `F` | Find / Search in document |
-| `Opt` + `←` / `→` | Move cursor by word |
-| `⌘` + `←` / `→` | Move cursor to start/end of line |
-| `⌘` + `↑` / `↓` | Move cursor to top/bottom of document |
-| `Shift` + `Arrows` | Highlight/Select text |
-| `Opt` + `Delete` | Delete previous word |
-| `⌘` + `Delete` | Delete entire line (to left of cursor) |
+<table class="shortcuts-table">
+  <thead>
+    <tr><th>Shortcut</th><th>Action</th></tr>
+  </thead>
+  <tbody>
+    <tr><td><code>⌘</code> + <code>C</code></td><td>Copy</td></tr>
+    <tr><td><code>⌘</code> + <code>V</code></td><td>Paste</td></tr>
+    <tr><td><code>⌘</code> + <code>X</code></td><td>Cut</td></tr>
+    <tr><td><code>⌘</code> + <code>Z</code></td><td>Undo</td></tr>
+    <tr><td><code>⌘</code> + <code>Shift</code> + <code>Z</code></td><td>Redo</td></tr>
+    <tr><td><code>⌘</code> + <code>A</code></td><td>Select All</td></tr>
+    <tr><td><code>⌘</code> + <code>F</code></td><td>Find / Search in document</td></tr>
+    <tr><td><code>Opt</code> + <code>←</code> / <code>→</code></td><td>Move cursor by word</td></tr>
+    <tr><td><code>⌘</code> + <code>←</code> / <code>→</code></td><td>Move cursor to start/end of line</td></tr>
+    <tr><td><code>⌘</code> + <code>↑</code> / <code>↓</code></td><td>Move cursor to top/bottom of document</td></tr>
+    <tr><td><code>Shift</code> + <code>Arrows</code></td><td>Highlight/Select text</td></tr>
+    <tr><td><code>Opt</code> + <code>Delete</code></td><td>Delete previous word</td></tr>
+    <tr><td><code>⌘</code> + <code>Delete</code></td><td>Delete entire line (to left of cursor)</td></tr>
+  </tbody>
+</table>
 
 ### 📂 Finder & File Management
-| Shortcut | Action |
-|----------|--------|
-| `⌘` + `N` | New Finder Window |
-| `⌘` + `Shift` + `N` | Create New Folder |
-| `Return` | Rename selected file |
-| `Spacebar` | Quick Look (Preview file without opening) |
-| `⌘` + `Delete` | Move to Trash |
-| `⌘` + `Shift` + `Delete` | Empty Trash |
-| `⌘` + `D` | Duplicate file |
-| `⌘` + `I` | Get Info (Size, type, permissions) |
-| `⌘` + `Shift` + `.` | Toggle Hidden Files |
-| `⌘` + `Opt` + `C` | Copy File Path |
-| `⌘` + `1`/`2`/`3`/`4` | View as Icon / List / Column / Gallery |
+<table class="shortcuts-table">
+  <thead>
+    <tr><th>Shortcut</th><th>Action</th></tr>
+  </thead>
+  <tbody>
+    <tr><td><code>⌘</code> + <code>N</code></td><td>New Finder Window</td></tr>
+    <tr><td><code>⌘</code> + <code>Shift</code> + <code>N</code></td><td>Create New Folder</td></tr>
+    <tr><td><code>Return</code></td><td>Rename selected file</td></tr>
+    <tr><td><code>Spacebar</code></td><td>Quick Look (Preview file without opening)</td></tr>
+    <tr><td><code>⌘</code> + <code>Delete</code></td><td>Move to Trash</td></tr>
+    <tr><td><code>⌘</code> + <code>Shift</code> + <code>Delete</code></td><td>Empty Trash</td></tr>
+    <tr><td><code>⌘</code> + <code>D</code></td><td>Duplicate file</td></tr>
+    <tr><td><code>⌘</code> + <code>I</code></td><td>Get Info (Size, type, permissions)</td></tr>
+    <tr><td><code>⌘</code> + <code>Shift</code> + <code>.</code></td><td>Toggle Hidden Files</td></tr>
+    <tr><td><code>⌘</code> + <code>Opt</code> + <code>C</code></td><td>Copy File Path</td></tr>
+    <tr><td><code>⌘</code> + <code>1</code>/<code>2</code>/<code>3</code>/<code>4</code></td><td>View as Icon / List / Column / Gallery</td></tr>
+  </tbody>
+</table>
 
 ### 📸 Screenshots & Recording
-| Shortcut | Action |
-|----------|--------|
-| `⌘` + `Shift` + `3` | Capture Entire Screen |
-| `⌘` + `Shift` + `4` | Capture Selected Area (Drag crosshair) |
-| `⌘` + `Shift` + `4` + `Space` | Capture Specific Window (Camera icon appears) |
-| `⌘` + `Shift` + `5` | Open Screenshot/Recording Utility (Options menu) |
-| `Ctrl` + (Any above) | Copy screenshot to Clipboard instead of saving to file |
+<table class="shortcuts-table">
+  <thead>
+    <tr><th>Shortcut</th><th>Action</th></tr>
+  </thead>
+  <tbody>
+    <tr><td><code>⌘</code> + <code>Shift</code> + <code>3</code></td><td>Capture Entire Screen</td></tr>
+    <tr><td><code>⌘</code> + <code>Shift</code> + <code>4</code></td><td>Capture Selected Area (Drag crosshair)</td></tr>
+    <tr><td><code>⌘</code> + <code>Shift</code> + <code>4</code> + <code>Space</code></td><td>Capture Specific Window (Camera icon appears)</td></tr>
+    <tr><td><code>⌘</code> + <code>Shift</code> + <code>5</code></td><td>Open Screenshot/Recording Utility (Options menu)</td></tr>
+    <tr><td><code>Ctrl</code> + (Any above)</td><td>Copy screenshot to Clipboard instead of saving to file</td></tr>
+  </tbody>
+</table>
 
 ### 🌐 Web Browsing (Safari/Chrome)
-| Shortcut | Action |
-|----------|--------|
-| `⌘` + `T` | New Tab |
-| `⌘` + `Shift` + `T` | Reopen Last Closed Tab (Lifesaver!) |
-| `⌘` + `L` | Highlight URL/Address Bar |
-| `⌘` + `R` | Refresh Page |
-| `⌘` + `+` / `-` | Zoom In / Out |
-| `⌘` + `0` | Reset Zoom |
-| `Ctrl` + `Tab` | Next Tab |
-| `Ctrl` + `Shift` + `Tab` | Previous Tab |
+<table class="shortcuts-table">
+  <thead>
+    <tr><th>Shortcut</th><th>Action</th></tr>
+  </thead>
+  <tbody>
+    <tr><td><code>⌘</code> + <code>T</code></td><td>New Tab</td></tr>
+    <tr><td><code>⌘</code> + <code>Shift</code> + <code>T</code></td><td>Reopen Last Closed Tab (Lifesaver!)</td></tr>
+    <tr><td><code>⌘</code> + <code>L</code></td><td>Highlight URL/Address Bar</td></tr>
+    <tr><td><code>⌘</code> + <code>R</code></td><td>Refresh Page</td></tr>
+    <tr><td><code>⌘</code> + <code>+</code> / <code>-</code></td><td>Zoom In / Out</td></tr>
+    <tr><td><code>⌘</code> + <code>0</code></td><td>Reset Zoom</td></tr>
+    <tr><td><code>Ctrl</code> + <code>Tab</code></td><td>Next Tab</td></tr>
+    <tr><td><code>Ctrl</code> + <code>Shift</code> + <code>Tab</code></td><td>Previous Tab</td></tr>
+  </tbody>
+</table>
 
 ### 🖥️ System & Window Management
-| Shortcut | Action |
-|----------|--------|
-| `Ctrl` + `⌘` + `F` | Toggle Full Screen |
-| `Ctrl` + `↑` | Mission Control (See all open windows) |
-| `Ctrl` + `↓` | App Expose (See windows of current app) |
-| `Ctrl` + `←` / `→` | Switch between Desktops/Spaces |
-| `Fn` + `Delete` | Forward Delete (Delete character to right) |
-| `Ctrl` + `⌘` + `Q` | Lock Screen immediately |
-| `⌘` + `Shift` + `?` | Open Help Menu (Search for menu items!) |
+<table class="shortcuts-table">
+  <thead>
+    <tr><th>Shortcut</th><th>Action</th></tr>
+  </thead>
+  <tbody>
+    <tr><td><code>Ctrl</code> + <code>⌘</code> + <code>F</code></td><td>Toggle Full Screen</td></tr>
+    <tr><td><code>Ctrl</code> + <code>↑</code></td><td>Mission Control (See all open windows)</td></tr>
+    <tr><td><code>Ctrl</code> + <code>↓</code></td><td>App Expose (See windows of current app)</td></tr>
+    <tr><td><code>Ctrl</code> + <code>←</code> / <code>→</code></td><td>Switch between Desktops/Spaces</td></tr>
+    <tr><td><code>Fn</code> + <code>Delete</code></td><td>Forward Delete (Delete character to right)</td></tr>
+    <tr><td><code>Ctrl</code> + <code>⌘</code> + <code>Q</code></td><td>Lock Screen immediately</td></tr>
+    <tr><td><code>⌘</code> + <code>Shift</code> + <code>?</code></td><td>Open Help Menu (Search for menu items!)</td></tr>
+  </tbody>
+</table>
 
 [↑ Back to Top](#table-of-contents)
 
