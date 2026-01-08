@@ -169,6 +169,8 @@ def update_toc(content):
         if "Table of Contents" in title:
             has_toc_header = True
             continue
+        if "Related Topics" in title:
+            continue
         
         slug = get_slug(title)
         indent = "  " if level == "###" else ""
@@ -229,6 +231,101 @@ def update_changelog(content):
         print(f"Warning: Could not update changelog (git error?): {e}")
         return content, False
 
+def generate_related_topics(md_content):
+    print("Generating Related Topics...")
+    
+    # 1. Parse Sections
+    lines = md_content.split('\n')
+    sections = []
+    current_section_lines = []
+    current_title = "Intro"
+    
+    for line in lines:
+        if line.startswith("## ") and not line.startswith("###"):
+            sections.append({'title': current_title, 'lines': current_section_lines})
+            current_title = line[3:].strip()
+            current_section_lines = [line]
+        else:
+            current_section_lines.append(line)
+    sections.append({'title': current_title, 'lines': current_section_lines})
+    
+    # 2. Extract Keywords
+    stop_words = {
+        'a', 'an', 'the', 'and', 'or', 'but', 'if', 'then', 'else', 'when', 'at', 'by', 'for', 'with', 
+        'about', 'against', 'between', 'into', 'through', 'during', 'before', 'after', 'above', 'below', 
+        'to', 'from', 'up', 'down', 'in', 'out', 'on', 'off', 'over', 'under', 'again', 'further', 
+        'then', 'once', 'here', 'there', 'when', 'where', 'why', 'how', 'all', 'any', 'both', 'each', 
+        'few', 'more', 'most', 'other', 'some', 'such', 'no', 'nor', 'not', 'only', 'own', 'same', 
+        'so', 'than', 'too', 'very', 's', 't', 'can', 'will', 'just', 'don', 'should', 'now',
+        'mac', 'macos', 'apple', 'use', 'using', 'guide', 'install', 'free', 'paid', 'open', 'source',
+        'version', 'update', 'upgrade', 'check', 'click', 'press', 'type', 'select', 'enable', 'disable',
+        'feature', 'support', 'system', 'tool', 'app', 'application', 'software', 'command', 'terminal',
+        'setup', 'config', 'configuration', 'best', 'top', 'list', 'level', 'pro', 'max', 'mini', 'air',
+        'intro', 'table', 'contents', 'new', 'updated', 'resources', 'related', 'topics'
+    }
+    
+    section_keywords = {}
+    ignored_titles = ["Table of Contents", "New & Updated", "Best Resources by Level", "Intro"]
+    
+    for i, sec in enumerate(sections):
+        title = sec["title"]
+        if any(ignored in title for ignored in ignored_titles):
+            continue
+            
+        text = " ".join(sec["lines"]).lower()
+        text = re.sub(r'[#*`\[\]\(\)!:;,.?]', ' ', text)
+        words = re.findall(r'\b[a-z]{3,}\b', text)
+        keywords = set([w for w in words if w not in stop_words])
+        section_keywords[i] = keywords
+
+    # 3. Calculate Similarity
+    related_map = {}
+    for i in section_keywords:
+        scores = []
+        for j in section_keywords:
+            if i == j: continue
+            s1 = section_keywords[i]
+            s2 = section_keywords[j]
+            if not s1 or not s2: continue
+            intersection = len(s1.intersection(s2))
+            union = len(s1.union(s2))
+            score = intersection / union if union > 0 else 0
+            if score > 0.08:
+                scores.append((score, j))
+        scores.sort(key=lambda x: x[0], reverse=True)
+        related_map[i] = [x[1] for x in scores[:3]]
+
+    # 4. Reconstruct Content
+    new_lines = []
+    for i, sec in enumerate(sections):
+        lines = sec["lines"]
+        cleaned_lines = []
+        skip = False
+        for line in lines:
+            if "### 🔗 Related Topics" in line: skip = True
+            elif skip and (line.startswith("## ") or line.strip() == "---" or line.startswith("[↑ Back to Top]")):
+                skip = False; cleaned_lines.append(line)
+            elif not skip: cleaned_lines.append(line)
+            
+        if i in related_map and related_map[i]:
+            insert_idx = len(cleaned_lines)
+            for idx in range(len(cleaned_lines) - 1, -1, -1):
+                line = cleaned_lines[idx].strip()
+                if line == "---" or line.startswith("[↑ Back to Top]"): insert_idx = idx
+                elif line != "": break
+            
+            related_block = ["", "### 🔗 Related Topics", ""]
+            for related_idx in related_map[i]:
+                related_title = sections[related_idx]["title"]
+                slug = get_slug(related_title)
+                related_block.append(f"- {related_title}")
+            related_block.append("")
+            cleaned_lines[insert_idx:insert_idx] = related_block
+            
+        new_lines.extend(cleaned_lines)
+        
+    return "\n".join(new_lines)
+
 def compress_images(md_content):
     print("Checking for images to compress...")
     try:
@@ -247,7 +344,11 @@ def compress_images(md_content):
     
     for img_path in all_images:
         # Clean path (remove query/hash)
-        clean_path = img_path.split('?')[0].split('#')[0]
+        # Also remove markdown titles: path/to/image.png "Title"
+        clean_path = img_path.strip()
+        if ' ' in clean_path:
+            clean_path = clean_path.split(' ')[0]
+        clean_path = clean_path.split('?')[0].split('#')[0]
         
         if not os.path.exists(clean_path):
             continue
@@ -268,6 +369,28 @@ def compress_images(md_content):
         except Exception as e:
             print(f"Error compressing {clean_path}: {e}")
 
+def generate_command_index(md_content):
+    print("Generating commands.json...")
+    import json
+    
+    # Find code blocks
+    # Regex for ```lang ... ```
+    blocks = re.findall(r'```(\w+)\n(.*?)```', md_content, re.DOTALL)
+    
+    commands = []
+    for lang, code in blocks:
+        if lang in ['bash', 'sh', 'zsh', 'shell']:
+            lines = code.strip().split('\n')
+            for line in lines:
+                line = line.strip()
+                if not line or line.startswith('#'): continue
+                # Remove leading $ if present
+                cmd = re.sub(r'^\$\s+', '', line)
+                commands.append({'cmd': cmd, 'lang': lang})
+                
+    with open('commands.json', 'w', encoding='utf-8') as f:
+        json.dump(commands, f, indent=2)
+
 def update_html():
     print(f"Change detected. Updating {HTML_FILE} from {MD_FILE}...")
     try:
@@ -283,13 +406,21 @@ def update_html():
         # Update Changelog
         md_content, log_updated = update_changelog(md_content)
         
+        # Generate Related Topics
+        new_md_content = generate_related_topics(md_content)
+        related_updated = new_md_content != md_content
+        md_content = new_md_content
+        
         # Compress Images
         compress_images(md_content)
+        
+        # Generate Command Index
+        generate_command_index(md_content)
         
         # Fix broken links
         md_content, fixed = fix_broken_links(md_content)
         
-        if updated or fixed or log_updated:
+        if updated or fixed or log_updated or related_updated:
             with open(MD_FILE, 'w', encoding='utf-8') as f:
                 f.write(md_content)
             

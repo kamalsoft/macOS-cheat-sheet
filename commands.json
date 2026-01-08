@@ -1,0 +1,278 @@
+[
+  {
+    "cmd": "sw_vers",
+    "lang": "bash"
+  },
+  {
+    "cmd": "system_profiler SPSoftwareDataType SPHardwareDataType",
+    "lang": "bash"
+  },
+  {
+    "cmd": "uname -m",
+    "lang": "bash"
+  },
+  {
+    "cmd": "softwareupdate --install-rosetta",
+    "lang": "bash"
+  },
+  {
+    "cmd": "pwd                 # Print Working Directory (Where am I?)",
+    "lang": "bash"
+  },
+  {
+    "cmd": "ls                  # List files",
+    "lang": "bash"
+  },
+  {
+    "cmd": "ls -la              # List all files (including hidden)",
+    "lang": "bash"
+  },
+  {
+    "cmd": "cd Documents        # Change Directory to Documents",
+    "lang": "bash"
+  },
+  {
+    "cmd": "cd ..               # Go back one folder",
+    "lang": "bash"
+  },
+  {
+    "cmd": "cd ~                # Go to Home folder",
+    "lang": "bash"
+  },
+  {
+    "cmd": "touch file.txt      # Create empty file",
+    "lang": "bash"
+  },
+  {
+    "cmd": "mkdir NewFolder     # Create new folder",
+    "lang": "bash"
+  },
+  {
+    "cmd": "cp file.txt copy.txt # Copy file",
+    "lang": "bash"
+  },
+  {
+    "cmd": "mv file.txt NewLoc/ # Move file",
+    "lang": "bash"
+  },
+  {
+    "cmd": "rm file.txt         # Delete file (Careful!)",
+    "lang": "bash"
+  },
+  {
+    "cmd": "open .              # Open current folder in Finder",
+    "lang": "bash"
+  },
+  {
+    "cmd": "top                 # Real-time process viewer",
+    "lang": "bash"
+  },
+  {
+    "cmd": "killall Safari      # Force close an app",
+    "lang": "bash"
+  },
+  {
+    "cmd": "uptime              # How long has Mac been on?",
+    "lang": "bash"
+  },
+  {
+    "cmd": "history             # Show command history",
+    "lang": "bash"
+  },
+  {
+    "cmd": "ifconfig            # Network interfaces",
+    "lang": "bash"
+  },
+  {
+    "cmd": "ping google.com     # Check internet connection",
+    "lang": "bash"
+  },
+  {
+    "cmd": "curl ifconfig.me    # Get public IP",
+    "lang": "bash"
+  },
+  {
+    "cmd": "find ~ -size +100M",
+    "lang": "bash"
+  },
+  {
+    "cmd": "tail -f /var/log/system.log",
+    "lang": "bash"
+  },
+  {
+    "cmd": "du -sh * | sort -hr",
+    "lang": "bash"
+  },
+  {
+    "cmd": "ln -s /original/path /link/path",
+    "lang": "bash"
+  },
+  {
+    "cmd": "defaults write com.apple.finder AppleShowAllFiles -bool true",
+    "lang": "bash"
+  },
+  {
+    "cmd": "killall Finder",
+    "lang": "bash"
+  },
+  {
+    "cmd": "defaults write com.apple.finder ShowPathbar -bool true",
+    "lang": "bash"
+  },
+  {
+    "cmd": "mkdir ~/Desktop/Screenshots",
+    "lang": "bash"
+  },
+  {
+    "cmd": "defaults write com.apple.screencapture location ~/Desktop/Screenshots",
+    "lang": "bash"
+  },
+  {
+    "cmd": "killall SystemUIServer",
+    "lang": "bash"
+  },
+  {
+    "cmd": "defaults write com.apple.screencapture disable-shadow -bool true",
+    "lang": "bash"
+  },
+  {
+    "cmd": "defaults write com.apple.dock autohide -bool true",
+    "lang": "bash"
+  },
+  {
+    "cmd": "defaults write com.apple.dock autohide-time-modifier -float 0.5",
+    "lang": "bash"
+  },
+  {
+    "cmd": "killall Dock",
+    "lang": "bash"
+  },
+  {
+    "cmd": "sh -c \"$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)\"",
+    "lang": "bash"
+  },
+  {
+    "cmd": "git clone --depth=1 https://github.com/romkatv/powerlevel10k.git ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/themes/powerlevel10k",
+    "lang": "bash"
+  },
+  {
+    "cmd": "xcode-select --install",
+    "lang": "bash"
+  },
+  {
+    "cmd": "/bin/bash -c \"$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)\"",
+    "lang": "bash"
+  },
+  {
+    "cmd": "brew install node           # Install Node.js",
+    "lang": "bash"
+  },
+  {
+    "cmd": "brew install git            # Install Git",
+    "lang": "bash"
+  },
+  {
+    "cmd": "brew install --cask google-chrome  # Install Chrome app",
+    "lang": "bash"
+  },
+  {
+    "cmd": "brew update && brew upgrade # Update everything",
+    "lang": "bash"
+  },
+  {
+    "cmd": "brew cleanup                # Remove old versions",
+    "lang": "bash"
+  },
+  {
+    "cmd": "git config --global user.name \"Your Name\"",
+    "lang": "bash"
+  },
+  {
+    "cmd": "git config --global user.email \"you@example.com\"",
+    "lang": "bash"
+  },
+  {
+    "cmd": "git config --global core.editor \"nano\" # or code, vim",
+    "lang": "bash"
+  },
+  {
+    "cmd": "alias zshconfig=\"nano ~/.zshrc\"",
+    "lang": "bash"
+  },
+  {
+    "cmd": "alias reload=\"source ~/.zshrc\"",
+    "lang": "bash"
+  },
+  {
+    "cmd": "alias ..=\"cd ..\"",
+    "lang": "bash"
+  },
+  {
+    "cmd": "alias ...=\"cd ../..\"",
+    "lang": "bash"
+  },
+  {
+    "cmd": "alias dl=\"cd ~/Downloads\"",
+    "lang": "bash"
+  },
+  {
+    "cmd": "alias dt=\"cd ~/Desktop\"",
+    "lang": "bash"
+  },
+  {
+    "cmd": "alias ll=\"ls -la\"",
+    "lang": "bash"
+  },
+  {
+    "cmd": "alias showfiles=\"defaults write com.apple.finder AppleShowAllFiles -bool true && killall Finder\"",
+    "lang": "bash"
+  },
+  {
+    "cmd": "alias hidefiles=\"defaults write com.apple.finder AppleShowAllFiles -bool false && killall Finder\"",
+    "lang": "bash"
+  },
+  {
+    "cmd": "ssh-keygen -t ed25519 -C \"your_email@example.com\"",
+    "lang": "bash"
+  },
+  {
+    "cmd": "pbcopy < ~/.ssh/id_ed25519.pub # Copies key to clipboard",
+    "lang": "bash"
+  },
+  {
+    "cmd": "du -sh * | sort -hr",
+    "lang": "bash"
+  },
+  {
+    "cmd": "find . -type f -size +500M",
+    "lang": "bash"
+  },
+  {
+    "cmd": "brew install ncdu && ncdu",
+    "lang": "bash"
+  },
+  {
+    "cmd": "sudo lsof -i -P | grep LISTEN",
+    "lang": "bash"
+  },
+  {
+    "cmd": "sudo tcpdump -i en0",
+    "lang": "bash"
+  },
+  {
+    "cmd": "dig google.com",
+    "lang": "bash"
+  },
+  {
+    "cmd": "pgrep -f python",
+    "lang": "bash"
+  },
+  {
+    "cmd": "kill -9 <PID>",
+    "lang": "bash"
+  },
+  {
+    "cmd": "pstree",
+    "lang": "bash"
+  }
+]

@@ -179,11 +179,11 @@
 
 ## 🆕 New & Updated
 
+- **2026-01-08**: Update documentation
 - **2026-01-07**: Update title and descriptions for consistency; add SEO metadata and sitemap
 - **2026-01-07**: Add hero section and quick access grid to the index for improved navigation and user engagement
 - **2026-01-07**: Add speed test widget and disk space analyzer instructions to the index
 - **2026-01-07**: Enhance styles for dynamic wallpapers and add dock navigation; update index for improved organization and clarity
-- **2026-01-07**: updates
 
 ---
 
@@ -226,6 +226,17 @@ This guide is organized by skill level. Find your level and start there:
 - ⚠️ = Caution required
 - 💡 = Pro tip
 - 🍎 = Apple Silicon (M1/M2/M3/M4/M5) specific
+
+
+
+
+
+
+### 🔗 Related Topics
+
+- Gaming on Mac
+- Virtualization
+- Getting Started (Beginners)
 
 [↑ Back to Top](#table-of-contents)
 
@@ -330,6 +341,17 @@ Optimize your experience immediately after a fresh install.
   </tbody>
 </table>
 
+
+
+
+
+
+### 🔗 Related Topics
+
+- Keyboard Shortcuts (Comprehensive)
+- Terminal Command Reference
+- System Configuration
+
 [↑ Back to Top](#table-of-contents)
 
 ---
@@ -347,6 +369,17 @@ Optimize your experience immediately after a fresh install.
 1. **Click** Finder (Smiling Face)
 2. **Go** to Applications → Utilities
 3. **Double-click** Terminal
+
+
+
+
+
+
+### 🔗 Related Topics
+
+- System Information & Hardware
+- Audio Tools
+- Productivity Apps
 
 [↑ Back to Top](#table-of-contents)
 
@@ -369,6 +402,17 @@ Your Mac has a special type of processor (chip) called "Apple Silicon".
 **Which Mac do you have?** 🟢
 1. Click  (Apple menu) → "About This Mac"
 2. Look at "Chip" or "Processor".
+
+
+
+
+
+
+### 🔗 Related Topics
+
+- System Information & Hardware
+- Design Tools
+- Virtualization
 
 [↑ Back to Top](#table-of-contents)
 
@@ -399,6 +443,17 @@ uname -m
 softwareupdate --install-rosetta
 ```
 
+
+
+
+
+
+### 🔗 Related Topics
+
+- Opening Terminal - Step by Step
+- Getting Started (Beginners)
+- Audio Tools
+
 [↑ Back to Top](#table-of-contents)
 
 ---
@@ -425,6 +480,15 @@ Understanding the differences between the M-Series chips will help you understan
 | **M3 (2023)** | 3nm Process. Hardware Ray Tracing. Dynamic Caching. | ~15-20% faster than M2. Massive GPU leap. |
 | **M4 (2024)** | AI Focused. Enhanced Neural Engine. Efficiency boost. | Significant AI/ML performance gains. |
 | **M5 (2025/26)** | Next-Gen Architecture. Extreme efficiency & raw power. | The pinnacle of desktop silicon. |
+
+
+
+
+
+
+### 🔗 Related Topics
+
+- Getting Started (Beginners)
 
 [↑ Back to Top](#table-of-contents)
 
@@ -493,6 +557,17 @@ du -sh * | sort -hr
 ln -s /original/path /link/path
 ```
 
+
+
+
+
+
+### 🔗 Related Topics
+
+- System Configuration
+- Keyboard Shortcuts (Comprehensive)
+- Beginner: Essentials
+
 [↑ Back to Top](#table-of-contents)
 
 ---
@@ -537,6 +612,17 @@ defaults write com.apple.dock autohide-time-modifier -float 0.5
 killall Dock
 ```
 
+
+
+
+
+
+### 🔗 Related Topics
+
+- Advanced Configuration (Pro)
+- Terminal Command Reference
+- Beginner: Essentials
+
 [↑ Back to Top](#table-of-contents)
 
 ---
@@ -561,6 +647,17 @@ Excellent alternative if you prefer the App Store.
 
 ↑ Back to Top
 
+
+
+
+
+
+### 🔗 Related Topics
+
+- Productivity Apps
+- Menu Bar Apps
+- Remote Access
+
 ---
 
 ## Menu Bar Apps
@@ -577,6 +674,17 @@ A modern, open-source alternative to Bartender.
 
 ### 3. Bartender (Paid) 🟢
 The most powerful option for total control over menu bar items.
+
+
+
+
+
+
+### 🔗 Related Topics
+
+- Remote Access
+- Productivity Apps
+- Utilities
 
 ---
 
@@ -596,6 +704,17 @@ The veteran productivity app.
 - **Features:** Incredibly fast file search, custom workflows (Powerpack required), clipboard history.
 
 ↑ Back to Top
+
+
+
+
+
+
+### 🔗 Related Topics
+
+- Remote Access
+- Clipboard Managers
+- File Management
 
 ---
 
@@ -621,6 +740,15 @@ The fastest and most customizable theme for Zsh.
 4. **Configure:** Restart terminal and type `p10k configure`.
 
 ↑ Back to Top
+
+
+
+
+
+
+### 🔗 Related Topics
+
+- Developer Tools (Mid-Level)
 
 ---
 
@@ -765,6 +893,17 @@ Protect against fire, theft, or hardware failure.
   </tbody>
 </table>
 
+
+
+
+
+
+### 🔗 Related Topics
+
+- Beginner: Essentials
+- Terminal Command Reference
+- Troubleshooting Guide
+
 [↑ Back to Top](#table-of-contents)
 
 ---
@@ -794,6 +933,16 @@ Protect against fire, theft, or hardware failure.
 ### Safe Mode 🟡
 - **Apple Silicon:** Shut down. Press and hold Power button until "Loading startup options" appears. Select disk, hold Shift, click "Continue in Safe Mode".
 - **Intel:** Restart and immediately hold Shift.
+
+
+
+
+
+
+### 🔗 Related Topics
+
+- Keyboard Shortcuts (Comprehensive)
+- Beginner: Essentials
 
 [↑ Back to Top](#table-of-contents)
 
@@ -842,6 +991,17 @@ Run containers and Linux machines on your Mac.
   - `brew install --cask orbstack`
 - **Docker Desktop:** The industry standard.
   - `brew install --cask docker`
+
+
+
+
+
+
+### 🔗 Related Topics
+
+- Virtualization
+- Terminal Themes
+- Gaming on Mac
 
 [↑ Back to Top](#table-of-contents)
 
@@ -892,6 +1052,17 @@ The most polished experience for running Windows on Mac.
 
 ↑ Back to Top
 
+
+
+
+
+
+### 🔗 Related Topics
+
+- Getting Started (Beginners)
+- Gaming on Mac
+- Developer Tools (Mid-Level)
+
 ---
 
 ## Gaming on Mac
@@ -910,6 +1081,17 @@ Apple's translation layer allowing DirectX 12 games to run on macOS.
 - **Performance:** Surprisingly good for many AAA titles.
 
 ↑ Back to Top
+
+
+
+
+
+
+### 🔗 Related Topics
+
+- Virtualization
+- How to Use This Guide
+- Developer Tools (Mid-Level)
 
 ---
 
@@ -931,6 +1113,17 @@ Live streaming and screen recording.
 - **Install:** `brew install --cask obs`
 
 ↑ Back to Top
+
+
+
+
+
+
+### 🔗 Related Topics
+
+- Music Production
+- Audio Tools
+- Utilities
 
 ---
 
@@ -954,6 +1147,17 @@ A powerful, one-time purchase alternative to Adobe Illustrator.
 
 ↑ Back to Top
 
+
+
+
+
+
+### 🔗 Related Topics
+
+- Getting Started (Beginners)
+- Music Production
+- Virtualization
+
 ---
 
 ## Audio Tools
@@ -969,6 +1173,17 @@ Record any audio on your Mac.
 - **Features:** Record individual apps (Zoom, Safari) separate from system audio. Apply effects in real-time.
 
 ↑ Back to Top
+
+
+
+
+
+
+### 🔗 Related Topics
+
+- System Information & Hardware
+- Opening Terminal - Step by Step
+- Creative Tools
 
 ---
 
@@ -987,6 +1202,17 @@ The best entry-level music creation tool.
 - **Path:** Great starting point before upgrading to Logic Pro.
 
 ↑ Back to Top
+
+
+
+
+
+
+### 🔗 Related Topics
+
+- Design Tools
+- Creative Tools
+- Getting Started (Beginners)
 
 ---
 
@@ -1045,6 +1271,16 @@ pbcopy < ~/.ssh/id_ed25519.pub # Copies key to clipboard
 ```
 
 
+
+
+
+
+
+### 🔗 Related Topics
+
+- System Configuration
+- Terminal Command Reference
+
 ## Privacy & Security Deep Dive
 
 Take control of your data and network connections.
@@ -1061,6 +1297,17 @@ Tools to detect persistence (malware that starts when your Mac starts).
 
 - **KnockKnock (Free):** Scans for persistently installed software.
 
+
+
+
+
+
+
+### 🔗 Related Topics
+
+- Networking Tools
+- Utilities
+- Menu Bar Apps
 
 ## Maintenance & Cleaning
 
@@ -1092,6 +1339,15 @@ find . -type f -size +500M
 brew install ncdu && ncdu
 ```
 
+
+
+
+
+
+### 🔗 Related Topics
+
+- Terminal Command Reference
+
 ## Networking Tools
 
 Analyze traffic and monitor connections.
@@ -1115,6 +1371,16 @@ The ultimate network monitor and application firewall.
   <div id="speed-status">Ready to test download speed</div>
 </div>
 
+
+
+
+
+
+### 🔗 Related Topics
+
+- Privacy & Security Deep Dive
+- Utilities
+
 ## Remote Access
 
 Control your Mac remotely or access other machines.
@@ -1134,6 +1400,17 @@ The best way to access a Windows PC from your Mac.
 - **Install:** Mac App Store or `brew install --cask microsoft-remote-desktop`
 
 
+
+
+
+
+
+### 🔗 Related Topics
+
+- Menu Bar Apps
+- Productivity Apps
+- File Management
+
 ## File Management
 
 Go beyond Finder with dual-pane file managers for power users.
@@ -1148,6 +1425,17 @@ A robust dual-pane file manager and file transfer client.
 - **Install:** `brew install --cask forklift`
 - **Best for:** Connecting to remote servers (SFTP, S3) and local file management.
 
+
+
+
+
+
+
+### 🔗 Related Topics
+
+- Productivity Apps
+- Clipboard Managers
+- Remote Access
 
 ## System Monitoring
 
@@ -1166,6 +1454,17 @@ The gold standard for system monitoring with beautiful weather and calendar inte
 - **Tip:** Check "Memory Pressure" (Green is good, Yellow/Red means you need more RAM).
 
 
+
+
+
+
+
+### 🔗 Related Topics
+
+- Finance & Budgeting
+- Calendar & Task Apps
+- Menu Bar Apps
+
 ## Browser Extensions
 
 Essential tools for privacy and security.
@@ -1180,6 +1479,15 @@ Securely manage passwords and passkeys.
 - **Integration:** Unlocks with Touch ID on your Mac.
 - **Alternative (Free):** Bitwarden.
 
+
+
+
+
+
+### 🔗 Related Topics
+
+- Email Clients
+- Database Tools
 
 ## Communication Apps
 
@@ -1216,6 +1524,17 @@ Reliable, secure, and integrated.
 - **Pros:** Privacy protection, Hide My Email integration, extensions support.
 
 
+
+
+
+
+
+### 🔗 Related Topics
+
+- Database Tools
+- Browser Extensions
+- Design Tools
+
 ## Calendar & Task Apps
 
 Master your schedule and to-do list.
@@ -1230,6 +1549,17 @@ The most polished and "Apple-like" task manager.
 - **Philosophy:** Based on GTD (Getting Things Done).
 - **Alternative (Free):** Apple Reminders (which has gotten very good recently).
 
+
+
+
+
+
+
+### 🔗 Related Topics
+
+- Getting Started (Beginners)
+- System Monitoring
+- Virtualization
 
 ## Finance & Budgeting
 
@@ -1246,6 +1576,15 @@ A comprehensive personal finance manager for macOS.
 - **Privacy:** Local-first data storage options.
 
 
+
+
+
+
+
+### 🔗 Related Topics
+
+- System Monitoring
+
 ## Database Tools
 
 Manage your local and remote databases with ease.
@@ -1260,6 +1599,17 @@ The easiest way to get started with a local database server.
 - **Use:** Spin up a local PostgreSQL, MySQL, or Redis server in one click.
 - **Integration:** Works perfectly with TablePlus.
 
+
+
+
+
+
+
+### 🔗 Related Topics
+
+- Local Development
+- Email Clients
+- Browser Extensions
 
 ## Local Development
 
@@ -1278,6 +1628,15 @@ The classic Mac, Apache, MySQL, PHP stack.
 Open source cross-platform web server solution.
 - **Use:** Widely used, but can be heavier than Herd.
 
+
+
+
+
+
+
+### 🔗 Related Topics
+
+- Database Tools
 
 ## Markdown Editors
 
@@ -1298,6 +1657,16 @@ A seamless "what you see is what you get" (WYSIWYG) markdown editor.
 - **Best for:** Distraction-free writing where the markdown syntax hides as you type.
 
 
+
+
+
+
+
+### 🔗 Related Topics
+
+- Writing Tools
+- Productivity Apps
+
 ## Writing Tools
 
 Distraction-free environments for long-form writing.
@@ -1311,6 +1680,15 @@ The ultimate tool for novelists, researchers, and scriptwriters.
 A polished, distraction-free writing app for the Apple ecosystem.
 - **Features:** Markdown-based, seamless iCloud sync, direct publishing to WordPress/Medium.
 
+
+
+
+
+
+
+### 🔗 Related Topics
+
+- Markdown Editors
 
 ## Education & Research
 
@@ -1358,6 +1736,17 @@ Hold the `⌘ Command` key to see a list of all active shortcuts for the current
 - **Install:** `brew install --cask cheatsheet`
 
 
+
+
+
+
+
+### 🔗 Related Topics
+
+- Privacy & Security Deep Dive
+- Menu Bar Apps
+- Productivity Apps
+
 ## Clipboard Managers
 
 Never lose a copied item again.
@@ -1371,6 +1760,17 @@ Lightweight, keyboard-centric clipboard manager.
 Visual clipboard history for Mac, iPhone, and iPad.
 - **Features:** Sync across devices, pin items, visual preview of links/images.
 
+
+
+
+
+
+
+### 🔗 Related Topics
+
+- Productivity Apps
+- File Management
+- Menu Bar Apps
 
 ## Automation
 
@@ -1386,6 +1786,16 @@ Legacy tool, great for file system operations.
 - **Folder Actions:** Automatically process files dropped into a folder.
 - **Quick Actions:** Add custom buttons to the Finder Touch Bar or Right-Click menu.
 
+
+
+
+
+
+### 🔗 Related Topics
+
+- Productivity Apps
+- Remote Access
+- Clipboard Managers
 
 ## Expert-Level Techniques
 
@@ -1418,6 +1828,15 @@ kill -9 <PID>
 # View process hierarchy
 pstree
 ```
+
+
+
+
+
+
+### 🔗 Related Topics
+
+- Terminal Command Reference
 
 [↑ Back to Top](#table-of-contents)
 
