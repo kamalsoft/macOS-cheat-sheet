@@ -1,11 +1,11 @@
 ---
 layout: default
-title: macOS Cheat Sheet 
+title: macOS Mastered
 theme: jekyll-theme-cayman
 ---
 
 
-# macOS Complete Cheat Sheet
+# macOS Mastered
 ### From Beginner to Expert | M1/M2/M3/M4/M5 Compatible
 
 ![macOS Logo](https://www.apple.com/ac/structured-data/images/knowledge_graph_logo.png)
@@ -30,7 +30,7 @@ theme: jekyll-theme-cayman
 
 <div class="hero-section">
   <div class="hero-title">macOS Mastered.</div>
-  <div class="hero-desc">The ultimate cheat sheet for developers, power users, and switchers. Shortcuts, terminal commands, and hidden settings in one place.</div>
+  <div class="hero-desc">The ultimate guide for developers, power users, and switchers. Shortcuts, terminal commands, and hidden settings in one place.</div>
   <div class="hero-buttons">
     <a href="#beginner-essentials" class="hero-btn">🚀 Beginner</a>
     <a href="#intermediate-productivity" class="hero-btn">⚡ Power User</a>
@@ -50,7 +50,7 @@ theme: jekyll-theme-cayman
  
 ## How to Use This Guide
 
-This cheat sheet is organized by skill level. Find your level and start there:
+This guide is organized by skill level. Find your level and start there:
 
 | Level | Description | Start Here |
 |-------|-------------|-----------|
