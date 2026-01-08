@@ -3,7 +3,7 @@ description: The ultimate guide to macOS for developers and power users. From be
 theme: jekyll-theme-cayman
 lang: en-US
 
-show_downloads: false
+show_downloads: true
 google_analytics:
 
 plugins:

@@ -99,60 +99,60 @@ If you just got a new Mac or did a fresh install, go through this checklist to o
 ### 🖱️ Trackpad & Mouse
 | Setting | Path | Action |
 | :--- | :--- | :--- |
-| **Tap to Click** | Trackpad → Point & Click | Turn on **Tap to click** |
-| **Tracking Speed** | Trackpad | Increase to **Fast** |
-| **Natural Scrolling** | Trackpad → Scroll & Zoom | Toggle based on preference |
-| **Three-Finger Drag** | Accessibility → Pointer Control | Enable **Trackpad Options** → **Three Finger Drag** |
-| **Right Click** | Trackpad → Point & Click | Secondary click → **Click with Two Fingers** |
+| **Tap to Click** | `Trackpad` → `Point & Click` | Turn on **Tap to click** |
+| **Tracking Speed** | `Trackpad` | Increase to **Fast** |
+| **Natural Scrolling** | `Trackpad` → `Scroll & Zoom` | Toggle based on preference |
+| **Three-Finger Drag** | `Accessibility` → `Pointer Control` | Enable **Trackpad Options** → **Three Finger Drag** |
+| **Right Click** | `Trackpad` → `Point & Click` | Secondary click → **Click with Two Fingers** |
 
 ### 🖥️ Finder & Desktop
 | Setting | Path | Action |
 | :--- | :--- | :--- |
-| **Show Extensions** | Finder Settings → Advanced | Check **Show all filename extensions** |
-| **Show Path Bar** | Finder View Menu | Click **Show Path Bar** |
-| **Show Status Bar** | Finder View Menu | Click **Show Status Bar** |
-| **New Window Loc** | Finder Settings → General | Set to **Home Directory** |
-| **Search Scope** | Finder Settings → Advanced | Set to **Search the Current Folder** |
+| **Show Extensions** | `Finder Settings` → `Advanced` | Check **Show all filename extensions** |
+| **Show Path Bar** | `Finder View Menu` | Click **Show Path Bar** |
+| **Show Status Bar** | `Finder View Menu` | Click **Show Status Bar** |
+| **New Window Loc** | `Finder Settings` → `General` | Set to **Home Directory** |
+| **Search Scope** | `Finder Settings` → `Advanced` | Set to **Search the Current Folder** |
 | **Clean Up** | Right-click Desktop | Click **Use Stacks** |
-| **Sidebar** | Finder Settings → Sidebar | Check Movies, Music, Pictures, Home |
+| **Sidebar** | `Finder Settings` → `Sidebar` | Check Movies, Music, Pictures, Home |
 
 ### ⚓ Dock & Menu Bar
 | Setting | Path | Action |
 | :--- | :--- | :--- |
-| **Auto-Hide Dock** | Desktop & Dock | Turn on **Automatically hide/show Dock** |
-| **Dock Size** | Desktop & Dock | Adjust Size slider (Smaller) |
-| **Magnification** | Desktop & Dock | Turn on **Magnification** |
-| **Battery %** | Control Center → Battery | Turn on **Show Percentage** |
-| **Sound Icon** | Control Center → Sound | **Always Show in Menu Bar** |
-| **Bluetooth Icon** | Control Center → Bluetooth | **Always Show in Menu Bar** |
+| **Auto-Hide Dock** | `Desktop & Dock` | Turn on **Automatically hide/show Dock** |
+| **Dock Size** | `Desktop & Dock` | Adjust Size slider (Smaller) |
+| **Magnification** | `Desktop & Dock` | Turn on **Magnification** |
+| **Battery %** | `Control Center` → `Battery` | Turn on **Show Percentage** |
+| **Sound Icon** | `Control Center` → `Sound` | **Always Show in Menu Bar** |
+| **Bluetooth Icon** | `Control Center` → `Bluetooth` | **Always Show in Menu Bar** |
 
 ### 🛡️ Security & Privacy
 | Setting | Path | Action |
 | :--- | :--- | :--- |
-| **FileVault** | Privacy & Security | Turn On (Disk Encryption) ⚠️ |
-| **Firewall** | Network → Firewall | Turn On |
-| **Hot Corners** | Desktop & Dock | Set corner to **Lock Screen** |
-| **Lock Screen** | Lock Screen Settings | Require password **Immediately** |
+| **FileVault** | `Privacy & Security` | Turn On (Disk Encryption) ⚠️ |
+| **Firewall** | `Network` → `Firewall` | Turn On |
+| **Hot Corners** | `Desktop & Dock` | Set corner to **Lock Screen** |
+| **Lock Screen** | `Lock Screen Settings` | Require password **Immediately** |
 
 ### ⚡ Performance & Power
 | Setting | Path | Action |
 | :--- | :--- | :--- |
-| **Optimized Charge** | Battery → Battery Health | Turn on **Optimized Charging** |
-| **Night Shift** | Displays | Schedule: Sunset to Sunrise |
-| **Key Repeat** | Keyboard | Rate: **Fast**, Delay: **Short** |
+| **Optimized Charge** | `Battery` → `Battery Health` | Turn on **Optimized Charging** |
+| **Night Shift** | `Displays` | Schedule: Sunset to Sunrise |
+| **Key Repeat** | `Keyboard` | Rate: **Fast**, Delay: **Short** |
 
 ### 🌐 Safari & Internet
 | Setting | Path | Action |
 | :--- | :--- | :--- |
-| **Show Full URL** | Safari Settings → Advanced | Check **Show full website address** |
-| **Develop Menu** | Safari Settings → Advanced | Check **Show Develop menu** |
-| **Default Browser** | Desktop & Dock | Select preference |
+| **Show Full URL** | `Safari Settings` → `Advanced` | Check **Show full website address** |
+| **Develop Menu** | `Safari Settings` → `Advanced` | Check **Show Develop menu** |
+| **Default Browser** | `Desktop & Dock` | Select preference |
 
 ### 🛠️ Miscellaneous
 | Setting | Path | Action |
 | :--- | :--- | :--- |
-| **Siri** | Siri & Spotlight | Disable if unused |
-| **Updates** | General → Software Update | Enable **Security Responses** |
+| **Siri** | `Siri & Spotlight` | Disable if unused |
+| **Updates** | `General` → `Software Update` | Enable **Security Responses** |
 
 [↑ Back to Top](#table-of-contents)
 
@@ -472,79 +472,79 @@ Protect against fire, theft, or hardware failure.
 ### 🔑 The "Must Know" Basics
 | Shortcut | Action |
 |----------|--------|
-| ⌘ + Space | Spotlight Search (Launch apps, find files, do math) |
-| ⌘ + Q | Quit application (Completely closes it) |
-| ⌘ + W | Close current window/tab |
-| ⌘ + Tab | Switch between open apps |
-| ⌘ + ` (Backtick) | Switch between windows of the same app |
-| ⌘ + Option + Esc | Force Quit menu (Use when app freezes) |
-| ⌘ + , (Comma) | Open Settings/Preferences for current app |
-| ⌘ + H | Hide current app |
-| ⌘ + M | Minimize window to Dock |
+| `⌘` + `Space` | Spotlight Search (Launch apps, find files, do math) |
+| `⌘` + `Q` | Quit application (Completely closes it) |
+| `⌘` + `W` | Close current window/tab |
+| `⌘` + `Tab` | Switch between open apps |
+| `⌘` + `` ` `` | Switch between windows of the same app |
+| `⌘` + `Opt` + `Esc` | Force Quit menu (Use when app freezes) |
+| `⌘` + `,` | Open Settings/Preferences for current app |
+| `⌘` + `H` | Hide current app |
+| `⌘` + `M` | Minimize window to Dock |
 
 ### 📝 Text Editing & Document Control
 | Shortcut | Action |
 |----------|--------|
-| ⌘ + C | Copy |
-| ⌘ + V | Paste |
-| ⌘ + X | Cut |
-| ⌘ + Z | Undo |
-| ⌘ + Shift + Z | Redo |
-| ⌘ + A | Select All |
-| ⌘ + F | Find / Search in document |
-| Option + Left/Right | Move cursor by word |
-| ⌘ + Left/Right | Move cursor to start/end of line |
-| ⌘ + Up/Down | Move cursor to top/bottom of document |
-| Shift + Arrows | Highlight/Select text |
-| Option + Delete | Delete previous word |
-| ⌘ + Delete | Delete entire line (to left of cursor) |
+| `⌘` + `C` | Copy |
+| `⌘` + `V` | Paste |
+| `⌘` + `X` | Cut |
+| `⌘` + `Z` | Undo |
+| `⌘` + `Shift` + `Z` | Redo |
+| `⌘` + `A` | Select All |
+| `⌘` + `F` | Find / Search in document |
+| `Opt` + `←` / `→` | Move cursor by word |
+| `⌘` + `←` / `→` | Move cursor to start/end of line |
+| `⌘` + `↑` / `↓` | Move cursor to top/bottom of document |
+| `Shift` + `Arrows` | Highlight/Select text |
+| `Opt` + `Delete` | Delete previous word |
+| `⌘` + `Delete` | Delete entire line (to left of cursor) |
 
 ### 📂 Finder & File Management
 | Shortcut | Action |
 |----------|--------|
-| ⌘ + N | New Finder Window |
-| ⌘ + Shift + N | Create New Folder |
-| Return (Enter) | Rename selected file |
-| Spacebar | Quick Look (Preview file without opening) |
-| ⌘ + Delete | Move to Trash |
-| ⌘ + Shift + Delete | Empty Trash |
-| ⌘ + D | Duplicate file |
-| ⌘ + I | Get Info (Size, type, permissions) |
-| ⌘ + Shift + . | Toggle Hidden Files |
-| ⌘ + Option + C | Copy File Path |
-| ⌘ + 1 / 2 / 3 / 4 | View as Icon / List / Column / Gallery |
+| `⌘` + `N` | New Finder Window |
+| `⌘` + `Shift` + `N` | Create New Folder |
+| `Return` | Rename selected file |
+| `Spacebar` | Quick Look (Preview file without opening) |
+| `⌘` + `Delete` | Move to Trash |
+| `⌘` + `Shift` + `Delete` | Empty Trash |
+| `⌘` + `D` | Duplicate file |
+| `⌘` + `I` | Get Info (Size, type, permissions) |
+| `⌘` + `Shift` + `.` | Toggle Hidden Files |
+| `⌘` + `Opt` + `C` | Copy File Path |
+| `⌘` + `1`/`2`/`3`/`4` | View as Icon / List / Column / Gallery |
 
 ### 📸 Screenshots & Recording
 | Shortcut | Action |
 |----------|--------|
-| ⌘ + Shift + 3 | Capture Entire Screen |
-| ⌘ + Shift + 4 | Capture Selected Area (Drag crosshair) |
-| ⌘ + Shift + 4 + Space | Capture Specific Window (Camera icon appears) |
-| ⌘ + Shift + 5 | Open Screenshot/Recording Utility (Options menu) |
-| Control + (Any above) | Copy screenshot to Clipboard instead of saving to file |
+| `⌘` + `Shift` + `3` | Capture Entire Screen |
+| `⌘` + `Shift` + `4` | Capture Selected Area (Drag crosshair) |
+| `⌘` + `Shift` + `4` + `Space` | Capture Specific Window (Camera icon appears) |
+| `⌘` + `Shift` + `5` | Open Screenshot/Recording Utility (Options menu) |
+| `Ctrl` + (Any above) | Copy screenshot to Clipboard instead of saving to file |
 
 ### 🌐 Web Browsing (Safari/Chrome)
 | Shortcut | Action |
 |----------|--------|
-| ⌘ + T | New Tab |
-| ⌘ + Shift + T | Reopen Last Closed Tab (Lifesaver!) |
-| ⌘ + L | Highlight URL/Address Bar |
-| ⌘ + R | Refresh Page |
-| ⌘ + + / - | Zoom In / Out |
-| ⌘ + 0 | Reset Zoom |
-| Control + Tab | Next Tab |
-| Control + Shift + Tab | Previous Tab |
+| `⌘` + `T` | New Tab |
+| `⌘` + `Shift` + `T` | Reopen Last Closed Tab (Lifesaver!) |
+| `⌘` + `L` | Highlight URL/Address Bar |
+| `⌘` + `R` | Refresh Page |
+| `⌘` + `+` / `-` | Zoom In / Out |
+| `⌘` + `0` | Reset Zoom |
+| `Ctrl` + `Tab` | Next Tab |
+| `Ctrl` + `Shift` + `Tab` | Previous Tab |
 
 ### 🖥️ System & Window Management
 | Shortcut | Action |
 |----------|--------|
-| Control + ⌘ + F | Toggle Full Screen |
-| Control + Up Arrow | Mission Control (See all open windows) |
-| Control + Down Arrow | App Expose (See windows of current app) |
-| Control + Left/Right | Switch between Desktops/Spaces |
-| Fn + Delete | Forward Delete (Delete character to right) |
-| Control + ⌘ + Q | Lock Screen immediately |
-| ⌘ + Shift + ? | Open Help Menu (Search for menu items!) |
+| `Ctrl` + `⌘` + `F` | Toggle Full Screen |
+| `Ctrl` + `↑` | Mission Control (See all open windows) |
+| `Ctrl` + `↓` | App Expose (See windows of current app) |
+| `Ctrl` + `←` / `→` | Switch between Desktops/Spaces |
+| `Fn` + `Delete` | Forward Delete (Delete character to right) |
+| `Ctrl` + `⌘` + `Q` | Lock Screen immediately |
+| `⌘` + `Shift` + `?` | Open Help Menu (Search for menu items!) |
 
 [↑ Back to Top](#table-of-contents)
 
