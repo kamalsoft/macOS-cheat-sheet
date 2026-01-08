@@ -190,7 +190,7 @@ blockquote {
 }
 
 #search-input {
-  padding: 0.6rem 1.2rem;
+  padding: 0.6rem 2.5rem 0.6rem 1.2rem;
   border-radius: 20px;
   border: 1px solid var(--glass-border);
   background: var(--glass-bg);
@@ -204,6 +204,43 @@ blockquote {
 
 #search-input:focus {
   box-shadow: 0 0 0 3px rgba(21, 153, 87, 0.3);
+}
+
+#voice-search-btn {
+  position: absolute;
+  right: 8px;
+  top: 50%;
+  transform: translateY(-50%);
+  background: transparent;
+  border: none;
+  font-size: 1.2rem;
+  cursor: pointer;
+  opacity: 0.5;
+  transition: all 0.2s;
+  color: var(--text-color);
+  z-index: 10;
+  padding: 4px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+#voice-search-btn:hover {
+  opacity: 1;
+  background: rgba(0,0,0,0.05);
+}
+
+#voice-search-btn.listening {
+  color: #e11d48;
+  opacity: 1;
+  animation: pulse-mic 1.5s infinite;
+}
+
+@keyframes pulse-mic {
+  0% { transform: translateY(-50%) scale(1); box-shadow: 0 0 0 0 rgba(225, 29, 72, 0.4); }
+  70% { transform: translateY(-50%) scale(1); box-shadow: 0 0 0 10px rgba(225, 29, 72, 0); }
+  100% { transform: translateY(-50%) scale(1); box-shadow: 0 0 0 0 rgba(225, 29, 72, 0); }
 }
 
 #search-history-dropdown {
@@ -1315,3 +1352,86 @@ body.quick-ref-mode #exit-zen-btn {
   color: var(--text-color);
   z-index: 1;
 }
+
+/* Visualizer Toolbar & Features */
+.viz-toolbar {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin-bottom: 10px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid var(--glass-border);
+}
+
+.viz-btn {
+  padding: 4px 8px;
+  font-size: 0.8rem;
+  border-radius: 4px;
+  border: 1px solid var(--glass-border);
+  background: rgba(255,255,255,0.2);
+  cursor: pointer;
+  color: var(--text-color);
+  transition: background 0.2s;
+}
+
+.viz-btn:hover { background: var(--td-hover); }
+.viz-btn.active { background: var(--heading-color); color: white; }
+
+#macro-log {
+  font-family: "SF Mono", Menlo, monospace;
+  background: rgba(0,0,0,0.05);
+  padding: 8px;
+  border-radius: 4px;
+  margin-bottom: 10px;
+  min-height: 24px;
+  white-space: pre-wrap;
+  font-size: 0.8rem;
+  display: none;
+  border: 1px solid var(--glass-border);
+}
+
+#game-ui {
+  text-align: center;
+  margin-bottom: 10px;
+  display: none;
+  padding: 10px;
+  background: rgba(0,0,0,0.02);
+  border-radius: 8px;
+}
+
+#game-question { font-weight: bold; margin: 5px 0; font-size: 1rem; }
+#game-feedback { font-size: 0.9rem; min-height: 1.2em; font-weight: bold; margin-top: 5px; }
+.feedback-correct { color: #159957; }
+.feedback-wrong { color: #d32f2f; }
+
+/* Shortcut of the Day */
+#shortcut-of-the-day {
+  margin: 1.5rem auto 0;
+  padding: 1rem;
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 12px;
+  backdrop-filter: blur(5px);
+  text-align: center;
+  max-width: 600px;
+  display: none;
+}
+
+#shortcut-of-the-day.visible {
+  display: block;
+  animation: fadeIn 0.5s ease-out;
+}
+
+#shortcut-of-the-day h3 {
+  margin: 0 0 0.5rem 0;
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  opacity: 0.9;
+  color: rgba(255,255,255,0.95) !important;
+  border: none;
+}
+
+.sotd-keys { font-size: 1.2rem; margin-bottom: 0.5rem; color: white; }
+.sotd-keys code { background: rgba(255,255,255,0.2); border-color: rgba(255,255,255,0.4); color: white; }
+.sotd-action { font-size: 1rem; color: rgba(255,255,255,0.9); font-weight: 500; }

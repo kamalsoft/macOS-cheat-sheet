@@ -64,6 +64,17 @@
     <button id="exit-zen-btn">Exit Zen Mode</button>
     
     <div id="keyboard-visualizer">
+      <div class="viz-toolbar">
+        <button id="viz-macro-btn" class="viz-btn">🔴 Record Macro</button>
+        <button id="viz-game-btn" class="viz-btn">🎮 Game Mode</button>
+      </div>
+      <div id="macro-log">Press keys to record...</div>
+      <div id="game-ui">
+        <div id="game-score">Score: 0</div>
+        <div id="game-question">Loading...</div>
+        <div id="game-feedback"></div>
+        <button id="game-skip-btn" class="viz-btn" style="margin-top:5px;">Skip Question</button>
+      </div>
       <div class="visualizer-hint">Hover over any shortcut in the tables below to visualize keys</div>
       <div class="kb-row">
         <div class="kb-key" data-key="`">`</div>
@@ -111,6 +122,7 @@
       <h1 class="project-name">{{ site.title | default: site.github.repository_name }}</h1>
       <h2 class="project-tagline">{{ site.description | default: site.github.project_tagline }}</h2>
       <p id="reading-time" style="margin-top: 0.5rem; opacity: 0.9; font-size: 0.9rem; font-weight: 500;"></p>
+      <div id="shortcut-of-the-day"></div>
       
       {% if site.show_downloads %}
         <a href="{{ site.github.zip_url }}" class="btn">Download .zip</a>
@@ -120,6 +132,7 @@
       <div class="controls-container">
         <div class="search-wrapper">
           <input type="text" id="search-input" placeholder="🔍 Search cheat sheet..." autocomplete="off">
+          <button id="voice-search-btn" title="Search with Voice">🎤</button>
           <div id="search-history-dropdown"></div>
         </div>
         <button id="mobile-menu-btn">☰ Menu</button>
@@ -307,6 +320,44 @@
           searchInput.blur();
         }
       });
+
+      // Voice Search Logic
+      const voiceSearchBtn = document.getElementById('voice-search-btn');
+      
+      if ('webkitSpeechRecognition' in window || 'SpeechRecognition' in window) {
+        const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+        const recognition = new SpeechRecognition();
+        
+        recognition.continuous = false;
+        recognition.lang = 'en-US';
+        recognition.interimResults = false;
+
+        voiceSearchBtn.addEventListener('click', () => {
+          if (voiceSearchBtn.classList.contains('listening')) {
+            recognition.stop();
+          } else {
+            recognition.start();
+          }
+        });
+
+        recognition.onstart = () => {
+          voiceSearchBtn.classList.add('listening');
+        };
+
+        recognition.onend = () => {
+          voiceSearchBtn.classList.remove('listening');
+        };
+
+        recognition.onresult = (event) => {
+          const transcript = event.results[0][0].transcript;
+          searchInput.value = transcript;
+          searchInput.dispatchEvent(new Event('input'));
+          searchInput.focus();
+          saveSearchTerm(transcript);
+        };
+      } else {
+        voiceSearchBtn.style.display = 'none';
+      }
 
       // Keyboard Shortcut to Focus Search
       document.addEventListener('keydown', (e) => {
@@ -630,6 +681,38 @@
       shortcutsOverlay.addEventListener('click', (e) => {
         if (e.target === shortcutsOverlay) shortcutsOverlay.style.display = 'none';
       });
+
+      // Shortcut of the Day Logic
+      function showShortcutOfTheDay() {
+        const tables = document.querySelectorAll('.shortcuts-table');
+        let shortcutRows = [];
+        
+        tables.forEach(table => {
+          const header = table.querySelector('th');
+          // Only select tables that are actually for shortcuts, not settings
+          if (header && header.textContent.trim() === 'Shortcut') {
+             const rows = table.querySelectorAll('tbody tr');
+             shortcutRows = [...shortcutRows, ...Array.from(rows)];
+          }
+        });
+
+        if (shortcutRows.length === 0) return;
+
+        const randomRow = shortcutRows[Math.floor(Math.random() * shortcutRows.length)];
+        const shortcutHtml = randomRow.cells[0].innerHTML;
+        const actionText = randomRow.cells[1].textContent;
+
+        const container = document.getElementById('shortcut-of-the-day');
+        container.innerHTML = `
+          <h3>💡 Random Shortcut Tip</h3>
+          <div class="sotd-keys">${shortcutHtml}</div>
+          <div class="sotd-action">${actionText}</div>
+        `;
+        container.classList.add('visible');
+      }
+      
+      // Initialize
+      showShortcutOfTheDay();
     </script>
 
     <!-- TOC & Copy Button Script -->
@@ -758,6 +841,324 @@
         document.getElementById('reading-time').innerText = `📚 Estimated reading time: ${time} min`;
       }
       calculateReadingTime();
+
+      // Keyboard Shortcuts Filter & Print Logic
+      const shortcutsFilter = document.getElementById('shortcuts-filter');
+      const printShortcutsBtn = document.getElementById('print-shortcuts-btn');
+      const printShortcutsModal = document.getElementById('print-shortcuts-modal');
+      const printShortcutsClose = document.getElementById('print-shortcuts-close');
+      const printShortcutsContent = document.getElementById('print-shortcuts-content');
+
+      const categoryMap = {
+        'basics': 'The "Must Know" Basics',
+        'text': 'Text Editing & Document Control',
+        'finder': 'Finder & File Management',
+        'screenshots': 'Screenshots & Recording',
+        'web': 'Web Browsing',
+        'system': 'System & Window Management'
+      };
+
+      if (shortcutsFilter) {
+        shortcutsFilter.addEventListener('change', (e) => {
+          const category = e.target.value;
+          const headers = document.querySelectorAll('.page-content h3');
+          
+          headers.forEach(h3 => {
+            let isShortcutSection = false;
+            for (const key in categoryMap) {
+              if (h3.textContent.includes(categoryMap[key])) {
+                isShortcutSection = true;
+                break;
+              }
+            }
+
+            if (isShortcutSection) {
+              const table = h3.nextElementSibling;
+              if (table && table.tagName === 'TABLE') {
+                const shouldShow = category === 'all' || h3.textContent.includes(categoryMap[category]);
+                h3.style.display = shouldShow ? '' : 'none';
+                table.style.display = shouldShow ? '' : 'none';
+              }
+            }
+          });
+        });
+      }
+
+      if (printShortcutsBtn) {
+        printShortcutsBtn.addEventListener('click', () => {
+          printShortcutsContent.innerHTML = '';
+          
+          const title = document.createElement('h1');
+          title.textContent = 'macOS Keyboard Shortcuts';
+          printShortcutsContent.appendChild(title);
+
+          const printNowBtn = document.createElement('button');
+          printNowBtn.textContent = '🖨️ Print Now';
+          printNowBtn.style.cssText = 'margin-bottom: 2rem; padding: 0.5rem 1rem; cursor: pointer; font-size: 1rem;';
+          printNowBtn.onclick = () => window.print();
+          printShortcutsContent.appendChild(printNowBtn);
+
+          const headers = document.querySelectorAll('.page-content h3');
+          headers.forEach(h3 => {
+            for (const key in categoryMap) {
+              if (h3.textContent.includes(categoryMap[key])) {
+                const table = h3.nextElementSibling;
+                if (table && table.tagName === 'TABLE') {
+                  printShortcutsContent.appendChild(h3.cloneNode(true));
+                  printShortcutsContent.appendChild(table.cloneNode(true));
+                }
+                break;
+              }
+            }
+          });
+
+          printShortcutsModal.classList.add('visible');
+          document.body.classList.add('printing-shortcuts');
+        });
+      }
+
+      if (printShortcutsClose) {
+        printShortcutsClose.addEventListener('click', () => {
+          printShortcutsModal.classList.remove('visible');
+          document.body.classList.remove('printing-shortcuts');
+        });
+      }
+
+      // Keyboard Visualizer Logic
+      const kbVisualizer = document.getElementById('keyboard-visualizer');
+      const kbToggleBtn = document.getElementById('keyboard-toggle-btn');
+      const keys = document.querySelectorAll('.kb-key');
+
+      if (kbToggleBtn) {
+        kbToggleBtn.addEventListener('click', () => {
+          kbVisualizer.classList.toggle('visible');
+          kbToggleBtn.classList.toggle('active');
+        });
+      }
+
+      function highlightKeys(shortcut) {
+        keys.forEach(k => k.classList.remove('active'));
+        if (!shortcut) return;
+
+        const parts = shortcut.toLowerCase().split(/[+\s]+/);
+        
+        parts.forEach(part => {
+          let key = part.trim();
+          if (!key) return;
+          
+          if (['⌘', 'cmd', 'command'].includes(key)) key = 'cmd';
+          else if (['⌥', 'opt', 'option'].includes(key)) key = 'opt';
+          else if (['⌃', 'ctrl', 'control'].includes(key)) key = 'ctrl';
+          else if (['⇧', 'shift'].includes(key)) key = 'shift';
+          else if (['return', 'enter'].includes(key)) key = 'return';
+          else if (['space', 'spacebar'].includes(key)) key = 'space';
+          else if (['delete', 'del', 'backspace'].includes(key)) key = 'delete';
+          else if (['caps', 'caps lock'].includes(key)) key = 'caps';
+          else if (['←', 'left'].includes(key)) key = 'left';
+          else if (['↑', 'up'].includes(key)) key = 'up';
+          else if (['↓', 'down'].includes(key)) key = 'down';
+          else if (['→', 'right'].includes(key)) key = 'right';
+          else if (['fn'].includes(key)) key = 'fn';
+          else if (['tab'].includes(key)) key = 'tab';
+          
+          const keyEls = document.querySelectorAll(`.kb-key[data-key="${key}"]`);
+          keyEls.forEach(el => el.classList.add('active'));
+        });
+      }
+
+      // Add Hover Listeners to Shortcuts Tables
+      document.querySelectorAll('.shortcuts-table').forEach(table => {
+        table.querySelectorAll('tbody tr').forEach(tr => {
+          tr.addEventListener('mouseenter', () => {
+            if (kbVisualizer.classList.contains('visible')) {
+              highlightKeys(tr.cells[0].textContent);
+            }
+          });
+          tr.addEventListener('mouseleave', () => {
+            if (kbVisualizer.classList.contains('visible')) {
+              keys.forEach(k => k.classList.remove('active'));
+            }
+          });
+        });
+      });
+
+      // --- Visualizer Advanced Features (Macro & Game) ---
+      const vizMacroBtn = document.getElementById('viz-macro-btn');
+      const vizGameBtn = document.getElementById('viz-game-btn');
+      const macroLog = document.getElementById('macro-log');
+      const gameUI = document.getElementById('game-ui');
+      const gameQuestion = document.getElementById('game-question');
+      const gameFeedback = document.getElementById('game-feedback');
+      const gameScoreEl = document.getElementById('game-score');
+      const gameSkipBtn = document.getElementById('game-skip-btn');
+
+      let isRecording = false;
+      let isGaming = false;
+      let gameScore = 0;
+      let gameQuestions = [];
+      let currentQuestion = null;
+      let pressedKeys = new Set();
+
+      // Helper: Map Event Key to Visualizer Data-Key
+      function getVizKey(e) {
+        const key = e.key.toLowerCase();
+        if (key === 'meta') return 'cmd';
+        if (key === 'control') return 'ctrl';
+        if (key === 'alt') return 'opt';
+        if (key === 'shift') return 'shift';
+        if (key === 'enter') return 'return';
+        if (key === ' ') return 'space';
+        if (key === 'backspace') return 'delete';
+        if (key === 'tab') return 'tab';
+        if (key === 'capslock') return 'caps';
+        if (key === 'arrowup') return 'up';
+        if (key === 'arrowdown') return 'down';
+        if (key === 'arrowleft') return 'left';
+        if (key === 'arrowright') return 'right';
+        if (key === 'escape') return 'esc';
+        if (key.length === 1) return key; // Alphanumeric
+        return null;
+      }
+
+      // Macro Recorder Logic
+      vizMacroBtn.addEventListener('click', () => {
+        isRecording = !isRecording;
+        vizMacroBtn.classList.toggle('active', isRecording);
+        vizMacroBtn.textContent = isRecording ? '⏹ Stop Recording' : '🔴 Record Macro';
+        macroLog.style.display = isRecording ? 'block' : 'none';
+        if (isRecording) {
+          macroLog.textContent = '';
+          if (isGaming) vizGameBtn.click(); // Disable game if active
+        }
+      });
+
+      // Game Mode Logic
+      function parseQuestions() {
+        gameQuestions = [];
+        document.querySelectorAll('.shortcuts-table tbody tr').forEach(tr => {
+          const shortcutText = tr.cells[0].textContent.trim();
+          const actionText = tr.cells[1].textContent.trim();
+          
+          // Normalize shortcut text to key set
+          const parts = shortcutText.toLowerCase().split(/[+\s]+/);
+          const keySet = new Set();
+          parts.forEach(p => {
+            let k = p.trim();
+            if (!k) return;
+            if (['⌘', 'cmd', 'command'].includes(k)) k = 'cmd';
+            else if (['⌥', 'opt', 'option'].includes(k)) k = 'opt';
+            else if (['⌃', 'ctrl', 'control'].includes(k)) k = 'ctrl';
+            else if (['⇧', 'shift'].includes(k)) k = 'shift';
+            else if (['return', 'enter'].includes(k)) k = 'return';
+            else if (['space', 'spacebar'].includes(k)) k = 'space';
+            else if (['delete', 'del', 'backspace'].includes(k)) k = 'delete';
+            else if (['caps', 'caps lock'].includes(k)) k = 'caps';
+            else if (['←', 'left'].includes(k)) k = 'left';
+            else if (['↑', 'up'].includes(k)) k = 'up';
+            else if (['↓', 'down'].includes(k)) k = 'down';
+            else if (['→', 'right'].includes(k)) k = 'right';
+            else if (['fn'].includes(k)) k = 'fn';
+            keySet.add(k);
+          });
+          
+          if (keySet.size > 0) {
+            gameQuestions.push({ shortcut: keySet, action: actionText, text: shortcutText });
+          }
+        });
+      }
+
+      function nextQuestion() {
+        if (gameQuestions.length === 0) parseQuestions();
+        const idx = Math.floor(Math.random() * gameQuestions.length);
+        currentQuestion = gameQuestions[idx];
+        gameQuestion.textContent = `Action: ${currentQuestion.action}`;
+        gameFeedback.textContent = '';
+        gameFeedback.className = '';
+        pressedKeys.clear();
+        updateVizKeys();
+      }
+
+      function updateVizKeys() {
+        document.querySelectorAll('.kb-key').forEach(k => k.classList.remove('active'));
+        pressedKeys.forEach(k => {
+          document.querySelectorAll(`.kb-key[data-key="${k}"]`).forEach(el => el.classList.add('active'));
+        });
+      }
+
+      function checkAnswer() {
+        if (!currentQuestion) return;
+        if (pressedKeys.size !== currentQuestion.shortcut.size) return;
+        
+        let match = true;
+        for (let k of currentQuestion.shortcut) {
+          if (!pressedKeys.has(k)) { match = false; break; }
+        }
+        
+        if (match) {
+          gameFeedback.textContent = 'Correct! 🎉';
+          gameFeedback.className = 'feedback-correct';
+          gameScore++;
+          gameScoreEl.textContent = `Score: ${gameScore}`;
+          setTimeout(nextQuestion, 1000);
+        }
+      }
+
+      vizGameBtn.addEventListener('click', () => {
+        isGaming = !isGaming;
+        vizGameBtn.classList.toggle('active', isGaming);
+        gameUI.style.display = isGaming ? 'block' : 'none';
+        if (isGaming) {
+          if (isRecording) vizMacroBtn.click();
+          parseQuestions();
+          gameScore = 0;
+          gameScoreEl.textContent = `Score: ${gameScore}`;
+          nextQuestion();
+        }
+      });
+
+      gameSkipBtn.addEventListener('click', () => {
+        gameFeedback.textContent = `Skipped! Shortcut: ${currentQuestion.text}`;
+        gameFeedback.className = 'feedback-wrong';
+        setTimeout(nextQuestion, 2500);
+      });
+
+      // Global Key Listener for Features
+      document.addEventListener('keydown', (e) => {
+        if (!isRecording && !isGaming) return;
+        if (e.repeat) return;
+
+        const vizKey = getVizKey(e);
+        if (!vizKey) return;
+
+        if (isRecording) {
+          e.preventDefault();
+          const keyEls = document.querySelectorAll(`.kb-key[data-key="${vizKey}"]`);
+          keyEls.forEach(el => {
+            el.classList.add('active');
+            setTimeout(() => el.classList.remove('active'), 200);
+          });
+          const displayKey = keyEls.length > 0 ? keyEls[0].textContent : vizKey;
+          macroLog.textContent += (macroLog.textContent ? ' + ' : '') + displayKey;
+        }
+
+        if (isGaming) {
+          e.preventDefault();
+          if (!pressedKeys.has(vizKey)) {
+            pressedKeys.add(vizKey);
+            updateVizKeys();
+            checkAnswer();
+          }
+        }
+      });
+
+      document.addEventListener('keyup', (e) => {
+        if (!isGaming) return;
+        const vizKey = getVizKey(e);
+        if (vizKey && pressedKeys.has(vizKey)) {
+          pressedKeys.delete(vizKey);
+          updateVizKeys();
+        }
+      });
 
       // Mobile FAB Logic
       const fabMain = document.getElementById('mobile-fab-main');
