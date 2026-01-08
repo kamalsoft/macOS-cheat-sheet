@@ -119,6 +119,13 @@
             background: rgba(30, 41, 59, 0.7);
             border-color: rgba(255, 255, 255, 0.1);
         }
+        
+        /* Grid View Styles */
+        .grid-view { display: grid; grid-template-columns: repeat(auto-fill, minmax(350px, 1fr)); gap: 1.5rem; align-items: start; }
+        .grid-view .content-section { background: white; padding: 1.5rem; border-radius: 1rem; border: 1px solid #e2e8f0; height: 100%; transition: all 0.2s; }
+        .dark .grid-view .content-section { background: #1e293b; border-color: #334155; }
+        .grid-view .content-section:hover { border-color: #3b82f6; box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1); }
+        .grid-view .intro-section, .grid-view .full-width { grid-column: 1 / -1; }
 
         /* Print Styles */
         @media print {
@@ -136,13 +143,6 @@
         }
     </style></head><body class="bg-slate-50 dark:bg-darker text-slate-800 dark:text-slate-200 h-screen flex overflow-hidden selection:bg-blue-500 selection:text-white"><aside class="w-72 bg-white dark:bg-dark border-r border-slate-200 dark:border-slate-800 flex-col hidden md:flex z-20 shadow-xl"><div class="p-6 border-b border-slate-200 dark:border-slate-800"><h1 class="text-2xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-blue-600 to-violet-600">macOS Mastered</h1><p class="text-xs text-slate-500 mt-1 font-medium tracking-wide uppercase">Interactive Guide</p></div><div class="p-4 space-y-3"><div class="relative group"><input type="text" id="search-input" placeholder="Filter topics..." 
                     class="w-full bg-slate-100 dark:bg-slate-800 text-slate-800 dark:text-slate-200 px-4 py-2.5 pl-10 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all"><svg class="w-4 h-4 absolute left-3 top-3 text-slate-400 group-focus-within:text-blue-500 transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg></div><button onclick="window.print()" class="w-full flex items-center justify-center gap-2 bg-white dark:bg-surface border border-slate-200 dark:border-slate-700 text-slate-600 dark:text-slate-300 px-4 py-2 rounded-xl text-sm font-medium hover:bg-slate-50 dark:hover:bg-slate-700 transition-all group"><svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 17h2a2 2 0 002-2v-4a2 2 0 00-2-2H5a2 2 0 00-2 2v4a2 2 0 002 2h2m2 4h6a2 2 0 002-2v-4a2 2 0 00-2-2H9a2 2 0 00-2 2v4a2 2 0 002 2zm8-12V5a2 2 0 00-2-2H9a2 2 0 00-2 2v4h10z"></path></svg><span>Export PDF</span></button></div><nav class="flex-1 overflow-y-auto p-3 space-y-0.5" id="toc-container"></nav><div class="p-4 border-t border-slate-200 dark:border-slate-800 flex items-center justify-between bg-slate-50 dark:bg-dark"><div class="flex items-center gap-2 text-sm font-medium text-slate-600 dark:text-slate-400"><svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"></path></svg><span>Theme</span></div><button id="theme-toggle" class="relative inline-flex h-6 w-11 items-center rounded-full bg-slate-200 dark:bg-slate-700 transition-colors focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 dark:focus:ring-offset-slate-900"><span class="sr-only">Toggle theme</span><span id="theme-knob" class="inline-block h-4 w-4 transform rounded-full bg-white shadow transition-transform translate-x-1 dark:translate-x-6"></span></button></div></aside><main class="flex-1 overflow-y-auto relative scroll-smooth" id="main-scroll"><div class="md:hidden sticky top-0 z-30 bg-white/80 dark:bg-dark/80 backdrop-blur-md border-b border-slate-200 dark:border-slate-800 p-4 flex items-center justify-between"><span class="font-bold text-lg bg-clip-text text-transparent bg-gradient-to-r from-blue-600 to-violet-600">macOS Mastered</span><button id="mobile-menu-btn" class="p-2 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800"><svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path></svg></button></div><div class="max-w-5xl mx-auto px-6 py-12"><div id="content-area" class="prose prose-slate dark:prose-invert prose-lg max-w-none prose-headings:scroll-mt-24 prose-a:no-underline hover:prose-a:underline prose-img:rounded-xl prose-img:shadow-lg"></div></div><button id="back-to-top" class="fixed bottom-8 right-8 bg-blue-600 text-white p-3 rounded-full shadow-lg shadow-blue-600/30 opacity-0 invisible transition-all duration-300 hover:bg-blue-700 hover:-translate-y-1 z-50"><svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 10l7-7m0 0l7 7m-7-7v18"></path></svg></button></main><div id="mobile-menu" class="fixed inset-0 z-50 hidden"><div class="absolute inset-0 bg-black/60 backdrop-blur-sm" id="mobile-menu-backdrop"></div><div class="absolute right-0 top-0 bottom-0 w-3/4 max-w-xs bg-white dark:bg-surface shadow-2xl transform transition-transform translate-x-full" id="mobile-menu-panel"><div class="p-4 flex justify-between items-center border-b border-slate-200 dark:border-slate-700"><h2 class="font-bold text-lg">Navigation</h2><button id="close-mobile-menu" class="p-2 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-700"><svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg></button></div><nav id="mobile-toc-container" class="p-4 space-y-2 overflow-y-auto h-full pb-20"></nav></div></div><script type="text/template" id="markdown-source">
----
-layout: default
-title: macOS Mastered
-theme: jekyll-theme-cayman
----
-
-
 # macOS Mastered
 ### From Beginner to Expert | M1/M2/M3/M4/M5 Compatible
 
@@ -156,20 +156,185 @@ theme: jekyll-theme-cayman
 
 ## 📋 Table of Contents
 
+  * [From Beginner to Expert | M1/M2/M3/M4/M5 Compatible](#from-beginner-to-expert-m1m2m3m4m5-compatible)
+* [How to Use This Guide](#how-to-use-this-guide)
 * [Beginner: Essentials](#beginner-essentials)
-* [Intermediate: Productivity](#intermediate-productivity)
-* [Power User: Workflows](#power-user-workflows)
-* [Developer: Ecosystem](#developer-ecosystem)
-* [Expert: Internals](#expert-internals)
-* [Troubleshooting & Maintenance](#troubleshooting--maintenance)
-* [Reference Cards](#reference-cards)
+  * [🚀 Top 30 Essential Settings](#top-30-essential-settings)
+* [Opening Terminal - Step by Step](#opening-terminal-step-by-step)
+  * [Method 1: Using Spotlight Search (Easiest) 🟢](#method-1-using-spotlight-search-easiest)
+  * [Method 2: Using Finder 🟢](#method-2-using-finder)
+* [Getting Started (Beginners)](#getting-started-beginners)
+  * [Apple Silicon (M-Series) Compatibility 🍎](#apple-silicon-m-series-compatibility)
+* [System Information & Hardware](#system-information-hardware)
+  * [Check Your Mac Specifications 🟢](#check-your-mac-specifications)
+* [Apple Silicon Chip Comparison](#apple-silicon-chip-comparison)
+  * [📊 Chip Tiers Explained](#chip-tiers-explained)
+  * [🚀 Generation Comparison](#generation-comparison)
+* [Terminal Command Reference](#terminal-command-reference)
+  * [Beginner Terminal Commands 🟢](#beginner-terminal-commands)
+  * [Mid-Level Terminal Commands 🟡](#mid-level-terminal-commands)
+  * [Pro Terminal Commands 🟠](#pro-terminal-commands)
+* [System Configuration](#system-configuration)
+  * [Finder Configuration 🟢](#finder-configuration)
+  * [Screenshot Configuration 🟡](#screenshot-configuration)
+  * [Dock Configuration 🟡](#dock-configuration)
+* [Window Management Apps](#window-management-apps)
+  * [1. Rectangle (Free & Open Source) 🟢](#1-rectangle-free-open-source)
+  * [2. Magnet (Paid) 🟢](#2-magnet-paid)
+* [Menu Bar Apps](#menu-bar-apps)
+  * [1. Hidden Bar (Free) 🟢](#1-hidden-bar-free)
+  * [2. Ice (Free) 🟢](#2-ice-free)
+  * [3. Bartender (Paid) 🟢](#3-bartender-paid)
+* [Productivity Apps](#productivity-apps)
+  * [1. Raycast (Free for Personal Use) 🟢](#1-raycast-free-for-personal-use)
+  * [2. Alfred (Freemium) 🟡](#2-alfred-freemium)
+* [Terminal Themes](#terminal-themes)
+  * [1. Oh My Zsh 🟡](#1-oh-my-zsh)
+  * [2. Powerlevel10k Theme 🟠](#2-powerlevel10k-theme)
+* [Backup Strategies](#backup-strategies)
+  * [1. Time Machine (Local) 🟢](#1-time-machine-local)
+  * [2. Cloud Backup (Off-site) 🟡](#2-cloud-backup-off-site)
+* [Keyboard Shortcuts (Comprehensive)](#keyboard-shortcuts-comprehensive)
+  * [🔑 The "Must Know" Basics](#the-must-know-basics)
+  * [📝 Text Editing & Document Control](#text-editing-document-control)
+  * [📂 Finder & File Management](#finder-file-management)
+  * [📸 Screenshots & Recording](#screenshots-recording)
+  * [🌐 Web Browsing (Safari/Chrome)](#web-browsing-safarichrome)
+  * [🖥️ System & Window Management](#system-window-management)
+* [Troubleshooting Guide](#troubleshooting-guide)
+  * [Common Issues & Fixes 🟢](#common-issues-fixes)
+  * [Safe Mode 🟡](#safe-mode)
+* [Developer Tools (Mid-Level)](#developer-tools-mid-level)
+  * [1. Xcode Command Line Tools 🟡](#1-xcode-command-line-tools)
+  * [2. Homebrew (The Missing Package Manager) 🟡](#2-homebrew-the-missing-package-manager)
+  * [3. Git Configuration 🟡](#3-git-configuration)
+  * [4. VS Code Setup 🟡](#4-vs-code-setup)
+  * [5. Containerization (Docker / OrbStack) 🟡](#5-containerization-docker-orbstack)
+* [Homebrew Essentials](#homebrew-essentials)
+  * [1. tldr (Too Long; Didn't Read) 🟢](#1-tldr-too-long-didnt-read)
+  * [2. htop / btop 🟡](#2-htop-btop)
+  * [3. ffmpeg 🔴](#3-ffmpeg)
+  * [4. bat 🟢](#4-bat)
+* [Virtualization](#virtualization)
+  * [1. UTM (Free / Open Source) 🟢](#1-utm-free-open-source)
+  * [2. VMware Fusion Pro (Free for Personal Use) 🟡](#2-vmware-fusion-pro-free-for-personal-use)
+  * [3. Parallels Desktop (Paid) 🟢](#3-parallels-desktop-paid)
+* [Gaming on Mac](#gaming-on-mac)
+  * [1. Whisky (Free / Open Source) 🟢](#1-whisky-free-open-source)
+  * [2. Game Porting Toolkit (GPTK) 🔴](#2-game-porting-toolkit-gptk)
+* [Creative Tools](#creative-tools)
+  * [1. DaVinci Resolve (Free / Paid) 🟠](#1-davinci-resolve-free-paid)
+  * [2. Blender (Free & Open Source) 🟠](#2-blender-free-open-source)
+  * [3. OBS Studio (Free & Open Source) 🟡](#3-obs-studio-free-open-source)
+* [Design Tools](#design-tools)
+  * [1. Figma (Free / Paid) 🟢](#1-figma-free-paid)
+  * [2. Sketch (Paid) 🟠](#2-sketch-paid)
+  * [3. Affinity Designer (Paid) 🟢](#3-affinity-designer-paid)
+* [Audio Tools](#audio-tools)
+  * [1. Loopback (Paid) 🟠](#1-loopback-paid)
+  * [2. Audio Hijack (Paid) 🟠](#2-audio-hijack-paid)
+* [Music Production](#music-production)
+  * [1. Logic Pro (Paid) 🟠](#1-logic-pro-paid)
+  * [2. GarageBand (Free) 🟢](#2-garageband-free)
+* [Quick Look Plugins](#quick-look-plugins)
+  * [1. Syntax Highlight (Free) 🟢](#1-syntax-highlight-free)
+  * [2. QLVideo (Free) 🟢](#2-qlvideo-free)
+  * [3. QLMarkdown (Free) 🟢](#3-qlmarkdown-free)
+* [Advanced Configuration (Pro)](#advanced-configuration-pro)
+  * [Shell Customization (Zsh) 🟠](#shell-customization-zsh)
+  * [SSH Key Generation 🟠](#ssh-key-generation)
+* [Privacy & Security Deep Dive](#privacy-security-deep-dive)
+  * [1. Outbound Firewalls 🟠](#1-outbound-firewalls)
+  * [2. Malware Monitoring 🟠](#2-malware-monitoring)
+* [Maintenance & Cleaning](#maintenance-cleaning)
+  * [1. OnyX (Free) 🟠](#1-onyx-free)
+  * [2. DaisyDisk (Paid) 🟢](#2-daisydisk-paid)
+  * [3. AppCleaner (Free) 🟢](#3-appcleaner-free)
+  * [4. Disk Space Analyzer (Terminal) 🟠](#4-disk-space-analyzer-terminal)
+* [Networking Tools](#networking-tools)
+  * [1. Wireshark (Free / Open Source) 🔴](#1-wireshark-free-open-source)
+  * [2. Little Snitch (Paid) 🟠](#2-little-snitch-paid)
+  * [3. Network Speed Test](#3-network-speed-test)
+* [Remote Access](#remote-access)
+  * [1. SSH (Secure Shell) 🟠](#1-ssh-secure-shell)
+  * [2. Screen Sharing (VNC) 🟢](#2-screen-sharing-vnc)
+  * [3. Microsoft Remote Desktop (Free) 🟡](#3-microsoft-remote-desktop-free)
+* [File Management](#file-management)
+  * [1. Commander One (Freemium) 🟡](#1-commander-one-freemium)
+  * [2. ForkLift (Paid) 🟠](#2-forklift-paid)
+* [System Monitoring](#system-monitoring)
+  * [1. Stats (Free & Open Source) 🟢](#1-stats-free-open-source)
+  * [2. iStat Menus (Paid) 🟢](#2-istat-menus-paid)
+  * [3. Activity Monitor (Built-in) 🟢](#3-activity-monitor-built-in)
+* [Browser Extensions](#browser-extensions)
+  * [1. uBlock Origin (Free / Open Source) 🟢](#1-ublock-origin-free-open-source)
+  * [2. 1Password (Paid) 🟢](#2-1password-paid)
+* [Communication Apps](#communication-apps)
+  * [1. Slack (Freemium) 🟢](#1-slack-freemium)
+  * [2. Discord (Free) 🟢](#2-discord-free)
+  * [3. Zoom (Free / Paid) 🟢](#3-zoom-free-paid)
+* [Email Clients](#email-clients)
+  * [1. Spark (Freemium) 🟢](#1-spark-freemium)
+  * [2. Mimestream (Paid) 🟢](#2-mimestream-paid)
+  * [3. Apple Mail (Built-in) 🟢](#3-apple-mail-built-in)
+* [Calendar & Task Apps](#calendar-task-apps)
+  * [1. Fantastical (Freemium) 🟢](#1-fantastical-freemium)
+  * [2. Things 3 (Paid) 🟢](#2-things-3-paid)
+* [Finance & Budgeting](#finance-budgeting)
+  * [1. YNAB (You Need A Budget) (Paid) 🟢](#1-ynab-you-need-a-budget-paid)
+  * [2. Banktivity (Paid) 🟠](#2-banktivity-paid)
+* [Database Tools](#database-tools)
+  * [1. TablePlus (Freemium) 🟡](#1-tableplus-freemium)
+  * [2. DBngin (Free) 🟢](#2-dbngin-free)
+* [Local Development](#local-development)
+  * [1. Laravel Herd (Free / Pro) 🟢](#1-laravel-herd-free-pro)
+  * [2. MAMP (Free / Pro) 🟡](#2-mamp-free-pro)
+  * [3. XAMPP (Free) 🟡](#3-xampp-free)
+* [Markdown Editors](#markdown-editors)
+  * [1. Obsidian (Free) 🟢](#1-obsidian-free)
+  * [2. Bear (Freemium) 🟢](#2-bear-freemium)
+  * [3. Typora (Paid) 🟢](#3-typora-paid)
+* [Writing Tools](#writing-tools)
+  * [1. Scrivener (Paid) 🟠](#1-scrivener-paid)
+  * [2. Ulysses (Paid) 🟢](#2-ulysses-paid)
+* [Education & Research](#education-research)
+  * [1. Zotero (Free & Open Source) 🟢](#1-zotero-free-open-source)
+  * [2. Anki (Free & Open Source) 🟢](#2-anki-free-open-source)
+* [Mind Mapping](#mind-mapping)
+  * [1. MindNode (Freemium) 🟢](#1-mindnode-freemium)
+  * [2. XMind (Freemium) 🟡](#2-xmind-freemium)
+* [Utilities](#utilities)
+  * [1. Amphetamine (Free) 🟢](#1-amphetamine-free)
+  * [2. The Unarchiver (Free) 🟢](#2-the-unarchiver-free)
+  * [3. CheatSheet (Free) 🟢](#3-cheatsheet-free)
+* [Clipboard Managers](#clipboard-managers)
+  * [1. Maccy (Free / Open Source) 🟢](#1-maccy-free-open-source)
+  * [2. Paste (Paid) 🟢](#2-paste-paid)
+* [Automation](#automation)
+  * [1. Shortcuts (Built-in) 🟢](#1-shortcuts-built-in)
+  * [2. Automator (Built-in) 🟡](#2-automator-built-in)
+* [Expert-Level Techniques](#expert-level-techniques)
+  * [System Integrity Protection (SIP) 🔴](#system-integrity-protection-sip)
+  * [Network Analysis 🔴](#network-analysis)
+  * [Process Management 🔴](#process-management)
+* [Best Resources by Level](#best-resources-by-level)
+
+
+---
+
+## 🆕 New & Updated
+
+- **2026-01-07**: Update title and descriptions for consistency; add SEO metadata and sitemap
+- **2026-01-07**: Add hero section and quick access grid to the index for improved navigation and user engagement
+- **2026-01-07**: Add speed test widget and disk space analyzer instructions to the index
+- **2026-01-07**: Enhance styles for dynamic wallpapers and add dock navigation; update index for improved organization and clarity
+- **2026-01-07**: updates
 
 ---
 
 <div class="hero-section">
   <div class="hero-title">macOS Mastered.</div>
   <div class="hero-desc">The ultimate guide for developers, power users, and switchers. Shortcuts, terminal commands, and hidden settings in one place.</div>
-  <div id="reading-time" class="hero-meta"></div>
   <div class="hero-buttons">
     <a href="#beginner-essentials" class="hero-btn">🚀 Beginner</a>
     <a href="#intermediate-productivity" class="hero-btn">⚡ Power User</a>
@@ -193,7 +358,7 @@ This guide is organized by skill level. Find your level and start there:
 
 | Level | Description | Start Here |
 |-------|-------------|-----------|
-| 🟢 **Beginner** | New to Mac, learning basics | [Top 30 Settings](#top-30-essential-settings-for-new-mac-users) |
+| 🟢 **Beginner** | New to Mac, learning basics | [Top 30 Settings](#top-30-essential-settings) |
 | 🟡 **Mid-Level** | Comfortable with Mac, want to do more | [Developer Tools](#developer-tools-mid-level) |
 | 🟠 **Pro** | Advanced user, customization & automation | [Advanced Configuration](#advanced-configuration-pro) |
 | 🔴 **Expert** | System administration, scripting, optimization | [Expert Techniques](#expert-level-techniques) |
@@ -1441,12 +1606,190 @@ pstree
             });
 
             // 2. Render Markdown
-            const rawMarkdown = document.getElementById('markdown-source').textContent;
-            // Strip Front Matter
-            const markdown = rawMarkdown.replace(/^---[\s\S]*?---\n/, '');
-            
             const contentArea = document.getElementById('content-area');
-            contentArea.innerHTML = marked.parse(markdown);
+            try {
+                if (typeof marked === 'undefined') throw new Error('Marked library not loaded');
+                
+                const rawMarkdown = document.getElementById('markdown-source').textContent;
+                // Strip Front Matter
+                const markdown = rawMarkdown.replace(/^---[\s\S]*?---\n/, '');
+                contentArea.innerHTML = marked.parse(markdown);
+            } catch (e) {
+                contentArea.innerHTML = `<div class="p-4 bg-red-100 text-red-700 rounded-lg">Error rendering content: ${e.message}. Please check your internet connection or file integrity.</div>`;
+                console.error(e);
+            }
+
+            // 2.05 DOM Restructuring for Grid View
+            const children = Array.from(contentArea.children);
+            const sections = [];
+            let currentSection = null;
+
+            children.forEach(el => {
+                // Group content by H2
+                if (el.tagName === 'H2') {
+                    currentSection = document.createElement('div');
+                    currentSection.className = 'content-section break-inside-avoid';
+                    sections.push(currentSection);
+                    currentSection.appendChild(el);
+                } else if (currentSection) {
+                    currentSection.appendChild(el);
+                } else {
+                    // Content before first H2 (Hero, Intro)
+                    if (!currentSection) {
+                        currentSection = document.createElement('div');
+                        currentSection.className = 'intro-section mb-8';
+                        sections.push(currentSection);
+                    }
+                    currentSection.appendChild(el);
+                }
+            });
+            
+            // Replace content with grouped sections
+            contentArea.innerHTML = '';
+            sections.forEach(sec => contentArea.appendChild(sec));
+
+            // 2.1 Inject Filter UI
+            const filterContainer = document.createElement('div');
+            filterContainer.className = 'px-4 pb-2 mb-2 border-b border-slate-100 dark:border-slate-800';
+            filterContainer.innerHTML = `
+                <h3 class="text-xs font-bold text-slate-400 uppercase tracking-wider mb-2">View</h3><div class="flex gap-2 mb-4"><button onclick="toggleView('list')" id="btn-list" class="flex-1 py-1.5 text-xs font-medium rounded-lg border border-blue-500 bg-blue-50 text-blue-600 dark:bg-blue-900/30 dark:text-blue-400 transition-all">List View</button><button onclick="toggleView('grid')" id="btn-grid" class="flex-1 py-1.5 text-xs font-medium rounded-lg border border-slate-200 dark:border-slate-700 text-slate-600 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-800 transition-all">Grid View</button></div><h3 class="text-xs font-bold text-slate-400 uppercase tracking-wider mb-2">Skill Level</h3><div class="flex gap-1"><button onclick="setSkillLevel('beginner')" class="skill-btn flex-1 px-2 py-1 text-xs rounded-md border border-slate-200 dark:border-slate-700 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors" title="Beginner">🟢</button><button onclick="setSkillLevel('mid')" class="skill-btn flex-1 px-2 py-1 text-xs rounded-md border border-slate-200 dark:border-slate-700 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors" title="Mid-Level">🟡</button><button onclick="setSkillLevel('pro')" class="skill-btn flex-1 px-2 py-1 text-xs rounded-md border border-slate-200 dark:border-slate-700 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors" title="Pro">🟠</button><button onclick="setSkillLevel('expert')" class="skill-btn flex-1 px-2 py-1 text-xs rounded-md border border-slate-200 dark:border-slate-700 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors" title="Expert">🔴</button><button onclick="setSkillLevel('all')" class="skill-btn flex-1 px-2 py-1 text-xs rounded-md border border-slate-200 dark:border-slate-700 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors font-bold" title="Show All">ALL</button></div>`;
+            const tocContainer = document.getElementById('toc-container');
+            tocContainer.parentNode.insertBefore(filterContainer, tocContainer);
+
+            // 2.2 Bookmarks Logic
+            const bookmarksContainer = document.createElement('div');
+            bookmarksContainer.id = 'bookmarks-container';
+            bookmarksContainer.className = 'hidden px-4 py-2 mb-2 border-b border-slate-100 dark:border-slate-800';
+            bookmarksContainer.innerHTML = '<h3 class="text-xs font-bold text-slate-400 uppercase tracking-wider mb-2">Bookmarks</h3><div id="bookmarks-list" class="space-y-1"></div>';
+            
+            // Insert before TOC
+            tocContainer.parentNode.insertBefore(bookmarksContainer, tocContainer);
+
+            let bookmarks = JSON.parse(localStorage.getItem('macOS-bookmarks') || '[]');
+
+            function renderBookmarks() {
+                const list = document.getElementById('bookmarks-list');
+                list.innerHTML = '';
+                if (bookmarks.length === 0) {
+                    bookmarksContainer.classList.add('hidden');
+                    return;
+                }
+                bookmarksContainer.classList.remove('hidden');
+                bookmarks.forEach(bm => {
+                    const link = document.createElement('a');
+                    link.href = `#${bm.id}`;
+                    link.textContent = bm.title;
+                    link.className = 'block text-sm text-slate-600 dark:text-slate-400 hover:text-blue-600 dark:hover:text-blue-400 truncate py-1';
+                    list.appendChild(link);
+                });
+            }
+
+            function toggleBookmark(id, title, btn) {
+                const index = bookmarks.findIndex(b => b.id === id);
+                if (index === -1) {
+                    bookmarks.push({ id, title });
+                    btn.classList.add('text-yellow-500');
+                    btn.classList.remove('text-slate-300');
+                } else {
+                    bookmarks.splice(index, 1);
+                    btn.classList.remove('text-yellow-500');
+                    btn.classList.add('text-slate-300');
+                }
+                localStorage.setItem('macOS-bookmarks', JSON.stringify(bookmarks));
+                renderBookmarks();
+            }
+
+            renderBookmarks();
+
+            // 2.25 View Toggle Logic
+            window.toggleView = function(view) {
+                const content = document.getElementById('content-area');
+                const btnList = document.getElementById('btn-list');
+                const btnGrid = document.getElementById('btn-grid');
+                
+                if (view === 'grid') {
+                    content.classList.add('grid-view');
+                    btnGrid.className = 'flex-1 py-1.5 text-xs font-medium rounded-lg border border-blue-500 bg-blue-50 text-blue-600 dark:bg-blue-900/30 dark:text-blue-400 transition-all';
+                    btnList.className = 'flex-1 py-1.5 text-xs font-medium rounded-lg border border-slate-200 dark:border-slate-700 text-slate-600 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-800 transition-all';
+                } else {
+                    content.classList.remove('grid-view');
+                    btnList.className = 'flex-1 py-1.5 text-xs font-medium rounded-lg border border-blue-500 bg-blue-50 text-blue-600 dark:bg-blue-900/30 dark:text-blue-400 transition-all';
+                    btnGrid.className = 'flex-1 py-1.5 text-xs font-medium rounded-lg border border-slate-200 dark:border-slate-700 text-slate-600 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-800 transition-all';
+                }
+            };
+
+            // State for filters
+            window.filterState = {
+                skillLevel: 'all',
+                codeQuery: ''
+            };
+
+            window.applyFilters = function() {
+                const content = document.getElementById('content-area');
+                const elements = Array.from(content.children);
+                const { skillLevel, codeQuery } = window.filterState;
+
+                const levels = { 'beginner': ['🟡', '🟠', '🔴'], 'mid': ['🟠', '🔴'], 'pro': ['🔴'], 'expert': [] };
+                const hiddenEmojis = levels[skillLevel] || [];
+
+                elements.forEach(el => {
+                    if (!el.classList.contains('content-section')) return;
+
+                    let shouldHide = false;
+
+                    // 1. Skill Level Check
+                    if (skillLevel !== 'all') {
+                        const text = el.textContent;
+                        if (hiddenEmojis.some(emoji => text.includes(emoji))) {
+                            shouldHide = true;
+                        }
+                    }
+
+                    // 2. Code Search Check
+                    if (!shouldHide && codeQuery) {
+                        const codeBlocks = el.querySelectorAll('code, pre');
+                        let hasMatch = false;
+                        codeBlocks.forEach(block => {
+                            if (block.textContent.toLowerCase().includes(codeQuery)) {
+                                hasMatch = true;
+                            }
+                        });
+                        if (!hasMatch) shouldHide = true;
+                    }
+
+                    if (shouldHide) {
+                        el.classList.add('hidden');
+                    } else {
+                        el.classList.remove('hidden');
+                    }
+                });
+
+                // Update skill buttons UI
+                document.querySelectorAll('.skill-btn').forEach(btn => {
+                    if (btn.getAttribute('onclick').includes(`'${skillLevel}'`)) {
+                        btn.classList.add('bg-blue-50', 'dark:bg-blue-900/30', 'border-blue-200', 'dark:border-blue-800', 'text-blue-600', 'dark:text-blue-400');
+                    } else {
+                        btn.classList.remove('bg-blue-50', 'dark:bg-blue-900/30', 'border-blue-200', 'dark:border-blue-800', 'text-blue-600', 'dark:text-blue-400');
+                    }
+                });
+            };
+
+            // 2.3 Skill Level Filter Logic
+            window.setSkillLevel = function(level) {
+                window.filterState.skillLevel = level;
+                window.applyFilters();
+            };
+            // Set default active state
+            window.setSkillLevel('all');
+
+            // Code Search Listener
+            const codeSearchInput = document.getElementById('code-search-input');
+            if (codeSearchInput) {
+                codeSearchInput.addEventListener('input', (e) => {
+                    window.filterState.codeQuery = e.target.value.toLowerCase();
+                    window.applyFilters();
+                });
+            }
 
             // 2.5 Calculate Reading Time
             const text = contentArea.innerText;
@@ -1502,6 +1845,26 @@ pstree
                 if (!header.id) {
                     header.id = `section-${index}`;
                 }
+
+                // Bookmark Button
+                const btn = document.createElement('button');
+                btn.className = 'ml-2 text-slate-300 hover:text-yellow-500 transition-colors opacity-0 group-hover:opacity-100 focus:opacity-100 print:hidden';
+                btn.innerHTML = '<svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>';
+                btn.title = 'Bookmark this section';
+                
+                const isBookmarked = bookmarks.some(b => b.id === header.id);
+                if (isBookmarked) {
+                    btn.classList.add('text-yellow-500', 'opacity-100');
+                    btn.classList.remove('text-slate-300', 'opacity-0');
+                }
+
+                btn.onclick = (e) => {
+                    e.stopPropagation();
+                    toggleBookmark(header.id, header.textContent.replace(/^[🟢🟡🟠🔴]\s*/, ''), btn);
+                };
+
+                header.classList.add('group', 'flex', 'items-center');
+                header.appendChild(btn);
 
                 const link = document.createElement('a');
                 link.href = `#${header.id}`;
