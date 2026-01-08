@@ -40,7 +40,8 @@ def minify_html(content):
 def get_slug(title):
     # Clean title: remove markdown links and special chars to match likely ID
     clean_title = re.sub(r'\[([^\]]+)\]\([^\)]+\)', r'\1', title)
-    clean_title = re.sub(r'[^\w\s-]', '', clean_title)
+    # Enforce ASCII slugs for better compatibility with JS
+    clean_title = re.sub(r'[^a-zA-Z0-9\s-]', '', clean_title)
     slug = clean_title.lower().strip().replace(' ', '-')
     slug = re.sub(r'-+', '-', slug)
     return slug
@@ -273,7 +274,8 @@ def generate_quick_sidebar(content):
     
     # Inject after Hero section (which is usually the first thing after front matter/title)
     # We look for the first separator "---"
-    pattern = r'(-\s--)'
+    # Match various HR formats on a new line (---, - --, etc)
+    pattern = r'(?m)^(?:\- ?){3,}\s*$'
     match = re.search(pattern, content)
     if match:
         # Check if sidebar or old grid already exists to replace or insert

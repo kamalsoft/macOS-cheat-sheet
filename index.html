@@ -38,8 +38,7 @@
                 }
             }
         }
-    </script>
-    <script>
+    </script><script>
         // Immediate theme check to prevent flash
         if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
             document.documentElement.classList.add('dark');
@@ -401,10 +400,10 @@
 ## 🆕 New & Updated
 
 - **2026-01-08**: Update documentation
+- **2026-01-08**: Update documentation
+- **2026-01-08**: Update documentation
 - **2026-01-08**: Add Contributors section and Last Updated badge to documentation; update sitemap and fix broken link handling
 - **2026-01-08**: Add Last Updated badge and Contributors section to documentation
-- **2026-01-08**: Update documentation
-- **2026-01-08**: Update documentation
 
 ## How to Use This Guide
 
@@ -1873,6 +1872,19 @@ Thanks to these wonderful people: **kamalsoft**.
     </script><script>
         document.addEventListener('DOMContentLoaded', () => {
             // 1. Initialize Theme
+            // Configure Marked to match Python's slug generation
+            const renderer = new marked.Renderer();
+            renderer.heading = function(text, level, raw) {
+                // Remove markdown links [text](url) -> text
+                let clean = raw.replace(/\[([^\]]+)\]\([^\)]+\)/g, '$1');
+                // Remove non-word chars (ASCII only to match Python script update)
+                clean = clean.replace(/[^a-zA-Z0-9\s-]/g, '');
+                let slug = clean.toLowerCase().trim().replace(/\s+/g, '-');
+                slug = slug.replace(/-+/g, '-');
+                return `<h${level} id="${slug}">${text}</h${level}>`;
+            };
+            marked.use({ renderer: renderer });
+
             function updateThemeUI(theme) {
                 const btns = {
                     light: document.getElementById('theme-light'),
