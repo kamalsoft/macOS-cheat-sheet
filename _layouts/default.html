@@ -7,6 +7,7 @@
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     {% seo %}
     <link rel="stylesheet" href="{{ '/assets/styles.css' | relative_url }}">
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
   </head>
   <body>
     <div id="sidebar-overlay"></div>
@@ -63,6 +64,7 @@
     <button id="exit-zen-btn">Exit Zen Mode</button>
     
     <div id="keyboard-visualizer">
+      <div class="visualizer-hint">Hover over any shortcut in the tables below to visualize keys</div>
       <div class="kb-row">
         <div class="kb-key" data-key="`">`</div>
         <div class="kb-key" data-key="1">1</div>
@@ -125,6 +127,8 @@
         <button id="share-btn">🔗 Share</button>
         <button id="settings-btn">⚙️ Settings</button>
         <button id="quick-ref-btn">🃏 Quick Ref</button>
+        <button id="dashboard-btn">📊 Dashboard</button>
+        <button id="checklist-mode-btn">☑️ Checklist</button>
         <button id="keyboard-toggle-btn">⌨️ Visualizer</button>
         <button id="zen-mode-toggle">🧘 Zen Mode</button>
         <button id="dark-mode-toggle">🌙 Dark Mode</button>

@@ -249,7 +249,9 @@ blockquote {
 #mobile-menu-btn,
 #settings-btn,
 #quick-ref-btn,
-#keyboard-toggle-btn {
+#keyboard-toggle-btn,
+#checklist-mode-btn,
+#dashboard-btn {
   background: var(--glass-bg);
   border: 1px solid var(--glass-border);
   color: var(--text-color);
@@ -267,7 +269,9 @@ blockquote {
 #mobile-menu-btn:hover,
 #settings-btn:hover,
 #quick-ref-btn:hover,
-#keyboard-toggle-btn:hover {
+#keyboard-toggle-btn:hover,
+#checklist-mode-btn:hover,
+#dashboard-btn:hover {
   background: var(--td-hover);
   transform: translateY(-1px);
 }
@@ -1186,4 +1190,128 @@ body.quick-ref-mode #exit-zen-btn {
   margin-bottom: 0.5rem;
   border-bottom: 1px solid var(--glass-border) !important;
   padding-bottom: 0.5rem !important;
+}
+
+/* Checklist Mode */
+.checklist-checkbox {
+  margin-right: 10px;
+  transform: scale(1.2);
+  cursor: pointer;
+  accent-color: var(--heading-color);
+  vertical-align: middle;
+}
+
+.setting-done {
+  opacity: 0.6;
+  background: rgba(0, 255, 0, 0.05) !important;
+}
+
+.setting-done td {
+  text-decoration: line-through;
+}
+
+#checklist-mode-btn.active {
+  background: var(--heading-color);
+  color: white;
+}
+
+/* Copy Path Button */
+.copy-path-btn {
+  background: transparent;
+  border: 1px solid var(--glass-border);
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 0.8rem;
+  margin-left: 8px;
+  padding: 2px 6px;
+  opacity: 0.6;
+  transition: all 0.2s;
+  vertical-align: middle;
+}
+
+.copy-path-btn:hover {
+  opacity: 1;
+  background: var(--td-hover);
+}
+
+/* Visualizer Hint */
+.visualizer-hint {
+  text-align: center;
+  font-size: 0.8rem;
+  margin-bottom: 10px;
+  color: var(--text-color);
+  font-weight: bold;
+  background: var(--glass-border);
+  padding: 4px;
+  border-radius: 4px;
+}
+
+/* Progress Dashboard */
+#dashboard-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 3000;
+  display: none;
+  justify-content: center;
+  align-items: center;
+  backdrop-filter: blur(5px);
+}
+
+#dashboard-modal {
+  background: var(--glass-bg);
+  border: 1px solid var(--glass-border);
+  padding: 2rem;
+  border-radius: 16px;
+  width: 600px;
+  max-width: 90%;
+  box-shadow: 0 20px 50px rgba(0,0,0,0.2);
+  text-align: center;
+}
+
+.dashboard-stats {
+  display: flex;
+  justify-content: space-around;
+  margin: 2rem 0;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.stat-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+}
+
+.progress-circle {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  background: conic-gradient(var(--heading-color) 0%, var(--glass-border) 0%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+}
+
+.progress-circle::before {
+  content: "";
+  position: absolute;
+  width: 90px;
+  height: 90px;
+  border-radius: 50%;
+  background: var(--glass-bg);
+}
+
+.progress-circle span {
+  position: relative;
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: var(--text-color);
+  z-index: 1;
 }
