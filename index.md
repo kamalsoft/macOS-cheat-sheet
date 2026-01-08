@@ -190,9 +190,9 @@
 
 ## 🆕 New & Updated
 
+- **2026-01-08**: Update documentation
 - **2026-01-08**: Add Contributors section and Last Updated badge to documentation; update sitemap and fix broken link handling
 - **2026-01-08**: Add Last Updated badge and Contributors section to documentation
-- **2026-01-08**: Update documentation
 - **2026-01-08**: Update documentation
 - **2026-01-08**: Update documentation
 

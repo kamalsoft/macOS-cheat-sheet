@@ -391,9 +391,9 @@
 
 ## 🆕 New & Updated
 
+- **2026-01-08**: Update documentation
 - **2026-01-08**: Add Contributors section and Last Updated badge to documentation; update sitemap and fix broken link handling
 - **2026-01-08**: Add Last Updated badge and Contributors section to documentation
-- **2026-01-08**: Update documentation
 - **2026-01-08**: Update documentation
 - **2026-01-08**: Update documentation
 
@@ -1864,6 +1864,22 @@ Thanks to these wonderful people: **kamalsoft**.
     </script><script>
         document.addEventListener('DOMContentLoaded', () => {
             // 1. Initialize Theme
+            const sidebar = document.querySelector('aside');
+            const toggleSidebarBtn = document.getElementById('toggle-sidebar-btn');
+            
+            function toggleSidebar() {
+                sidebar.classList.toggle('hidden');
+                if (sidebar.classList.contains('hidden')) {
+                    toggleSidebarBtn.innerHTML = '<svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path></svg>';
+                } else {
+                    toggleSidebarBtn.innerHTML = '<svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>';
+                }
+            }
+
+            if (toggleSidebarBtn) {
+                toggleSidebarBtn.addEventListener('click', toggleSidebar);
+            }
+
             function updateThemeUI(theme) {
                 const btns = {
                     light: document.getElementById('theme-light'),
