@@ -27,6 +27,26 @@ theme: jekyll-theme-cayman
 * [Reference Cards](#reference-cards)
 
 ---
+
+<div class="hero-section">
+  <div class="hero-title">macOS Mastered.</div>
+  <div class="hero-desc">The ultimate cheat sheet for developers, power users, and switchers. Shortcuts, terminal commands, and hidden settings in one place.</div>
+  <div class="hero-buttons">
+    <a href="#beginner-essentials" class="hero-btn">🚀 Beginner</a>
+    <a href="#intermediate-productivity" class="hero-btn">⚡ Power User</a>
+    <a href="#developer-ecosystem" class="hero-btn">🛠️ Developer</a>
+    <a href="#expert-internals" class="hero-btn">🧠 Expert</a>
+  </div>
+</div>
+
+<div class="quick-grid">
+  <a href="#keyboard-shortcuts-comprehensive" class="quick-tile"><span class="tile-icon">⌨️</span><span class="tile-label">Shortcuts</span></a>
+  <a href="#terminal-command-reference" class="quick-tile"><span class="tile-icon">💻</span><span class="tile-label">Terminal</span></a>
+  <a href="#top-30-essential-settings" class="quick-tile"><span class="tile-icon">⚙️</span><span class="tile-label">Settings</span></a>
+  <a href="#homebrew-essentials" class="quick-tile"><span class="tile-icon">🍺</span><span class="tile-label">Homebrew</span></a>
+  <a href="#troubleshooting-guide" class="quick-tile"><span class="tile-icon">🚑</span><span class="tile-label">Fixes</span></a>
+  <a href="#developer-tools-mid-level" class="quick-tile"><span class="tile-icon">🛠️</span><span class="tile-label">Dev Tools</span></a>
+</div>
  
 ## How to Use This Guide
 

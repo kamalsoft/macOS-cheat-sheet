@@ -20,13 +20,27 @@
     <div id="settings-modal-overlay">
       <div id="settings-modal">
         <h2>⚙️ Settings</h2>
-        <div class="setting-group">
-          <label>Font Size: <span id="font-size-val">16px</span></label>
-          <input type="range" id="font-size-input" min="12" max="24" value="16" style="width: 100%;">
+        <div class="settings-grid">
+          <div class="setting-group">
+            <label>Font Size: <span id="font-size-val">16px</span></label>
+            <input type="range" id="font-size-input" min="12" max="24" value="16" style="width: 100%;">
+          </div>
+          <div class="setting-group">
+            <label>Theme Color</label>
+            <input type="color" id="theme-color-input" value="#159957" style="width: 100%; height: 40px;">
+          </div>
         </div>
-        <div class="setting-group">
-          <label>Theme Color</label>
-          <input type="color" id="theme-color-input" value="#159957" style="width: 100%; height: 40px;">
+        
+        <h3>Features</h3>
+        <div class="settings-btn-grid">
+          <button id="dark-mode-toggle" class="settings-action-btn">🌙 Dark Mode</button>
+          <button id="zen-mode-toggle" class="settings-action-btn">🧘 Zen Mode</button>
+          <button id="checklist-mode-btn" class="settings-action-btn">☑️ Checklist</button>
+          <button id="keyboard-toggle-btn" class="settings-action-btn">⌨️ Visualizer</button>
+          <button id="dashboard-btn" class="settings-action-btn">📊 Dashboard</button>
+          <button id="quick-ref-btn" class="settings-action-btn">🃏 Quick Ref</button>
+          <button id="print-btn" class="settings-action-btn">🖨️ Print PDF</button>
+          <button id="share-btn" class="settings-action-btn">🔗 Share</button>
         </div>
         <div style="display: flex; gap: 10px; justify-content: flex-end;">
           <button id="reset-settings-btn" style="padding: 8px 16px; border-radius: 8px; border: 1px solid #ccc; cursor: pointer;">Reset</button>
@@ -116,44 +130,38 @@
       </div>
     </div>
 
+    <!-- Mobile Search Overlay Container -->
+    <div id="mobile-search-overlay">
+      <button id="close-mobile-search" class="icon-btn" style="position: absolute; top: 1rem; right: 1rem; font-size: 1.5rem;">✕</button>
+    </div>
+
     <a id="skip-to-content" href="#content">Skip to the content.</a>
 
-    <header class="page-header" role="banner">
-      <h1 class="project-name">{{ site.title | default: site.github.repository_name }}</h1>
-      <h2 class="project-tagline">{{ site.description | default: site.github.project_tagline }}</h2>
-      <p id="reading-time" style="margin-top: 0.5rem; opacity: 0.9; font-size: 0.9rem; font-weight: 500;"></p>
-      <div id="shortcut-of-the-day"></div>
+    <header class="app-header">
+      <div class="header-left">
+        <div class="header-logo"></div>
+        <div class="header-title">macOS Cheat Sheet</div>
+      </div>
       
-      {% if site.show_downloads %}
-        <a href="{{ site.github.zip_url }}" class="btn">Download .zip</a>
-        <a href="{{ site.github.tar_url }}" class="btn">Download .tar.gz</a>
-      {% endif %}
-
-      <div class="controls-container">
-        <div class="search-wrapper">
+      <div class="header-center" id="header-search-container">
+        <div class="search-wrapper" style="width: 100%;">
           <input type="text" id="search-input" placeholder="🔍 Search cheat sheet..." autocomplete="off">
           <button id="clear-search-btn" title="Clear Search">✕</button>
           <button id="voice-search-btn" title="Search with Voice">🎤</button>
           <div id="search-history-dropdown"></div>
         </div>
-        <button id="mobile-menu-btn">☰ Menu</button>
-        <button id="print-btn">🖨️ PDF</button>
-        <button id="share-btn">🔗 Share</button>
-        <button id="settings-btn">⚙️ Settings</button>
-        <button id="quick-ref-btn">🃏 Quick Ref</button>
-        <button id="dashboard-btn">📊 Dashboard</button>
-        <button id="checklist-mode-btn">☑️ Checklist</button>
-        <button id="keyboard-toggle-btn">⌨️ Visualizer</button>
-        <button id="zen-mode-toggle">🧘 Zen Mode</button>
-        <button id="dark-mode-toggle">🌙 Dark Mode</button>
       </div>
-      
-      <!-- <a href="https://github.com/kamalsoft/macOS-cheat-sheet" class="btn">View on GitHub</a> -->
+
+      <div class="header-right">
+        <button id="mobile-search-toggle" class="icon-btn">🔍</button>
+        <button id="settings-btn" class="icon-btn">⚙️</button>
+      </div>
     </header>
 
     <main id="content" class="main-content" role="main">
       <div class="page-layout">
         <aside id="toc-sidebar" class="toc-sidebar">
+          <div id="shortcut-of-the-day"></div>
           <div class="favorites-section">
             <div style="display: flex; justify-content: space-between; align-items: center;">
               <h3>⭐ Favorites</h3>
