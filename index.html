@@ -4,32 +4,34 @@
             theme: {
                 extend: {
                     colors: {
-                        primary: '#3b82f6',
-                        dark: '#0f172a',
-                        darker: '#020617',
-                        surface: '#1e293b',
+                        primary: '#8b5cf6', // Violet-500
+                        dark: '#18181b',    // Zinc-900
+                        darker: '#09090b',  // Zinc-950
+                        surface: '#27272a', // Zinc-800
                     },
                     typography: (theme) => ({
                         DEFAULT: {
                             css: {
                                 maxWidth: 'none',
-                                color: '#334155',
-                                a: { color: '#3b82f6', textDecoration: 'none', '&:hover': { textDecoration: 'underline' } },
-                                h1: { color: '#1e293b' },
-                                h2: { color: '#1e293b', borderBottom: '1px solid #e2e8f0', paddingBottom: '0.5rem', marginTop: '3rem' },
-                                code: { color: '#ec4899', backgroundColor: '#f1f5f9', padding: '0.2em 0.4em', borderRadius: '0.25rem', fontWeight: '600' },
+                                color: '#52525b', // Zinc-600
+                                a: { color: '#8b5cf6', textDecoration: 'none', fontWeight: '500', '&:hover': { color: '#7c3aed' } },
+                                h1: { color: '#18181b', fontWeight: '800', letterSpacing: '-0.025em' },
+                                h2: { color: '#18181b', fontWeight: '700', letterSpacing: '-0.025em', marginTop: '3rem' },
+                                h3: { color: '#27272a', fontWeight: '600' },
+                                code: { color: '#db2777', backgroundColor: '#f4f4f5', padding: '0.2em 0.4em', borderRadius: '0.375rem', fontWeight: '600' },
                                 'code::before': { content: '""' },
                                 'code::after': { content: '""' },
-                                pre: { backgroundColor: '#1e293b', color: '#e2e8f0' },
+                                pre: { backgroundColor: '#18181b', color: '#e4e4e7', borderRadius: '0.75rem' },
                             },
                         },
                         invert: {
                             css: {
-                                color: '#cbd5e1',
-                                h1: { color: '#f8fafc' },
-                                h2: { color: '#f8fafc', borderColor: '#334155' },
-                                code: { color: '#f472b6', backgroundColor: '#334155' },
-                                strong: { color: '#f8fafc' },
+                                color: '#a1a1aa', // Zinc-400
+                                h1: { color: '#f4f4f5' },
+                                h2: { color: '#f4f4f5' },
+                                h3: { color: '#e4e4e7' },
+                                code: { color: '#f472b6', backgroundColor: '#27272a' },
+                                strong: { color: '#f4f4f5' },
                             }
                         }
                     }),
@@ -1814,29 +1816,38 @@ Thanks to these wonderful people: **kamalsoft**.
     </script><script>
         document.addEventListener('DOMContentLoaded', () => {
             // 1. Initialize Theme
-            const themeToggle = document.getElementById('theme-toggle');
-            const themeKnob = document.getElementById('theme-knob');
-            
-            const isDark = localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches);
-            if (isDark) {
-                document.documentElement.classList.add('dark');
-                themeKnob.classList.add('translate-x-6');
-                themeKnob.classList.remove('translate-x-1');
+            function updateThemeUI(theme) {
+                const btns = {
+                    light: document.getElementById('theme-light'),
+                    system: document.getElementById('theme-system'),
+                    dark: document.getElementById('theme-dark')
+                };
+                
+                // Reset all
+                Object.values(btns).forEach(btn => {
+                    btn.classList.remove('bg-white', 'dark:bg-zinc-600', 'text-violet-600', 'dark:text-white', 'shadow-sm');
+                    btn.classList.add('text-zinc-500');
+                });
+
+                // Activate current
+                const activeBtn = btns[theme] || btns['system'];
+                activeBtn.classList.add('bg-white', 'dark:bg-zinc-600', 'text-violet-600', 'dark:text-white', 'shadow-sm');
+                activeBtn.classList.remove('text-zinc-500');
             }
 
-            themeToggle.addEventListener('click', () => {
-                document.documentElement.classList.toggle('dark');
-                const isNowDark = document.documentElement.classList.contains('dark');
-                localStorage.theme = isNowDark ? 'dark' : 'light';
-                
-                if (isNowDark) {
-                    themeKnob.classList.add('translate-x-6');
-                    themeKnob.classList.remove('translate-x-1');
+            window.setTheme = function(theme) {
+                if (theme === 'dark' || (theme === 'system' && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+                    document.documentElement.classList.add('dark');
                 } else {
-                    themeKnob.classList.remove('translate-x-6');
-                    themeKnob.classList.add('translate-x-1');
+                    document.documentElement.classList.remove('dark');
                 }
-            });
+                localStorage.theme = theme;
+                updateThemeUI(theme);
+            };
+
+            // Initial Load
+            const savedTheme = localStorage.theme || 'system';
+            setTheme(savedTheme);
 
             // 2. Render Markdown
             const contentArea = document.getElementById('content-area');
@@ -1884,8 +1895,7 @@ Thanks to these wonderful people: **kamalsoft**.
             // 2.1 Inject Filter UI
             const filterContainer = document.createElement('div');
             filterContainer.className = 'px-4 pb-2 mb-2 border-b border-slate-100 dark:border-slate-800';
-            filterContainer.innerHTML = `
-                <h3 class="text-xs font-bold text-slate-400 uppercase tracking-wider mb-2">View</h3><div class="flex gap-2 mb-4"><button onclick="toggleView('list')" id="btn-list" class="flex-1 py-1.5 text-xs font-medium rounded-lg border border-blue-500 bg-blue-50 text-blue-600 dark:bg-blue-900/30 dark:text-blue-400 transition-all">List View</button><button onclick="toggleView('grid')" id="btn-grid" class="flex-1 py-1.5 text-xs font-medium rounded-lg border border-slate-200 dark:border-slate-700 text-slate-600 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-800 transition-all">Grid View</button></div><h3 class="text-xs font-bold text-slate-400 uppercase tracking-wider mb-2">Skill Level</h3><div class="flex gap-1"><button onclick="setSkillLevel('beginner')" class="skill-btn flex-1 px-2 py-1 text-xs rounded-md border border-slate-200 dark:border-slate-700 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors" title="Beginner">🟢</button><button onclick="setSkillLevel('mid')" class="skill-btn flex-1 px-2 py-1 text-xs rounded-md border border-slate-200 dark:border-slate-700 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors" title="Mid-Level">🟡</button><button onclick="setSkillLevel('pro')" class="skill-btn flex-1 px-2 py-1 text-xs rounded-md border border-slate-200 dark:border-slate-700 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors" title="Pro">🟠</button><button onclick="setSkillLevel('expert')" class="skill-btn flex-1 px-2 py-1 text-xs rounded-md border border-slate-200 dark:border-slate-700 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors" title="Expert">🔴</button><button onclick="setSkillLevel('all')" class="skill-btn flex-1 px-2 py-1 text-xs rounded-md border border-slate-200 dark:border-slate-700 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors font-bold" title="Show All">ALL</button></div>`;
+            filterContainer.innerHTML = `<h3 class="text-xs font-bold text-slate-400 uppercase tracking-wider mb-2">View</h3><div class="flex gap-2 mb-4"><button onclick="toggleView('list')" id="btn-list" class="flex-1 py-1.5 text-xs font-medium rounded-lg border border-violet-500 bg-violet-50 text-violet-600 dark:bg-violet-900/30 dark:text-violet-400 transition-all">List View</button><button onclick="toggleView('grid')" id="btn-grid" class="flex-1 py-1.5 text-xs font-medium rounded-lg border border-zinc-200 dark:border-zinc-700 text-zinc-600 dark:text-zinc-400 hover:bg-zinc-50 dark:hover:bg-zinc-800 transition-all">Grid View</button></div><h3 class="text-xs font-bold text-slate-400 uppercase tracking-wider mb-2">Skill Level</h3><div class="flex gap-1"><button onclick="setSkillLevel('beginner')" class="skill-btn flex-1 px-2 py-1 text-xs rounded-md border border-zinc-200 dark:border-zinc-700 hover:bg-zinc-100 dark:hover:bg-zinc-800 transition-colors" title="Beginner">🟢</button><button onclick="setSkillLevel('mid')" class="skill-btn flex-1 px-2 py-1 text-xs rounded-md border border-zinc-200 dark:border-zinc-700 hover:bg-zinc-100 dark:hover:bg-zinc-800 transition-colors" title="Mid-Level">🟡</button><button onclick="setSkillLevel('pro')" class="skill-btn flex-1 px-2 py-1 text-xs rounded-md border border-zinc-200 dark:border-zinc-700 hover:bg-zinc-100 dark:hover:bg-zinc-800 transition-colors" title="Pro">🟠</button><button onclick="setSkillLevel('expert')" class="skill-btn flex-1 px-2 py-1 text-xs rounded-md border border-zinc-200 dark:border-zinc-700 hover:bg-zinc-100 dark:hover:bg-zinc-800 transition-colors" title="Expert">🔴</button><button onclick="setSkillLevel('all')" class="skill-btn flex-1 px-2 py-1 text-xs rounded-md border border-zinc-200 dark:border-zinc-700 hover:bg-zinc-100 dark:hover:bg-zinc-800 transition-colors font-bold" title="Show All">ALL</button></div>`;
             const tocContainer = document.getElementById('toc-container');
             tocContainer.parentNode.insertBefore(filterContainer, tocContainer);
 
@@ -1942,12 +1952,12 @@ Thanks to these wonderful people: **kamalsoft**.
                 
                 if (view === 'grid') {
                     content.classList.add('grid-view');
-                    btnGrid.className = 'flex-1 py-1.5 text-xs font-medium rounded-lg border border-blue-500 bg-blue-50 text-blue-600 dark:bg-blue-900/30 dark:text-blue-400 transition-all';
-                    btnList.className = 'flex-1 py-1.5 text-xs font-medium rounded-lg border border-slate-200 dark:border-slate-700 text-slate-600 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-800 transition-all';
+                    btnGrid.className = 'flex-1 py-1.5 text-xs font-medium rounded-lg border border-violet-500 bg-violet-50 text-violet-600 dark:bg-violet-900/30 dark:text-violet-400 transition-all';
+                    btnList.className = 'flex-1 py-1.5 text-xs font-medium rounded-lg border border-zinc-200 dark:border-zinc-700 text-zinc-600 dark:text-zinc-400 hover:bg-zinc-50 dark:hover:bg-zinc-800 transition-all';
                 } else {
                     content.classList.remove('grid-view');
-                    btnList.className = 'flex-1 py-1.5 text-xs font-medium rounded-lg border border-blue-500 bg-blue-50 text-blue-600 dark:bg-blue-900/30 dark:text-blue-400 transition-all';
-                    btnGrid.className = 'flex-1 py-1.5 text-xs font-medium rounded-lg border border-slate-200 dark:border-slate-700 text-slate-600 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-800 transition-all';
+                    btnList.className = 'flex-1 py-1.5 text-xs font-medium rounded-lg border border-violet-500 bg-violet-50 text-violet-600 dark:bg-violet-900/30 dark:text-violet-400 transition-all';
+                    btnGrid.className = 'flex-1 py-1.5 text-xs font-medium rounded-lg border border-zinc-200 dark:border-zinc-700 text-zinc-600 dark:text-zinc-400 hover:bg-zinc-50 dark:hover:bg-zinc-800 transition-all';
                 }
             };
 
@@ -2000,9 +2010,9 @@ Thanks to these wonderful people: **kamalsoft**.
                 // Update skill buttons UI
                 document.querySelectorAll('.skill-btn').forEach(btn => {
                     if (btn.getAttribute('onclick').includes(`'${skillLevel}'`)) {
-                        btn.classList.add('bg-blue-50', 'dark:bg-blue-900/30', 'border-blue-200', 'dark:border-blue-800', 'text-blue-600', 'dark:text-blue-400');
+                        btn.classList.add('bg-violet-50', 'dark:bg-violet-900/30', 'border-violet-200', 'dark:border-violet-800', 'text-violet-600', 'dark:text-violet-400');
                     } else {
-                        btn.classList.remove('bg-blue-50', 'dark:bg-blue-900/30', 'border-blue-200', 'dark:border-blue-800', 'text-blue-600', 'dark:text-blue-400');
+                        btn.classList.remove('bg-violet-50', 'dark:bg-violet-900/30', 'border-violet-200', 'dark:border-violet-800', 'text-violet-600', 'dark:text-violet-400');
                     }
                 });
             };
@@ -2156,9 +2166,9 @@ Thanks to these wonderful people: **kamalsoft**.
                 // Styling based on level
                 const baseClasses = "block py-1.5 px-3 rounded-lg text-sm transition-all duration-200 hover:bg-slate-100 dark:hover:bg-slate-800 truncate";
                 if (header.tagName === 'H2') {
-                    link.className = `${baseClasses} font-semibold text-slate-700 dark:text-slate-200`;
+                    link.className = `${baseClasses} font-semibold text-zinc-700 dark:text-zinc-200`;
                 } else {
-                    link.className = `${baseClasses} ml-4 text-slate-500 dark:text-slate-400 border-l border-slate-200 dark:border-slate-700 pl-4`;
+                    link.className = `${baseClasses} ml-4 text-zinc-500 dark:text-zinc-400 border-l border-zinc-200 dark:border-zinc-700 pl-4`;
                 }
 
                 tocContainer.appendChild(link);

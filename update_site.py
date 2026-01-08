@@ -232,6 +232,63 @@ def update_changelog(content):
         print(f"Warning: Could not update changelog (git error?): {e}")
         return content, False
 
+def generate_quick_links(content):
+    print("Generating Quick Links navigation...")
+    
+    # Define mapping of keywords to icons for the quick grid
+    # We look for headers containing these keywords
+    quick_map = {
+        "Shortcuts": "⌨️",
+        "Terminal": "💻",
+        "Settings": "⚙️",
+        "Homebrew": "🍺",
+        "Troubleshooting": "🚑",
+        "Developer": "🛠️"
+    }
+    
+    headers = re.findall(r'^(#{2,3})\s+(.+)$', content, re.MULTILINE)
+    tiles = []
+    
+    for _, title in headers:
+        clean_title = re.sub(r'^[🟢🟡🟠🔴]\s*', '', title) # Remove status icons
+        clean_title = re.sub(r'\s*[🟢🟡🟠🔴]$', '', clean_title)
+        
+        for key, icon in quick_map.items():
+            if key in clean_title and len(tiles) < 6: # Limit to 6 tiles
+                slug = get_slug(title)
+                # Check if we already have this key to avoid duplicates (e.g. multiple Terminal headers)
+                if not any(t['label'] == key for t in tiles):
+                    tiles.append({'icon': icon, 'label': key, 'slug': slug})
+                break
+    
+    if not tiles:
+        return content, False
+        
+    # Construct HTML block
+    grid_html = '<div class="quick-grid">\n'
+    for t in tiles:
+        grid_html += f'  <a href="#{t["slug"]}" class="quick-tile"><span class="tile-icon">{t["icon"]}</span><span class="tile-label">{t["label"]}</span></a>\n'
+    grid_html += '</div>\n'
+    
+    # Inject after Hero section (which is usually the first thing after front matter/title)
+    # We look for the first separator "---"
+    pattern = r'(-\s--)'
+    match = re.search(pattern, content)
+    if match:
+        # Check if grid already exists to replace or insert
+        grid_pattern = r'(<div class="quick-grid">[\s\S]*?</div>)'
+        if re.search(grid_pattern, content):
+            new_content = re.sub(grid_pattern, grid_html, content, count=1)
+            if new_content != content:
+                return new_content, True
+        else:
+            # Insert after the first separator
+            end_pos = match.end()
+            new_content = content[:end_pos] + "\n\n" + grid_html + content[end_pos:]
+            return new_content, True
+            
+    return content, False
+
 def update_last_updated_badge(content):
     print("Updating Last Updated badge...")
     today = datetime.datetime.now().strftime("%Y--%m--%d")
@@ -485,6 +542,9 @@ def update_html():
         # Update TOC in Markdown if needed
         md_content, updated = update_toc(md_content)
         
+        # Generate Quick Links
+        md_content, quick_updated = generate_quick_links(md_content)
+        
         # Update Changelog
         md_content, log_updated = update_changelog(md_content)
         
@@ -508,7 +568,7 @@ def update_html():
         # Fix broken links
         md_content, fixed = fix_broken_links(md_content)
         
-        if updated or fixed or log_updated or related_updated or badge_updated or contrib_updated:
+        if updated or fixed or log_updated or related_updated or badge_updated or contrib_updated or quick_updated:
             with open(MD_FILE, 'w', encoding='utf-8') as f:
                 f.write(md_content)
             
