@@ -18,55 +18,13 @@ theme: jekyll-theme-cayman
 
 ## 📋 Table of Contents
 
-* [How to Use This Guide](#how-to-use-this-guide)
-* [Top 30 Essential Settings (New Users)](#top-30-essential-settings-for-new-mac-users)
-* [Opening Terminal - Step by Step](#opening-terminal---step-by-step)
-* [Getting Started (Beginners)](#getting-started-beginners)
-* [System Information & Hardware](#system-information--hardware)
-* [Apple Silicon Chip Comparison](#apple-silicon-chip-comparison)
-* [Terminal Command Reference](#terminal-command-reference)
-* [System Configuration](#system-configuration)
-* [Modern macOS Features](#modern-macos-features)
-* [Window Management Apps](#window-management-apps)
-* [Menu Bar Apps](#menu-bar-apps)
-* [Productivity Apps](#productivity-apps)
-* [Terminal Themes](#terminal-themes)
-* [Backup Strategies](#backup-strategies)
-* [Keyboard Shortcuts (Comprehensive)](#keyboard-shortcuts-comprehensive)
-* [Troubleshooting Guide](#troubleshooting-guide)
-* [Developer Tools (Mid-Level)](#developer-tools-mid-level)
-* [Homebrew Essentials](#homebrew-essentials)
-* [Virtualization](#virtualization)
-* [Gaming on Mac](#gaming-on-mac)
-* [Creative Tools](#creative-tools)
-* [Design Tools](#design-tools)
-* [Audio Tools](#audio-tools)
-* [Music Production](#music-production)
-* [Quick Look Plugins](#quick-look-plugins)
-* [Advanced Configuration (Pro)](#advanced-configuration-pro)
-* [Privacy & Security Deep Dive](#privacy--security-deep-dive)
-* [Maintenance & Cleaning](#maintenance--cleaning)
-* [Networking Tools](#networking-tools)
-* [Remote Access](#remote-access)
-* [File Management](#file-management)
-* [System Monitoring](#system-monitoring)
-* [Browser Extensions](#browser-extensions)
-* [Communication Apps](#communication-apps)
-* [Email Clients](#email-clients)
-* [Calendar & Task Apps](#calendar--task-apps)
-* [Finance & Budgeting](#finance--budgeting)
-* [Database Tools](#database-tools)
-* [Local Development](#local-development)
-* [Markdown Editors](#markdown-editors)
-* [Writing Tools](#writing-tools)
-* [Education & Research](#education--research)
-* [Mind Mapping](#mind-mapping)
-* [Utilities](#utilities)
-* [Clipboard Managers](#clipboard-managers)
-* [Automation](#automation)
-* [Expert-Level Techniques](#expert-level-techniques)
-* [Glossary](#glossary)
-* [Best Resources by Level](#best-resources-by-level)
+* [Beginner: Essentials](#beginner-essentials)
+* [Intermediate: Productivity](#intermediate-productivity)
+* [Power User: Workflows](#power-user-workflows)
+* [Developer: Ecosystem](#developer-ecosystem)
+* [Expert: Internals](#expert-internals)
+* [Troubleshooting & Maintenance](#troubleshooting--maintenance)
+* [Reference Cards](#reference-cards)
 
 ---
  
@@ -94,11 +52,13 @@ This cheat sheet is organized by skill level. Find your level and start there:
 
 ---
 
-## Top 30 Essential Settings for New Mac Users
+## Beginner: Essentials
 
-If you just got a new Mac or did a fresh install, go through this checklist to optimize your experience immediately.
+### 🚀 Top 30 Essential Settings
 
-### 🖱️ Trackpad & Mouse
+Optimize your experience immediately after a fresh install.
+
+#### 🖱️ Trackpad & Mouse
 <table class="shortcuts-table">
   <thead>
     <tr><th>Setting</th><th>Path</th><th>Action</th></tr>
@@ -112,7 +72,7 @@ If you just got a new Mac or did a fresh install, go through this checklist to o
   </tbody>
 </table>
 
-### 🖥️ Finder & Desktop
+#### 🖥️ Finder & Desktop
 <table class="shortcuts-table">
   <thead>
     <tr><th>Setting</th><th>Path</th><th>Action</th></tr>
@@ -128,7 +88,7 @@ If you just got a new Mac or did a fresh install, go through this checklist to o
   </tbody>
 </table>
 
-### ⚓ Dock & Menu Bar
+#### ⚓ Dock & Menu Bar
 <table class="shortcuts-table">
   <thead>
     <tr><th>Setting</th><th>Path</th><th>Action</th></tr>
@@ -143,7 +103,7 @@ If you just got a new Mac or did a fresh install, go through this checklist to o
   </tbody>
 </table>
 
-### 🛡️ Security & Privacy
+#### 🛡️ Security & Privacy
 <table class="shortcuts-table">
   <thead>
     <tr><th>Setting</th><th>Path</th><th>Action</th></tr>
@@ -156,7 +116,7 @@ If you just got a new Mac or did a fresh install, go through this checklist to o
   </tbody>
 </table>
 
-### ⚡ Performance & Power
+#### ⚡ Performance & Power
 <table class="shortcuts-table">
   <thead>
     <tr><th>Setting</th><th>Path</th><th>Action</th></tr>
@@ -168,7 +128,7 @@ If you just got a new Mac or did a fresh install, go through this checklist to o
   </tbody>
 </table>
 
-### 🌐 Safari & Internet
+#### 🌐 Safari & Internet
 <table class="shortcuts-table">
   <thead>
     <tr><th>Setting</th><th>Path</th><th>Action</th></tr>
@@ -180,7 +140,7 @@ If you just got a new Mac or did a fresh install, go through this checklist to o
   </tbody>
 </table>
 
-### 🛠️ Miscellaneous
+#### 🛠️ Miscellaneous
 <table class="shortcuts-table">
   <thead>
     <tr><th>Setting</th><th>Path</th><th>Action</th></tr>

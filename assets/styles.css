@@ -49,6 +49,20 @@ body {
   font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Helvetica Neue", Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   letter-spacing: -0.01em;
+  transition: background-image 1s ease;
+}
+
+/* Dynamic Wallpaper Gradients */
+body.morning { background-image: linear-gradient(135deg, #FFDEE9 0%, #B5FFFC 100%); }
+body.afternoon { background-image: linear-gradient(135deg, #89f7fe 0%, #66a6ff 100%); }
+body.evening { background-image: linear-gradient(135deg, #fa709a 0%, #fee140 100%); }
+body.night { background-image: linear-gradient(135deg, #0f172a 0%, #1e293b 100%); }
+
+/* Dark Mode Overrides for Wallpaper */
+[data-theme="dark"] body.morning { background-image: linear-gradient(135deg, #2c3e50 0%, #3498db 100%); }
+[data-theme="dark"] body.afternoon { background-image: linear-gradient(135deg, #232526 0%, #414345 100%); }
+[data-theme="dark"] body.evening { background-image: linear-gradient(135deg, #4b134f 0%, #c94b4b 100%); }
+[data-theme="dark"] body.night { background-image: linear-gradient(135deg, #0f172a 0%, #1e293b 100%); }
 }
 
 h1, h2, h3, h4, h5, h6 {
@@ -1466,12 +1480,17 @@ body.quick-ref-mode #exit-zen-btn {
   backdrop-filter: blur(5px);
   text-align: center;
   max-width: 600px;
-  display: none;
+  display: none !important; /* Hidden by default */
 }
 
-#shortcut-of-the-day.visible {
-  display: block;
+#shortcut-of-the-day.visible { /* Still hidden unless dark mode */
+  display: none !important;
   animation: fadeIn 0.5s ease-out;
+}
+
+/* Only show in Dark Mode */
+[data-theme="dark"] #shortcut-of-the-day.visible {
+  display: block !important;
 }
 
 #shortcut-of-the-day h3 {
@@ -1492,4 +1511,106 @@ body.quick-ref-mode #exit-zen-btn {
 .searchable-section {
   display: block;
   width: 100%;
+}
+
+/* Dock Navigation */
+.dock-nav {
+  position: fixed;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: rgba(255, 255, 255, 0.25);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  border-radius: 24px;
+  padding: 12px 24px;
+  display: flex;
+  gap: 20px;
+  z-index: 2000;
+  box-shadow: 0 15px 35px rgba(0,0,0,0.2);
+  transition: bottom 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+
+.dock-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-decoration: none;
+  color: var(--text-color);
+  font-size: 0.75rem;
+  font-weight: 500;
+  transition: transform 0.2s cubic-bezier(0.25, 0.8, 0.25, 1);
+  cursor: pointer;
+  opacity: 0.85;
+}
+
+.dock-item:hover {
+  transform: scale(1.2) translateY(-8px);
+  opacity: 1;
+}
+
+.dock-icon {
+  font-size: 1.8rem;
+  margin-bottom: 4px;
+  filter: drop-shadow(0 2px 4px rgba(0,0,0,0.1));
+}
+
+@media (max-width: 768px) {
+  .dock-nav {
+    bottom: 10px;
+    padding: 10px 15px;
+    gap: 15px;
+    width: 95%;
+    border-radius: 16px;
+    justify-content: space-around;
+  }
+  .dock-icon { font-size: 1.4rem; }
+  .dock-item span { display: none; }
+}
+
+.site-footer {
+  padding-bottom: 100px; /* Space for Dock */
+}
+
+/* Time Zone Converter */
+#timezone-converter {
+  padding: 1.5rem;
+  margin: 1rem 0;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  align-items: center;
+}
+
+.tz-controls {
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.tz-controls select, .tz-controls input {
+  padding: 0.5rem;
+  border-radius: 8px;
+  border: 1px solid var(--glass-border);
+  background: var(--glass-bg);
+  color: var(--text-color);
+  font-family: inherit;
+}
+
+#tz-result {
+  font-size: 1.2rem;
+  font-weight: bold;
+  color: var(--heading-color);
+}
+
+.glass-card {
+  background: var(--glass-bg);
+  border: 1px solid var(--glass-border);
+  border-radius: 16px;
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(5px);
+  -webkit-backdrop-filter: blur(5px);
 }
