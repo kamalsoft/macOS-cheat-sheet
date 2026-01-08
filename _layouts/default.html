@@ -16,6 +16,35 @@
         <ul id="command-list"></ul>
       </div>
     </div>
+    <div id="settings-modal-overlay">
+      <div id="settings-modal">
+        <h2>⚙️ Settings</h2>
+        <div class="setting-group">
+          <label>Font Size: <span id="font-size-val">16px</span></label>
+          <input type="range" id="font-size-input" min="12" max="24" value="16" style="width: 100%;">
+        </div>
+        <div class="setting-group">
+          <label>Theme Color</label>
+          <input type="color" id="theme-color-input" value="#159957" style="width: 100%; height: 40px;">
+        </div>
+        <div style="display: flex; gap: 10px; justify-content: flex-end;">
+          <button id="reset-settings-btn" style="padding: 8px 16px; border-radius: 8px; border: 1px solid #ccc; cursor: pointer;">Reset</button>
+          <button id="close-settings-btn" style="padding: 8px 16px; border-radius: 8px; background: var(--heading-color); color: white; border: none; cursor: pointer;">Close</button>
+        </div>
+      </div>
+    </div>
+    <div id="shortcuts-overlay">
+      <div id="shortcuts-modal">
+        <h2>⌨️ Site Shortcuts</h2>
+        <ul class="shortcut-list">
+          <li><span>Focus Search</span> <code>/</code></li>
+          <li><span>Command Palette</span> <code>Cmd</code> + <code>K</code></li>
+          <li><span>Show this help</span> <code>?</code></li>
+          <li><span>Close overlays</span> <code>Esc</code></li>
+        </ul>
+        <button id="close-shortcuts-btn" style="width:100%; padding: 10px; background: var(--heading-color); color: white; border: none; border-radius: 8px; cursor: pointer;">Close</button>
+      </div>
+    </div>
     <div id="progress-container">
       <div id="progress-bar"></div>
     </div>
@@ -37,6 +66,7 @@
         <button id="mobile-menu-btn">☰ Menu</button>
         <button id="print-btn">🖨️ PDF</button>
         <button id="share-btn">🔗 Share</button>
+        <button id="settings-btn">⚙️ Settings</button>
         <button id="zen-mode-toggle">🧘 Zen Mode</button>
         <button id="dark-mode-toggle">🌙 Dark Mode</button>
       </div>
@@ -296,6 +326,7 @@
       const cmdInput = document.getElementById('command-input');
       const cmdList = document.getElementById('command-list');
       let cmdItems = [];
+      let cmdHistory = JSON.parse(localStorage.getItem('cmd_history')) || [];
 
       function openCommandPalette() {
         cmdPaletteOverlay.style.display = 'flex';
@@ -312,6 +343,22 @@
         cmdList.innerHTML = '';
         cmdItems = [];
 
+        // Add History
+        if (cmdHistory.length > 0) {
+          const historyHeader = document.createElement('li');
+          historyHeader.innerHTML = '<strong>🕒 Recently Visited</strong>';
+          historyHeader.style.pointerEvents = 'none';
+          historyHeader.style.background = 'transparent';
+          cmdList.appendChild(historyHeader);
+
+          cmdHistory.forEach(item => {
+            createCmdItem(item.title, () => {
+              window.location.hash = item.id;
+              addToHistory(item.id, item.title);
+            }, 'History', true);
+          });
+        }
+
         // Add Actions
         const actions = [
           { title: 'Toggle Dark Mode', action: () => toggleBtn.click(), shortcut: 'Theme' },
@@ -327,14 +374,16 @@
         // Add Sections
         document.querySelectorAll('.page-content h2').forEach(header => {
           if (header.id) {
-            createCmdItem('Go to: ' + header.textContent.replace('⭐', '').replace('☆', '').trim(), () => {
+            const title = header.textContent.replace('⭐', '').replace('☆', '').trim();
+            createCmdItem('Go to: ' + title, () => {
               window.location.hash = header.id;
+              addToHistory(header.id, title);
             }, 'Section');
           }
         });
       }
 
-      function createCmdItem(text, action, shortcut) {
+      function createCmdItem(text, action, shortcut, isHistory = false) {
         const li = document.createElement('li');
         li.innerHTML = `<span>${text}</span>${shortcut ? `<span class="cmd-shortcut">${shortcut}</span>` : ''}`;
         li.addEventListener('click', () => {
@@ -342,7 +391,9 @@
           closeCommandPalette();
         });
         cmdList.appendChild(li);
-        cmdItems.push({ element: li, text: text.toLowerCase() });
+        if (!isHistory) {
+          cmdItems.push({ element: li, text: text.toLowerCase() });
+        }
       }
 
       // Filter List
@@ -367,6 +418,85 @@
       // Close on click outside
       cmdPaletteOverlay.addEventListener('click', (e) => {
         if (e.target === cmdPaletteOverlay) closeCommandPalette();
+      });
+
+      function addToHistory(id, title) {
+        cmdHistory = cmdHistory.filter(item => item.id !== id);
+        cmdHistory.unshift({ id, title });
+        if (cmdHistory.length > 5) cmdHistory.pop();
+        localStorage.setItem('cmd_history', JSON.stringify(cmdHistory));
+      }
+
+      // Settings Modal Logic
+      const settingsBtn = document.getElementById('settings-btn');
+      const settingsOverlay = document.getElementById('settings-modal-overlay');
+      const closeSettingsBtn = document.getElementById('close-settings-btn');
+      const resetSettingsBtn = document.getElementById('reset-settings-btn');
+      const fontSizeInput = document.getElementById('font-size-input');
+      const fontSizeVal = document.getElementById('font-size-val');
+      const themeColorInput = document.getElementById('theme-color-input');
+
+      // Load Settings
+      const savedFontSize = localStorage.getItem('fontSize') || '16';
+      const savedThemeColor = localStorage.getItem('themeColor') || '#159957';
+
+      function applySettings(fontSize, themeColor) {
+        document.documentElement.style.setProperty('--base-font-size', fontSize + 'px');
+        document.documentElement.style.setProperty('--heading-color', themeColor);
+        fontSizeInput.value = fontSize;
+        fontSizeVal.textContent = fontSize + 'px';
+        themeColorInput.value = themeColor;
+      }
+
+      applySettings(savedFontSize, savedThemeColor);
+
+      settingsBtn.addEventListener('click', () => {
+        settingsOverlay.style.display = 'flex';
+      });
+
+      closeSettingsBtn.addEventListener('click', () => {
+        settingsOverlay.style.display = 'none';
+      });
+      
+      settingsOverlay.addEventListener('click', (e) => {
+        if (e.target === settingsOverlay) settingsOverlay.style.display = 'none';
+      });
+
+      fontSizeInput.addEventListener('input', (e) => {
+        const val = e.target.value;
+        fontSizeVal.textContent = val + 'px';
+        document.documentElement.style.setProperty('--base-font-size', val + 'px');
+        localStorage.setItem('fontSize', val);
+      });
+
+      themeColorInput.addEventListener('input', (e) => {
+        const val = e.target.value;
+        document.documentElement.style.setProperty('--heading-color', val);
+        localStorage.setItem('themeColor', val);
+      });
+
+      resetSettingsBtn.addEventListener('click', () => {
+        localStorage.removeItem('fontSize');
+        localStorage.removeItem('themeColor');
+        applySettings('16', '#159957');
+      });
+
+      // Shortcuts Overlay Logic
+      const shortcutsOverlay = document.getElementById('shortcuts-overlay');
+      const closeShortcutsBtn = document.getElementById('close-shortcuts-btn');
+
+      document.addEventListener('keydown', (e) => {
+        if (e.key === '?' && document.activeElement.tagName !== 'INPUT') {
+          shortcutsOverlay.style.display = 'flex';
+        }
+        if (e.key === 'Escape' && shortcutsOverlay.style.display === 'flex') {
+          shortcutsOverlay.style.display = 'none';
+        }
+      });
+
+      closeShortcutsBtn.addEventListener('click', () => shortcutsOverlay.style.display = 'none');
+      shortcutsOverlay.addEventListener('click', (e) => {
+        if (e.target === shortcutsOverlay) shortcutsOverlay.style.display = 'none';
       });
     </script>
 
@@ -393,6 +523,7 @@
           const a = document.createElement('a');
           a.textContent = header.textContent;
           a.href = '#' + header.id;
+          a.addEventListener('click', () => addToHistory(header.id, header.textContent.replace('⭐', '').replace('☆', '').trim()));
           li.appendChild(a);
           tocList.appendChild(li);
         }
