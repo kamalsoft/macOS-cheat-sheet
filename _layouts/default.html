@@ -48,6 +48,14 @@
     <div id="progress-container">
       <div id="progress-bar"></div>
     </div>
+    <div id="mobile-fab-container">
+      <div id="mobile-fab-menu">
+        <button id="fab-toc-btn" class="fab-action-btn">📑 Contents</button>
+        <button id="fab-search-btn" class="fab-action-btn">🔍 Search</button>
+        <button id="fab-settings-btn" class="fab-action-btn">⚙️ Settings</button>
+      </div>
+      <button id="mobile-fab-main">➕</button>
+    </div>
     <button id="exit-zen-btn">Exit Zen Mode</button>
     <a id="skip-to-content" href="#content">Skip to the content.</a>
 
@@ -83,6 +91,10 @@
               <button id="export-favorites-btn" title="Export Favorites to JSON" style="background:none; border:none; cursor:pointer; font-size:1.2rem;">📥</button>
             </div>
             <ul id="favorites-list"><li class="favorites-placeholder">Click stars to bookmark sections</li></ul>
+          </div>
+          <div class="toc-controls">
+            <span style="font-size: 0.85rem; font-weight: bold; color: var(--heading-color); text-transform: uppercase;">Contents</span>
+            <button id="toc-toggle-btn">Collapse All</button>
           </div>
           <ul id="toc-list"></ul>
         </aside>
@@ -504,29 +516,80 @@
     <script>
       // Generate TOC
       const tocList = document.getElementById('toc-list');
-      const headers = document.querySelectorAll('.page-content h2');
+      const headers = document.querySelectorAll('.page-content h2, .page-content h3');
+      let currentSublist = null;
       
       headers.forEach(header => {
         if (header.id) {
-          // Add Favorite Button
-          const favBtn = document.createElement('button');
-          favBtn.className = 'favorite-btn';
-          favBtn.setAttribute('data-id', header.id);
-          favBtn.textContent = '☆';
-          favBtn.onclick = (e) => {
-            e.stopPropagation();
-            toggleFavorite(header.id);
-          };
-          header.appendChild(favBtn);
+          const isH2 = header.tagName.toLowerCase() === 'h2';
+          
+          // Add Favorite Button (Only for H2s to keep UI clean)
+          if (isH2) {
+            const favBtn = document.createElement('button');
+            favBtn.className = 'favorite-btn';
+            favBtn.setAttribute('data-id', header.id);
+            favBtn.textContent = '☆';
+            favBtn.onclick = (e) => {
+              e.stopPropagation();
+              toggleFavorite(header.id);
+            };
+            header.appendChild(favBtn);
+          }
 
+          // Create List Item
           const li = document.createElement('li');
           const a = document.createElement('a');
-          a.textContent = header.textContent;
+          a.textContent = header.textContent.replace('⭐', '').replace('☆', '').trim();
           a.href = '#' + header.id;
-          a.addEventListener('click', () => addToHistory(header.id, header.textContent.replace('⭐', '').replace('☆', '').trim()));
+          a.addEventListener('click', () => addToHistory(header.id, a.textContent));
           li.appendChild(a);
-          tocList.appendChild(li);
+
+          // Calculate Read Time for H2
+          if (isH2) {
+            let sectionText = '';
+            let nextNode = header.nextElementSibling;
+            while (nextNode && nextNode.tagName !== 'H2') {
+              sectionText += nextNode.innerText + ' ';
+              nextNode = nextNode.nextElementSibling;
+            }
+            const wordCount = sectionText.trim().split(/\s+/).length;
+            const readTime = Math.ceil(wordCount / 200);
+            if (readTime > 0) {
+              const timeSpan = document.createElement('span');
+              timeSpan.className = 'toc-read-time';
+              timeSpan.textContent = `${readTime} min`;
+              a.appendChild(timeSpan);
+            }
+          }
+
+          if (isH2) {
+            li.className = 'toc-h2-item';
+            const ul = document.createElement('ul');
+            ul.className = 'toc-sublist';
+            li.appendChild(ul);
+            currentSublist = ul;
+            tocList.appendChild(li);
+          } else {
+            li.className = 'toc-h3-item';
+            if (currentSublist) {
+              currentSublist.appendChild(li);
+            } else {
+              tocList.appendChild(li);
+            }
+          }
         }
+      });
+
+      // Collapse/Expand Logic
+      const tocToggleBtn = document.getElementById('toc-toggle-btn');
+      let tocExpanded = true;
+
+      tocToggleBtn.addEventListener('click', () => {
+        tocExpanded = !tocExpanded;
+        document.querySelectorAll('.toc-sublist').forEach(ul => {
+          ul.style.display = tocExpanded ? 'block' : 'none';
+        });
+        tocToggleBtn.textContent = tocExpanded ? 'Collapse All' : 'Expand All';
       });
 
       // Initialize Favorites
@@ -575,6 +638,31 @@
         document.getElementById('reading-time').innerText = `📚 Estimated reading time: ${time} min`;
       }
       calculateReadingTime();
+
+      // Mobile FAB Logic
+      const fabMain = document.getElementById('mobile-fab-main');
+      const fabMenu = document.getElementById('mobile-fab-menu');
+      const fabToc = document.getElementById('fab-toc-btn');
+      const fabSearch = document.getElementById('fab-search-btn');
+      const fabSettings = document.getElementById('fab-settings-btn');
+
+      fabMain.addEventListener('click', () => {
+        fabMain.classList.toggle('active');
+        fabMenu.classList.toggle('visible');
+      });
+
+      fabToc.addEventListener('click', () => {
+        toggleMobileMenu();
+        fabMain.click(); // Close menu
+      });
+      fabSearch.addEventListener('click', () => {
+        document.getElementById('search-input').focus();
+        fabMain.click();
+      });
+      fabSettings.addEventListener('click', () => {
+        document.getElementById('settings-btn').click();
+        fabMain.click();
+      });
     </script>
     
     {% if site.google_analytics %}

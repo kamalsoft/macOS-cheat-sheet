@@ -111,7 +111,7 @@ If you just got a new Mac or did a fresh install, go through this checklist to o
 | **Show Extensions** | `Finder Settings` → `Advanced` | Check Show all filename extensions |
 | **Show Path Bar** | `Finder View Menu` | Click Show Path Bar |
 | **Show Status Bar** | `Finder View Menu` | Click Show Status Bar |
-| **New Window Loc** | `Finder Settings` → `General` | Set to Home Directory |
+| **New Window Location** | `Finder Settings` → `General` | Set to Home Directory |
 | **Search Scope** | `Finder Settings` → `Advanced` | Set to Search the Current Folder |
 | **Clean Up** | Right-click Desktop | Click Use Stacks |
 | **Sidebar** | `Finder Settings` → `Sidebar` | Check Movies, Music, Pictures, Home |
@@ -871,6 +871,8 @@ The world's most widely-used network protocol analyzer.
 
 ### 2. Little Snitch (Paid) 🟠
 The ultimate network monitor and application firewall.
+- **Features:** Real-time traffic map, per-app connection alerts, bandwidth usage history.
+- **Why use it:** See exactly where your data is going.
 
 
 ## Remote Access
@@ -889,6 +891,7 @@ View and control your Mac's screen from another Apple device.
 
 ### 3. Microsoft Remote Desktop (Free) 🟡
 The best way to access a Windows PC from your Mac.
+- **Install:** Mac App Store or `brew install --cask microsoft-remote-desktop`
 
 
 ## File Management
@@ -902,6 +905,8 @@ Classic dual-pane file manager inspired by Norton Commander.
 
 ### 2. ForkLift (Paid) 🟠
 A robust dual-pane file manager and file transfer client.
+- **Install:** `brew install --cask forklift`
+- **Best for:** Connecting to remote servers (SFTP, S3) and local file management.
 
 
 ## System Monitoring
@@ -917,6 +922,8 @@ The best free menu bar monitor for macOS.
 The gold standard for system monitoring with beautiful weather and calendar integration.
 
 ### 3. Activity Monitor (Built-in) 🟢
+- **Tip:** View → Dock Icon → Show CPU Usage (Turn your dock icon into a live graph).
+- **Tip:** Check "Memory Pressure" (Green is good, Yellow/Red means you need more RAM).
 
 
 ## Browser Extensions
@@ -930,6 +937,8 @@ The most efficient content blocker.
 
 ### 2. 1Password (Paid) 🟢
 Securely manage passwords and passkeys.
+- **Integration:** Unlocks with Touch ID on your Mac.
+- **Alternative (Free):** Bitwarden.
 
 
 ## Communication Apps
@@ -945,6 +954,8 @@ Stay connected with teams and communities.
 - **Tip:** Adjust "Noise Suppression" (Krisp) in Voice settings for crystal clear audio.
 
 ### 3. Zoom (Free / Paid) 🟢
+- **Mute Toggle:** `Cmd + Shift + A` (Audio).
+- **Video Toggle:** `Cmd + Shift + V` (Video).
 
 
 ## Email Clients
@@ -962,6 +973,7 @@ A native macOS client for Gmail.
 
 ### 3. Apple Mail (Built-in) 🟢
 Reliable, secure, and integrated.
+- **Pros:** Privacy protection, Hide My Email integration, extensions support.
 
 
 ## Calendar & Task Apps
@@ -975,6 +987,8 @@ The best calendar app for macOS, period.
 ### 2. Things 3 (Paid) 🟢
 The most polished and "Apple-like" task manager.
 - **Design:** Award-winning minimalist interface.
+- **Philosophy:** Based on GTD (Getting Things Done).
+- **Alternative (Free):** Apple Reminders (which has gotten very good recently).
 
 
 ## Finance & Budgeting
@@ -988,6 +1002,8 @@ The gold standard for zero-based budgeting.
 
 ### 2. Banktivity (Paid) 🟠
 A comprehensive personal finance manager for macOS.
+- **Best for:** Tracking investments, real estate, and multi-currency support.
+- **Privacy:** Local-first data storage options.
 
 
 ## Database Tools
@@ -1001,6 +1017,8 @@ A modern, native, and friendly GUI tool for relational databases.
 
 ### 2. DBngin (Free) 🟢
 The easiest way to get started with a local database server.
+- **Use:** Spin up a local PostgreSQL, MySQL, or Redis server in one click.
+- **Integration:** Works perfectly with TablePlus.
 
 
 ## Local Development
@@ -1018,6 +1036,7 @@ The classic Mac, Apache, MySQL, PHP stack.
 
 ### 3. XAMPP (Free) 🟡
 Open source cross-platform web server solution.
+- **Use:** Widely used, but can be heavier than Herd.
 
 
 ## Markdown Editors
@@ -1036,6 +1055,7 @@ Beautiful, native Apple ecosystem note-taking app.
 
 ### 3. Typora (Paid) 🟢
 A seamless "what you see is what you get" (WYSIWYG) markdown editor.
+- **Best for:** Distraction-free writing where the markdown syntax hides as you type.
 
 
 ## Writing Tools
@@ -1049,6 +1069,7 @@ The ultimate tool for novelists, researchers, and scriptwriters.
 
 ### 2. Ulysses (Paid) 🟢
 A polished, distraction-free writing app for the Apple ecosystem.
+- **Features:** Markdown-based, seamless iCloud sync, direct publishing to WordPress/Medium.
 
 
 ## Education & Research
@@ -1061,6 +1082,8 @@ The best tool to collect, organize, cite, and share research.
 
 ### 2. Anki (Free & Open Source) 🟢
 Powerful, intelligent flashcards.
+- **Method:** Uses Spaced Repetition to help you remember things forever.
+- **Best for:** Language learning, medical school, memorizing shortcuts.
 
 
 ## Mind Mapping
@@ -1074,6 +1097,7 @@ The most beautiful and native mind mapping experience on Mac.
 
 ### 2. XMind (Freemium) 🟡
 A professional, cross-platform mind mapping tool.
+- **Features:** Pitch mode, various chart structures (fishbone, matrix), and extensive export options.
 
 
 ## Utilities
@@ -1091,6 +1115,7 @@ Open any archive format (RAR, 7z, Tar, etc.) that macOS doesn't support natively
 
 ### 3. CheatSheet (Free) 🟢
 Hold the `⌘ Command` key to see a list of all active shortcuts for the current app.
+- **Install:** `brew install --cask cheatsheet`
 
 
 ## Clipboard Managers
@@ -1104,6 +1129,7 @@ Lightweight, keyboard-centric clipboard manager.
 
 ### 2. Paste (Paid) 🟢
 Visual clipboard history for Mac, iPhone, and iPad.
+- **Features:** Sync across devices, pin items, visual preview of links/images.
 
 
 ## Automation
@@ -1117,6 +1143,8 @@ Apple's modern automation tool.
 
 ### 2. Automator (Built-in) 🟡
 Legacy tool, great for file system operations.
+- **Folder Actions:** Automatically process files dropped into a folder.
+- **Quick Actions:** Add custom buttons to the Finder Touch Bar or Right-Click menu.
 
 
 ## Expert-Level Techniques
