@@ -32,7 +32,7 @@
     <priority>0.5</priority>
   </url>
   <url>
-    <loc>https://kamalsoft.github.io/macOS-cheat-sheet/#top-30-essential-settings</loc>
+    <loc>https://kamalsoft.github.io/macOS-cheat-sheet/#top-50-essential-settings</loc>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
@@ -103,6 +103,26 @@
   </url>
   <url>
     <loc>https://kamalsoft.github.io/macOS-cheat-sheet/#generation-comparison</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://kamalsoft.github.io/macOS-cheat-sheet/#related-topics</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://kamalsoft.github.io/macOS-cheat-sheet/#macos-26-tahoe-preview</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://kamalsoft.github.io/macOS-cheat-sheet/#liquid-glass-ui</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://kamalsoft.github.io/macOS-cheat-sheet/#spotlight-quick-keys</loc>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>

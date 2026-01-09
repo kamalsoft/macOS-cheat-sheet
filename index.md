@@ -12,13 +12,13 @@
 - --
 
 <div class="quick-nav-sidebar">
-  <a href="#top-30-essential-settings" class="quick-nav-item" title="Settings">⚙️</a>
-  <a href="#opening-terminal-step-by-step" class="quick-nav-item" title="Terminal">💻</a>
-  <a href="#keyboard-shortcuts-comprehensive" class="quick-nav-item" title="Shortcuts">⌨️</a>
-  <a href="#troubleshooting-guide" class="quick-nav-item" title="Troubleshooting">🚑</a>
-  <a href="#developer-tools-mid-level" class="quick-nav-item" title="Developer">🛠️</a>
-  <a href="#2-homebrew-the-missing-package-manager" class="quick-nav-item" title="Homebrew">🍺</a>
-  <a href="#virtualization" class="quick-nav-item" title="Virtualization">🖥️</a>
+  <a href="#top-50-essential-settings" class="quick-nav-item" title="Settings"><span class="nav-icon">⚙️</span><span class="quick-nav-label">Settings</span></a>
+  <a href="#opening-terminal-step-by-step" class="quick-nav-item" title="Terminal"><span class="nav-icon">💻</span><span class="quick-nav-label">Terminal</span></a>
+  <a href="#keyboard-shortcuts-comprehensive" class="quick-nav-item" title="Shortcuts"><span class="nav-icon">⌨️</span><span class="quick-nav-label">Shortcuts</span></a>
+  <a href="#troubleshooting-guide" class="quick-nav-item" title="Troubleshooting"><span class="nav-icon">🚑</span><span class="quick-nav-label">Troubleshooting</span></a>
+  <a href="#developer-tools-mid-level" class="quick-nav-item" title="Developer"><span class="nav-icon">🛠️</span><span class="quick-nav-label">Developer</span></a>
+  <a href="#2-homebrew-the-missing-package-manager" class="quick-nav-item" title="Homebrew"><span class="nav-icon">🍺</span><span class="quick-nav-label">Homebrew</span></a>
+  <a href="#virtualization" class="quick-nav-item" title="Virtualization"><span class="nav-icon">🖥️</span><span class="quick-nav-label">Virtualization</span></a>
 </div>
 
 
@@ -31,7 +31,7 @@
     <details>
       <summary><a href="#beginner-essentials">Beginner: Essentials</a></summary>
       <ul>
-        <li><a href="#top-30-essential-settings">🚀 Top 30 Essential Settings</a></li>
+        <li><a href="#top-50-essential-settings">🚀 Top 50 Essential Settings</a></li>
       </ul>
     </details>
     <details>
@@ -58,6 +58,13 @@
       <ul>
         <li><a href="#chip-tiers-explained">📊 Chip Tiers Explained</a></li>
         <li><a href="#generation-comparison">🚀 Generation Comparison</a></li>
+      </ul>
+    </details>
+    <details>
+      <summary><a href="#macos-26-tahoe-preview">✨ macOS 26 Tahoe (Preview)</a></summary>
+      <ul>
+        <li><a href="#liquid-glass-ui">Liquid Glass UI</a></li>
+        <li><a href="#spotlight-quick-keys">Spotlight Quick Keys</a></li>
       </ul>
     </details>
     <details>
@@ -393,7 +400,7 @@ This guide is organized by skill level. Find your level and start there:
 
 | Level | Description | Start Here |
 |-------|-------------|-----------|
-| 🟢 **Beginner** | New to Mac, learning basics | [Top 30 Settings](#top-30-essential-settings) |
+| 🟢 **Beginner** | New to Mac, learning basics | [Top 50 Settings](#top-50-essential-settings) |
 | 🟡 **Mid-Level** | Comfortable with Mac, want to do more | [Developer Tools](#developer-tools-mid-level) |
 | 🟠 **Pro** | Advanced user, customization & automation | [Advanced Configuration](#advanced-configuration-pro) |
 | 🔴 **Expert** | System administration, scripting, optimization | [Expert Techniques](#expert-level-techniques) |
@@ -420,7 +427,7 @@ This guide is organized by skill level. Find your level and start there:
 
 ## Beginner: Essentials
 
-### 🚀 Top 30 Essential Settings
+### 🚀 Top 50 Essential Settings
 
 Optimize your experience immediately after a fresh install.
 
@@ -632,7 +639,7 @@ Understanding the differences between the M-Series chips will help you understan
 | **Base** (M1–M4) | Everyday tasks, office work, light editing, browsing. | Students, Writers, Office Workers |
 | **Pro** (M1–M4 Pro) | Heavy multitasking, coding, photo editing, light video. | Developers, Photographers, Creators |
 | **Max** (M1–M4 Max) | 3D rendering, 4K/8K video editing, complex compiling. | Video Editors, 3D Artists, Engineers |
-| **Ultra** (M1–M3 Ultra) | Extreme workstation tasks, scientific compute. | Studios, Data Scientists |
+| **Ultra** (M1–M4 Ultra) | Extreme workstation tasks, scientific compute. | Studios, Data Scientists |
 
 ### 🚀 Generation Comparison
 
@@ -643,6 +650,24 @@ Understanding the differences between the M-Series chips will help you understan
 | **M3 (2023)** | 3nm Process. Hardware Ray Tracing. Dynamic Caching. | ~15-20% faster than M2. Massive GPU leap. |
 | **M4 (2024)** | AI Focused. Enhanced Neural Engine. Efficiency boost. | Significant AI/ML performance gains. |
 
+
+### 🔗 Related Topics
+
+- [Getting Started (Beginners)](#getting-started-beginners)
+
+## ✨ macOS 26 Tahoe (Preview)
+
+The next generation of macOS is here, optimized for M1–M4 Verified silicon.
+
+### Liquid Glass UI
+A complete redesign of the Aqua interface, featuring:
+- **Adaptive Transparency:** Windows adjust opacity based on focus depth.
+- **Depth Layers:** 3D spatial awareness for window management.
+
+### Spotlight Quick Keys
+- **Cmd + Space (Hold):** Activates voice command mode.
+- **Smart Actions:** "Send file to John" works instantly via NLP.
+
 [↑ Back to Top](#table-of-contents)
 
 - --
@@ -652,7 +677,7 @@ Understanding the differences between the M-Series chips will help you understan
 
 - [Getting Started (Beginners)](#getting-started-beginners)
 - [System Information & Hardware](#system-information-hardware)
-- [Creative Tools](#creative-tools)
+- [How to Use This Guide](#how-to-use-this-guide)
 
 ## Terminal Command Reference
 

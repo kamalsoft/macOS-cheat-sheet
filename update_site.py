@@ -293,7 +293,7 @@ def generate_quick_sidebar(content):
     # Construct HTML block
     sidebar_html = '<div class="quick-nav-sidebar">\n'
     for t in tiles:
-        sidebar_html += f'  <a href="#{t["slug"]}" class="quick-nav-item" title="{t["label"]}">{t["icon"]}</a>\n'
+        sidebar_html += f'  <a href="#{t["slug"]}" class="quick-nav-item" title="{t["label"]}"><span class="nav-icon">{t["icon"]}</span><span class="quick-nav-label">{t["label"]}</span></a>\n'
     sidebar_html += '</div>\n'
     
     # Inject after Hero section (which is usually the first thing after front matter/title)
@@ -716,27 +716,56 @@ def inject_styles(html_content):
             width: 80px; flex-shrink: 0;
             position: fixed; top: 50%; left: 20px; transform: translateY(-50%);
             height: auto;
-            background: rgba(255, 255, 255, 0.05);
-            backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
-            padding: 15px; border-radius: 16px;
+            background: var(--card-bg);
+            padding: 12px; border-radius: 16px;
             box-shadow: var(--shadow); 
-            border: 1px solid rgba(255, 255, 255, 0.2);
+            border: 1px solid var(--border-color);
             z-index: 50;
-            display: flex; flex-direction: column; gap: 15px; align-items: center;
+            display: flex; flex-direction: column; gap: 10px; align-items: flex-start;
+            transition: width 0.2s ease;
+            overflow: hidden;
+        }
+        .quick-nav-sidebar.expanded {
+            width: 240px;
         }
         html.dark .quick-nav-sidebar {
-            background: rgba(0, 0, 0, 0.2);
-            border: 1px solid rgba(255, 255, 255, 0.1);
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
         }
         .quick-nav-item { 
-            font-size: 1.8rem; transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); 
-            display: flex; justify-content: center; align-items: center;
-            width: 50px; height: 50px; border-radius: 12px;
+            font-size: 1rem; transition: background-color 0.2s ease, color 0.2s ease; 
+            display: flex; justify-content: flex-start; align-items: center;
+            width: 100%; height: 44px; border-radius: 8px;
             color: var(--text-color);
+            padding: 0 12px;
+            gap: 12px;
+            box-sizing: border-box;
         }
-        .quick-nav-item:hover { transform: scale(1.15); background: rgba(0,0,0,0.05); }
-        html.dark .quick-nav-item:hover { background: rgba(255,255,255,0.1); }
+        .quick-nav-item:hover { background: var(--code-bg); color: var(--accent); }
+        html.dark .quick-nav-item:hover { background: var(--code-bg); }
+        
+        .nav-icon { font-size: 1.2rem; min-width: 24px; text-align: center; }
+        .quick-nav-label { 
+            display: none; white-space: nowrap; font-weight: 500; opacity: 0; transition: opacity 0.2s; 
+        }
+        .quick-nav-sidebar.expanded .quick-nav-label { display: block; opacity: 1; }
+        
+        /* Quick Actions Menu */
+        #quick-actions-menu {
+            position: absolute; left: 100%; top: 0; margin-left: 15px;
+            background: var(--card-bg); border: 1px solid var(--border-color);
+            border-radius: 16px; padding: 10px; box-shadow: var(--shadow);
+            display: none; flex-direction: column; gap: 5px; z-index: 60;
+            width: 220px;
+        }
+        #quick-actions-menu.visible { display: flex; }
+        .action-btn {
+            text-align: left; padding: 10px; border-radius: 8px;
+            background: transparent; border: none; color: var(--text-color);
+            cursor: pointer; transition: background 0.2s;
+            display: flex; align-items: center; gap: 10px; font-size: 0.9rem;
+        }
+        .action-btn:hover { background: var(--code-bg); }
         
         /* Command Palette */
         .search-trigger {
@@ -802,10 +831,17 @@ def inject_styles(html_content):
             text-transform: uppercase; letter-spacing: 0.05em;
         }
         
-        /* Table of Contents Grid */
-        .toc-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; margin-bottom: 40px; }
-        .toc-column { background: var(--card-bg); padding: 20px; border-radius: 12px; border: 1px solid var(--border-color); box-shadow: var(--shadow); }
-        .toc-column h3 { margin-top: 0; border-bottom: 1px solid var(--border-color); padding-bottom: 10px; font-size: 1.2rem; margin-bottom: 15px; }
+        /* Table of Contents Grid (Bento) */
+        .toc-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 24px; margin-bottom: 40px; }
+        .toc-column { 
+            background: rgba(255, 255, 255, 0.03); 
+            backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);
+            padding: 24px; border-radius: 24px; 
+            border: 1px solid var(--border-color); box-shadow: 0 4px 6px rgba(0,0,0,0.05); 
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+        .toc-column:hover { transform: translateY(-4px); box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1); }
+        .toc-column h3 { margin-top: 0; border-bottom: 1px solid var(--border-color); padding-bottom: 12px; font-size: 1.2rem; margin-bottom: 16px; }
         .toc-item { margin-bottom: 8px; }
         
         details { margin-bottom: 8px; }
@@ -957,6 +993,31 @@ def inject_styles(html_content):
             border-radius: 4px; padding: 2px 6px; font-family: monospace;
             font-size: 0.9rem; box-shadow: 0 1px 1px rgba(0,0,0,0.1);
         }
+        
+        /* Settings Modal */
+        #settings-modal-overlay {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0, 0, 0, 0.5); z-index: 10000;
+            display: none; justify-content: center; align-items: center;
+            backdrop-filter: blur(4px); -webkit-backdrop-filter: blur(4px);
+        }
+        #settings-modal-overlay.visible { display: flex; }
+        #settings-modal {
+            background: var(--card-bg); padding: 30px; border-radius: 16px;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+            border: 1px solid var(--border-color);
+            max-width: 400px; width: 90%;
+        }
+        #settings-modal h2 { margin-top: 0; border-bottom: 1px solid var(--border-color); padding-bottom: 10px; }
+        .setting-item { margin-bottom: 20px; }
+        .setting-item label { display: block; margin-bottom: 8px; font-weight: 600; }
+        .setting-control { display: flex; align-items: center; gap: 15px; }
+        
+        /* No Animations Class */
+        body.no-animations * {
+            transition: none !important;
+            animation: none !important;
+        }
     </style>
     """
     # Remove old styles if present
@@ -1007,6 +1068,14 @@ def inject_scripts(html_content):
             try {
                 mainContainer.innerHTML = marked.parse(mdSource.innerHTML);
                 if (window.hljs) hljs.highlightAll();
+                
+                // Open external links in new tab
+                mainContainer.querySelectorAll('a').forEach(link => {
+                    if (link.hostname !== window.location.hostname && link.href.startsWith('http')) {
+                        link.target = '_blank';
+                        link.rel = 'noopener noreferrer';
+                    }
+                });
                 
                 // Enforce IDs on headers to match Python's get_slug logic for TOC links
                 document.querySelectorAll('h1, h2, h3, h4, h5, h6').forEach(header => {
@@ -1208,7 +1277,7 @@ def inject_scripts(html_content):
         
         // 3. Theme Toggle
         const toggleBtn = document.createElement('button');
-        toggleBtn.textContent = '🌗';
+        toggleBtn.innerHTML = '<span class="nav-icon">🌗</span><span class="quick-nav-label">Theme</span>';
         toggleBtn.className = 'quick-nav-item';
         toggleBtn.style.border = 'none';
         toggleBtn.style.background = 'transparent';
@@ -1231,7 +1300,7 @@ def inject_scripts(html_content):
         
         // 4. PDF Export
         const pdfBtn = document.createElement('button');
-        pdfBtn.textContent = '🖨️';
+        pdfBtn.innerHTML = '<span class="nav-icon">🖨️</span><span class="quick-nav-label">Print PDF</span>';
         pdfBtn.className = 'quick-nav-item';
         pdfBtn.style.border = 'none';
         pdfBtn.style.background = 'transparent';
@@ -1243,7 +1312,7 @@ def inject_scripts(html_content):
         
         // 5. Copy All Button
         const copyAllBtn = document.createElement('button');
-        copyAllBtn.textContent = '📋';
+        copyAllBtn.innerHTML = '<span class="nav-icon">📋</span><span class="quick-nav-label">Copy All</span>';
         copyAllBtn.className = 'quick-nav-item';
         copyAllBtn.style.border = 'none';
         copyAllBtn.style.background = 'transparent';
@@ -1254,9 +1323,9 @@ def inject_scripts(html_content):
             const mdSource = document.getElementById('markdown-source');
             if (mdSource) {
                 navigator.clipboard.writeText(mdSource.textContent).then(() => {
-                    const originalText = copyAllBtn.textContent;
-                    copyAllBtn.textContent = '✅';
-                    setTimeout(() => copyAllBtn.textContent = originalText, 2000);
+                    const originalHTML = copyAllBtn.innerHTML;
+                    copyAllBtn.innerHTML = '<span class="nav-icon">✅</span><span class="quick-nav-label">Copied!</span>';
+                    setTimeout(() => copyAllBtn.innerHTML = originalHTML, 2000);
                 });
             }
         };
@@ -1416,7 +1485,7 @@ def inject_scripts(html_content):
         
         // 12. Focus Mode Toggle
         const focusBtn = document.createElement('button');
-        focusBtn.textContent = '👁️';
+        focusBtn.innerHTML = '<span class="nav-icon">👁️</span><span class="quick-nav-label">Focus Mode</span>';
         focusBtn.className = 'quick-nav-item';
         focusBtn.style.border = 'none';
         focusBtn.style.background = 'transparent';
@@ -1426,6 +1495,145 @@ def inject_scripts(html_content):
         
         const sidebarRef = document.querySelector('.quick-nav-sidebar');
         if (sidebarRef) sidebarRef.appendChild(focusBtn);
+        
+        // 15. Quick Actions Menu
+        const quickActionsBtn = document.createElement('button');
+        quickActionsBtn.className = 'quick-nav-item';
+        quickActionsBtn.innerHTML = '<span class="nav-icon">⚡</span><span class="quick-nav-label">Quick Actions</span>';
+        quickActionsBtn.title = 'Quick Actions';
+        
+        const actionsMenu = document.createElement('div');
+        actionsMenu.id = 'quick-actions-menu';
+        actionsMenu.innerHTML = `
+            <button class="action-btn" onclick="copyCommand('sudo killall -HUP mDNSResponder')"><span>🌐</span> Flush DNS</button>
+            <button class="action-btn" onclick="copyCommand('defaults write com.apple.finder AppleShowAllFiles -bool true && killall Finder')"><span>👁️</span> Show Hidden Files</button>
+            <button class="action-btn" onclick="copyCommand('defaults write com.apple.finder AppleShowAllFiles -bool false && killall Finder')"><span>🙈</span> Hide Hidden Files</button>
+            <button class="action-btn" onclick="copyCommand('sudo purge')"><span>🧹</span> Free Up RAM</button>
+        `;
+        
+        if (sidebarRef) {
+            sidebarRef.appendChild(quickActionsBtn);
+            sidebarRef.appendChild(actionsMenu);
+            
+            quickActionsBtn.onclick = (e) => {
+                e.stopPropagation();
+                actionsMenu.classList.toggle('visible');
+                // Position menu relative to button
+                const rect = quickActionsBtn.getBoundingClientRect();
+                actionsMenu.style.top = (quickActionsBtn.offsetTop) + 'px';
+            };
+            
+            document.addEventListener('click', (e) => {
+                if (!actionsMenu.contains(e.target) && e.target !== quickActionsBtn) {
+                    actionsMenu.classList.remove('visible');
+                }
+            });
+        }
+        
+        window.copyCommand = (cmd) => {
+            navigator.clipboard.writeText(cmd).then(() => {
+                alert('Command copied to clipboard:\\n' + cmd);
+            });
+        };
+        
+        // 16. Sidebar Toggle (Compact/Comfortable)
+        const toggleSidebarBtn = document.createElement('button');
+        toggleSidebarBtn.className = 'quick-nav-item';
+        toggleSidebarBtn.innerHTML = '<span class="nav-icon">↔️</span><span class="quick-nav-label">Collapse</span>';
+        toggleSidebarBtn.title = 'Toggle Sidebar View';
+        toggleSidebarBtn.style.marginTop = 'auto'; // Push to bottom
+        
+        toggleSidebarBtn.onclick = () => {
+            sidebarRef.classList.toggle('expanded');
+            const isExpanded = sidebarRef.classList.contains('expanded');
+            toggleSidebarBtn.querySelector('.nav-icon').textContent = isExpanded ? '◀️' : '↔️';
+            toggleSidebarBtn.querySelector('.quick-nav-label').textContent = isExpanded ? 'Collapse' : 'Expand';
+        };
+        
+        if (sidebarRef) sidebarRef.appendChild(toggleSidebarBtn);
+        
+        // 17. Settings Modal
+        const settingsBtn = document.createElement('button');
+        settingsBtn.className = 'quick-nav-item';
+        settingsBtn.innerHTML = '<span class="nav-icon">⚙️</span><span class="quick-nav-label">Settings</span>';
+        settingsBtn.title = 'Settings';
+        
+        const settingsOverlay = document.createElement('div');
+        settingsOverlay.id = 'settings-modal-overlay';
+        settingsOverlay.innerHTML = `
+            <div id="settings-modal">
+                <h2>Settings</h2>
+                <div class="setting-item">
+                    <label>Font Size</label>
+                    <div class="setting-control">
+                        <span style="font-size: 0.8rem">A</span>
+                        <input type="range" id="font-size-range" min="12" max="24" step="1" value="16" style="flex:1">
+                        <span style="font-size: 1.5rem">A</span>
+                    </div>
+                </div>
+                <div class="setting-item">
+                    <label>Animations</label>
+                    <div class="setting-control">
+                        <input type="checkbox" id="animations-toggle" checked>
+                        <span>Enable Animations</span>
+                    </div>
+                </div>
+                <div style="margin-top: 20px; display: flex; justify-content: space-between;">
+                    <button class="btn" id="reset-settings-btn" style="background: transparent; border: 1px solid var(--border-color); color: var(--text-color);">Reset Defaults</button>
+                    <button class="btn" id="close-settings-btn">Done</button>
+                </div>
+            </div>
+        `;
+        document.body.appendChild(settingsOverlay);
+        
+        if (sidebarRef) sidebarRef.appendChild(settingsBtn);
+        
+        settingsBtn.onclick = () => settingsOverlay.classList.add('visible');
+        document.getElementById('close-settings-btn').onclick = () => settingsOverlay.classList.remove('visible');
+        settingsOverlay.addEventListener('click', (e) => {
+            if (e.target === settingsOverlay) settingsOverlay.classList.remove('visible');
+        });
+        
+        document.getElementById('reset-settings-btn').onclick = () => {
+            if(confirm('Are you sure you want to reset all settings?')) {
+                localStorage.clear();
+                location.reload();
+            }
+        };
+        
+        // Settings Logic
+        const fontSizeRange = document.getElementById('font-size-range');
+        const animationsToggle = document.getElementById('animations-toggle');
+        
+        // Load saved settings
+        const savedFontSize = localStorage.getItem('fontSize') || '16';
+        const savedAnimations = localStorage.getItem('animations') !== 'false';
+        
+        // Apply initial settings
+        document.documentElement.style.fontSize = savedFontSize + 'px';
+        fontSizeRange.value = savedFontSize;
+        
+        if (!savedAnimations) {
+            document.body.classList.add('no-animations');
+            animationsToggle.checked = false;
+        }
+        
+        // Event Listeners
+        fontSizeRange.addEventListener('input', (e) => {
+            const size = e.target.value;
+            document.documentElement.style.fontSize = size + 'px';
+            localStorage.setItem('fontSize', size);
+        });
+        
+        animationsToggle.addEventListener('change', (e) => {
+            if (e.target.checked) {
+                document.body.classList.remove('no-animations');
+                localStorage.setItem('animations', 'true');
+            } else {
+                document.body.classList.add('no-animations');
+                localStorage.setItem('animations', 'false');
+            }
+        });
         
         // 13. Footer
         const footer = document.createElement('footer');
