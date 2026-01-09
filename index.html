@@ -283,6 +283,21 @@
         "@id": "https://kamalsoft.github.io/macOS-cheat-sheet/"
       }
     }
+    </script><meta name="description" content="The ultimate macOS cheat sheet."><meta name="keywords" content="macOS, cheat sheet, shortcuts, terminal"><meta name="author" content="KamalSoft"><meta property="og:title" content="macOS Mastered"><meta property="og:description" content="The ultimate macOS cheat sheet."><meta property="og:type" content="website"><meta property="og:url" content="https://kamalsoft.github.io/macOS-cheat-sheet/"><meta property="og:image" content="https://www.apple.com/ac/structured-data/images/knowledge_graph_logo.png"><meta name="twitter:card" content="summary_large_image"><link rel="canonical" href="https://kamalsoft.github.io/macOS-cheat-sheet/"><link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🍎</text></svg>"><script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "TechArticle",
+      "headline": "macOS Mastered",
+      "description": "The ultimate macOS cheat sheet.",
+      "author": {
+        "@type": "Person",
+        "name": "KamalSoft"
+      },
+      "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "https://kamalsoft.github.io/macOS-cheat-sheet/"
+      }
+    }
     </script><style id="custom-styles">
         :root {
             --bg-color: #ffffff;
@@ -378,15 +393,69 @@
         .quick-nav-item:hover { transform: scale(1.15); background: rgba(0,0,0,0.05); }
         html.dark .quick-nav-item:hover { background: rgba(255,255,255,0.1); }
         
-        /* Search Bar */
-        #search-container { margin-bottom: 30px; position: sticky; top: 0; z-index: 40; background: var(--bg-color); padding: 10px 0; }
-        #search-input {
+        /* Command Palette */
+        .search-trigger {
             width: 100%; padding: 16px 20px; font-size: 1.1rem;
             border: 2px solid var(--border-color); border-radius: 12px;
-            background: var(--card-bg); color: var(--text-color);
-            box-shadow: var(--shadow); outline: none; transition: border-color 0.2s;
+            background: var(--card-bg); color: var(--text-secondary);
+            box-shadow: var(--shadow); cursor: text;
+            display: flex; justify-content: space-between; align-items: center;
+            margin-bottom: 30px; position: sticky; top: 20px; z-index: 40;
+            transition: border-color 0.2s;
         }
-        #search-input:focus { border-color: var(--accent); }
+        .search-trigger:hover { border-color: var(--accent); }
+        .shortcut-hint {
+            background: var(--border-color); padding: 2px 8px; border-radius: 6px; font-size: 0.9rem;
+        }
+        
+        #cmd-palette-overlay {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0, 0, 0, 0.5); z-index: 9999;
+            display: none; justify-content: center; align-items: flex-start;
+            padding-top: 100px;
+            backdrop-filter: blur(4px); -webkit-backdrop-filter: blur(4px);
+        }
+        #cmd-palette-overlay.visible { display: flex; }
+        #cmd-palette-modal {
+            width: 600px; max-width: 90%;
+            background: var(--card-bg);
+            border-radius: 16px;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+            overflow: hidden;
+            border: 1px solid var(--border-color);
+            display: flex; flex-direction: column;
+            animation: slideDown 0.2s ease-out;
+        }
+        @keyframes slideDown {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        #cmd-palette-input {
+            width: 100%; padding: 20px;
+            font-size: 1.2rem; border: none; border-bottom: 1px solid var(--border-color);
+            background: transparent; color: var(--text-color);
+            outline: none;
+        }
+        #cmd-palette-results {
+            max-height: 400px; overflow-y: auto;
+            padding: 8px;
+        }
+        .cmd-item {
+            padding: 12px 16px; margin-bottom: 4px;
+            border-radius: 8px; cursor: pointer;
+            display: flex; justify-content: space-between; align-items: center;
+            color: var(--text-color);
+            text-decoration: none;
+            transition: background-color 0.1s;
+        }
+        .cmd-item:hover, .cmd-item.active {
+            background: var(--accent); color: white;
+        }
+        .cmd-item .cmd-type {
+            font-size: 0.75rem; opacity: 0.7;
+            background: rgba(125,125,125,0.2); padding: 2px 6px; border-radius: 4px;
+            text-transform: uppercase; letter-spacing: 0.05em;
+        }
         
         /* Table of Contents Grid */
         .toc-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; margin-bottom: 40px; }
@@ -430,6 +499,53 @@
         #back-to-top.visible { opacity: 1; visibility: visible; }
         #back-to-top:hover { transform: scale(1.1); }
         
+        /* Section Navigation */
+        #section-nav {
+            position: fixed; bottom: 30px; right: 90px;
+            display: flex; gap: 10px; z-index: 90;
+            opacity: 0; visibility: hidden; transition: opacity 0.3s;
+        }
+        #section-nav.visible { opacity: 1; visibility: visible; }
+        .nav-btn {
+            width: 50px; height: 50px; border-radius: 50%;
+            background: var(--card-bg); color: var(--text-color);
+            border: 1px solid var(--border-color);
+            box-shadow: var(--shadow); cursor: pointer;
+            display: flex; justify-content: center; align-items: center;
+            font-size: 1.2rem; transition: transform 0.2s, background-color 0.2s;
+        }
+        .nav-btn:hover { transform: scale(1.1); background: var(--accent); color: white; border-color: var(--accent); }
+        
+        /* Focus Mode */
+        .content-section { transition: opacity 0.5s ease, filter 0.5s ease; }
+        body.focus-mode .content-section { opacity: 0.15; filter: blur(2px); }
+        body.focus-mode .content-section.active { opacity: 1; filter: none; }
+        
+        /* Footer */
+        .site-footer {
+            margin-top: 80px; padding: 60px 20px;
+            border-top: 1px solid var(--border-color);
+            text-align: center; color: var(--text-secondary);
+            font-size: 0.95rem;
+            background: linear-gradient(to bottom, var(--bg-color), var(--sidebar-bg));
+        }
+        .site-footer p { margin: 8px 0; }
+        .site-footer strong { color: var(--text-color); font-weight: 600; }
+        .footer-links { margin: 20px 0; display: flex; justify-content: center; gap: 20px; }
+        .footer-links a { color: var(--text-secondary); transition: color 0.2s; }
+        .footer-links a:hover { color: var(--accent); }
+        .disclaimer {
+            margin-top: 30px;
+            padding-top: 20px;
+            border-top: 1px solid var(--border-color);
+            font-size: 0.8rem;
+            opacity: 0.8;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+            line-height: 1.6;
+        }
+        
         /* Mobile */
         @media (max-width: 768px) {
             .container { padding: 15px; padding-bottom: 100px; }
@@ -444,6 +560,7 @@
             html.dark .quick-nav-sidebar { background: rgba(15, 23, 42, 0.85); }
             h1 { font-size: 2rem; }
             #back-to-top { bottom: 90px; right: 20px; }
+            #section-nav { bottom: 90px; right: 80px; }
         }
         
         /* Utility */
@@ -452,7 +569,7 @@
         
         /* Print */
         @media print {
-            .quick-nav-sidebar, #search-container, .copy-btn { display: none; }
+            .quick-nav-sidebar, .search-trigger, #cmd-palette-overlay, .copy-btn { display: none; }
             body { background: white; color: black; }
             .container { display: block; }
         }
@@ -472,6 +589,29 @@
         .speed-controls { display: flex; flex-direction: column; gap: 15px; align-items: center; }
         #speed-result { font-size: 2.5rem; font-weight: 800; color: var(--accent); font-variant-numeric: tabular-nums; }
         #speed-status { color: var(--text-secondary); font-size: 0.9rem; margin-top: 10px; }
+        
+        /* Shortcuts Modal */
+        #shortcuts-modal-overlay {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0, 0, 0, 0.5); z-index: 10000;
+            display: none; justify-content: center; align-items: center;
+            backdrop-filter: blur(4px); -webkit-backdrop-filter: blur(4px);
+        }
+        #shortcuts-modal-overlay.visible { display: flex; }
+        #shortcuts-modal {
+            background: var(--card-bg); padding: 30px; border-radius: 16px;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+            border: 1px solid var(--border-color);
+            max-width: 500px; width: 90%;
+        }
+        #shortcuts-modal h2 { margin-top: 0; border-bottom: 1px solid var(--border-color); padding-bottom: 10px; }
+        .shortcuts-list { display: grid; grid-template-columns: auto 1fr; gap: 10px 20px; align-items: center; margin-top: 20px; }
+        .key-combo { display: flex; gap: 5px; justify-content: flex-end; }
+        kbd {
+            background: var(--code-bg); border: 1px solid var(--border-color);
+            border-radius: 4px; padding: 2px 6px; font-family: monospace;
+            font-size: 0.9rem; box-shadow: 0 1px 1px rgba(0,0,0,0.1);
+        }
     </style></head><body><script type="text/template" id="markdown-source">
 # macOS Mastered
 
@@ -2400,6 +2540,39 @@ Thanks to these wonderful people: **kamalsoft**.
                     if (slug) header.id = slug;
                 });
 
+                // Wrap content in sections for Focus Mode
+                const children = Array.from(mainContainer.children);
+                if (children.length > 0) {
+                    const newWrapper = document.createElement('div');
+                    let currentSection = document.createElement('section');
+                    currentSection.className = 'content-section active';
+                    newWrapper.appendChild(currentSection);
+                    
+                    children.forEach(child => {
+                        // If we hit an H2, start a new section
+                        if (child.tagName === 'H2') {
+                            currentSection = document.createElement('section');
+                            currentSection.className = 'content-section';
+                            newWrapper.appendChild(currentSection);
+                        }
+                        currentSection.appendChild(child);
+                    });
+                    mainContainer.innerHTML = '';
+                    mainContainer.appendChild(newWrapper);
+                    
+                    // Observe sections for Focus Mode
+                    const observer = new IntersectionObserver((entries) => {
+                        entries.forEach(entry => {
+                            if (entry.isIntersecting) {
+                                document.querySelectorAll('.content-section').forEach(s => s.classList.remove('active'));
+                                entry.target.classList.add('active');
+                            }
+                        });
+                    }, { rootMargin: '-20% 0px -60% 0px' });
+                    
+                    document.querySelectorAll('.content-section').forEach(s => observer.observe(s));
+                }
+
             } catch (e) {
                 console.error("Markdown rendering failed:", e);
                 mainContainer.innerHTML = "<p>Error rendering content. Please check console.</p>";
@@ -2423,50 +2596,130 @@ Thanks to these wonderful people: **kamalsoft**.
             document.body.prepend(skipLink);
         }
         
-        // 2. Search Functionality
-        const searchInput = document.createElement('input');
-        searchInput.id = 'search-input';
-        searchInput.placeholder = 'Search commands, shortcuts, settings... (Cmd+K)';
-        searchInput.setAttribute('aria-label', 'Search content');
+        // 2. Command Palette
+        // Create Overlay & Modal
+        const paletteOverlay = document.createElement('div');
+        paletteOverlay.id = 'cmd-palette-overlay';
+        paletteOverlay.innerHTML = `
+            <div id="cmd-palette-modal"><input type="text" id="cmd-palette-input" placeholder="Type a command or search..." autocomplete="off"><div id="cmd-palette-results"></div></div>
+        `;
+        document.body.appendChild(paletteOverlay);
         
-        const searchContainer = document.createElement('div');
-        searchContainer.id = 'search-container';
-        searchContainer.appendChild(searchInput);
+        const paletteInput = document.getElementById('cmd-palette-input');
+        const paletteResults = document.getElementById('cmd-palette-results');
+        let paletteItems = [];
+        let activeIndex = 0;
+
+        // Trigger Button
+        const searchTrigger = document.createElement('div');
+        searchTrigger.className = 'search-trigger';
+        searchTrigger.innerHTML = `
+            <span>🔍 Search commands, shortcuts...</span><span class="shortcut-hint">⌘K</span>
+        `;
+        searchTrigger.onclick = openPalette;
         
         const mainContent = document.getElementById('main-content');
         if (mainContent) {
-            mainContent.parentNode.insertBefore(searchContainer, mainContent);
             // If sidebar exists, ensure search is inside main column or above
             if (mainContent.parentElement.classList.contains('container')) {
-                mainContent.insertBefore(searchContainer, mainContent.firstChild);
+                mainContent.insertBefore(searchTrigger, mainContent.firstChild);
+            } else {
+                mainContent.parentNode.insertBefore(searchTrigger, mainContent);
             }
         }
         
-        searchInput.addEventListener('input', (e) => {
-            const term = e.target.value.toLowerCase();
-            const sections = document.querySelectorAll('h2, h3, tr');
-            
-            sections.forEach(sec => {
-                const text = sec.textContent.toLowerCase();
-                if (text.includes(term)) {
-                    sec.style.opacity = '1';
-                    sec.style.display = '';
-                } else {
-                    // Simple filtering logic - hide rows in tables, dim headers
-                    if (sec.tagName === 'TR' && !sec.querySelector('th')) {
-                        sec.style.display = 'none';
-                    } else if (term.length > 2) {
-                        sec.style.opacity = '0.3';
-                    }
+        function collectItems() {
+            const items = [];
+            document.querySelectorAll('h2, h3').forEach(h => {
+                if (h.id) {
+                    items.push({
+                        type: h.tagName,
+                        text: h.textContent.replace(/^[🟢🟡🟠🔴]\s*/, '').replace(/\s*[🟢🟡🟠🔴]$/, ''),
+                        id: h.id
+                    });
                 }
             });
-        });
+            return items;
+        }
         
-        // Keyboard shortcut for search
+        paletteItems = collectItems();
+
+        function renderResults(term = '') {
+            paletteResults.innerHTML = '';
+            const filtered = paletteItems.filter(item => 
+                item.text.toLowerCase().includes(term.toLowerCase())
+            );
+            
+            filtered.forEach((item, index) => {
+                const div = document.createElement('div');
+                div.className = `cmd-item ${index === activeIndex ? 'active' : ''}`;
+                div.innerHTML = `<span>${item.text}</span><span class="cmd-type">${item.type}</span>`;
+                div.onclick = () => {
+                    closePalette();
+                    window.location.hash = item.id;
+                };
+                paletteResults.appendChild(div);
+            });
+            
+            if (filtered.length === 0) {
+                paletteResults.innerHTML = '<div style="padding:15px; text-align:center; color:var(--text-secondary)">No results found</div>';
+            }
+        }
+
+        function openPalette() {
+            paletteOverlay.classList.add('visible');
+            paletteInput.value = '';
+            paletteInput.focus();
+            activeIndex = 0;
+            renderResults();
+        }
+
+        function closePalette() {
+            paletteOverlay.classList.remove('visible');
+        }
+
         document.addEventListener('keydown', (e) => {
             if ((e.metaKey || e.ctrlKey) && e.key === 'k') {
                 e.preventDefault();
-                searchInput.focus();
+                if (paletteOverlay.classList.contains('visible')) {
+                    closePalette();
+                } else {
+                    openPalette();
+                }
+            }
+            if (e.key === 'Escape' && paletteOverlay.classList.contains('visible')) {
+                closePalette();
+            }
+        });
+
+        paletteOverlay.addEventListener('click', (e) => {
+            if (e.target === paletteOverlay) closePalette();
+        });
+
+        paletteInput.addEventListener('input', (e) => {
+            activeIndex = 0;
+            renderResults(e.target.value);
+        });
+
+        paletteInput.addEventListener('keydown', (e) => {
+            const items = paletteResults.querySelectorAll('.cmd-item');
+            if (items.length === 0) return;
+
+            if (e.key === 'ArrowDown') {
+                e.preventDefault();
+                activeIndex = (activeIndex + 1) % items.length;
+                renderResults(paletteInput.value);
+                const active = paletteResults.querySelector('.active');
+                if(active) active.scrollIntoView({ block: 'nearest' });
+            } else if (e.key === 'ArrowUp') {
+                e.preventDefault();
+                activeIndex = (activeIndex - 1 + items.length) % items.length;
+                renderResults(paletteInput.value);
+                const active = paletteResults.querySelector('.active');
+                if(active) active.scrollIntoView({ block: 'nearest' });
+            } else if (e.key === 'Enter') {
+                e.preventDefault();
+                items[activeIndex].click();
             }
         });
         
@@ -2623,6 +2876,124 @@ Thanks to these wonderful people: **kamalsoft**.
             const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
             const scrolled = (winScroll / height) * 100;
             progressBar.style.width = scrolled + "%";
+        });
+        
+        // 11. Section Navigation (Prev/Next)
+        const navContainer = document.createElement('div');
+        navContainer.id = 'section-nav';
+        
+        const prevBtn = document.createElement('button');
+        prevBtn.className = 'nav-btn';
+        prevBtn.innerHTML = '←';
+        prevBtn.title = 'Previous Section';
+        prevBtn.onclick = () => navigateSection(-1);
+        
+        const nextBtn = document.createElement('button');
+        nextBtn.className = 'nav-btn';
+        nextBtn.innerHTML = '→';
+        nextBtn.title = 'Next Section';
+        nextBtn.onclick = () => navigateSection(1);
+        
+        navContainer.appendChild(prevBtn);
+        navContainer.appendChild(nextBtn);
+        document.body.appendChild(navContainer);
+        
+        function navigateSection(direction) {
+            const headers = Array.from(document.querySelectorAll('h2, h3')).filter(h => h.id);
+            const currentScroll = window.scrollY + 100; // Offset for sticky header
+            let currentIndex = -1;
+            
+            // Find current section
+            for (let i = 0; i < headers.length; i++) {
+                if (headers[i].offsetTop > currentScroll) {
+                    currentIndex = Math.max(0, i - 1);
+                    break;
+                }
+            }
+            if (currentIndex === -1) currentIndex = headers.length - 1;
+            
+            const targetIndex = currentIndex + direction;
+            if (targetIndex >= 0 && targetIndex < headers.length) {
+                const target = headers[targetIndex];
+                const offset = 80; // Header/Search offset
+                const elementPosition = target.getBoundingClientRect().top;
+                const offsetPosition = elementPosition + window.pageYOffset - offset;
+                window.scrollTo({ top: offsetPosition, behavior: "smooth" });
+                history.pushState(null, null, '#' + target.id);
+            }
+        }
+        
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 300) {
+                navContainer.classList.add('visible');
+            } else {
+                navContainer.classList.remove('visible');
+            }
+        });
+        
+        // 12. Focus Mode Toggle
+        const focusBtn = document.createElement('button');
+        focusBtn.textContent = '👁️';
+        focusBtn.className = 'quick-nav-item';
+        focusBtn.style.border = 'none';
+        focusBtn.style.background = 'transparent';
+        focusBtn.style.cursor = 'pointer';
+        focusBtn.title = 'Toggle Focus Mode';
+        focusBtn.onclick = () => document.body.classList.toggle('focus-mode');
+        
+        const sidebarRef = document.querySelector('.quick-nav-sidebar');
+        if (sidebarRef) sidebarRef.appendChild(focusBtn);
+        
+        // 13. Footer
+        const footer = document.createElement('footer');
+        footer.className = 'site-footer';
+        footer.innerHTML = `
+            <div class="footer-content"><p>&copy; ${new Date().getFullYear()} <strong>macOS Mastered</strong></p><p>Concept & Development by <strong>Kamalesh</strong></p><div class="footer-links"><a href="https://github.com/kamalsoft/macOS-cheat-sheet" target="_blank">GitHub</a><a href="#" onclick="window.scrollTo({top:0, behavior:'smooth'}); return false;">Back to Top</a></div><div class="disclaimer"><p><strong>Disclaimer:</strong> This website is an independent open-source project and is <strong>not affiliated with, endorsed by, or sponsored by Apple Inc.</strong></p><p>All terminal commands and software recommendations are provided "as is" without warranty of any kind. The authors are not liable for any data loss or system issues resulting from the use of this guide. Always backup your data before running system-level commands.</p></div></div>
+        `;
+        const container = document.querySelector('.container');
+        if (container) container.appendChild(footer);
+        
+        // 14. Keyboard Shortcuts Modal
+        const shortcutsOverlay = document.createElement('div');
+        shortcutsOverlay.id = 'shortcuts-modal-overlay';
+        shortcutsOverlay.innerHTML = `
+            <div id="shortcuts-modal"><h2>Keyboard Shortcuts</h2><div class="shortcuts-list"><div class="key-combo"><kbd>?</kbd></div><div>Show this help menu</div><div class="key-combo"><kbd>⌘</kbd><kbd>K</kbd></div><div>Open Command Palette</div><div class="key-combo"><kbd>/</kbd></div><div>Open Command Palette</div><div class="key-combo"><kbd>J</kbd></div><div>Next Section</div><div class="key-combo"><kbd>K</kbd></div><div>Previous Section</div><div class="key-combo"><kbd>Esc</kbd></div><div>Close Modals</div></div><div style="margin-top: 20px; text-align: center; font-size: 0.9rem; color: var(--text-secondary);">
+                    Press <kbd>Esc</kbd> to close
+                </div></div>
+        `;
+        document.body.appendChild(shortcutsOverlay);
+
+        function toggleShortcuts() {
+            shortcutsOverlay.classList.toggle('visible');
+        }
+
+        document.addEventListener('keydown', (e) => {
+            // Ignore if typing in an input
+            if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA') return;
+
+            if (e.key === '?' && !e.metaKey && !e.ctrlKey) {
+                e.preventDefault();
+                toggleShortcuts();
+            }
+            
+            if (e.key === '/' && !e.metaKey && !e.ctrlKey) {
+                e.preventDefault();
+                openPalette();
+            }
+            
+            if (e.key.toLowerCase() === 'j') {
+                navigateSection(1);
+            }
+            
+            if (e.key.toLowerCase() === 'k') {
+                navigateSection(-1);
+            }
+            
+            if (e.key === 'Escape') {
+                if (shortcutsOverlay.classList.contains('visible')) {
+                    toggleShortcuts();
+                }
+            }
         });
     });
     </script></body></html>
