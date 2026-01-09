@@ -934,11 +934,15 @@ def inject_styles(html_content):
                 position: fixed; bottom: 0; top: auto; left: 0; right: 0; 
                 transform: none;
                 width: 100%; height: auto; flex-direction: row; 
-                justify-content: space-around; border-radius: 16px 16px 0 0; 
+                justify-content: flex-start; overflow-x: auto; gap: 10px;
+                border-radius: 16px 16px 0 0; 
                 z-index: 100; padding: 10px; box-sizing: border-box;
-                background: rgba(255, 255, 255, 0.85);
+                background: rgba(255, 255, 255, 0.95);
+                backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);
             }
-            html.dark .quick-nav-sidebar { background: rgba(15, 23, 42, 0.85); }
+            .quick-nav-sidebar::-webkit-scrollbar { display: none; }
+            .quick-nav-item { width: auto; flex-shrink: 0; padding: 0 12px; }
+            html.dark .quick-nav-sidebar { background: rgba(15, 23, 42, 0.95); }
             h1 { font-size: 2rem; }
             #back-to-top { bottom: 90px; right: 20px; }
             #section-nav { bottom: 90px; right: 80px; }
