@@ -389,9 +389,9 @@
 
 ## 🆕 New & Updated
 
+- **2026-01-08**: Update documentation
 - **2026-01-08**: Refactor documentation updates and enhance slug generation; improve developer logging and smooth scrolling for anchor links
 - **2026-01-08**: Refactor documentation updates and enhance slug generation for better compatibility
-- **2026-01-08**: Update documentation
 - **2026-01-08**: Update documentation
 - **2026-01-08**: Update documentation
 
@@ -413,7 +413,7 @@ This guide is organized by skill level. Find your level and start there:
 - 🔴 = Expert only
 - ⚠️ = Caution required
 - 💡 = Pro tip
-- 🍎 = Apple Silicon (M1/M2/M3/M4) specific
+- 🍎 = Apple Silicon (M1–M4) specific
 
 [↑ Back to Top](#table-of-contents)
 
@@ -565,7 +565,7 @@ Optimize your experience immediately after a fresh install.
 
 ### Apple Silicon (M-Series) Compatibility 🍎
 
-* *M1/M2/M3/M4 Macs Are Special!**
+* *M1–M4 Macs Are Special!**
 
 Your Mac has a special type of processor (chip) called "Apple Silicon".
 
@@ -637,10 +637,10 @@ Understanding the differences between the M-Series chips will help you understan
 
 | Tier | Best For... | Ideal User |
 | :--- | :--- | :--- |
-| **Base** (M1/M2/M3/M4) | Everyday tasks, office work, light editing, browsing. | Students, Writers, Office Workers |
-| **Pro** (M1/M2/M3/M4 Pro) | Heavy multitasking, coding, photo editing, light video. | Developers, Photographers, Creators |
-| **Max** (M1/M2/M3/M4 Max) | 3D rendering, 4K/8K video editing, complex compiling. | Video Editors, 3D Artists, Engineers |
-| **Ultra** (M1/M2/M3 Ultra) | Extreme workstation tasks, scientific compute. | Studios, Data Scientists |
+| **Base** (M1–M4) | Everyday tasks, office work, light editing, browsing. | Students, Writers, Office Workers |
+| **Pro** (M1–M4 Pro) | Heavy multitasking, coding, photo editing, light video. | Developers, Photographers, Creators |
+| **Max** (M1–M4 Max) | 3D rendering, 4K/8K video editing, complex compiling. | Video Editors, 3D Artists, Engineers |
+| **Ultra** (M1–M3 Ultra) | Extreme workstation tasks, scientific compute. | Studios, Data Scientists |
 
 ### 🚀 Generation Comparison
 

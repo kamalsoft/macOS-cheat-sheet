@@ -712,7 +712,7 @@ def inject_styles(html_content):
         }
         
         /* Layout */
-        .container { max-width: 1200px; margin: 0 auto; padding: 20px; display: flex; gap: 40px; }
+        .container { max-width: 1200px; margin: 0 auto; padding: 20px; padding-left: 40px; display: flex; gap: 40px; }
         #main-content { flex: 1; min-width: 0; }
         
         /* Typography */
@@ -879,6 +879,18 @@ def inject_scripts(html_content):
             try {
                 mainContainer.innerHTML = marked.parse(mdSource.innerHTML);
                 if (window.hljs) hljs.highlightAll();
+                
+                // Enforce IDs on headers to match Python's get_slug logic for TOC links
+                document.querySelectorAll('h1, h2, h3, h4, h5, h6').forEach(header => {
+                    let text = header.textContent;
+                    // Remove markdown links if any (simple approximation) and non-alphanumeric
+                    text = text.replace(/\[([^\]]+)\]\([^\)]+\)/g, '$1');
+                    text = text.replace(/[^a-zA-Z0-9\s-]/g, '');
+                    let slug = text.toLowerCase().trim().replace(/\s+/g, '-');
+                    slug = slug.replace(/-+/g, '-');
+                    if (slug) header.id = slug;
+                });
+
             } catch (e) {
                 console.error("Markdown rendering failed:", e);
                 mainContainer.innerHTML = "<p>Error rendering content. Please check console.</p>";

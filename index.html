@@ -223,6 +223,36 @@
         "@id": "https://kamalsoft.github.io/macOS-cheat-sheet/"
       }
     }
+    </script><meta name="description" content="The ultimate macOS cheat sheet."><meta name="keywords" content="macOS, cheat sheet, shortcuts, terminal"><meta name="author" content="KamalSoft"><meta property="og:title" content="macOS Mastered"><meta property="og:description" content="The ultimate macOS cheat sheet."><meta property="og:type" content="website"><meta property="og:url" content="https://kamalsoft.github.io/macOS-cheat-sheet/"><meta property="og:image" content="https://www.apple.com/ac/structured-data/images/knowledge_graph_logo.png"><meta name="twitter:card" content="summary_large_image"><link rel="canonical" href="https://kamalsoft.github.io/macOS-cheat-sheet/"><link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🍎</text></svg>"><script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "TechArticle",
+      "headline": "macOS Mastered",
+      "description": "The ultimate macOS cheat sheet.",
+      "author": {
+        "@type": "Person",
+        "name": "KamalSoft"
+      },
+      "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "https://kamalsoft.github.io/macOS-cheat-sheet/"
+      }
+    }
+    </script><meta name="description" content="The ultimate macOS cheat sheet."><meta name="keywords" content="macOS, cheat sheet, shortcuts, terminal"><meta name="author" content="KamalSoft"><meta property="og:title" content="macOS Mastered"><meta property="og:description" content="The ultimate macOS cheat sheet."><meta property="og:type" content="website"><meta property="og:url" content="https://kamalsoft.github.io/macOS-cheat-sheet/"><meta property="og:image" content="https://www.apple.com/ac/structured-data/images/knowledge_graph_logo.png"><meta name="twitter:card" content="summary_large_image"><link rel="canonical" href="https://kamalsoft.github.io/macOS-cheat-sheet/"><link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🍎</text></svg>"><script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "TechArticle",
+      "headline": "macOS Mastered",
+      "description": "The ultimate macOS cheat sheet.",
+      "author": {
+        "@type": "Person",
+        "name": "KamalSoft"
+      },
+      "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "https://kamalsoft.github.io/macOS-cheat-sheet/"
+      }
+    }
     </script><style id="custom-styles">
         :root {
             --bg-color: #ffffff;
@@ -259,7 +289,7 @@
         }
         
         /* Layout */
-        .container { max-width: 1200px; margin: 0 auto; padding: 20px; display: flex; gap: 40px; }
+        .container { max-width: 1200px; margin: 0 auto; padding: 20px; padding-left: 40px; display: flex; gap: 40px; }
         #main-content { flex: 1; min-width: 0; }
         
         /* Typography */
@@ -768,9 +798,9 @@
 
 ## 🆕 New & Updated
 
+- **2026-01-08**: Update documentation
 - **2026-01-08**: Refactor documentation updates and enhance slug generation; improve developer logging and smooth scrolling for anchor links
 - **2026-01-08**: Refactor documentation updates and enhance slug generation for better compatibility
-- **2026-01-08**: Update documentation
 - **2026-01-08**: Update documentation
 - **2026-01-08**: Update documentation
 
@@ -792,7 +822,7 @@ This guide is organized by skill level. Find your level and start there:
 - 🔴 = Expert only
 - ⚠️ = Caution required
 - 💡 = Pro tip
-- 🍎 = Apple Silicon (M1/M2/M3/M4) specific
+- 🍎 = Apple Silicon (M1–M4) specific
 
 [↑ Back to Top](#table-of-contents)
 
@@ -944,7 +974,7 @@ Optimize your experience immediately after a fresh install.
 
 ### Apple Silicon (M-Series) Compatibility 🍎
 
-* *M1/M2/M3/M4 Macs Are Special!**
+* *M1–M4 Macs Are Special!**
 
 Your Mac has a special type of processor (chip) called "Apple Silicon".
 
@@ -1016,10 +1046,10 @@ Understanding the differences between the M-Series chips will help you understan
 
 | Tier | Best For... | Ideal User |
 | :--- | :--- | :--- |
-| **Base** (M1/M2/M3/M4) | Everyday tasks, office work, light editing, browsing. | Students, Writers, Office Workers |
-| **Pro** (M1/M2/M3/M4 Pro) | Heavy multitasking, coding, photo editing, light video. | Developers, Photographers, Creators |
-| **Max** (M1/M2/M3/M4 Max) | 3D rendering, 4K/8K video editing, complex compiling. | Video Editors, 3D Artists, Engineers |
-| **Ultra** (M1/M2/M3 Ultra) | Extreme workstation tasks, scientific compute. | Studios, Data Scientists |
+| **Base** (M1–M4) | Everyday tasks, office work, light editing, browsing. | Students, Writers, Office Workers |
+| **Pro** (M1–M4 Pro) | Heavy multitasking, coding, photo editing, light video. | Developers, Photographers, Creators |
+| **Max** (M1–M4 Max) | 3D rendering, 4K/8K video editing, complex compiling. | Video Editors, 3D Artists, Engineers |
+| **Ultra** (M1–M3 Ultra) | Extreme workstation tasks, scientific compute. | Studios, Data Scientists |
 
 ### 🚀 Generation Comparison
 
@@ -2300,6 +2330,18 @@ Thanks to these wonderful people: **kamalsoft**.
             try {
                 mainContainer.innerHTML = marked.parse(mdSource.innerHTML);
                 if (window.hljs) hljs.highlightAll();
+                
+                // Enforce IDs on headers to match Python's get_slug logic for TOC links
+                document.querySelectorAll('h1, h2, h3, h4, h5, h6').forEach(header => {
+                    let text = header.textContent;
+                    // Remove markdown links if any (simple approximation) and non-alphanumeric
+                    text = text.replace(/\[([^\]]+)\]\([^\)]+\)/g, '$1');
+                    text = text.replace(/[^a-zA-Z0-9\s-]/g, '');
+                    let slug = text.toLowerCase().trim().replace(/\s+/g, '-');
+                    slug = slug.replace(/-+/g, '-');
+                    if (slug) header.id = slug;
+                });
+
             } catch (e) {
                 console.error("Markdown rendering failed:", e);
                 mainContainer.innerHTML = "<p>Error rendering content. Please check console.</p>";
