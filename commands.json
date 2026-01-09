@@ -164,6 +164,14 @@
     "lang": "bash"
   },
   {
+    "cmd": "(echo; echo 'eval \"$(/opt/homebrew/bin/brew shellenv)\"') >> ~/.zprofile",
+    "lang": "bash"
+  },
+  {
+    "cmd": "eval \"$(/opt/homebrew/bin/brew shellenv)\"",
+    "lang": "bash"
+  },
+  {
     "cmd": "brew install node           # Install Node.js",
     "lang": "bash"
   },

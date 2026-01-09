@@ -1,6 +1,6 @@
 # macOS Mastered
 
-### From Beginner to Expert | M1/M2/M3/M4/M5 Compatible
+### From Beginner to Expert | M1–M4 Verified
 
 ![macOS Logo](https://www.apple.com/ac/structured-data/images/knowledge_graph_logo.png)
 
@@ -24,178 +24,376 @@
 
 ## 📋 Table of Contents
 
-  * [From Beginner to Expert | M1/M2/M3/M4/M5 Compatible](#from-beginner-to-expert-m1m2m3m4m5-compatible)
-* [🆕 New & Updated](#new-updated)
-* [How to Use This Guide](#how-to-use-this-guide)
-* [Beginner: Essentials](#beginner-essentials)
-  * [🚀 Top 30 Essential Settings](#top-30-essential-settings)
-* [Opening Terminal - Step by Step](#opening-terminal-step-by-step)
-  * [Method 1: Using Spotlight Search (Easiest) 🟢](#method-1-using-spotlight-search-easiest)
-  * [Method 2: Using Finder 🟢](#method-2-using-finder)
-* [Getting Started (Beginners)](#getting-started-beginners)
-  * [Apple Silicon (M-Series) Compatibility 🍎](#apple-silicon-m-series-compatibility)
-* [System Information & Hardware](#system-information-hardware)
-  * [Check Your Mac Specifications 🟢](#check-your-mac-specifications)
-* [Apple Silicon Chip Comparison](#apple-silicon-chip-comparison)
-  * [📊 Chip Tiers Explained](#chip-tiers-explained)
-  * [🚀 Generation Comparison](#generation-comparison)
-* [Terminal Command Reference](#terminal-command-reference)
-  * [Beginner Terminal Commands 🟢](#beginner-terminal-commands)
-  * [Mid-Level Terminal Commands 🟡](#mid-level-terminal-commands)
-  * [Pro Terminal Commands 🟠](#pro-terminal-commands)
-* [System Configuration](#system-configuration)
-  * [Finder Configuration 🟢](#finder-configuration)
-  * [Screenshot Configuration 🟡](#screenshot-configuration)
-  * [Dock Configuration 🟡](#dock-configuration)
-* [Window Management Apps](#window-management-apps)
-  * [1. Rectangle (Free & Open Source) 🟢](#1-rectangle-free-open-source)
-  * [2. Magnet (Paid) 🟢](#2-magnet-paid)
-* [Menu Bar Apps](#menu-bar-apps)
-  * [1. Hidden Bar (Free) 🟢](#1-hidden-bar-free)
-  * [2. Ice (Free) 🟢](#2-ice-free)
-  * [3. Bartender (Paid) 🟢](#3-bartender-paid)
-* [Productivity Apps](#productivity-apps)
-  * [1. Raycast (Free for Personal Use) 🟢](#1-raycast-free-for-personal-use)
-  * [2. Alfred (Freemium) 🟡](#2-alfred-freemium)
-* [Terminal Themes](#terminal-themes)
-  * [1. Oh My Zsh 🟡](#1-oh-my-zsh)
-  * [2. Powerlevel10k Theme 🟠](#2-powerlevel10k-theme)
-* [Backup Strategies](#backup-strategies)
-  * [1. Time Machine (Local) 🟢](#1-time-machine-local)
-  * [2. Cloud Backup (Off-site) 🟡](#2-cloud-backup-off-site)
-* [Keyboard Shortcuts (Comprehensive)](#keyboard-shortcuts-comprehensive)
-  * [🔑 The "Must Know" Basics](#the-must-know-basics)
-  * [📝 Text Editing & Document Control](#text-editing-document-control)
-  * [📂 Finder & File Management](#finder-file-management)
-  * [📸 Screenshots & Recording](#screenshots-recording)
-  * [🌐 Web Browsing (Safari/Chrome)](#web-browsing-safarichrome)
-  * [🖥️ System & Window Management](#system-window-management)
-* [Troubleshooting Guide](#troubleshooting-guide)
-  * [Common Issues & Fixes 🟢](#common-issues-fixes)
-  * [Safe Mode 🟡](#safe-mode)
-* [Developer Tools (Mid-Level)](#developer-tools-mid-level)
-  * [1. Xcode Command Line Tools 🟡](#1-xcode-command-line-tools)
-  * [2. Homebrew (The Missing Package Manager) 🟡](#2-homebrew-the-missing-package-manager)
-  * [3. Git Configuration 🟡](#3-git-configuration)
-  * [4. VS Code Setup 🟡](#4-vs-code-setup)
-  * [5. Containerization (Docker / OrbStack) 🟡](#5-containerization-docker-orbstack)
-* [Homebrew Essentials](#homebrew-essentials)
-  * [1. tldr (Too Long; Didn't Read) 🟢](#1-tldr-too-long-didnt-read)
-  * [2. htop / btop 🟡](#2-htop-btop)
-  * [3. ffmpeg 🔴](#3-ffmpeg)
-  * [4. bat 🟢](#4-bat)
-* [Virtualization](#virtualization)
-  * [1. UTM (Free / Open Source) 🟢](#1-utm-free-open-source)
-  * [2. VMware Fusion Pro (Free for Personal Use) 🟡](#2-vmware-fusion-pro-free-for-personal-use)
-  * [3. Parallels Desktop (Paid) 🟢](#3-parallels-desktop-paid)
-* [Gaming on Mac](#gaming-on-mac)
-  * [1. Whisky (Free / Open Source) 🟢](#1-whisky-free-open-source)
-  * [2. Game Porting Toolkit (GPTK) 🔴](#2-game-porting-toolkit-gptk)
-* [Creative Tools](#creative-tools)
-  * [1. DaVinci Resolve (Free / Paid) 🟠](#1-davinci-resolve-free-paid)
-  * [2. Blender (Free & Open Source) 🟠](#2-blender-free-open-source)
-  * [3. OBS Studio (Free & Open Source) 🟡](#3-obs-studio-free-open-source)
-* [Design Tools](#design-tools)
-  * [1. Figma (Free / Paid) 🟢](#1-figma-free-paid)
-  * [2. Sketch (Paid) 🟠](#2-sketch-paid)
-  * [3. Affinity Designer (Paid) 🟢](#3-affinity-designer-paid)
-* [Audio Tools](#audio-tools)
-  * [1. Loopback (Paid) 🟠](#1-loopback-paid)
-  * [2. Audio Hijack (Paid) 🟠](#2-audio-hijack-paid)
-* [Music Production](#music-production)
-  * [1. Logic Pro (Paid) 🟠](#1-logic-pro-paid)
-  * [2. GarageBand (Free) 🟢](#2-garageband-free)
-* [Quick Look Plugins](#quick-look-plugins)
-  * [1. Syntax Highlight (Free) 🟢](#1-syntax-highlight-free)
-  * [2. QLVideo (Free) 🟢](#2-qlvideo-free)
-  * [3. QLMarkdown (Free) 🟢](#3-qlmarkdown-free)
-* [Advanced Configuration (Pro)](#advanced-configuration-pro)
-  * [Shell Customization (Zsh) 🟠](#shell-customization-zsh)
-  * [SSH Key Generation 🟠](#ssh-key-generation)
-* [Privacy & Security Deep Dive](#privacy-security-deep-dive)
-  * [1. Outbound Firewalls 🟠](#1-outbound-firewalls)
-  * [2. Malware Monitoring 🟠](#2-malware-monitoring)
-* [Maintenance & Cleaning](#maintenance-cleaning)
-  * [1. OnyX (Free) 🟠](#1-onyx-free)
-  * [2. DaisyDisk (Paid) 🟢](#2-daisydisk-paid)
-  * [3. AppCleaner (Free) 🟢](#3-appcleaner-free)
-  * [4. Disk Space Analyzer (Terminal) 🟠](#4-disk-space-analyzer-terminal)
-* [Networking Tools](#networking-tools)
-  * [1. Wireshark (Free / Open Source) 🔴](#1-wireshark-free-open-source)
-  * [2. Little Snitch (Paid) 🟠](#2-little-snitch-paid)
-  * [3. Network Speed Test](#3-network-speed-test)
-* [Remote Access](#remote-access)
-  * [1. SSH (Secure Shell) 🟠](#1-ssh-secure-shell)
-  * [2. Screen Sharing (VNC) 🟢](#2-screen-sharing-vnc)
-  * [3. Microsoft Remote Desktop (Free) 🟡](#3-microsoft-remote-desktop-free)
-* [File Management](#file-management)
-  * [1. Commander One (Freemium) 🟡](#1-commander-one-freemium)
-  * [2. ForkLift (Paid) 🟠](#2-forklift-paid)
-* [System Monitoring](#system-monitoring)
-  * [1. Stats (Free & Open Source) 🟢](#1-stats-free-open-source)
-  * [2. iStat Menus (Paid) 🟢](#2-istat-menus-paid)
-  * [3. Activity Monitor (Built-in) 🟢](#3-activity-monitor-built-in)
-* [Browser Extensions](#browser-extensions)
-  * [1. uBlock Origin (Free / Open Source) 🟢](#1-ublock-origin-free-open-source)
-  * [2. 1Password (Paid) 🟢](#2-1password-paid)
-* [Communication Apps](#communication-apps)
-  * [1. Slack (Freemium) 🟢](#1-slack-freemium)
-  * [2. Discord (Free) 🟢](#2-discord-free)
-  * [3. Zoom (Free / Paid) 🟢](#3-zoom-free-paid)
-* [Email Clients](#email-clients)
-  * [1. Spark (Freemium) 🟢](#1-spark-freemium)
-  * [2. Mimestream (Paid) 🟢](#2-mimestream-paid)
-  * [3. Apple Mail (Built-in) 🟢](#3-apple-mail-built-in)
-* [Calendar & Task Apps](#calendar-task-apps)
-  * [1. Fantastical (Freemium) 🟢](#1-fantastical-freemium)
-  * [2. Things 3 (Paid) 🟢](#2-things-3-paid)
-* [Finance & Budgeting](#finance-budgeting)
-  * [1. YNAB (You Need A Budget) (Paid) 🟢](#1-ynab-you-need-a-budget-paid)
-  * [2. Banktivity (Paid) 🟠](#2-banktivity-paid)
-* [Database Tools](#database-tools)
-  * [1. TablePlus (Freemium) 🟡](#1-tableplus-freemium)
-  * [2. DBngin (Free) 🟢](#2-dbngin-free)
-* [Local Development](#local-development)
-  * [1. Laravel Herd (Free / Pro) 🟢](#1-laravel-herd-free-pro)
-  * [2. MAMP (Free / Pro) 🟡](#2-mamp-free-pro)
-  * [3. XAMPP (Free) 🟡](#3-xampp-free)
-* [Markdown Editors](#markdown-editors)
-  * [1. Obsidian (Free) 🟢](#1-obsidian-free)
-  * [2. Bear (Freemium) 🟢](#2-bear-freemium)
-  * [3. Typora (Paid) 🟢](#3-typora-paid)
-* [Writing Tools](#writing-tools)
-  * [1. Scrivener (Paid) 🟠](#1-scrivener-paid)
-  * [2. Ulysses (Paid) 🟢](#2-ulysses-paid)
-* [Education & Research](#education-research)
-  * [1. Zotero (Free & Open Source) 🟢](#1-zotero-free-open-source)
-  * [2. Anki (Free & Open Source) 🟢](#2-anki-free-open-source)
-* [Mind Mapping](#mind-mapping)
-  * [1. MindNode (Freemium) 🟢](#1-mindnode-freemium)
-  * [2. XMind (Freemium) 🟡](#2-xmind-freemium)
-* [Utilities](#utilities)
-  * [1. Amphetamine (Free) 🟢](#1-amphetamine-free)
-  * [2. The Unarchiver (Free) 🟢](#2-the-unarchiver-free)
-  * [3. CheatSheet (Free) 🟢](#3-cheatsheet-free)
-* [Clipboard Managers](#clipboard-managers)
-  * [1. Maccy (Free / Open Source) 🟢](#1-maccy-free-open-source)
-  * [2. Paste (Paid) 🟢](#2-paste-paid)
-* [Automation](#automation)
-  * [1. Shortcuts (Built-in) 🟢](#1-shortcuts-built-in)
-  * [2. Automator (Built-in) 🟡](#2-automator-built-in)
-* [Expert-Level Techniques](#expert-level-techniques)
-  * [System Integrity Protection (SIP) 🔴](#system-integrity-protection-sip)
-  * [Network Analysis 🔴](#network-analysis)
-  * [Process Management 🔴](#process-management)
-* [👥 Contributors](#contributors)
-* [Best Resources by Level](#best-resources-by-level)
+<div class="toc-grid">
+  <div class="toc-column">
+    <h3>🟢 Beginner</h3>
+    <div class="toc-item"><a href="#how-to-use-this-guide">How to Use This Guide</a></div>
+    <details>
+      <summary><a href="#beginner-essentials">Beginner: Essentials</a></summary>
+      <ul>
+        <li><a href="#top-30-essential-settings">🚀 Top 30 Essential Settings</a></li>
+      </ul>
+    </details>
+    <details>
+      <summary><a href="#opening-terminal-step-by-step">Opening Terminal - Step by Step</a></summary>
+      <ul>
+        <li><a href="#method-1-using-spotlight-search-easiest">Method 1: Using Spotlight Search (Easiest) 🟢</a></li>
+        <li><a href="#method-2-using-finder">Method 2: Using Finder 🟢</a></li>
+      </ul>
+    </details>
+    <details>
+      <summary><a href="#getting-started-beginners">Getting Started (Beginners)</a></summary>
+      <ul>
+        <li><a href="#apple-silicon-m-series-compatibility">Apple Silicon (M-Series) Compatibility 🍎</a></li>
+      </ul>
+    </details>
+    <details>
+      <summary><a href="#system-information-hardware">System Information & Hardware</a></summary>
+      <ul>
+        <li><a href="#check-your-mac-specifications">Check Your Mac Specifications 🟢</a></li>
+      </ul>
+    </details>
+    <details>
+      <summary><a href="#apple-silicon-chip-comparison">Apple Silicon Chip Comparison</a></summary>
+      <ul>
+        <li><a href="#chip-tiers-explained">📊 Chip Tiers Explained</a></li>
+        <li><a href="#generation-comparison">🚀 Generation Comparison</a></li>
+      </ul>
+    </details>
+    <details>
+      <summary><a href="#terminal-command-reference">Terminal Command Reference</a></summary>
+      <ul>
+        <li><a href="#beginner-terminal-commands">Beginner Terminal Commands 🟢</a></li>
+        <li><a href="#mid-level-terminal-commands">Mid-Level Terminal Commands 🟡</a></li>
+        <li><a href="#pro-terminal-commands">Pro Terminal Commands 🟠</a></li>
+      </ul>
+    </details>
+    <details>
+      <summary><a href="#system-configuration">System Configuration</a></summary>
+      <ul>
+        <li><a href="#finder-configuration">Finder Configuration 🟢</a></li>
+        <li><a href="#screenshot-configuration">Screenshot Configuration 🟡</a></li>
+        <li><a href="#dock-configuration">Dock Configuration 🟡</a></li>
+      </ul>
+    </details>
+    <details>
+      <summary><a href="#window-management-apps">Window Management Apps</a></summary>
+      <ul>
+        <li><a href="#1-rectangle-free-open-source">1. Rectangle (Free & Open Source) 🟢</a></li>
+        <li><a href="#2-magnet-paid">2. Magnet (Paid) 🟢</a></li>
+      </ul>
+    </details>
+    <details>
+      <summary><a href="#menu-bar-apps">Menu Bar Apps</a></summary>
+      <ul>
+        <li><a href="#1-hidden-bar-free">1. Hidden Bar (Free) 🟢</a></li>
+        <li><a href="#2-ice-free">2. Ice (Free) 🟢</a></li>
+        <li><a href="#3-bartender-paid">3. Bartender (Paid) 🟢</a></li>
+      </ul>
+    </details>
+    <details>
+      <summary><a href="#terminal-themes">Terminal Themes</a></summary>
+      <ul>
+        <li><a href="#1-oh-my-zsh">1. Oh My Zsh 🟡</a></li>
+        <li><a href="#2-powerlevel10k-theme">2. Powerlevel10k Theme 🟠</a></li>
+      </ul>
+    </details>
+    <details>
+      <summary><a href="#backup-strategies">Backup Strategies</a></summary>
+      <ul>
+        <li><a href="#1-time-machine-local">1. Time Machine (Local) 🟢</a></li>
+        <li><a href="#2-cloud-backup-off-site">2. Cloud Backup (Off-site) 🟡</a></li>
+      </ul>
+    </details>
+    <details>
+      <summary><a href="#keyboard-shortcuts-comprehensive">Keyboard Shortcuts (Comprehensive)</a></summary>
+      <ul>
+        <li><a href="#the-must-know-basics">🔑 The "Must Know" Basics</a></li>
+        <li><a href="#text-editing-document-control">📝 Text Editing & Document Control</a></li>
+        <li><a href="#finder-file-management">📂 Finder & File Management</a></li>
+        <li><a href="#screenshots-recording">📸 Screenshots & Recording</a></li>
+        <li><a href="#web-browsing-safarichrome">🌐 Web Browsing (Safari/Chrome)</a></li>
+        <li><a href="#system-window-management">🖥️ System & Window Management</a></li>
+      </ul>
+    </details>
+    <details>
+      <summary><a href="#troubleshooting-guide">Troubleshooting Guide</a></summary>
+      <ul>
+        <li><a href="#common-issues-fixes">Common Issues & Fixes 🟢</a></li>
+        <li><a href="#safe-mode">Safe Mode 🟡</a></li>
+      </ul>
+    </details>
+    <details>
+      <summary><a href="#gaming-on-mac">Gaming on Mac</a></summary>
+      <ul>
+        <li><a href="#1-whisky-free-open-source">1. Whisky (Free / Open Source) 🟢</a></li>
+        <li><a href="#2-game-porting-toolkit-gptk">2. Game Porting Toolkit (GPTK) 🔴</a></li>
+      </ul>
+    </details>
+    <details>
+      <summary><a href="#quick-look-plugins">Quick Look Plugins</a></summary>
+      <ul>
+        <li><a href="#1-syntax-highlight-free">1. Syntax Highlight (Free) 🟢</a></li>
+        <li><a href="#2-qlvideo-free">2. QLVideo (Free) 🟢</a></li>
+        <li><a href="#3-qlmarkdown-free">3. QLMarkdown (Free) 🟢</a></li>
+      </ul>
+    </details>
+    <details>
+      <summary><a href="#maintenance-cleaning">Maintenance & Cleaning</a></summary>
+      <ul>
+        <li><a href="#1-onyx-free">1. OnyX (Free) 🟠</a></li>
+        <li><a href="#2-daisydisk-paid">2. DaisyDisk (Paid) 🟢</a></li>
+        <li><a href="#3-appcleaner-free">3. AppCleaner (Free) 🟢</a></li>
+        <li><a href="#4-disk-space-analyzer-terminal">4. Disk Space Analyzer (Terminal) 🟠</a></li>
+      </ul>
+    </details>
+    <details>
+      <summary><a href="#networking-tools">Networking Tools</a></summary>
+      <ul>
+        <li><a href="#1-wireshark-free-open-source">1. Wireshark (Free / Open Source) 🔴</a></li>
+        <li><a href="#2-little-snitch-paid">2. Little Snitch (Paid) 🟠</a></li>
+        <li><a href="#3-network-speed-test">3. Network Speed Test</a></li>
+      </ul>
+    </details>
+    <details>
+      <summary><a href="#remote-access">Remote Access</a></summary>
+      <ul>
+        <li><a href="#1-ssh-secure-shell">1. SSH (Secure Shell) 🟠</a></li>
+        <li><a href="#2-screen-sharing-vnc">2. Screen Sharing (VNC) 🟢</a></li>
+        <li><a href="#3-microsoft-remote-desktop-free">3. Microsoft Remote Desktop (Free) 🟡</a></li>
+      </ul>
+    </details>
+    <details>
+      <summary><a href="#file-management">File Management</a></summary>
+      <ul>
+        <li><a href="#1-commander-one-freemium">1. Commander One (Freemium) 🟡</a></li>
+        <li><a href="#2-forklift-paid">2. ForkLift (Paid) 🟠</a></li>
+      </ul>
+    </details>
+    <details>
+      <summary><a href="#system-monitoring">System Monitoring</a></summary>
+      <ul>
+        <li><a href="#1-stats-free-open-source">1. Stats (Free & Open Source) 🟢</a></li>
+        <li><a href="#2-istat-menus-paid">2. iStat Menus (Paid) 🟢</a></li>
+        <li><a href="#3-activity-monitor-built-in">3. Activity Monitor (Built-in) 🟢</a></li>
+      </ul>
+    </details>
+    <details>
+      <summary><a href="#browser-extensions">Browser Extensions</a></summary>
+      <ul>
+        <li><a href="#1-ublock-origin-free-open-source">1. uBlock Origin (Free / Open Source) 🟢</a></li>
+        <li><a href="#2-1password-paid">2. 1Password (Paid) 🟢</a></li>
+      </ul>
+    </details>
+    <details>
+      <summary><a href="#communication-apps">Communication Apps</a></summary>
+      <ul>
+        <li><a href="#1-slack-freemium">1. Slack (Freemium) 🟢</a></li>
+        <li><a href="#2-discord-free">2. Discord (Free) 🟢</a></li>
+        <li><a href="#3-zoom-free-paid">3. Zoom (Free / Paid) 🟢</a></li>
+      </ul>
+    </details>
+    <details>
+      <summary><a href="#email-clients">Email Clients</a></summary>
+      <ul>
+        <li><a href="#1-spark-freemium">1. Spark (Freemium) 🟢</a></li>
+        <li><a href="#2-mimestream-paid">2. Mimestream (Paid) 🟢</a></li>
+        <li><a href="#3-apple-mail-built-in">3. Apple Mail (Built-in) 🟢</a></li>
+      </ul>
+    </details>
+    <details>
+      <summary><a href="#calendar-task-apps">Calendar & Task Apps</a></summary>
+      <ul>
+        <li><a href="#1-fantastical-freemium">1. Fantastical (Freemium) 🟢</a></li>
+        <li><a href="#2-things-3-paid">2. Things 3 (Paid) 🟢</a></li>
+      </ul>
+    </details>
+    <details>
+      <summary><a href="#finance-budgeting">Finance & Budgeting</a></summary>
+      <ul>
+        <li><a href="#1-ynab-you-need-a-budget-paid">1. YNAB (You Need A Budget) (Paid) 🟢</a></li>
+        <li><a href="#2-banktivity-paid">2. Banktivity (Paid) 🟠</a></li>
+      </ul>
+    </details>
+    <details>
+      <summary><a href="#ai-coding-assistants">AI Coding Assistants</a></summary>
+      <ul>
+        <li><a href="#1-github-copilot-paid">1. GitHub Copilot (Paid) 🟢</a></li>
+        <li><a href="#2-cursor-freemium">2. Cursor (Freemium) 🟢</a></li>
+        <li><a href="#3-gemini-code-assist-freemium-paid">3. Gemini Code Assist (Freemium / Paid) 🟢</a></li>
+      </ul>
+    </details>
+    <details>
+      <summary><a href="#markdown-editors">Markdown Editors</a></summary>
+      <ul>
+        <li><a href="#1-obsidian-free">1. Obsidian (Free) 🟢</a></li>
+        <li><a href="#2-bear-freemium">2. Bear (Freemium) 🟢</a></li>
+        <li><a href="#3-typora-paid">3. Typora (Paid) 🟢</a></li>
+      </ul>
+    </details>
+    <details>
+      <summary><a href="#education-research">Education & Research</a></summary>
+      <ul>
+        <li><a href="#1-zotero-free-open-source">1. Zotero (Free & Open Source) 🟢</a></li>
+        <li><a href="#2-anki-free-open-source">2. Anki (Free & Open Source) 🟢</a></li>
+      </ul>
+    </details>
+    <details>
+      <summary><a href="#mind-mapping">Mind Mapping</a></summary>
+      <ul>
+        <li><a href="#1-mindnode-freemium">1. MindNode (Freemium) 🟢</a></li>
+        <li><a href="#2-xmind-freemium">2. XMind (Freemium) 🟡</a></li>
+      </ul>
+    </details>
+    <details>
+      <summary><a href="#utilities">Utilities</a></summary>
+      <ul>
+        <li><a href="#1-amphetamine-free">1. Amphetamine (Free) 🟢</a></li>
+        <li><a href="#2-the-unarchiver-free">2. The Unarchiver (Free) 🟢</a></li>
+        <li><a href="#3-cheatsheet-free">3. CheatSheet (Free) 🟢</a></li>
+      </ul>
+    </details>
+    <details>
+      <summary><a href="#clipboard-managers">Clipboard Managers</a></summary>
+      <ul>
+        <li><a href="#1-maccy-free-open-source">1. Maccy (Free / Open Source) 🟢</a></li>
+        <li><a href="#2-paste-paid">2. Paste (Paid) 🟢</a></li>
+      </ul>
+    </details>
+  </div>
+  <div class="toc-column">
+    <h3>🟡 Mid-Level</h3>
+    <details>
+      <summary><a href="#developer-tools-mid-level">Developer Tools (Mid-Level)</a></summary>
+      <ul>
+        <li><a href="#1-xcode-command-line-tools">1. Xcode Command Line Tools 🟡</a></li>
+        <li><a href="#2-homebrew-the-missing-package-manager">2. Homebrew (The Missing Package Manager) 🟡</a></li>
+        <li><a href="#3-git-configuration">3. Git Configuration 🟡</a></li>
+        <li><a href="#4-vs-code-setup">4. VS Code Setup 🟡</a></li>
+        <li><a href="#5-containerization-docker-orbstack">5. Containerization (Docker / OrbStack) 🟡</a></li>
+      </ul>
+    </details>
+    <details>
+      <summary><a href="#homebrew-essentials">Homebrew Essentials</a></summary>
+      <ul>
+        <li><a href="#1-tldr-too-long-didnt-read">1. tldr (Too Long; Didn't Read) 🟢</a></li>
+        <li><a href="#2-htop-btop">2. htop / btop 🟡</a></li>
+        <li><a href="#3-ffmpeg">3. ffmpeg 🔴</a></li>
+        <li><a href="#4-bat">4. bat 🟢</a></li>
+      </ul>
+    </details>
+    <details>
+      <summary><a href="#virtualization">Virtualization</a></summary>
+      <ul>
+        <li><a href="#1-utm-free-open-source">1. UTM (Free / Open Source) 🟢</a></li>
+        <li><a href="#2-vmware-fusion-pro-free-for-personal-use">2. VMware Fusion Pro (Free for Personal Use) 🟡</a></li>
+        <li><a href="#3-parallels-desktop-paid">3. Parallels Desktop (Paid) 🟢</a></li>
+      </ul>
+    </details>
+    <details>
+      <summary><a href="#database-tools">Database Tools</a></summary>
+      <ul>
+        <li><a href="#1-tableplus-freemium">1. TablePlus (Freemium) 🟡</a></li>
+        <li><a href="#2-dbngin-free">2. DBngin (Free) 🟢</a></li>
+      </ul>
+    </details>
+    <details>
+      <summary><a href="#local-development">Local Development</a></summary>
+      <ul>
+        <li><a href="#1-laravel-herd-free-pro">1. Laravel Herd (Free / Pro) 🟢</a></li>
+        <li><a href="#2-mamp-free-pro">2. MAMP (Free / Pro) 🟡</a></li>
+        <li><a href="#3-xampp-free">3. XAMPP (Free) 🟡</a></li>
+      </ul>
+    </details>
+    <details>
+      <summary><a href="#automation">Automation</a></summary>
+      <ul>
+        <li><a href="#1-shortcuts-built-in">1. Shortcuts (Built-in) 🟢</a></li>
+        <li><a href="#2-automator-built-in">2. Automator (Built-in) 🟡</a></li>
+      </ul>
+    </details>
+  </div>
+  <div class="toc-column">
+    <h3>🟠 Pro</h3>
+    <details>
+      <summary><a href="#productivity-apps">Productivity Apps</a></summary>
+      <ul>
+        <li><a href="#1-raycast-free-for-personal-use">1. Raycast (Free for Personal Use) 🟢</a></li>
+        <li><a href="#2-alfred-freemium">2. Alfred (Freemium) 🟡</a></li>
+      </ul>
+    </details>
+    <details>
+      <summary><a href="#creative-tools">Creative Tools</a></summary>
+      <ul>
+        <li><a href="#1-davinci-resolve-free-paid">1. DaVinci Resolve (Free / Paid) 🟠</a></li>
+        <li><a href="#2-blender-free-open-source">2. Blender (Free & Open Source) 🟠</a></li>
+        <li><a href="#3-obs-studio-free-open-source">3. OBS Studio (Free & Open Source) 🟡</a></li>
+      </ul>
+    </details>
+    <details>
+      <summary><a href="#design-tools">Design Tools</a></summary>
+      <ul>
+        <li><a href="#1-figma-free-paid">1. Figma (Free / Paid) 🟢</a></li>
+        <li><a href="#2-sketch-paid">2. Sketch (Paid) 🟠</a></li>
+        <li><a href="#3-affinity-designer-paid">3. Affinity Designer (Paid) 🟢</a></li>
+      </ul>
+    </details>
+    <details>
+      <summary><a href="#audio-tools">Audio Tools</a></summary>
+      <ul>
+        <li><a href="#1-loopback-paid">1. Loopback (Paid) 🟠</a></li>
+        <li><a href="#2-audio-hijack-paid">2. Audio Hijack (Paid) 🟠</a></li>
+      </ul>
+    </details>
+    <details>
+      <summary><a href="#music-production">Music Production</a></summary>
+      <ul>
+        <li><a href="#1-logic-pro-paid">1. Logic Pro (Paid) 🟠</a></li>
+        <li><a href="#2-garageband-free">2. GarageBand (Free) 🟢</a></li>
+      </ul>
+    </details>
+    <details>
+      <summary><a href="#advanced-configuration-pro">Advanced Configuration (Pro)</a></summary>
+      <ul>
+        <li><a href="#shell-customization-zsh">Shell Customization (Zsh) 🟠</a></li>
+        <li><a href="#ssh-key-generation">SSH Key Generation 🟠</a></li>
+      </ul>
+    </details>
+    <details>
+      <summary><a href="#privacy-security-deep-dive">Privacy & Security Deep Dive</a></summary>
+      <ul>
+        <li><a href="#1-outbound-firewalls">1. Outbound Firewalls 🟠</a></li>
+        <li><a href="#2-malware-monitoring">2. Malware Monitoring 🟠</a></li>
+      </ul>
+    </details>
+    <details>
+      <summary><a href="#writing-tools">Writing Tools</a></summary>
+      <ul>
+        <li><a href="#1-scrivener-paid">1. Scrivener (Paid) 🟠</a></li>
+        <li><a href="#2-ulysses-paid">2. Ulysses (Paid) 🟢</a></li>
+      </ul>
+    </details>
+  </div>
+  <div class="toc-column">
+    <h3>🔴 Expert</h3>
+    <details>
+      <summary><a href="#expert-level-techniques">Expert-Level Techniques</a></summary>
+      <ul>
+        <li><a href="#system-integrity-protection-sip">System Integrity Protection (SIP) 🔴</a></li>
+        <li><a href="#network-analysis">Network Analysis 🔴</a></li>
+        <li><a href="#process-management">Process Management 🔴</a></li>
+      </ul>
+    </details>
+  </div>
+</div>
 
 ## 🆕 New & Updated
 
+- **2026-01-08**: Refactor documentation updates and enhance slug generation; improve developer logging and smooth scrolling for anchor links
 - **2026-01-08**: Refactor documentation updates and enhance slug generation for better compatibility
 - **2026-01-08**: Update documentation
 - **2026-01-08**: Update documentation
 - **2026-01-08**: Update documentation
-- **2026-01-08**: Add Contributors section and Last Updated badge to documentation; update sitemap and fix broken link handling
 
 ## How to Use This Guide
 
@@ -215,7 +413,7 @@ This guide is organized by skill level. Find your level and start there:
 - 🔴 = Expert only
 - ⚠️ = Caution required
 - 💡 = Pro tip
-- 🍎 = Apple Silicon (M1/M2/M3/M4/M5) specific
+- 🍎 = Apple Silicon (M1/M2/M3/M4) specific
 
 [↑ Back to Top](#table-of-contents)
 
@@ -224,9 +422,9 @@ This guide is organized by skill level. Find your level and start there:
 
 ### 🔗 Related Topics
 
-- Gaming on Mac
-- Virtualization
-- Getting Started (Beginners)
+- [System Information & Hardware](#system-information-hardware)
+- [Getting Started (Beginners)](#getting-started-beginners)
+- [Gaming on Mac](#gaming-on-mac)
 
 ## Beginner: Essentials
 
@@ -334,9 +532,9 @@ Optimize your experience immediately after a fresh install.
 
 ### 🔗 Related Topics
 
-- Keyboard Shortcuts (Comprehensive)
-- Terminal Command Reference
-- System Configuration
+- [Keyboard Shortcuts (Comprehensive)](#keyboard-shortcuts-comprehensive)
+- [Terminal Command Reference](#terminal-command-reference)
+- [System Configuration](#system-configuration)
 
 ## Opening Terminal - Step by Step
 
@@ -359,19 +557,19 @@ Optimize your experience immediately after a fresh install.
 
 ### 🔗 Related Topics
 
-- System Information & Hardware
-- Audio Tools
-- Productivity Apps
+- [System Information & Hardware](#system-information-hardware)
+- [Audio Tools](#audio-tools)
+- [Productivity Apps](#productivity-apps)
 
 ## Getting Started (Beginners)
 
 ### Apple Silicon (M-Series) Compatibility 🍎
 
-* *M1/M2/M3/M4/M5 Macs Are Special!**
+* *M1/M2/M3/M4 Macs Are Special!**
 
 Your Mac has a special type of processor (chip) called "Apple Silicon".
 
-| Feature | Intel Macs | Apple Silicon (M1-M5) |
+| Feature | Intel Macs | Apple Silicon (M1-M4) |
 |---------|------------|----------------------|
 | **Architecture** | x86_64 | arm64 |
 | **Apps** | All native | Native + Rosetta 2 |
@@ -388,9 +586,9 @@ Your Mac has a special type of processor (chip) called "Apple Silicon".
 
 ### 🔗 Related Topics
 
-- System Information & Hardware
-- Design Tools
-- Virtualization
+- [System Information & Hardware](#system-information-hardware)
+- [Virtualization](#virtualization)
+- [Design Tools](#design-tools)
 
 ## System Information & Hardware
 
@@ -409,7 +607,7 @@ system_profiler SPSoftwareDataType SPHardwareDataType
 # Check if Apple Silicon or Intel
 uname -m
 
-# arm64 = Apple Silicon (M1-M5) | x86_64 = Intel
+# arm64 = Apple Silicon (M1-M4) | x86_64 = Intel
 ```
 
 * *Installing Rosetta 2 (for Intel apps):** 🍎
@@ -427,9 +625,9 @@ softwareupdate --install-rosetta
 
 ### 🔗 Related Topics
 
-- Opening Terminal - Step by Step
-- Getting Started (Beginners)
-- Audio Tools
+- [Opening Terminal - Step by Step](#opening-terminal-step-by-step)
+- [Getting Started (Beginners)](#getting-started-beginners)
+- [Audio Tools](#audio-tools)
 
 ## Apple Silicon Chip Comparison
 
@@ -439,9 +637,9 @@ Understanding the differences between the M-Series chips will help you understan
 
 | Tier | Best For... | Ideal User |
 | :--- | :--- | :--- |
-| **Base** (M1/M2/M3/M4/M5) | Everyday tasks, office work, light editing, browsing. | Students, Writers, Office Workers |
-| **Pro** (M1/M2/M3/M4/M5 Pro) | Heavy multitasking, coding, photo editing, light video. | Developers, Photographers, Creators |
-| **Max** (M1/M2/M3/M4/M5 Max) | 3D rendering, 4K/8K video editing, complex compiling. | Video Editors, 3D Artists, Engineers |
+| **Base** (M1/M2/M3/M4) | Everyday tasks, office work, light editing, browsing. | Students, Writers, Office Workers |
+| **Pro** (M1/M2/M3/M4 Pro) | Heavy multitasking, coding, photo editing, light video. | Developers, Photographers, Creators |
+| **Max** (M1/M2/M3/M4 Max) | 3D rendering, 4K/8K video editing, complex compiling. | Video Editors, 3D Artists, Engineers |
 | **Ultra** (M1/M2/M3 Ultra) | Extreme workstation tasks, scientific compute. | Studios, Data Scientists |
 
 ### 🚀 Generation Comparison
@@ -452,7 +650,6 @@ Understanding the differences between the M-Series chips will help you understan
 | **M2 (2022)** | Refined architecture. Better GPU, Media Engine added to base. | ~18% faster CPU, 35% faster GPU than M1. |
 | **M3 (2023)** | 3nm Process. Hardware Ray Tracing. Dynamic Caching. | ~15-20% faster than M2. Massive GPU leap. |
 | **M4 (2024)** | AI Focused. Enhanced Neural Engine. Efficiency boost. | Significant AI/ML performance gains. |
-| **M5 (2025/26)** | Next-Gen Architecture. Extreme efficiency & raw power. | The pinnacle of desktop silicon. |
 
 [↑ Back to Top](#table-of-contents)
 
@@ -461,7 +658,9 @@ Understanding the differences between the M-Series chips will help you understan
 
 ### 🔗 Related Topics
 
-- Getting Started (Beginners)
+- [Getting Started (Beginners)](#getting-started-beginners)
+- [System Information & Hardware](#system-information-hardware)
+- [Creative Tools](#creative-tools)
 
 ## Terminal Command Reference
 
@@ -534,9 +733,9 @@ ln -s /original/path /link/path
 
 ### 🔗 Related Topics
 
-- System Configuration
-- Keyboard Shortcuts (Comprehensive)
-- Beginner: Essentials
+- [System Configuration](#system-configuration)
+- [Keyboard Shortcuts (Comprehensive)](#keyboard-shortcuts-comprehensive)
+- [Beginner: Essentials](#beginner-essentials)
 
 ## System Configuration
 
@@ -588,9 +787,9 @@ killall Dock
 
 ### 🔗 Related Topics
 
-- Advanced Configuration (Pro)
-- Terminal Command Reference
-- Beginner: Essentials
+- [Advanced Configuration (Pro)](#advanced-configuration-pro)
+- [Terminal Command Reference](#terminal-command-reference)
+- [Beginner: Essentials](#beginner-essentials)
 
 ## Window Management Apps
 
@@ -615,9 +814,9 @@ Excellent alternative if you prefer the App Store.
 
 ### 🔗 Related Topics
 
-- Menu Bar Apps
-- Remote Access
-- Productivity Apps
+- [Menu Bar Apps](#menu-bar-apps)
+- [Remote Access](#remote-access)
+- [Productivity Apps](#productivity-apps)
 
 ## Menu Bar Apps
 
@@ -637,9 +836,9 @@ The most powerful option for total control over menu bar items.
 
 ### 🔗 Related Topics
 
-- Remote Access
-- Productivity Apps
-- Window Management Apps
+- [Remote Access](#remote-access)
+- [Productivity Apps](#productivity-apps)
+- [Window Management Apps](#window-management-apps)
 
 ## Productivity Apps
 
@@ -661,9 +860,9 @@ The veteran productivity app.
 
 ### 🔗 Related Topics
 
-- Menu Bar Apps
-- Remote Access
-- File Management
+- [Menu Bar Apps](#menu-bar-apps)
+- [Remote Access](#remote-access)
+- [File Management](#file-management)
 
 ## Terminal Themes
 
@@ -691,7 +890,7 @@ The fastest and most customizable theme for Zsh.
 
 ### 🔗 Related Topics
 
-- Developer Tools (Mid-Level)
+- [Developer Tools (Mid-Level)](#developer-tools-mid-level)
 
 ## Backup Strategies
 
@@ -841,9 +1040,9 @@ Protect against fire, theft, or hardware failure.
 
 ### 🔗 Related Topics
 
-- Beginner: Essentials
-- Terminal Command Reference
-- Troubleshooting Guide
+- [Beginner: Essentials](#beginner-essentials)
+- [Terminal Command Reference](#terminal-command-reference)
+- [Troubleshooting Guide](#troubleshooting-guide)
 
 ## Troubleshooting Guide
 
@@ -878,8 +1077,8 @@ Protect against fire, theft, or hardware failure.
 
 ### 🔗 Related Topics
 
-- Keyboard Shortcuts (Comprehensive)
-- Beginner: Essentials
+- [Keyboard Shortcuts (Comprehensive)](#keyboard-shortcuts-comprehensive)
+- [Beginner: Essentials](#beginner-essentials)
 
 ## Developer Tools (Mid-Level)
 
@@ -895,6 +1094,10 @@ Install software easily from terminal.
 * *Install Homebrew:**
 ```bash
 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+
+# Add Homebrew to your PATH
+(echo; echo 'eval "$(/opt/homebrew/bin/brew shellenv)"') >> ~/.zprofile
+eval "$(/opt/homebrew/bin/brew shellenv)"
 ```
 
 * *Common Commands:**
@@ -932,9 +1135,9 @@ Run containers and Linux machines on your Mac.
 
 ### 🔗 Related Topics
 
-- Virtualization
-- Terminal Themes
-- Gaming on Mac
+- [AI Coding Assistants](#ai-coding-assistants)
+- [Terminal Themes](#terminal-themes)
+- [Virtualization](#virtualization)
 
 ## Homebrew Essentials
 
@@ -984,9 +1187,9 @@ The most polished experience for running Windows on Mac.
 
 ### 🔗 Related Topics
 
-- Getting Started (Beginners)
-- Gaming on Mac
-- Developer Tools (Mid-Level)
+- [Getting Started (Beginners)](#getting-started-beginners)
+- [Design Tools](#design-tools)
+- [Music Production](#music-production)
 
 ## Gaming on Mac
 
@@ -1008,9 +1211,9 @@ Apple's translation layer allowing DirectX 12 games to run on macOS.
 
 ### 🔗 Related Topics
 
-- Virtualization
-- How to Use This Guide
-- Developer Tools (Mid-Level)
+- [How to Use This Guide](#how-to-use-this-guide)
+- [Virtualization](#virtualization)
+- [Developer Tools (Mid-Level)](#developer-tools-mid-level)
 
 ## Creative Tools
 
@@ -1034,9 +1237,9 @@ Live streaming and screen recording.
 
 ### 🔗 Related Topics
 
-- Music Production
-- Audio Tools
-- Utilities
+- [Music Production](#music-production)
+- [Virtualization](#virtualization)
+- [Audio Tools](#audio-tools)
 
 ## Design Tools
 
@@ -1061,9 +1264,9 @@ A powerful, one-time purchase alternative to Adobe Illustrator.
 
 ### 🔗 Related Topics
 
-- Getting Started (Beginners)
-- Music Production
-- Virtualization
+- [Virtualization](#virtualization)
+- [Getting Started (Beginners)](#getting-started-beginners)
+- [Music Production](#music-production)
 
 ## Audio Tools
 
@@ -1082,9 +1285,9 @@ Record any audio on your Mac.
 
 ### 🔗 Related Topics
 
-- System Information & Hardware
-- Opening Terminal - Step by Step
-- Creative Tools
+- [System Information & Hardware](#system-information-hardware)
+- [Opening Terminal - Step by Step](#opening-terminal-step-by-step)
+- [Creative Tools](#creative-tools)
 
 ## Music Production
 
@@ -1105,9 +1308,9 @@ The best entry-level music creation tool.
 
 ### 🔗 Related Topics
 
-- Design Tools
-- Creative Tools
-- Getting Started (Beginners)
+- [Creative Tools](#creative-tools)
+- [Virtualization](#virtualization)
+- [Design Tools](#design-tools)
 
 ## Quick Look Plugins
 
@@ -1168,8 +1371,8 @@ pbcopy < ~/.ssh/id_ed25519.pub # Copies key to clipboard
 
 ### 🔗 Related Topics
 
-- System Configuration
-- Terminal Command Reference
+- [System Configuration](#system-configuration)
+- [Terminal Command Reference](#terminal-command-reference)
 
 ## Privacy & Security Deep Dive
 
@@ -1190,9 +1393,9 @@ Tools to detect persistence (malware that starts when your Mac starts).
 
 ### 🔗 Related Topics
 
-- Networking Tools
-- Utilities
-- Menu Bar Apps
+- [Networking Tools](#networking-tools)
+- [Utilities](#utilities)
+- [Menu Bar Apps](#menu-bar-apps)
 
 ## Maintenance & Cleaning
 
@@ -1228,7 +1431,7 @@ brew install ncdu && ncdu
 
 ### 🔗 Related Topics
 
-- Terminal Command Reference
+- [Terminal Command Reference](#terminal-command-reference)
 
 ## Networking Tools
 
@@ -1256,8 +1459,8 @@ The ultimate network monitor and application firewall.
 
 ### 🔗 Related Topics
 
-- Privacy & Security Deep Dive
-- Utilities
+- [Privacy & Security Deep Dive](#privacy-security-deep-dive)
+- [Utilities](#utilities)
 
 ## Remote Access
 
@@ -1280,9 +1483,9 @@ The best way to access a Windows PC from your Mac.
 
 ### 🔗 Related Topics
 
-- Menu Bar Apps
-- Productivity Apps
-- Window Management Apps
+- [Menu Bar Apps](#menu-bar-apps)
+- [Productivity Apps](#productivity-apps)
+- [Window Management Apps](#window-management-apps)
 
 ## File Management
 
@@ -1301,9 +1504,9 @@ A robust dual-pane file manager and file transfer client.
 
 ### 🔗 Related Topics
 
-- Clipboard Managers
-- Productivity Apps
-- Remote Access
+- [Clipboard Managers](#clipboard-managers)
+- [Productivity Apps](#productivity-apps)
+- [Remote Access](#remote-access)
 
 ## System Monitoring
 
@@ -1324,9 +1527,9 @@ The gold standard for system monitoring with beautiful weather and calendar inte
 
 ### 🔗 Related Topics
 
-- Finance & Budgeting
-- Calendar & Task Apps
-- Menu Bar Apps
+- [Finance & Budgeting](#finance-budgeting)
+- [Calendar & Task Apps](#calendar-task-apps)
+- [Menu Bar Apps](#menu-bar-apps)
 
 ## Browser Extensions
 
@@ -1345,8 +1548,9 @@ Securely manage passwords and passkeys.
 
 ### 🔗 Related Topics
 
-- Email Clients
-- Database Tools
+- [Email Clients](#email-clients)
+- [Database Tools](#database-tools)
+- [AI Coding Assistants](#ai-coding-assistants)
 
 ## Communication Apps
 
@@ -1384,9 +1588,9 @@ Reliable, secure, and integrated.
 
 ### 🔗 Related Topics
 
-- Database Tools
-- Browser Extensions
-- Design Tools
+- [Browser Extensions](#browser-extensions)
+- [Database Tools](#database-tools)
+- [AI Coding Assistants](#ai-coding-assistants)
 
 ## Calendar & Task Apps
 
@@ -1405,9 +1609,9 @@ The most polished and "Apple-like" task manager.
 
 ### 🔗 Related Topics
 
-- Getting Started (Beginners)
-- System Monitoring
-- Virtualization
+- [Getting Started (Beginners)](#getting-started-beginners)
+- [Virtualization](#virtualization)
+- [System Monitoring](#system-monitoring)
 
 ## Finance & Budgeting
 
@@ -1426,7 +1630,7 @@ A comprehensive personal finance manager for macOS.
 
 ### 🔗 Related Topics
 
-- System Monitoring
+- [System Monitoring](#system-monitoring)
 
 ## Database Tools
 
@@ -1445,9 +1649,9 @@ The easiest way to get started with a local database server.
 
 ### 🔗 Related Topics
 
-- Local Development
-- Email Clients
-- Browser Extensions
+- [Local Development](#local-development)
+- [Email Clients](#email-clients)
+- [Browser Extensions](#browser-extensions)
 
 ## Local Development
 
@@ -1469,7 +1673,33 @@ Open source cross-platform web server solution.
 
 ### 🔗 Related Topics
 
-- Database Tools
+- [Database Tools](#database-tools)
+
+## AI Coding Assistants
+
+Accelerate your development with intelligent code completion and chat.
+
+### 1. GitHub Copilot (Paid) 🟢
+The industry standard AI pair programmer.
+- **Install:** Extension for VS Code, Xcode (via Copilot for Xcode), or JetBrains.
+- **Best for:** General purpose autocompletion and chat within your IDE.
+
+### 2. Cursor (Freemium) 🟢
+A VS Code fork built from the ground up for AI.
+- **Features:** "Cmd+K" to edit code, codebase indexing, and model switching (Claude 3.5 Sonnet, GPT-4o).
+- **Best for:** Developers who want a native AI-first editor experience.
+
+### 3. Gemini Code Assist (Freemium / Paid) 🟢
+Google's powerful coding assistant with large context windows.
+- **Features:** Full codebase awareness, enterprise-grade security, and deep integration with Google Cloud.
+- **Best for:** Enterprise developers and those working with large codebases.
+
+
+### 🔗 Related Topics
+
+- [Email Clients](#email-clients)
+- [Developer Tools (Mid-Level)](#developer-tools-mid-level)
+- [Database Tools](#database-tools)
 
 ## Markdown Editors
 
@@ -1492,8 +1722,8 @@ A seamless "what you see is what you get" (WYSIWYG) markdown editor.
 
 ### 🔗 Related Topics
 
-- Writing Tools
-- Productivity Apps
+- [Writing Tools](#writing-tools)
+- [Productivity Apps](#productivity-apps)
 
 ## Writing Tools
 
@@ -1511,7 +1741,7 @@ A polished, distraction-free writing app for the Apple ecosystem.
 
 ### 🔗 Related Topics
 
-- Markdown Editors
+- [Markdown Editors](#markdown-editors)
 
 ## Education & Research
 
@@ -1559,9 +1789,9 @@ Hold the `⌘ Command` key to see a list of all active shortcuts for the current
 
 ### 🔗 Related Topics
 
-- Privacy & Security Deep Dive
-- Menu Bar Apps
-- Productivity Apps
+- [Privacy & Security Deep Dive](#privacy-security-deep-dive)
+- [Menu Bar Apps](#menu-bar-apps)
+- [Productivity Apps](#productivity-apps)
 
 ## Clipboard Managers
 
@@ -1579,9 +1809,9 @@ Visual clipboard history for Mac, iPhone, and iPad.
 
 ### 🔗 Related Topics
 
-- File Management
-- Automation
-- Productivity Apps
+- [File Management](#file-management)
+- [Automation](#automation)
+- [Productivity Apps](#productivity-apps)
 
 ## Automation
 
@@ -1600,9 +1830,9 @@ Legacy tool, great for file system operations.
 
 ### 🔗 Related Topics
 
-- Clipboard Managers
-- Productivity Apps
-- File Management
+- [Clipboard Managers](#clipboard-managers)
+- [Productivity Apps](#productivity-apps)
+- [File Management](#file-management)
 
 ## Expert-Level Techniques
 
@@ -1645,7 +1875,7 @@ pstree
 
 ### 🔗 Related Topics
 
-- Terminal Command Reference
+- [Terminal Command Reference](#terminal-command-reference)
 
 ## 👥 Contributors
 

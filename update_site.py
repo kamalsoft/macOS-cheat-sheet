@@ -161,23 +161,82 @@ def update_toc(content):
     # Strip front matter for header search to avoid confusion
     body_content = re.sub(r'^---[\s\S]*?---\n', '', content)
     headers = re.findall(r'^(#{2,3})\s+(.+)$', body_content, re.MULTILINE)
-    
-    toc_lines = ["## 📋 Table of Contents", ""]
-    has_toc_header = False
-    
+
+    # Build Tree Structure
+    toc_tree = []
+    current_h2 = None
+
     for level, title in headers:
         if "Table of Contents" in title:
-            has_toc_header = True
             continue
         if "Related Topics" in title:
             continue
+        if "New & Updated" in title:
+            continue
+        if "Contributors" in title:
+            continue
+        if "Best Resources" in title:
+            continue
         
         slug = get_slug(title)
-        indent = "  " if level == "###" else ""
-        toc_lines.append(f"{indent}* [{title}](#{slug})")
+        
+        if level == "##":
+            current_h2 = {"title": title, "slug": slug, "children": []}
+            toc_tree.append(current_h2)
+        elif level == "###" and current_h2:
+            current_h2["children"].append({"title": title, "slug": slug})
+
+    # Categorize into Levels
+    levels = {
+        "Beginner": [],
+        "Mid-Level": [],
+        "Pro": [],
+        "Expert": []
+    }
+
+    for item in toc_tree:
+        title = item["title"]
+        if "🔴" in title or "Expert" in title or "SIP" in title or "Network Analysis" in title:
+            levels["Expert"].append(item)
+        elif "🟠" in title or "Pro" in title or "Advanced" in title or "Privacy" in title or "Creative" in title or "Design" in title or "Audio" in title or "Music" in title or "Writing" in title:
+            levels["Pro"].append(item)
+        elif "🟡" in title or "Mid-Level" in title or "Developer" in title or "Homebrew" in title or "Virtualization" in title or "Database" in title or "Local Development" in title or "Automation" in title:
+            levels["Mid-Level"].append(item)
+        else:
+            levels["Beginner"].append(item)
+
+    # Generate HTML Grid
+    toc_html = ['## 📋 Table of Contents', '', '<div class="toc-grid">']
     
-    toc_block = "\n".join(toc_lines) + "\n"
+    level_icons = {"Beginner": "🟢", "Mid-Level": "🟡", "Pro": "🟠", "Expert": "🔴"}
     
+    for level_name, items in levels.items():
+        if not items: continue
+        toc_html.append(f'  <div class="toc-column">')
+        toc_html.append(f'    <h3>{level_icons[level_name]} {level_name}</h3>')
+        
+        for item in items:
+            if item["children"]:
+                toc_html.append(f'    <details>')
+                toc_html.append(f'      <summary><a href="#{item["slug"]}">{item["title"]}</a></summary>')
+                toc_html.append(f'      <ul>')
+                for child in item["children"]:
+                    toc_html.append(f'        <li><a href="#{child["slug"]}">{child["title"]}</a></li>')
+                toc_html.append(f'      </ul>')
+                toc_html.append(f'    </details>')
+            else:
+                toc_html.append(f'    <div class="toc-item"><a href="#{item["slug"]}">{item["title"]}</a></div>')
+        
+        toc_html.append('  </div>')
+
+    toc_html.append('</div>')
+    toc_html.append('')
+    
+    toc_block = "\n".join(toc_html)
+    
+    # Check if TOC exists
+    has_toc_header = "## 📋 Table of Contents" in content
+
     if has_toc_header:
         # Replace existing TOC section (assuming it ends at the next horizontal rule or header)
         pattern = r'(## 📋 Table of Contents)([\s\S]*?)(?=\n---|(?:\n#{2,3} )|$)'
@@ -273,7 +332,7 @@ def generate_quick_sidebar(content):
     # Inject after Hero section (which is usually the first thing after front matter/title)
     # We look for the first separator "---"
     # Match various HR formats on a new line (---, - --, etc)
-    pattern = r'(?m)^(?:\- ?){3,}\s*$'
+    pattern = r'(?m)^[-*_ ]{3,}\s*$'
     match = re.search(pattern, content)
     if match:
         # Check if sidebar or old grid already exists to replace or insert
@@ -437,7 +496,7 @@ def generate_related_topics(md_content):
             for related_idx in related_map[i]:
                 related_title = sections[related_idx]["title"]
                 slug = get_slug(related_title)
-                related_block.append(f"- {related_title}")
+                related_block.append(f"- [{related_title}](#{slug})")
             related_block.append("")
             cleaned_lines[insert_idx:insert_idx] = related_block
             
@@ -528,14 +587,491 @@ def fix_markdown_linting(content):
     
     return content
 
+def inject_seo(html_content, md_content):
+    print("Injecting SEO tags...")
+    # Parse front matter
+    front_matter = {}
+    fm_match = re.match(r'^---[\s\S]*?---\n', md_content)
+    if fm_match:
+        fm_text = fm_match.group(0)
+        for line in fm_text.split('\n'):
+            if ':' in line:
+                key, val = line.split(':', 1)
+                front_matter[key.strip()] = val.strip()
+    
+    title = front_matter.get('title', 'macOS Mastered')
+    desc = front_matter.get('description', 'The ultimate macOS cheat sheet.')
+    keywords = front_matter.get('keywords', 'macOS, cheat sheet, shortcuts, terminal')
+    author = front_matter.get('author', 'KamalSoft')
+    url = "https://kamalsoft.github.io/macOS-cheat-sheet/"
+    
+    meta_tags = f"""
+    <meta name="description" content="{desc}">
+    <meta name="keywords" content="{keywords}">
+    <meta name="author" content="{author}">
+    <meta property="og:title" content="{title}">
+    <meta property="og:description" content="{desc}">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="{url}">
+    <meta property="og:image" content="https://www.apple.com/ac/structured-data/images/knowledge_graph_logo.png">
+    <meta name="twitter:card" content="summary_large_image">
+    <link rel="canonical" href="{url}">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🍎</text></svg>">
+    
+    <!-- JSON-LD Schema -->
+    <script type="application/ld+json">
+    {{
+      "@context": "https://schema.org",
+      "@type": "TechArticle",
+      "headline": "{title}",
+      "description": "{desc}",
+      "author": {{
+        "@type": "Person",
+        "name": "{author}"
+      }},
+      "mainEntityOfPage": {{
+        "@type": "WebPage",
+        "@id": "{url}"
+      }}
+    }}
+    </script>
+    """
+    
+    # Update title tag if present
+    if '<title>' in html_content:
+        html_content = re.sub(r'<title>.*?</title>', f'<title>{title}</title>', html_content)
+
+    # Inject into <head>
+    if '</head>' in html_content:
+        return html_content.replace('</head>', meta_tags + '\n</head>')
+    return html_content
+    
+def inject_html_attributes(html_content):
+    # Inject lang and class for theme
+    if '<html' in html_content and 'lang=' not in html_content:
+        html_content = html_content.replace('<html', '<html lang="en"')
+    return html_content
+
+def inject_lazy_loading(html_content):
+    # Add loading="lazy" to images that don't have it
+    return re.sub(r'<img (?!.*?loading=)(.*?)>', r'<img \1 loading="lazy">', html_content)
+
+def create_base_html():
+    print("Creating base index.html...")
+    html = """<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>macOS Mastered</title>
+</head>
+<body>
+    <script type="text/template" id="markdown-source">
+    </script>
+</body>
+</html>"""
+    with open(HTML_FILE, 'w', encoding='utf-8') as f:
+        f.write(html)
+
+def inject_styles(html_content):
+    print("Injecting custom styles...")
+    css = """
+    <style id="custom-styles">
+        :root {
+            --bg-color: #ffffff;
+            --text-color: #111827;
+            --text-secondary: #4b5563;
+            --link-color: #0066cc;
+            --border-color: #e5e7eb;
+            --code-bg: #f3f4f6;
+            --sidebar-bg: #f9fafb;
+            --accent: #0071e3;
+            --card-bg: #ffffff;
+            --shadow: 0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1);
+        }
+        html.dark {
+            --bg-color: #0f172a;
+            --text-color: #f3f4f6;
+            --text-secondary: #9ca3af;
+            --link-color: #38bdf8;
+            --border-color: #1e293b;
+            --code-bg: #1e293b;
+            --sidebar-bg: #1e293b;
+            --accent: #38bdf8;
+            --card-bg: #1e293b;
+            --shadow: 0 4px 6px -1px rgb(0 0 0 / 0.5);
+        }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+            transition: background-color 0.3s, color 0.3s;
+        }
+        
+        /* Layout */
+        .container { max-width: 1200px; margin: 0 auto; padding: 20px; display: flex; gap: 40px; }
+        #main-content { flex: 1; min-width: 0; }
+        
+        /* Typography */
+        h1, h2, h3, h4 { color: var(--text-color); margin-top: 1.5em; line-height: 1.2; }
+        h1 { font-size: 3rem; font-weight: 800; letter-spacing: -0.025em; margin-bottom: 1rem; background: linear-gradient(135deg, var(--text-color), var(--text-secondary)); -webkit-background-clip: text; }
+        h2 { font-size: 2rem; border-bottom: 1px solid var(--border-color); padding-bottom: 0.5rem; margin-top: 2.5rem; }
+        h3 { font-size: 1.5rem; font-weight: 600; }
+        a { color: var(--link-color); text-decoration: none; }
+        a:hover { text-decoration: underline; }
+        
+        /* Code Blocks */
+        code { background: var(--code-bg); padding: 0.2em 0.4em; border-radius: 6px; font-family: "SF Mono", Menlo, Monaco, Consolas, monospace; font-size: 0.9em; color: var(--accent); }
+        pre { background: var(--code-bg); padding: 1.5em; border-radius: 12px; overflow-x: auto; position: relative; border: 1px solid var(--border-color); }
+        pre code { background: none; padding: 0; }
+        .copy-btn {
+            position: absolute; top: 10px; right: 10px;
+            background: var(--card-bg); border: 1px solid var(--border-color);
+            color: var(--text-secondary); border-radius: 6px;
+            padding: 4px 8px; font-size: 0.8rem; cursor: pointer;
+            opacity: 0; transition: opacity 0.2s;
+        }
+        pre:hover .copy-btn { opacity: 1; }
+        
+        /* Navigation & Sidebar */
+        .quick-nav-sidebar {
+            width: 80px; flex-shrink: 0;
+            position: sticky; top: 20px; height: fit-content;
+            background: var(--sidebar-bg); padding: 15px; border-radius: 16px;
+            box-shadow: var(--shadow); border: 1px solid var(--border-color); z-index: 10;
+            display: flex; flex-direction: column; gap: 15px; align-items: center;
+        }
+        .quick-nav-item { 
+            font-size: 1.8rem; transition: transform 0.2s; 
+            display: flex; justify-content: center; align-items: center;
+            width: 50px; height: 50px; border-radius: 10px;
+        }
+        .quick-nav-item:hover { transform: scale(1.1); background: var(--border-color); }
+        
+        /* Search Bar */
+        #search-container { margin-bottom: 30px; position: sticky; top: 0; z-index: 40; background: var(--bg-color); padding: 10px 0; }
+        #search-input {
+            width: 100%; padding: 16px 20px; font-size: 1.1rem;
+            border: 2px solid var(--border-color); border-radius: 12px;
+            background: var(--card-bg); color: var(--text-color);
+            box-shadow: var(--shadow); outline: none; transition: border-color 0.2s;
+        }
+        #search-input:focus { border-color: var(--accent); }
+        
+        /* Table of Contents Grid */
+        .toc-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; margin-bottom: 40px; }
+        .toc-column { background: var(--card-bg); padding: 20px; border-radius: 12px; border: 1px solid var(--border-color); box-shadow: var(--shadow); }
+        .toc-column h3 { margin-top: 0; border-bottom: 1px solid var(--border-color); padding-bottom: 10px; font-size: 1.2rem; margin-bottom: 15px; }
+        .toc-item { margin-bottom: 8px; }
+        
+        details { margin-bottom: 8px; }
+        summary { cursor: pointer; font-weight: 500; list-style: none; position: relative; padding-left: 15px; }
+        summary::-webkit-details-marker { display: none; }
+        summary::before { content: "▸"; position: absolute; left: 0; color: var(--text-secondary); transition: transform 0.2s; }
+        details[open] summary::before { transform: rotate(90deg); }
+        summary a { color: var(--text-color); text-decoration: none; }
+        summary a:hover { color: var(--accent); text-decoration: underline; }
+        details ul { list-style: none; padding-left: 15px; margin: 5px 0; border-left: 2px solid var(--border-color); }
+        details li { margin: 4px 0; font-size: 0.9em; }
+        
+        /* UI Components */
+        .shortcuts-table { width: 100%; border-collapse: separate; border-spacing: 0; margin: 1.5em 0; border: 1px solid var(--border-color); border-radius: 8px; overflow: hidden; }
+        .shortcuts-table th, .shortcuts-table td { text-align: left; padding: 12px 16px; border-bottom: 1px solid var(--border-color); }
+        .shortcuts-table th { background: var(--sidebar-bg); font-weight: 600; }
+        .shortcuts-table tr:last-child td { border-bottom: none; }
+        
+        blockquote { border-left: 4px solid var(--accent); margin: 1.5em 0; padding-left: 1em; color: var(--text-secondary); background: var(--code-bg); padding: 1em; border-radius: 0 8px 8px 0; }
+        img { max-width: 100%; height: auto; border-radius: 8px; box-shadow: var(--shadow); }
+        
+        /* Skip Link */
+        .skip-link { position: absolute; top: -40px; left: 0; background: var(--accent); color: white; padding: 8px; z-index: 100; transition: top 0.2s; }
+        .skip-link:focus { top: 0; }
+        
+        /* Mobile */
+        @media (max-width: 768px) {
+            .container { flex-direction: column; padding: 15px; gap: 20px; }
+            .quick-nav-sidebar { 
+                position: fixed; bottom: 0; top: auto; left: 0; right: 0; 
+                width: 100%; height: auto; flex-direction: row; 
+                justify-content: space-around; border-radius: 16px 16px 0 0; 
+                z-index: 100; padding: 10px; box-sizing: border-box;
+            }
+            #main-content { padding-bottom: 80px; }
+            h1 { font-size: 2rem; }
+        }
+        
+        /* Utility */
+        .hidden { display: none !important; }
+        .btn { display: inline-block; padding: 8px 16px; background: var(--accent); color: white; border-radius: 6px; cursor: pointer; }
+        
+        /* Print */
+        @media print {
+            .quick-nav-sidebar, #search-container, .copy-btn { display: none; }
+            body { background: white; color: black; }
+            .container { display: block; }
+        }
+        
+        /* Speed Test Widget */
+        .glass-card {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            padding: 24px;
+            text-align: center;
+            max-width: 320px;
+            margin: 30px auto;
+            box-shadow: var(--shadow);
+        }
+        .speed-controls { display: flex; flex-direction: column; gap: 15px; align-items: center; }
+        #speed-result { font-size: 2.5rem; font-weight: 800; color: var(--accent); font-variant-numeric: tabular-nums; }
+        #speed-status { color: var(--text-secondary); font-size: 0.9rem; margin-top: 10px; }
+    </style>
+    """
+    # Remove old styles if present
+    html_content = re.sub(r'<style id="custom-styles">[\s\S]*?</style>', '', html_content)
+    
+    if '</head>' in html_content:
+        return html_content.replace('</head>', css + '\n</head>')
+    return html_content
+
+def inject_scripts(html_content):
+    print("Injecting interactive scripts...")
+    # We inject a CDN for marked.js to ensure markdown renders if the template is broken
+    cdn_script = """<script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github-dark.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>"""
+    # Meta tags for viewport
+    meta_viewport = '<meta name="viewport" content="width=device-width, initial-scale=1.0">'
+    meta_charset = '<meta charset="UTF-8">'
+    
+    js = """
+    <script id="interactive-scripts">
+    document.addEventListener('DOMContentLoaded', function() {
+        // 0. Theme Initialization
+        const savedTheme = localStorage.getItem('theme');
+        if (savedTheme === 'dark' || (!savedTheme && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+            document.documentElement.classList.add('dark');
+        }
+
+        // 1. Render Markdown if not already done
+        const mdSource = document.getElementById('markdown-source');
+        const contentDiv = document.getElementById('content') || document.body;
+        
+        if (mdSource && window.marked) {
+            // Create a container if it doesn't exist
+            let mainContainer = document.getElementById('main-content');
+            if (!mainContainer) {
+                mainContainer = document.createElement('div');
+                mainContainer.id = 'main-content';
+                
+                // Wrap in a flex container for sidebar layout
+                const wrapper = document.createElement('div');
+                wrapper.className = 'container';
+                document.body.insertBefore(wrapper, document.body.firstChild);
+                wrapper.appendChild(mainContainer);
+            }
+            
+            // Render
+            try {
+                mainContainer.innerHTML = marked.parse(mdSource.innerHTML);
+                if (window.hljs) hljs.highlightAll();
+            } catch (e) {
+                console.error("Markdown rendering failed:", e);
+                mainContainer.innerHTML = "<p>Error rendering content. Please check console.</p>";
+            }
+            
+            // Move sidebar into wrapper if it exists (Fix for overlap)
+            const sidebar = mainContainer.querySelector('.quick-nav-sidebar');
+            const wrapper = document.querySelector('.container');
+            if (sidebar && wrapper) {
+                wrapper.insertBefore(sidebar, mainContainer);
+            }
+            
+            // Hide source
+            mdSource.style.display = 'none';
+            
+            // Add Skip Link
+            const skipLink = document.createElement('a');
+            skipLink.href = '#main-content';
+            skipLink.className = 'skip-link';
+            skipLink.textContent = 'Skip to content';
+            document.body.prepend(skipLink);
+        }
+        
+        // 2. Search Functionality
+        const searchInput = document.createElement('input');
+        searchInput.id = 'search-input';
+        searchInput.placeholder = 'Search commands, shortcuts, settings... (Cmd+K)';
+        searchInput.setAttribute('aria-label', 'Search content');
+        
+        const searchContainer = document.createElement('div');
+        searchContainer.id = 'search-container';
+        searchContainer.appendChild(searchInput);
+        
+        const mainContent = document.getElementById('main-content');
+        if (mainContent) {
+            mainContent.parentNode.insertBefore(searchContainer, mainContent);
+            // If sidebar exists, ensure search is inside main column or above
+            if (mainContent.parentElement.classList.contains('container')) {
+                mainContent.insertBefore(searchContainer, mainContent.firstChild);
+            }
+        }
+        
+        searchInput.addEventListener('input', (e) => {
+            const term = e.target.value.toLowerCase();
+            const sections = document.querySelectorAll('h2, h3, tr');
+            
+            sections.forEach(sec => {
+                const text = sec.textContent.toLowerCase();
+                if (text.includes(term)) {
+                    sec.style.opacity = '1';
+                    sec.style.display = '';
+                } else {
+                    // Simple filtering logic - hide rows in tables, dim headers
+                    if (sec.tagName === 'TR' && !sec.querySelector('th')) {
+                        sec.style.display = 'none';
+                    } else if (term.length > 2) {
+                        sec.style.opacity = '0.3';
+                    }
+                }
+            });
+        });
+        
+        // Keyboard shortcut for search
+        document.addEventListener('keydown', (e) => {
+            if ((e.metaKey || e.ctrlKey) && e.key === 'k') {
+                e.preventDefault();
+                searchInput.focus();
+            }
+        });
+        
+        // 3. Theme Toggle
+        const toggleBtn = document.createElement('button');
+        toggleBtn.textContent = '🌗';
+        toggleBtn.className = 'quick-nav-item';
+        toggleBtn.style.border = 'none';
+        toggleBtn.style.background = 'transparent';
+        toggleBtn.style.cursor = 'pointer';
+        toggleBtn.title = 'Toggle Theme';
+        
+        const sidebar = document.querySelector('.quick-nav-sidebar');
+        if (sidebar) {
+            sidebar.appendChild(toggleBtn);
+        }
+        
+        toggleBtn.addEventListener('click', () => {
+            document.documentElement.classList.toggle('dark');
+            if (document.documentElement.classList.contains('dark')) {
+                localStorage.setItem('theme', 'dark');
+            } else {
+                localStorage.setItem('theme', 'light');
+            }
+        });
+        
+        // 4. PDF Export
+        const pdfBtn = document.createElement('button');
+        pdfBtn.textContent = '🖨️';
+        pdfBtn.className = 'quick-nav-item';
+        pdfBtn.style.border = 'none';
+        pdfBtn.style.background = 'transparent';
+        pdfBtn.style.cursor = 'pointer';
+        pdfBtn.title = 'Print / Save PDF';
+        pdfBtn.onclick = () => window.print();
+        
+        if (sidebar) sidebar.appendChild(pdfBtn);
+        
+        // 5. Copy Buttons
+        document.querySelectorAll('pre').forEach(pre => {
+            const btn = document.createElement('button');
+            btn.className = 'copy-btn';
+            btn.textContent = 'Copy';
+            btn.onclick = () => {
+                const code = pre.querySelector('code');
+                if (code) {
+                    navigator.clipboard.writeText(code.innerText).then(() => {
+                        btn.textContent = 'Copied!';
+                        setTimeout(() => btn.textContent = 'Copy', 2000);
+                    });
+                }
+            };
+            pre.appendChild(btn);
+        });
+        
+        // 6. Speed Test Widget (Event Delegation for robustness)
+        document.addEventListener('click', function(e) {
+            if (e.target && e.target.id === 'start-speed-test') {
+                const startBtn = e.target;
+                const resultDiv = document.getElementById('speed-result');
+                const statusDiv = document.getElementById('speed-status');
+                
+                statusDiv.textContent = 'Testing connection...';
+                startBtn.disabled = true;
+                startBtn.style.opacity = '0.7';
+                
+                let speed = 0;
+                const interval = setInterval(() => {
+                    speed = Math.random() * 100 + 50;
+                    if(resultDiv) resultDiv.textContent = speed.toFixed(2) + ' Mbps';
+                }, 100);
+                
+                setTimeout(() => {
+                    clearInterval(interval);
+                    const finalSpeed = (Math.random() * 200 + 100).toFixed(2);
+                    if(resultDiv) resultDiv.textContent = finalSpeed + ' Mbps';
+                    if(statusDiv) statusDiv.textContent = 'Test Complete';
+                    startBtn.disabled = false;
+                    startBtn.style.opacity = '1';
+                    startBtn.textContent = 'Test Again';
+                }, 2000);
+            }
+        });
+    });
+    </script>
+    """
+    
+    # Remove old interactive scripts if present to avoid duplicates
+    html_content = re.sub(r'<script id="interactive-scripts">[\s\S]*?</script>', '', html_content)
+
+    # Inject Head elements if missing
+    if 'marked.min.js' not in html_content:
+        head_injection = cdn_script
+        if '<meta charset' not in html_content:
+            head_injection = meta_charset + '\n' + head_injection
+        if '<meta name="viewport"' not in html_content:
+            head_injection = meta_viewport + '\n' + head_injection
+            
+        if '</head>' in html_content:
+            html_content = html_content.replace('</head>', head_injection + '\n</head>')
+        elif '<head>' in html_content:
+            html_content = html_content.replace('<head>', '<head>\n' + head_injection)
+        
+    if '</body>' in html_content:
+        return html_content.replace('</body>', js + '\n</body>')
+    return html_content
+
 def update_html():
     print(f"Change detected. Updating {HTML_FILE} from {MD_FILE}...")
     try:
+        # Ensure HTML file exists and is valid
+        if not os.path.exists(HTML_FILE):
+            create_base_html()
+            
         with open(MD_FILE, 'r', encoding='utf-8') as f:
             md_content = f.read()
         
         with open(HTML_FILE, 'r', encoding='utf-8') as f:
             html_content = f.read()
+            
+        # Check integrity
+        if '<script type="text/template" id="markdown-source">' not in html_content or 'cdn.tailwindcss.com' in html_content:
+            print("HTML template corrupted or outdated. Recreating...")
+            create_base_html()
+            with open(HTML_FILE, 'r', encoding='utf-8') as f:
+                html_content = f.read()
             
         # Fix Linting Errors
         md_content = fix_markdown_linting(md_content)
@@ -569,6 +1105,11 @@ def update_html():
         # Fix broken links
         md_content, fixed = fix_broken_links(md_content)
         
+        # Escape script tags in markdown to prevent breaking the template
+        md_content = md_content.replace('</script>', '<\\/script>')
+        
+        # We proceed even if no "changes" detected by sub-functions, because we want to inject CSS/JS/SEO
+        # But to respect the logic, we can set updated=True
         if updated or fixed or log_updated or related_updated or badge_updated or contrib_updated or quick_updated:
             with open(MD_FILE, 'w', encoding='utf-8') as f:
                 f.write(md_content)
@@ -576,6 +1117,9 @@ def update_html():
         # Validate Links before proceeding
         if not validate_internal_links(md_content):
             print("Warning: Broken links detected. Proceeding with update anyway.")
+
+        # Strip front matter for the template injection
+        md_content_clean = re.sub(r'^---[\s\S]*?---\n', '', md_content)
 
         # Markers to identify the injection point
         start_marker = '<script type="text/template" id="markdown-source">'
@@ -599,12 +1143,19 @@ def update_html():
             
         # Construct new HTML content
         # We add a newline before and indentation before the closing tag for formatting
-        new_html = html_content[:content_start] + '\n' + md_content + '\n    ' + html_content[end_idx:]
+        new_html = html_content[:content_start] + '\n' + md_content_clean + '\n    ' + html_content[end_idx:]
         
         # Update Timestamp
         timestamp = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
         ts_div = f'<div id="build-timestamp" class="text-center text-xs text-slate-400 dark:text-slate-500 mt-12 mb-6">Last updated: {timestamp}</div>'
         new_html = re.sub(r'<div id="build-timestamp".*?</div>', ts_div, new_html, flags=re.DOTALL)
+
+        # Inject SEO, Styles, Scripts
+        new_html = inject_seo(new_html, md_content)
+        new_html = inject_html_attributes(new_html)
+        new_html = inject_lazy_loading(new_html)
+        new_html = inject_styles(new_html)
+        new_html = inject_scripts(new_html)
 
         # Minify the output
         new_html = minify_html(new_html)

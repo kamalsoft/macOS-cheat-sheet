@@ -7,7 +7,7 @@
     <priority>1.0</priority>
   </url>
   <url>
-    <loc>https://kamalsoft.github.io/macOS-cheat-sheet/#from-beginner-to-expert-m1m2m3m4m5-compatible</loc>
+    <loc>https://kamalsoft.github.io/macOS-cheat-sheet/#from-beginner-to-expert-m1m4-verified</loc>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
@@ -848,6 +848,31 @@
   </url>
   <url>
     <loc>https://kamalsoft.github.io/macOS-cheat-sheet/#3-xampp-free</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://kamalsoft.github.io/macOS-cheat-sheet/#related-topics</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://kamalsoft.github.io/macOS-cheat-sheet/#ai-coding-assistants</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://kamalsoft.github.io/macOS-cheat-sheet/#1-github-copilot-paid</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://kamalsoft.github.io/macOS-cheat-sheet/#2-cursor-freemium</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://kamalsoft.github.io/macOS-cheat-sheet/#3-gemini-code-assist-freemium-paid</loc>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
