@@ -561,7 +561,7 @@ Optimize your experience immediately after a fresh install.
 
 Your Mac has a special type of processor (chip) called "Apple Silicon".
 
-| Feature | Intel Macs | Apple Silicon (M1-M4) |
+| Feature | Intel Macs | Apple Silicon (M1–M4) |
 |---------|------------|----------------------|
 | **Architecture** | x86_64 | arm64 |
 | **Apps** | All native | Native + Rosetta 2 |
@@ -599,7 +599,7 @@ system_profiler SPSoftwareDataType SPHardwareDataType
 # Check if Apple Silicon or Intel
 uname -m
 
-# arm64 = Apple Silicon (M1-M4) | x86_64 = Intel
+# arm64 = Apple Silicon (M1–M4) | x86_64 = Intel
 ```
 
 * *Installing Rosetta 2 (for Intel apps):** 🍎

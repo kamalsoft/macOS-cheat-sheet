@@ -679,8 +679,16 @@ def inject_styles(html_content):
         }
         
         /* Layout */
-        .container { max-width: 1200px; margin: 0 auto; padding: 20px; padding-left: 40px; display: flex; gap: 40px; }
-        #main-content { flex: 1; min-width: 0; }
+        .container { max-width: 1200px; margin: 0 auto; padding: 40px 20px 40px 140px; display: block; }
+        #main-content { min-width: 0; }
+        
+        /* Progress Bar */
+        #progress-container {
+            position: fixed; top: 0; left: 0; width: 100%; height: 4px; z-index: 1000; background: transparent;
+        }
+        #progress-bar {
+            height: 100%; background: var(--accent); width: 0%; transition: width 0.1s;
+        }
         
         /* Typography */
         h1, h2, h3, h4 { color: var(--text-color); margin-top: 1.5em; line-height: 1.2; }
@@ -706,17 +714,29 @@ def inject_styles(html_content):
         /* Navigation & Sidebar */
         .quick-nav-sidebar {
             width: 80px; flex-shrink: 0;
-            position: sticky; top: 20px; height: fit-content;
-            background: var(--sidebar-bg); padding: 15px; border-radius: 16px;
-            box-shadow: var(--shadow); border: 1px solid var(--border-color); z-index: 10;
+            position: fixed; top: 50%; left: 20px; transform: translateY(-50%);
+            height: auto;
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            padding: 15px; border-radius: 16px;
+            box-shadow: var(--shadow); 
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            z-index: 50;
             display: flex; flex-direction: column; gap: 15px; align-items: center;
         }
-        .quick-nav-item { 
-            font-size: 1.8rem; transition: transform 0.2s; 
-            display: flex; justify-content: center; align-items: center;
-            width: 50px; height: 50px; border-radius: 10px;
+        html.dark .quick-nav-sidebar {
+            background: rgba(0, 0, 0, 0.2);
+            border: 1px solid rgba(255, 255, 255, 0.1);
         }
-        .quick-nav-item:hover { transform: scale(1.1); background: var(--border-color); }
+        .quick-nav-item { 
+            font-size: 1.8rem; transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); 
+            display: flex; justify-content: center; align-items: center;
+            width: 50px; height: 50px; border-radius: 12px;
+            color: var(--text-color);
+        }
+        .quick-nav-item:hover { transform: scale(1.15); background: rgba(0,0,0,0.05); }
+        html.dark .quick-nav-item:hover { background: rgba(255,255,255,0.1); }
         
         /* Search Bar */
         #search-container { margin-bottom: 30px; position: sticky; top: 0; z-index: 40; background: var(--bg-color); padding: 10px 0; }
@@ -772,14 +792,16 @@ def inject_styles(html_content):
         
         /* Mobile */
         @media (max-width: 768px) {
-            .container { flex-direction: column; padding: 15px; gap: 20px; }
+            .container { padding: 15px; padding-bottom: 100px; }
             .quick-nav-sidebar { 
                 position: fixed; bottom: 0; top: auto; left: 0; right: 0; 
+                transform: none;
                 width: 100%; height: auto; flex-direction: row; 
                 justify-content: space-around; border-radius: 16px 16px 0 0; 
                 z-index: 100; padding: 10px; box-sizing: border-box;
+                background: rgba(255, 255, 255, 0.85);
             }
-            #main-content { padding-bottom: 80px; }
+            html.dark .quick-nav-sidebar { background: rgba(15, 23, 42, 0.85); }
             h1 { font-size: 2rem; }
             #back-to-top { bottom: 90px; right: 20px; }
         }
@@ -1081,6 +1103,21 @@ def inject_scripts(html_content):
                 h1.parentNode.insertBefore(timeDiv, h1.nextSibling);
             }
         }
+        
+        // 10. Progress Bar
+        const progressBarContainer = document.createElement('div');
+        progressBarContainer.id = 'progress-container';
+        const progressBar = document.createElement('div');
+        progressBar.id = 'progress-bar';
+        progressBarContainer.appendChild(progressBar);
+        document.body.prepend(progressBarContainer);
+        
+        window.addEventListener('scroll', () => {
+            const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+            const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+            const scrolled = (winScroll / height) * 100;
+            progressBar.style.width = scrolled + "%";
+        });
     });
     </script>
     """
