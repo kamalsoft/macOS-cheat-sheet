@@ -387,14 +387,6 @@
   </div>
 </div>
 
-## 🆕 New & Updated
-
-- **2026-01-08**: Update documentation
-- **2026-01-08**: Refactor documentation updates and enhance slug generation; improve developer logging and smooth scrolling for anchor links
-- **2026-01-08**: Refactor documentation updates and enhance slug generation for better compatibility
-- **2026-01-08**: Update documentation
-- **2026-01-08**: Update documentation
-
 ## How to Use This Guide
 
 This guide is organized by skill level. Find your level and start there:

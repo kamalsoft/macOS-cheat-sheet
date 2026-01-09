@@ -17,11 +17,6 @@
     <priority>0.5</priority>
   </url>
   <url>
-    <loc>https://kamalsoft.github.io/macOS-cheat-sheet/#new-updated</loc>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  <url>
     <loc>https://kamalsoft.github.io/macOS-cheat-sheet/#how-to-use-this-guide</loc>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>

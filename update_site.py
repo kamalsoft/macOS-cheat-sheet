@@ -257,39 +257,6 @@ def update_toc(content):
             
     return content, False
 
-def update_changelog(content):
-    print("Updating Changelog...")
-    try:
-        # Get git history
-        # We use git log to get the last 5 commits affecting index.md
-        cmd = ['git', 'log', '-n', '5', '--date=short', '--pretty=format:- **%ad**: %s', 'index.md']
-        history = subprocess.check_output(cmd, stderr=subprocess.STDOUT).decode('utf-8').strip()
-        
-        if not history:
-            return content, False
-
-        changelog_block = "## 🆕 New & Updated\n\n" + history + "\n"
-        
-        # Check if section exists and replace it
-        pattern = r'(## 🆕 New & Updated)([\s\S]*?)(?=\n---|(?:\n#{2,3} )|$)'
-        if re.search(pattern, content):
-            new_content = re.sub(pattern, changelog_block, content, count=1)
-            if new_content != content:
-                return new_content, True
-        else:
-            # Insert after TOC if it exists
-            toc_pattern = r'(## 📋 Table of Contents)([\s\S]*?)(?=\n---|(?:\n#{2,3} )|$)'
-            match = re.search(toc_pattern, content)
-            if match:
-                end_pos = match.end()
-                new_content = content[:end_pos] + "\n\n---\n\n" + changelog_block + content[end_pos:]
-                return new_content, True
-                
-        return content, False
-    except Exception as e:
-        print(f"Warning: Could not update changelog (git error?): {e}")
-        return content, False
-
 def generate_quick_sidebar(content):
     print("Generating Quick Links Sidebar...")
     
@@ -790,6 +757,19 @@ def inject_styles(html_content):
         .skip-link { position: absolute; top: -40px; left: 0; background: var(--accent); color: white; padding: 8px; z-index: 100; transition: top 0.2s; }
         .skip-link:focus { top: 0; }
         
+        /* Back to Top */
+        #back-to-top {
+            position: fixed; bottom: 30px; right: 30px;
+            width: 50px; height: 50px; border-radius: 50%;
+            background: var(--accent); color: white; border: none;
+            box-shadow: var(--shadow); cursor: pointer;
+            display: flex; justify-content: center; align-items: center;
+            font-size: 1.5rem; z-index: 90;
+            opacity: 0; visibility: hidden; transition: opacity 0.3s, transform 0.2s;
+        }
+        #back-to-top.visible { opacity: 1; visibility: visible; }
+        #back-to-top:hover { transform: scale(1.1); }
+        
         /* Mobile */
         @media (max-width: 768px) {
             .container { flex-direction: column; padding: 15px; gap: 20px; }
@@ -801,6 +781,7 @@ def inject_styles(html_content):
             }
             #main-content { padding-bottom: 80px; }
             h1 { font-size: 2rem; }
+            #back-to-top { bottom: 90px; right: 20px; }
         }
         
         /* Utility */
@@ -996,7 +977,29 @@ def inject_scripts(html_content):
         
         if (sidebar) sidebar.appendChild(pdfBtn);
         
-        // 5. Copy Buttons
+        // 5. Copy All Button
+        const copyAllBtn = document.createElement('button');
+        copyAllBtn.textContent = '📋';
+        copyAllBtn.className = 'quick-nav-item';
+        copyAllBtn.style.border = 'none';
+        copyAllBtn.style.background = 'transparent';
+        copyAllBtn.style.cursor = 'pointer';
+        copyAllBtn.title = 'Copy Entire Cheat Sheet';
+        
+        copyAllBtn.onclick = () => {
+            const mdSource = document.getElementById('markdown-source');
+            if (mdSource) {
+                navigator.clipboard.writeText(mdSource.textContent).then(() => {
+                    const originalText = copyAllBtn.textContent;
+                    copyAllBtn.textContent = '✅';
+                    setTimeout(() => copyAllBtn.textContent = originalText, 2000);
+                });
+            }
+        };
+        
+        if (sidebar) sidebar.appendChild(copyAllBtn);
+        
+        // 6. Copy Buttons
         document.querySelectorAll('pre').forEach(pre => {
             const btn = document.createElement('button');
             btn.className = 'copy-btn';
@@ -1013,7 +1016,7 @@ def inject_scripts(html_content):
             pre.appendChild(btn);
         });
         
-        // 6. Speed Test Widget (Event Delegation for robustness)
+        // 7. Speed Test Widget (Event Delegation for robustness)
         document.addEventListener('click', function(e) {
             if (e.target && e.target.id === 'start-speed-test') {
                 const startBtn = e.target;
@@ -1041,6 +1044,43 @@ def inject_scripts(html_content):
                 }, 2000);
             }
         });
+        
+        // 8. Back to Top Button
+        const backToTopBtn = document.createElement('button');
+        backToTopBtn.id = 'back-to-top';
+        backToTopBtn.textContent = '↑';
+        backToTopBtn.setAttribute('aria-label', 'Back to Top');
+        backToTopBtn.onclick = () => window.scrollTo({ top: 0, behavior: 'smooth' });
+        document.body.appendChild(backToTopBtn);
+        
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 500) {
+                backToTopBtn.classList.add('visible');
+            } else {
+                backToTopBtn.classList.remove('visible');
+            }
+        });
+        
+        // 9. Reading Time Estimator
+        const articleContent = document.getElementById('main-content');
+        if (articleContent) {
+            const text = articleContent.innerText;
+            const wpm = 200;
+            const words = text.trim().split(/\s+/).length;
+            const time = Math.ceil(words / wpm);
+            
+            const timeDiv = document.createElement('div');
+            timeDiv.id = 'reading-time';
+            timeDiv.style.color = 'var(--text-secondary)';
+            timeDiv.style.marginBottom = '20px';
+            timeDiv.style.fontStyle = 'italic';
+            timeDiv.textContent = `⏱️ Estimated reading time: ${time} min`;
+            
+            const h1 = articleContent.querySelector('h1');
+            if (h1) {
+                h1.parentNode.insertBefore(timeDiv, h1.nextSibling);
+            }
+        }
     });
     </script>
     """
@@ -1094,9 +1134,6 @@ def update_html():
         # Generate Quick Sidebar
         md_content, quick_updated = generate_quick_sidebar(md_content)
         
-        # Update Changelog
-        md_content, log_updated = update_changelog(md_content)
-        
         # Update Last Updated Badge
         md_content, badge_updated = update_last_updated_badge(md_content)
         
@@ -1122,7 +1159,7 @@ def update_html():
         
         # We proceed even if no "changes" detected by sub-functions, because we want to inject CSS/JS/SEO
         # But to respect the logic, we can set updated=True
-        if updated or fixed or log_updated or related_updated or badge_updated or contrib_updated or quick_updated:
+        if updated or fixed or related_updated or badge_updated or contrib_updated or quick_updated:
             with open(MD_FILE, 'w', encoding='utf-8') as f:
                 f.write(md_content)
             

@@ -223,36 +223,6 @@
         "@id": "https://kamalsoft.github.io/macOS-cheat-sheet/"
       }
     }
-    </script><meta name="description" content="The ultimate macOS cheat sheet."><meta name="keywords" content="macOS, cheat sheet, shortcuts, terminal"><meta name="author" content="KamalSoft"><meta property="og:title" content="macOS Mastered"><meta property="og:description" content="The ultimate macOS cheat sheet."><meta property="og:type" content="website"><meta property="og:url" content="https://kamalsoft.github.io/macOS-cheat-sheet/"><meta property="og:image" content="https://www.apple.com/ac/structured-data/images/knowledge_graph_logo.png"><meta name="twitter:card" content="summary_large_image"><link rel="canonical" href="https://kamalsoft.github.io/macOS-cheat-sheet/"><link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🍎</text></svg>"><script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      "@type": "TechArticle",
-      "headline": "macOS Mastered",
-      "description": "The ultimate macOS cheat sheet.",
-      "author": {
-        "@type": "Person",
-        "name": "KamalSoft"
-      },
-      "mainEntityOfPage": {
-        "@type": "WebPage",
-        "@id": "https://kamalsoft.github.io/macOS-cheat-sheet/"
-      }
-    }
-    </script><meta name="description" content="The ultimate macOS cheat sheet."><meta name="keywords" content="macOS, cheat sheet, shortcuts, terminal"><meta name="author" content="KamalSoft"><meta property="og:title" content="macOS Mastered"><meta property="og:description" content="The ultimate macOS cheat sheet."><meta property="og:type" content="website"><meta property="og:url" content="https://kamalsoft.github.io/macOS-cheat-sheet/"><meta property="og:image" content="https://www.apple.com/ac/structured-data/images/knowledge_graph_logo.png"><meta name="twitter:card" content="summary_large_image"><link rel="canonical" href="https://kamalsoft.github.io/macOS-cheat-sheet/"><link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🍎</text></svg>"><script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      "@type": "TechArticle",
-      "headline": "macOS Mastered",
-      "description": "The ultimate macOS cheat sheet.",
-      "author": {
-        "@type": "Person",
-        "name": "KamalSoft"
-      },
-      "mainEntityOfPage": {
-        "@type": "WebPage",
-        "@id": "https://kamalsoft.github.io/macOS-cheat-sheet/"
-      }
-    }
     </script><style id="custom-styles">
         :root {
             --bg-color: #ffffff;
@@ -367,6 +337,19 @@
         .skip-link { position: absolute; top: -40px; left: 0; background: var(--accent); color: white; padding: 8px; z-index: 100; transition: top 0.2s; }
         .skip-link:focus { top: 0; }
         
+        /* Back to Top */
+        #back-to-top {
+            position: fixed; bottom: 30px; right: 30px;
+            width: 50px; height: 50px; border-radius: 50%;
+            background: var(--accent); color: white; border: none;
+            box-shadow: var(--shadow); cursor: pointer;
+            display: flex; justify-content: center; align-items: center;
+            font-size: 1.5rem; z-index: 90;
+            opacity: 0; visibility: hidden; transition: opacity 0.3s, transform 0.2s;
+        }
+        #back-to-top.visible { opacity: 1; visibility: visible; }
+        #back-to-top:hover { transform: scale(1.1); }
+        
         /* Mobile */
         @media (max-width: 768px) {
             .container { flex-direction: column; padding: 15px; gap: 20px; }
@@ -378,6 +361,7 @@
             }
             #main-content { padding-bottom: 80px; }
             h1 { font-size: 2rem; }
+            #back-to-top { bottom: 90px; right: 20px; }
         }
         
         /* Utility */
@@ -795,14 +779,6 @@
     </details>
   </div>
 </div>
-
-## 🆕 New & Updated
-
-- **2026-01-08**: Update documentation
-- **2026-01-08**: Refactor documentation updates and enhance slug generation; improve developer logging and smooth scrolling for anchor links
-- **2026-01-08**: Refactor documentation updates and enhance slug generation for better compatibility
-- **2026-01-08**: Update documentation
-- **2026-01-08**: Update documentation
 
 ## How to Use This Guide
 
@@ -2447,7 +2423,29 @@ Thanks to these wonderful people: **kamalsoft**.
         
         if (sidebar) sidebar.appendChild(pdfBtn);
         
-        // 5. Copy Buttons
+        // 5. Copy All Button
+        const copyAllBtn = document.createElement('button');
+        copyAllBtn.textContent = '📋';
+        copyAllBtn.className = 'quick-nav-item';
+        copyAllBtn.style.border = 'none';
+        copyAllBtn.style.background = 'transparent';
+        copyAllBtn.style.cursor = 'pointer';
+        copyAllBtn.title = 'Copy Entire Cheat Sheet';
+        
+        copyAllBtn.onclick = () => {
+            const mdSource = document.getElementById('markdown-source');
+            if (mdSource) {
+                navigator.clipboard.writeText(mdSource.textContent).then(() => {
+                    const originalText = copyAllBtn.textContent;
+                    copyAllBtn.textContent = '✅';
+                    setTimeout(() => copyAllBtn.textContent = originalText, 2000);
+                });
+            }
+        };
+        
+        if (sidebar) sidebar.appendChild(copyAllBtn);
+        
+        // 6. Copy Buttons
         document.querySelectorAll('pre').forEach(pre => {
             const btn = document.createElement('button');
             btn.className = 'copy-btn';
@@ -2464,7 +2462,7 @@ Thanks to these wonderful people: **kamalsoft**.
             pre.appendChild(btn);
         });
         
-        // 6. Speed Test Widget (Event Delegation for robustness)
+        // 7. Speed Test Widget (Event Delegation for robustness)
         document.addEventListener('click', function(e) {
             if (e.target && e.target.id === 'start-speed-test') {
                 const startBtn = e.target;
@@ -2492,5 +2490,42 @@ Thanks to these wonderful people: **kamalsoft**.
                 }, 2000);
             }
         });
+        
+        // 8. Back to Top Button
+        const backToTopBtn = document.createElement('button');
+        backToTopBtn.id = 'back-to-top';
+        backToTopBtn.textContent = '↑';
+        backToTopBtn.setAttribute('aria-label', 'Back to Top');
+        backToTopBtn.onclick = () => window.scrollTo({ top: 0, behavior: 'smooth' });
+        document.body.appendChild(backToTopBtn);
+        
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 500) {
+                backToTopBtn.classList.add('visible');
+            } else {
+                backToTopBtn.classList.remove('visible');
+            }
+        });
+        
+        // 9. Reading Time Estimator
+        const articleContent = document.getElementById('main-content');
+        if (articleContent) {
+            const text = articleContent.innerText;
+            const wpm = 200;
+            const words = text.trim().split(/\s+/).length;
+            const time = Math.ceil(words / wpm);
+            
+            const timeDiv = document.createElement('div');
+            timeDiv.id = 'reading-time';
+            timeDiv.style.color = 'var(--text-secondary)';
+            timeDiv.style.marginBottom = '20px';
+            timeDiv.style.fontStyle = 'italic';
+            timeDiv.textContent = `⏱️ Estimated reading time: ${time} min`;
+            
+            const h1 = articleContent.querySelector('h1');
+            if (h1) {
+                h1.parentNode.insertBefore(timeDiv, h1.nextSibling);
+            }
+        }
     });
     </script></body></html>
